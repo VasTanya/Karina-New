@@ -8,6 +8,7 @@ class AlbumsController {
     this.AlbumsService = new AlbumsService();
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
+    this.getItemById = expressAsyncHandler(this.getItemById.bind(this));
   }
 
   getAll = async (req, res) => {
@@ -28,11 +29,31 @@ class AlbumsController {
   getById = async (req, res) => {
     try {
       const paramsId = req.params._id;
+      const page = parseInt(req.query.page) || 1;
+      const size = parseInt(req.query.size) || 10;
 
-      const albumById = await this.AlbumsService.getById(paramsId);
+      const albumById = await this.AlbumsService.getById(paramsId, page, size);
       response(res, 200, albumById);
     } catch (error) {
       logger.error(`Error during getById: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  getItemById = async (req, res) => {
+    try {
+      const paramsId = req.params._id;
+      const paramsItem = req.params.item;
+
+      const albumDataItem = await this.AlbumsService.getItemById(
+        paramsId,
+        paramsItem
+      );
+      response(res, 200, albumDataItem);
+    } catch (error) {
+      logger.error(`Error during getItemById: ${error}`);
       return response(res, error.statusCode || 500, {
         _message: error.message,
       });

@@ -8,4 +8,6 @@ albumsRouter.get("/", albumsInstance.getAll);
 
 albumsRouter.get("/:_id", albumsInstance.getById);
 
+albumsRouter.get("/:_id/:item", albumsInstance.getItemById);
+
 export default albumsRouter;
