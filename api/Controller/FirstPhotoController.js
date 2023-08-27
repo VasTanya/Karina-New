@@ -12,10 +12,7 @@ class FirstPhotoController {
 
   getAll = async (req, res) => {
     try {
-      const page = parseInt(req.query.params) || 1;
-      const size = parseInt(req.query.params) || 10;
-
-      const firstPhoto = await this.FirstPhotoService.getAll(page, size);
+      const firstPhoto = await this.FirstPhotoService.getAll();
       response(res, 200, firstPhoto);
     } catch (error) {
       logger.error(`Error during getAll ${error}`);
