@@ -1,5 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import AdminService from "../Service/AdminService.js";
+import response from "../Utils/Response.js";
+import logger from "../Utils/Logger/Logger.js";
 
 class AdminController {
   constructor() {
@@ -8,10 +10,17 @@ class AdminController {
   }
 
   login = async (req, res) => {
-    const { login, password } = req.body;
+    try {
+      const { email, password } = req.body;
 
-    console.log("LOGIN: ", login);
-    console.log("PASSWORD", password);
+      const admin = await this.AdminService.login(email, password);
+      response(res, 200, { token: admin });
+    } catch (error) {
+      logger.error(`Error during login: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
   };
 }
 

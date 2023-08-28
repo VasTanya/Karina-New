@@ -5,8 +5,10 @@ import Albums from "../Model/AlbumsModel.js";
 import Slices from "../Model/SlicesModel.js";
 import Regular from "../Model/RegularModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
-import logger from "../Utils/logger/Logger.js";
+import Admin from "../Model/AdminModel.js";
+import logger from "../Utils/Logger/Logger.js";
 import response from "../Utils/Response.js";
+import bcrypt from "bcryptjs";
 
 const seedRouter = Router();
 
@@ -50,6 +52,30 @@ seedRouter.get("/", async (req, res) => {
       createdSlices,
       createdRegular,
     });
+  } catch (error) {
+    logger.error("Seed error:", error);
+    response(
+      res,
+      error.statusCode || 500,
+      "Error during seeding: ",
+      error.message
+    );
+  }
+});
+
+seedRouter.get("/admin", async (req, res) => {
+  try {
+    await Admin.deleteMany({});
+
+    const createdAdmin = new Admin({
+      login: "test",
+      email: "test@email.com",
+      password: bcrypt.hashSync("12345678", 10),
+    });
+
+    await createdAdmin.save();
+
+    response(res, 201, createdAdmin);
   } catch (error) {
     logger.error("Seed error:", error);
     response(
