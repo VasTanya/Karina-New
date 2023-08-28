@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import SlicesService from "../Service/SlicesService.js";
 import response from "../Utils/Response.js";
-import logger from "../Utils/logger/logger.js";
+import logger from "../Utils/logger/Logger.js";
 
 class SlicesController {
   constructor() {
