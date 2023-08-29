@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import RegularService from "../Service/RegularService.js";
-import logger from "../Utils/logger/logger.js";
 import response from "../Utils/Response.js";
+import logger from "../Utils/logger/Logger.js";
 
 class RegularController {
   constructor() {

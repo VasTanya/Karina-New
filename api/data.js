@@ -1,4 +1,9 @@
 const data = {
+  admin: {
+    login: "test",
+    email: "test@email.com",
+    password: "12345678",
+  },
   firstPhoto: [
     {
       display_number: 1,

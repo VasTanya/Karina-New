@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import AlbumsService from "../Service/AlbumsService.js";
 import response from "../Utils/Response.js";
-import logger from "../Utils/logger/logger.js";
+import logger from "../Utils/Logger/Logger.js";
 
 class AlbumsController {
   constructor() {

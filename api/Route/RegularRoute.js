@@ -2,10 +2,10 @@ import { Router } from "express";
 import RegularController from "../Controller/RegularController.js";
 
 const regularRouter = Router();
-const regularInstance = RegularController;
+const { getAll, getById } = RegularController;
 
-regularRouter.get("/", regularInstance.getAll);
+regularRouter.get("/", getAll);
 
-regularRouter.get("/:_id", regularInstance.getById);
+regularRouter.get("/:_id", getById);
 
 export default regularRouter;

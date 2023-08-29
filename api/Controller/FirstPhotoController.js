@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
-import logger from "../Utils/logger/logger.js";
 import FirstPhotoService from "../Service/FirstPhotoService.js";
 import response from "../Utils/Response.js";
+import logger from "../Utils/logger/Logger.js";
 
 class FirstPhotoController {
   constructor() {
