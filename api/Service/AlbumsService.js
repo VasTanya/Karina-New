@@ -1,6 +1,5 @@
 import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
-import logger from "../Utils/logger/logger.js";
 
 class AlbumsService {
   constructor() {}

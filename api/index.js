@@ -2,9 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
+import ejs from "ejs";
 
-import logger from "./Utils/logger/Logger.js";
 import apiLogger from "./Utils/logger/ApiLogger.js";
+import logger from "./Utils/logger/Logger.js";
 
 import credentials from "./Config/Credentials.js";
 import corsOptions from "./Config/CorsOptions.js";
@@ -15,6 +18,9 @@ import firstPhotoRouter from "./Route/FirstPhotoRoute.js";
 import albumsRouter from "./Route/AlbumsRoute.js";
 import slicesRouter from "./Route/SlicesRoute.js";
 import regularRouter from "./Route/RegularRoute.js";
+import emailRouter from "./Route/EmailRoute.js";
+import viewsRouter from "./Route/ViewsRouter.js";
+import adminRouter from "./Route/AdminRoute.js";
 
 const app = express();
 const dotenvConf = dotenv.config();
@@ -27,11 +33,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(apiLogger);
 
-app.use("/api", seedRouter);
+app.set("view engine", "ejs");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.set("views", path.join(__dirname, "Views", "Pages"));
+app.use(express.static(path.join(__dirname, "Public")));
+
+app.use("/api/seed", seedRouter);
 app.use("/api/firstPhoto", firstPhotoRouter);
 app.use("/api/albums", albumsRouter);
 app.use("/api/slices", slicesRouter);
 app.use("/api/regular", regularRouter);
+app.use("/api/request", emailRouter);
+app.use("/api/admin", adminRouter);
+app.use("/", viewsRouter);
 
 app.use((err, req, res, next) => {
   res.status(404).send({ message: err.message });
