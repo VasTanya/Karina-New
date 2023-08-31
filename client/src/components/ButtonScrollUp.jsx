@@ -6,7 +6,7 @@ function ButtonScrollUp() {
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 150) {
         setScrollUp(true)
       } else {
         setScrollUp(false)

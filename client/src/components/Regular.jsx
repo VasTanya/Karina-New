@@ -1,24 +1,65 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchRegular } from '../redux/slice/getUrlRegular'
+import IsLoading from './IsLoading'
 
-function Regular({regular}) {
+
+function Regular() {
+    const dispatch = useDispatch()
+    const { dataRegular, status } = useSelector(store => store.getUrlRegular)
+    const dataRegularCake = dataRegular.data
+  
+    
+    const getUrlRegular = async () => {
+        const urlRegular = '/api/regular'
+        dispatch(fetchRegular({ urlRegular })
+        )
+        
+    }
+
+    useEffect(() => {
+        getUrlRegular()
+    }, [])
+
+    const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
+
+   
 
 
     return (
-        <div className='photos_in_album'> {
-            regular.map((el) =>
-                <div className='one_photo_from_alb' key={el.id}>
+        <>
+        {
+        status === 'error' ? (
+          <div className='error_try-later'>
+            <div className='error'>
+              <p>An error has occurred
+                <span> <img className='nosmile' src="./img/nosmile.png" alt="" />
+                </span>
+              </p>
+            </div>
+            <div>
+              <p className='Try later'>Please try again later.</p>
+            </div>
+          </div>
+        ) : (<div className='photos_in_album'>{status === 'loading' ? isLoading : 
+        dataRegularCake.map((el) =>
+                <div key={el.display_number} className='one_photo_from_alb'>
                     <img src={el.src} alt="" />
-                    <div className='title_price'>
-                        <p>{el.title + '(№' + el.id + ')'}</p>
+                     <div className='title_price'>
+                         <p>{el.title + '(№' + el.display_number + ')'}</p>
                         <p>{el.price}</p>
-                    </div>
-
-
-                </div>)
-        }
-
-        </div>
+                     </div>
+                 </div>
+           )
+        } </div>)
+      }
+      {/* <div className='photos_in_album'>
+        {isLoading}
+      </div> */}
+        </>
     )
+
+
 }
 
 export default Regular
