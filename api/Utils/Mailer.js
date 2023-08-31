@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import logger from "./logger/Logger.js";
+import logger from "./Logger/Logger.js";
 
 const mailer = async (data) => {
   const transporter = nodemailer.createTransport({
