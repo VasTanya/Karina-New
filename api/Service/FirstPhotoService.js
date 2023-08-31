@@ -4,16 +4,22 @@ class FirstPhotoService {
   constructor() {}
 
   getAll = async () => {
-    // const skip = (page - 1) * size;
-
-    const firstPhoto = await FirstPhoto.find()
-    // .find().skip(skip).limit(size);
+    const firstPhoto = await FirstPhoto.find();
     return firstPhoto;
   };
 
   getById = async (id) => {
     const albumById = await FirstPhoto.findById(id);
     return albumById;
+  };
+
+  edit = async (data) => {
+    const item = await FirstPhoto.findOneAndUpdate(data);
+    return item;
+  };
+  delete = async (id) => {
+    const item = await FirstPhoto.findOneAndDelete(id);
+    return item;
   };
 }
 

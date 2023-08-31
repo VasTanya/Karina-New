@@ -4,7 +4,7 @@ const firstPhotoSchema = new Schema(
   {
     display_number: { type: Number, required: true },
     title: { type: String, required: true },
-    img: { type: String, required: true },
+    src: { type: String, required: true },
   },
   {
     timestamps: true,

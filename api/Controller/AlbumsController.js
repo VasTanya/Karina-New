@@ -1,13 +1,16 @@
 import expressAsyncHandler from "express-async-handler";
 import AlbumsService from "../Service/AlbumsService.js";
 import response from "../Utils/Response.js";
-import logger from "../Utils/logger/logger.js";
+import logger from "../Utils/Logger/Logger.js";
 
 class AlbumsController {
   constructor() {
     this.AlbumsService = new AlbumsService();
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
+    this.getItemById = expressAsyncHandler(this.getItemById.bind(this));
+    this.editItem = expressAsyncHandler(this.editItem.bind(this));
+    this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
   }
 
   getAll = async (req, res) => {
@@ -28,11 +31,67 @@ class AlbumsController {
   getById = async (req, res) => {
     try {
       const paramsId = req.params._id;
+      const page = parseInt(req.query.page) || 1;
+      const size = parseInt(req.query.size) || 10;
 
-      const albumById = await this.AlbumsService.getById(paramsId);
+      const albumById = await this.AlbumsService.getById(paramsId, page, size);
       response(res, 200, albumById);
     } catch (error) {
       logger.error(`Error during getById: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  getItemById = async (req, res) => {
+    try {
+      const paramsId = req.params._id;
+      const paramsItem = req.params.item;
+
+      const albumDataItem = await this.AlbumsService.getItemById(
+        paramsId,
+        paramsItem
+      );
+      response(res, 200, albumDataItem);
+    } catch (error) {
+      logger.error(`Error during getItemById: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  editItem = async (req, res) => {
+    try {
+      const { display_number, title, src } = req.body;
+
+      const data = {
+        display_number: display_number,
+        title: title,
+        src: src,
+      };
+
+      const editedItem = this.AlbumsService.edit(data);
+
+      response(res, 200, editedItem);
+    } catch (error) {
+      logger.error(`Error during edit: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  deleteItem = async (req, res) => {
+    try {
+      const { _id } = req.body;
+
+      const deletedItem = this.AlbumsService.delete(_id);
+
+      response(res, 200, deletedItem);
+    } catch (error) {
+      logger.error(`Error during delete: ${error}`);
       return response(res, error.statusCode || 500, {
         _message: error.message,
       });

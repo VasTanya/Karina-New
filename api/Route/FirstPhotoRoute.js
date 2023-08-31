@@ -1,11 +1,16 @@
 import { Router } from "express";
 import FirstPhotoController from "../Controller/FirstPhotoController.js";
+import isAuth from "../Middleware/IsAuth.js";
 
 const firstPhotoRouter = Router();
-const firstPhotoInstance = FirstPhotoController;
+const { getAll, getById, editItem, deleteItem } = FirstPhotoController;
 
-firstPhotoRouter.get("/", firstPhotoInstance.getAll);
+firstPhotoRouter.get("/", getAll);
 
-firstPhotoRouter.get("/:_id", firstPhotoInstance.getById);
+firstPhotoRouter.get("/:_id", getById);
+
+firstPhotoRouter.get("/:_id/edit", isAuth, editItem);
+
+firstPhotoRouter.get("/delete", isAuth, deleteItem);
 
 export default firstPhotoRouter;

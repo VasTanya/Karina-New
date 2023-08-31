@@ -15,6 +15,15 @@ class SlicesService {
     const sliceById = await Slices.findById(id);
     return sliceById;
   };
+
+  edit = async (data) => {
+    const item = await Slices.findOneAndUpdate(data);
+    return item;
+  };
+  delete = async (id) => {
+    const item = await Slices.findOneAndDelete(id);
+    return item;
+  };
 }
 
 export default SlicesService;

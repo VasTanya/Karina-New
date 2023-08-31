@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <title>Login</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <form>
+        <input
+          id="email"
+          class="input"
+          type="email"
+          placeholder="email"
+          required
+        />
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <input id="submit" class="input" type="submit" />
+      </form>
+    </div>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

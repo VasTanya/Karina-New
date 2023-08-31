@@ -1,115 +1,120 @@
 const data = {
+  admin: {
+    login: "test",
+    email: "test@email.com",
+    password: "12345678",
+  },
   firstPhoto: [
 
     {
       display_number: 1,
       title: "Happy birthday",
-      img: "./img/1.Happy birthday/first.jpeg",
+      src: "./img/1.Happy birthday/first.jpeg",
     },
     {
       display_number: 2,
       title: "Kids girls",
-      img: "./img/2.Kids (girls)/first.jpeg",
+      src: "./img/2.Kids (girls)/first.jpeg",
     },
     {
       display_number: 3,
       title: "Kids boys",
-      img: "./img/3.Kids (boys)/first.jpeg",
+      src: "./img/3.Kids (boys)/first.jpeg",
     },
     {
       display_number: 4,
       title: "Natural Flowers",
-      img: "./img/4.Natural flowers/first.jpeg",
+      src: "./img/4.Natural flowers/first.jpeg",
     },
     {
       display_number: 5,
       title: "Wedding",
-      img: "./img/5.Wedding/first.jpeg",
+      src: "./img/5.Wedding/first.jpeg",
     },
     {
       display_number: 6,
       title: "Chistina",
-      img: "./img/6.Chistina/first.jpeg",
+      src: "./img/6.Chistina/first.jpeg",
     },
     {
       display_number: 7,
       title: "First tooth",
-      img: "./img/7.First tooth/first.jpeg",
+      src: "./img/7.First tooth/first.jpeg",
     },
     {
       display_number: 8,
       title: "Naked",
-      img: "./img/8.Naked/first.jpeg",
+      src: "./img/8.Naked/first.jpeg",
     },
     {
       display_number: 9,
       title: "Gender",
-      img: "./img/9.Gender/first.jpeg",
+      src: "./img/9.Gender/first.jpeg",
     },
     {
       display_number: 10,
       title: "Graduation",
-      img: "./img/10.Graduation/first.jpeg",
+      src: "./img/10.Graduation/first.jpeg",
     },
     {
       display_number: 11,
       title: "Sport",
-      img: "./img/11.Sport/first.jpeg",
+      src: "./img/11.Sport/first.jpeg",
     },
     {
       display_number: 12,
       title: "Hearts",
-      img: "./img/12.Hearts/first.jpeg",
+      src: "./img/12.Hearts/first.jpeg",
     },
     {
       display_number: 13,
       title: "Simple design",
-      img: "./img/13.Simple design/first.jpeg",
+      src: "./img/13.Simple design/first.jpeg",
     },
     {
       display_number: 14,
       title: "Square",
-      img: "./img/14.Square/first.jpeg",
+      src: "./img/14.Square/first.jpeg",
     },
     {
       display_number: 15,
       title: "Fix price",
-      img: "./img/15.Fix price/first.jpeg",
+      src: "./img/15.Fix price/first.jpeg",
     },
     {
       display_number: 16,
       title: "Valentines",
-      img: "./img/16.Valentines/first.JPG",
+      src: "./img/16.Valentines/first.JPG",
     },
     {
       display_number: 17,
       title: "Nambers and Letters",
-      img: "./img/17.Nambers and Letters/first.jpeg",
+      src: "./img/17.Nambers and Letters/first.jpeg",
     },
     {
       display_number: 18,
       title: "Easter",
-      img: "./img/18.Easter/first.jpeg",
+      src: "./img/18.Easter/first.jpeg",
     },
     {
       display_number: 19,
       title: "Christmas and New Year",
-      img: "./img/19.Christmas and New Year/first.jpeg",
+      src: "./img/19.Christmas and New Year/first.jpeg",
     },
     {
       display_number: 20,
       title: "Haloween",
-      img: "./img/20.Haloween/first.JPG",
+      src: "./img/20.Haloween/first.JPG",
     },
     {
       display_number: 21,
       title: "Thanksgiving Day",
-      img: "./img/21.Thanksgiving Day/first.jpeg",
+      src: "./img/21.Thanksgiving Day/first.jpeg",
     },
     {
       display_number: 22,
       title: "Fondant",
-      img: "./img/22.Fondant/first.JPG",
+      src: "./img/22.Fondant/first.JPG",
     },
   ],
   albums: [

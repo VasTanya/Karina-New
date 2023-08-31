@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/products.css" />
+    <title>Products</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../Components/navbar.ejs') %>
+      <div class="productsContainer">
+        <table id="table">
+          <tr>
+            <td>
+              <button class="tableNav" value="firstPhoto">First Photo</button>
+            </td>
+            <td><button class="tableNav" value="slices">Slices</button></td>
+            <td><button class="tableNav" value="regular">Regular</button></td>
+            <td><button class="tableNav" value="albums">Albums</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="/js/products.js"></script>
+  </body>
+</html>

@@ -2,10 +2,14 @@ import { Router } from "express";
 import SlicesController from "../Controller/SlicesController.js";
 
 const slicesRouter = Router();
-const slicesInstance = SlicesController;
+const { getAll, getById, editItem, deleteItem } = SlicesController;
 
-slicesRouter.get("/", slicesInstance.getAll);
+slicesRouter.get("/", getAll);
 
-slicesRouter.get("/:_id", slicesInstance.getById);
+slicesRouter.get("/:_id", getById);
+
+slicesRouter.get("/:_id.edit", editItem);
+
+slicesRouter.get("/delete", deleteItem);
 
 export default slicesRouter;
