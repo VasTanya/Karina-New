@@ -6,8 +6,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import ejs from "ejs";
 
-import apiLogger from "./Utils/logger/ApiLogger.js";
-import logger from "./Utils/logger/Logger.js";
+import apiLogger from "./Utils/Logger/ApiLogger.js";
+import logger from "./Utils/Logger/Logger.js";
 
 import credentials from "./Config/Credentials.js";
 import corsOptions from "./Config/CorsOptions.js";
