@@ -1,0 +1,455 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1.5vw;
+  font-family: 'Libre Baskerville', serif;
+}
+
+nav {
+  width: 100%;
+  height: 20vw;
+  display: grid;
+  align-content: end;
+}
+
+.nav_name {
+  color: white;
+  font-family: 'Lora', serif;
+  font-size: 7vw;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.nav_name img {
+  width: 35vw;
+  height: 15vw;
+}
+
+.nav_name_cake {
+  color: white;
+  font-family: 'Lora', serif;
+  font-size: 3vw;
+  display: grid;
+  justify-items: center;
+  padding-bottom: 2vw;
+}
+
+li {
+  color: black;
+  font-size: 1.7vw;
+  cursor: pointer;
+}
+
+.nav_li {
+  color: black;
+  font-size: 1.7vw;
+  cursor: pointer;
+}
+.li_activ {
+  color: rgb(233, 217, 164);
+  cursor: pointer;
+}
+
+li:hover,
+.insta_logo:hover {
+  scale: 1.15;
+  color: rgb(233, 217, 164);
+}
+
+nav ul {
+  list-style-type: none;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-items: center;
+  padding: 0 4vw;
+  background: #B6975A;
+}
+
+.searchCake {
+  width: 11vw;
+  border-radius: 15px;
+  border: none;
+  padding: 0.2vw 1vw;
+  outline: none;
+}
+.fa-times{
+  color: #e6cb97;
+}
+
+
+.insta_icon {
+  margin: .5vw 3vw;
+}
+
+.insta_logo {
+  width: 3vw;
+}
+
+.phone {
+  justify-items: center;
+  margin: 3vw 1vw;
+}
+
+.call,
+.mail {
+  color: black;
+  font-size: 1.7vw;
+  text-align: center;
+}
+
+.mail {
+  margin-top: 2vw;
+}
+
+.choose_cake_div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.all_cakes,
+.contacts {
+  /* margin: auto; */
+  width: 44vw;
+  height: 4vw;
+  border-radius: 55px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 0 2vw;
+  margin: 3vw;
+  background: #FAF3ED;
+  box-shadow: 0px 0px 22px 3px rgba(182, 151, 90, 0.82);
+}
+
+.all_cakes p,
+.contacts p {
+  font-size: 2vw;
+  text-align: center;
+}
+.our_contacts{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.albums {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+  padding: 1vw 2vw;
+  gap: 4vw;
+}
+
+.first_foto {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 1vw;
+  padding: 1vw 0;
+}
+
+.first_foto p {
+  color: black;
+}
+
+.first_foto:hover {
+  scale: 1.15;
+  cursor: pointer;
+}
+
+.first_foto img {
+  width: 20vw;
+  height: 20vw;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+
+}
+
+.copyright {
+  margin-left: 40%;
+}
+
+.footer img {
+  width: 100%;
+}
+
+.about_text_and_foto {
+  position: relative;
+  margin-top: 1.5vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 6vw 0;
+}
+
+.about_text_and_foto img {
+  border-radius: 7px;
+  width: 93vw;
+  height: 60vw;
+  background-size: cover;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  margin: 2vw;
+}
+
+.about_text_and_foto p {
+  color: white;
+  position: absolute;
+  font-size: 3vw;
+  margin: 17vw 15vw;
+}
+
+.bg {
+  background: grey;
+  position: absolute;
+  border-radius: 7px;
+  width: 93vw;
+  height: 60vw;
+  opacity: 0.4;
+  margin: 2vw;
+}
+
+.map {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 2vw 15vw;
+  margin-top: 3vw;
+}
+
+.map p {
+  font-size: 2vw;
+}
+
+.fa-arrow-right {
+  color: #B6975A;
+}
+
+iframe {
+  margin: 1vw auto;
+  width: 70vw;
+  height: 30vw;
+  border-radius: 15px;
+}
+
+.one_photo_from_alb {
+  padding: 1vw 0;
+  display: grid;
+  justify-items: center;
+  cursor: pointer;
+}
+
+.one_photo_from_alb p {
+  color: black;
+  font-size: 1.3vw;
+ 
+}
+.title_price{
+   padding: .7vw 0;
+   display: grid;
+   justify-items: center;
+   align-items: center;
+}
+
+
+.one_photo_from_alb img {
+  max-width: 20vw;
+  max-height: 20vw;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+}
+
+.photos_in_album {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+  padding: 5vw 1vw;
+}
+
+.btn-scroll-up {
+  position: fixed;
+  right: .7vw;
+  bottom: 5vw;
+  z-index: 1000;
+  width: 3vw;
+  height: 3vw;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0px 0px 8px 3px rgba(182, 151, 90, 0.82);
+  transition: .2s;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.fa-arrow-up {
+  font-size: 2vw;
+  color: #B6975A;
+}
+
+.fa-arrow-up:hover {
+  color: rgb(233, 217, 164);
+}
+
+.one_cake_div_and_mail {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 5vw 0;
+}
+
+.one_cake_div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.one_cake_div img {
+  max-width: 50vw;
+  max-height: 40vw;
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+}
+
+.mail_form {
+  width: 25vw;
+  height: 45vw;
+  border: 1px solid rgb(233, 217, 164);
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  display: grid;
+  justify-items: center;
+  padding: 2vw 2vw;
+}
+
+.mail_form p {
+  text-align: justify;
+  font-size: 1vw;
+}
+
+.mail_form img {
+  width: 10vw;
+}
+
+.mail_form input {
+  width: 15vw;
+  height: 2vw;
+  border-radius: 15px;
+  padding: 0 1vw;
+  font-size: 1vw;
+}
+
+.mail_form button {
+  width: 15vw;
+  height: 3vw;
+  border-radius: 15px;
+  padding: 0 1vw;
+  background: rgb(233, 217, 164);
+  border: none;
+}
+
+
+
+
+@media (max-width:768px) {
+  nav {
+    height: 32vw;
+  }
+
+  .nav_name img {
+    width: 53vw;
+    height: 22vw;
+  }
+
+  nav ul {
+    height: 10vw;
+    padding: 0 2vw;
+    grid-template-columns: 1fr 1.5fr 1fr 2fr 2fr .2fr;
+    justify-items: center;
+  }
+
+  li {
+    font-size: 2.6vw;
+  }
+
+  .about_text_and_foto p {
+    font-size: 3.7vw;
+    margin-top: 6vw;
+  }
+
+  .all_cakes,
+  .contacts {
+    width: 70vw;
+    height: 7vw;
+    margin-top: 5vw;
+  }
+
+  .all_cakes p, .contacts p {
+    font-size: 3.5vw;
+    text-align: center;
+  }
+
+  .albums {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vw;
+  }
+
+  .first_foto img {
+    width: 26vw;
+    height: 26vw;
+  }
+
+  .btn-scroll-up {
+    width: 8vw;
+    height: 8vw;
+    right: 1vw;
+    bottom: 27vw;
+  }
+
+  .fa-arrow-up {
+    font-size: 5vw;
+  }
+
+  .photos_in_album {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3vw 1vw;
+  }
+
+  .one_photo_from_alb img {
+    max-width: 30vw;
+    max-height: 27vw;
+  }
+  .title_price p{
+    font-size: 2.6vw;
+  }
+
+  .call, .mail {
+    font-size: 3.7vw;
+  }
+
+  .map p {
+    font-size: 3.5vw;
+  }
+
+  .fa-phone {
+    font-size: 3.7vw;
+  }
+
+  iframe {
+    width: 72vw;
+    height: 60vw;
+  }
+
+  .map,
+  .call {
+    margin-top: 9vw;
+  }
+}
