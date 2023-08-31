@@ -1,0 +1,18 @@
+.productsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+#table {
+  border: 1px solid;
+  width: 80%;
+  height: auto;
+}
+
+.tableNav {
+  font-size: 2em;
+  padding: 1vh;
+}

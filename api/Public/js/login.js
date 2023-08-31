@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const submit = document.getElementById("submit");
-  const login = document.getElementById("login");
+  const email = document.getElementById("email");
   const password = document.getElementById("password");
 
-  submit.onclick = async () => {
+  submit.onclick = async (e) => {
+    e.preventDefault();
+
     const data = {
-      login: login.value,
+      email: email.value,
       password: password.value,
     };
 
@@ -17,13 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify(data),
       });
+
       if (response.ok) {
-        console.log("Login successful");
+        window.location.href = "/products";
       } else {
-        console.error("ERROR: ", error);
+        console.error("Login failed");
       }
     } catch (error) {
-      console.error("An error occured", error);
+      console.error("An error occurred", error);
     }
   };
 });

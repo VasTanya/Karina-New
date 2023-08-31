@@ -36,6 +36,16 @@ class AlbumsService {
 
     return albumDataItem;
   };
+
+  edit = async (data) => {
+    const item = await Albums.findOneAndUpdate(data);
+    return item;
+  };
+
+  delete = async (id) => {
+    const item = await Albums.findOneAndDelete(id);
+    return item;
+  };
 }
 
 export default AlbumsService;

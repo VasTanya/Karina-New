@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  border: 1px solid;
+}
+
+.nav {
+  border: 1px solid;
+  font-size: 2em;
+  padding: 2vh;
+  margin: 2vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.end {
+  justify-self: end;
+}
