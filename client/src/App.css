@@ -8,7 +8,6 @@
 
 nav {
   width: 100%;
-  height: 20vw;
   display: grid;
   align-content: end;
 }
@@ -40,6 +39,7 @@ li {
   color: black;
   font-size: 1.7vw;
   cursor: pointer;
+  padding: 1vw 0;
 }
 
 .nav_li {
@@ -112,7 +112,6 @@ nav ul {
 
 .all_cakes,
 .contacts {
-  /* margin: auto; */
   width: 44vw;
   height: 4vw;
   border-radius: 55px;
@@ -355,15 +354,32 @@ iframe {
   background: rgb(233, 217, 164);
   border: none;
 }
+.css-wjh20t-MuiPagination-ul {
+  justify-content: center;
+  padding: 2vw 0;
+}
+.css-wjh20t-MuiPagination-ul > li > button {
+  font-size: 2vw;
+  min-width: 5vw;
+  height: 5vw;
+}
+.nosmile {
+  width: 5vw;
+  margin-top: 2vw;
+}
+.error_try-later{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 6vw;
+}
+
 
 
 
 
 @media (max-width:768px) {
-  nav {
-    height: 32vw;
-  }
-
+ 
   .nav_name img {
     width: 53vw;
     height: 22vw;
@@ -375,9 +391,13 @@ iframe {
     grid-template-columns: 1fr 1.5fr 1fr 2fr 2fr .2fr;
     justify-items: center;
   }
+  .nav_li{
+    font-size: 2.6vw;
+  }
 
   li {
     font-size: 2.6vw;
+    padding: 1vw 0;
   }
 
   .about_text_and_foto p {
@@ -393,7 +413,7 @@ iframe {
   }
 
   .all_cakes p, .contacts p {
-    font-size: 3.5vw;
+    font-size: 3.3vw;
     text-align: center;
   }
 
@@ -408,14 +428,14 @@ iframe {
   }
 
   .btn-scroll-up {
-    width: 8vw;
-    height: 8vw;
+    width: 5.2vw;
+    height: 5.2vw;
     right: 1vw;
-    bottom: 27vw;
+    bottom: 20vw;
   }
 
   .fa-arrow-up {
-    font-size: 5vw;
+    font-size: 2.5vw;
   }
 
   .photos_in_album {
@@ -428,15 +448,15 @@ iframe {
     max-height: 27vw;
   }
   .title_price p{
-    font-size: 2.6vw;
+    font-size: 2.1vw;
   }
 
   .call, .mail {
-    font-size: 3.7vw;
+    font-size: 3.3vw;
   }
 
   .map p {
-    font-size: 3.5vw;
+    font-size: 3.3vw;
   }
 
   .fa-phone {
@@ -452,4 +472,14 @@ iframe {
   .call {
     margin-top: 9vw;
   }
+  .css-lqq3n7-MuiButtonBase-root-MuiPaginationItem-root {
+  font-size: 2vw;
+  min-width: 5vw;
+  height: 5vw;
 }
+}
+
+
+/* .photos_in_album > svg {
+  height: 100px;
+} */

@@ -1,5 +1,6 @@
 const data = {
   firstPhoto: [
+
     {
       display_number: 1,
       title: "Happy birthday",
@@ -19020,6 +19021,7 @@ const data = {
         {
           display_number: 4,
           src: "./img/21.Thanksgiving Day/first.jpeg",
+          tag: "firstPhoto"
         },
       ],
     },
@@ -19811,6 +19813,24 @@ const data = {
       src: "./img/Slices/img (26).jpeg",
       price: "$2.99",
     },
+    {
+      display_number: 27,
+      title: 'Mikado slice',
+      src: './img/Slices/img (27).jpg',
+      price: '$3.99'
+    },
+    {
+      display_number: 28,
+      title: 'Ideal slice',
+      src: './img/Slices/img (28).jpg',
+      price: '$3.49'
+    },
+    {
+      display_number: 29,
+      title: 'Cheese cake slice',
+      src: './img/Slices/img (29).jpg',
+      price: '$3.49'
+    },
   ],
   regular: [
     {
@@ -19821,7 +19841,7 @@ const data = {
     },
     {
       display_number: 2,
-      title: "kievsky cake",
+      title: "Kievsky cake",
       src: "./img/Regular/img (2).jpg",
       price: "$45",
     },
@@ -19931,7 +19951,7 @@ const data = {
       display_number: 20,
       title: "Honey cake",
       src: "./img/Regular/img (20).JPG",
-      price: "$ ??????",
+      price: "$30",
     },
     {
       display_number: 21,
@@ -19956,6 +19976,12 @@ const data = {
       title: "Baklava cake",
       src: "./img/Regular/img (24).jpeg",
       price: "$25",
+    },
+    {
+      display_number: 25,
+      title: "Birds milk cake",
+      src: "./img/Regular/img (25).jpeg",
+      price: "$30",
     },
   ],
 };

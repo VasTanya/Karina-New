@@ -3,10 +3,11 @@ import FirstPhoto from "../Model/FirstPhoto.js";
 class FirstPhotoService {
   constructor() {}
 
-  getAll = async (page, size) => {
-    const skip = (page - 1) * size;
+  getAll = async () => {
+    // const skip = (page - 1) * size;
 
-    const firstPhoto = await FirstPhoto.find().skip(skip).limit(size);
+    const firstPhoto = await FirstPhoto.find()
+    // .find().skip(skip).limit(size);
     return firstPhoto;
   };
 

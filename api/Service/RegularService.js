@@ -3,10 +3,11 @@ import Regular from "../Model/RegularModel.js";
 class RegularService {
   constructor() {}
 
-  getAll = async (page, size) => {
-    const skip = (page - 1) * size;
+  getAll = async () => {
+    // const skip = (page - 1) * size;
 
-    const regular = await Regular.find().skip(skip).limit(size);
+    const regular = await Regular.find()
+    // .find().skip(skip).limit(size);
     return regular;
   };
 

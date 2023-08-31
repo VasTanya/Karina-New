@@ -11,10 +11,10 @@ class SlicesController {
 
   getAll = async (req, res) => {
     try {
-      const page = parseInt(req.query.page) || 1;
-      const size = parseInt(req.query.size) || 10;
+      // const page = parseInt(req.query.page) || 1;
+      // const size = parseInt(req.query.size) || 10;
 
-      const slices = await this.SlicesService.getAll(page, size);
+      const slices = await this.SlicesService.getAll();
       response(res, 200, slices);
     } catch (error) {
       logger.error(`Error during getAll: ${error}`);

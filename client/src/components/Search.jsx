@@ -20,7 +20,7 @@ function Search() {
    
     const resultPrevSlice = test.slice(0,idxSin)
     const resultNextSlice = test.slice(idxSin+1)
-    console.log(resultPrevSlice+resultNextSlice);
+   // console.log(resultPrevSlice+resultNextSlice);
     // console.log(resultNextSlice);
   return (
     <div className='div_search'>
