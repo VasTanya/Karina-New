@@ -1,6 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import EmailService from "../Service/EmailService.js";
-import logger from "../Utils/logger/Logger.js";
+import logger from "../Utils/Logger/Logger.js";
 import response from "../Utils/Response.js";
 
 class EmailController {

@@ -1,24 +1,23 @@
-import jwt, { decode } from "jsonwebtoken";
-import response from "./Response.js";
+import jwt from "jsonwebtoken";
+import response from "../Utils/Response.js";
 
 const isAuth = (req, res, next) => {
-  const authorization = req.headers.authorization;
-  if (authorization) {
-    const token = authorization.slice(7, authorization.length);
-    jwt.verify(token, process.env.SECRET, (err, decode) => {
-      if (err) {
-        response(res, 401, {
-          message: "Invalid token",
-        });
-      } else {
-        req.user = decode;
-        next();
-      }
-    });
-  } else {
-    response(res, 401, {
-      message: "No token",
-    });
+  const token = req.cookies.access_token;
+
+  if (!token) {
+    return res.redirect("/login");
+  }
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET);
+    req.user = decodedToken;
+    next();
+  } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      res.clearCookie("access_token");
+      return res.redirect("/login");
+    }
+    response(res, 401, { message: "Invalid token" });
   }
 };
 

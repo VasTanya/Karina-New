@@ -12,6 +12,15 @@ class RegularService {
     const regularById = await Regular.findById(id);
     return regularById;
   };
+
+  edit = async (data) => {
+    const item = await Regular.findOneAndUpdate(data);
+    return item;
+  };
+  delete = async (id) => {
+    const item = await Regular.findOneAndDelete(id);
+    return item;
+  };
 }
 
 export default RegularService;
