@@ -81,16 +81,12 @@ class AlbumsController {
   search = async (req, res) => {
     try {
       const { album_number, display_number } = req.query;
-      console.log(
-        `album_number ${album_number}, display_number ${display_number}`
-      );
 
       const search = await this.AlbumsService.search(
         album_number,
         display_number
       );
 
-      console.log("SEARCH CONTROLLER: ", search);
       response(res, 200, search);
     } catch (error) {
       logger.error(`Error during search: ${error}`);

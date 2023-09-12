@@ -4,7 +4,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-import ejs from "ejs";
 
 import apiLogger from "./Utils/Logger/ApiLogger.js";
 import logger from "./Utils/Logger/Logger.js";
