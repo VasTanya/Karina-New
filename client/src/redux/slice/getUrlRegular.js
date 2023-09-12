@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchRegular = createAsyncThunk(
-    'cakes/fetchFirstFotoStatus',
+    'cakes/fetchRegularStatus',
     async (params) => {
         const { urlRegular } = params
         const { data } = await axios.get(urlRegular)

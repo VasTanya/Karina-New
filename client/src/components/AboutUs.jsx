@@ -4,7 +4,7 @@ function AboutUs() {
     return (
         <div>
             <div className="about_text_and_foto">
-                <img src="./img/about_foto.jpg" />
+                <img src="./img/about_foto2.jpg" />
                 <div className="bg"></div>
                 <p>
                     Located in the heart of Glendale, Karina’s Cake House has been
