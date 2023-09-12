@@ -12,6 +12,7 @@ class FirstPhotoController {
     this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
   }
 
+  
   getAll = async (req, res) => {
     try {
       const firstPhoto = await this.FirstPhotoService.getAll();
@@ -37,7 +38,6 @@ class FirstPhotoController {
       });
     }
   };
-}
 
 editItem = async (req, res) => {
   try {
@@ -74,5 +74,7 @@ deleteItem = async (req, res) => {
     });
   }
 };
+
+}
 
 export default new FirstPhotoController();
