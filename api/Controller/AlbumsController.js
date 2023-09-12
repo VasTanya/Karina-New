@@ -2,6 +2,8 @@ import expressAsyncHandler from "express-async-handler";
 import AlbumsService from "../Service/AlbumsService.js";
 import response from "../Utils/Response.js";
 import logger from "../Utils/Logger/Logger.js";
+import { Types } from "mongoose";
+const { ObjectId } = Types;
 
 class AlbumsController {
   constructor() {
@@ -9,6 +11,8 @@ class AlbumsController {
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
     this.getItemById = expressAsyncHandler(this.getItemById.bind(this));
+    this.firstPhoto = expressAsyncHandler(this.firstPhoto.bind(this));
+    this.search = expressAsyncHandler(this.search.bind(this));
     this.editItem = expressAsyncHandler(this.editItem.bind(this));
     this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
   }
@@ -30,11 +34,11 @@ class AlbumsController {
 
   getById = async (req, res) => {
     try {
-      const paramsId = req.params._id;
+      const { _id } = req.params;
       const page = parseInt(req.query.page) || 1;
       const size = parseInt(req.query.size) || 10;
 
-      const albumById = await this.AlbumsService.getById(paramsId, page, size);
+      const albumById = await this.AlbumsService.getById(_id, page, size);
       response(res, 200, albumById);
     } catch (error) {
       logger.error(`Error during getById: ${error}`);
@@ -46,16 +50,50 @@ class AlbumsController {
 
   getItemById = async (req, res) => {
     try {
-      const paramsId = req.params._id;
-      const paramsItem = req.params.item;
+      const { _id, item } = req.params;
 
-      const albumDataItem = await this.AlbumsService.getItemById(
-        paramsId,
-        paramsItem
-      );
+      const id = new ObjectId(_id);
+      const itemId = new ObjectId(item);
+
+      const albumDataItem = await this.AlbumsService.getItemById(id, itemId);
       response(res, 200, albumDataItem);
     } catch (error) {
       logger.error(`Error during getItemById: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  firstPhoto = async (req, res) => {
+    try {
+      const firstPhoto = await this.AlbumsService.firstPhoto();
+
+      response(res, 200, firstPhoto);
+    } catch (error) {
+      logger.error(`Error during firstPhoto: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  search = async (req, res) => {
+    try {
+      const { album_number, display_number } = req.query;
+      console.log(
+        `album_number ${album_number}, display_number ${display_number}`
+      );
+
+      const search = await this.AlbumsService.search(
+        album_number,
+        display_number
+      );
+
+      console.log("SEARCH CONTROLLER: ", search);
+      response(res, 200, search);
+    } catch (error) {
+      logger.error(`Error during search: ${error}`);
       return response(res, error.statusCode || 500, {
         _message: error.message,
       });
@@ -72,7 +110,7 @@ class AlbumsController {
         src: src,
       };
 
-      const editedItem = this.AlbumsService.edit(data);
+      const editedItem = await this.AlbumsService.edit(data);
 
       response(res, 200, editedItem);
     } catch (error) {
@@ -87,7 +125,7 @@ class AlbumsController {
     try {
       const { _id } = req.body;
 
-      const deletedItem = this.AlbumsService.delete(_id);
+      const deletedItem = await this.AlbumsService.delete(_id);
 
       response(res, 200, deletedItem);
     } catch (error) {

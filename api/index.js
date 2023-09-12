@@ -14,7 +14,6 @@ import corsOptions from "./Config/CorsOptions.js";
 import Connection from "./Utils/Connection.js";
 
 import seedRouter from "./Route/SeedRoute.js";
-import firstPhotoRouter from "./Route/FirstPhotoRoute.js";
 import albumsRouter from "./Route/AlbumsRoute.js";
 import slicesRouter from "./Route/SlicesRoute.js";
 import regularRouter from "./Route/RegularRoute.js";
@@ -23,8 +22,8 @@ import viewsRouter from "./Route/ViewsRouter.js";
 import adminRouter from "./Route/AdminRoute.js";
 
 const app = express();
-const dotenvConf = dotenv.config();
-const connection = Connection();
+dotenv.config();
+Connection();
 
 app.use(credentials);
 app.use(cors(corsOptions));
@@ -42,7 +41,6 @@ app.set("views", path.join(__dirname, "Views", "Pages"));
 app.use(express.static(path.join(__dirname, "Public")));
 
 app.use("/api/seed", seedRouter);
-app.use("/api/firstPhoto", firstPhotoRouter);
 app.use("/api/albums", albumsRouter);
 app.use("/api/slices", slicesRouter);
 app.use("/api/regular", regularRouter);

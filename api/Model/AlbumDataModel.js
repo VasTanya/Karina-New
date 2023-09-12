@@ -7,6 +7,7 @@ const albumDataSchema = new Schema(
       {
         display_number: { type: Number, required: true },
         src: { type: String, required: true },
+        tag: { type: String },
       },
     ],
   },
