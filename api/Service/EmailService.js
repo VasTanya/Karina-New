@@ -4,6 +4,7 @@ class EmailService {
   constructor() {}
 
   sendRequest = async (data) => {
+    console.log("SERVICE EMAIL: ", data.email);
     await mailer(data);
     return true;
   };
