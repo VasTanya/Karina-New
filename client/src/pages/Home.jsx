@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFirstFoto } from '../redux/slice/getUrlFirstFoto';
 import IsLoading from '../components/IsLoading';
 
-function ShowPage() {
+function Home() {
   const dispatch = useDispatch()
   const { dataFirstFoto, status } = useSelector(store => store.getUrlFirstFoto)
+  const {searchValue} = useSelector(store=>store.cakeSlice)
   const dataFirstPhoto = dataFirstFoto.data;
   //  console.log(dataFirstPhoto);
 
   const getUrlFirstFoto = async () => {
-    const urlFirstFoto = '/api/firstPhoto'
+    const searchUrl = searchValue ? `search=${searchValue}` : ''
+    const urlFirstFoto = `/api/firstPhoto?&${searchUrl}`
     dispatch(fetchFirstFoto({ urlFirstFoto })
     )
   }
@@ -20,6 +22,10 @@ function ShowPage() {
   }, [])
 
   const isLoading = [...new Array(22)].map((_, idx) => <IsLoading key={idx} />)
+
+  // const sortDataFirstPhoto = status === 'successful' ?   [...dataFirstFoto] : []
+  // sortDataFirstPhoto.sort((a,b)=>a.display_number-b.display_number? 1:-1)
+  // console.log(sortDataFirstPhoto);
 
   return (
     <>
@@ -42,7 +48,8 @@ function ShowPage() {
             </div>
           </div>
         ) : (<div className='albums'>{status === 'loading' ? isLoading : 
-          dataFirstPhoto.map((el) => <Link key={el.display_number} style={{ textDecoration: 'none' }} to={`${el.display_number}`} >
+        
+          dataFirstPhoto/*.sort((a,b)=>a.display_number-b.display_number)*/.map((el) => <Link key={el.display_number} style={{ textDecoration: 'none' }} to={`${el.display_number}`} >
             <div className='first_foto'>
               <img src={el.img} alt="" />
               <div className='title_price'>
@@ -50,11 +57,12 @@ function ShowPage() {
               </div>
             </div>
           </Link>)
+
         } </div>)
       }
     </>
   )
 }
 
-export default ShowPage
+export default Home
 

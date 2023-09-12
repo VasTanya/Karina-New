@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Nav from './components/Nav';
@@ -10,9 +9,10 @@ import ButtonScrollUp from './components/ButtonScrollUp';
 import Slices from './components/Slices';
 import Regular from './components/Regular';
 import MoreWraper from './components/MoreWraper';
-import ShowPage from './pages/ShowPage';
+import Home from './pages/Home';
 import AllAlbomsPhoto from './components/AllAlbomsPhoto';
 import AskCoustOfThisCake from './components/AskCoustOfThisCake';
+import OneSearchCake from './components/OneSearchCake';
 import './App.css';
 
 function App() {
@@ -28,12 +28,13 @@ function App() {
                 <Route path='slices' element={<Slices />} />
                 <Route path='regular' element={<Regular />} />
                 <Route path='contactUs' element={<ContactUs />} />
-
+                
                 <Route path='/' element={<MoreWraper />}>
                     
-                    <Route index element={<ShowPage  />} />
+                    <Route index element={<Home />} />
                     <Route path=':id' element={<AllAlbomsPhoto />} />
                     <Route path='/cake' element={<AskCoustOfThisCake />} />
+                    <Route path='/search' element={<OneSearchCake/>} />
 
                 </Route>
 

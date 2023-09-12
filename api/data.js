@@ -19841,21 +19841,21 @@ const data = {
     },
     {
       display_number: 27,
-      title: 'Mikado slice',
-      src: './img/Slices/img (27).jpg',
-      price: '$3.99'
+      title: "Mikado slice",
+      src: "./img/Slices/img (27).jpg",
+      price: "$3.99",
     },
     {
       display_number: 28,
-      title: 'Ideal slice',
-      src: './img/Slices/img (28).jpg',
-      price: '$3.49'
+      title: "Ideal slice",
+      src: "./img/Slices/img (28).jpg",
+      price: "$3.49",
     },
     {
       display_number: 29,
-      title: 'Cheese cake slice',
-      src: './img/Slices/img (29).jpg',
-      price: '$3.49'
+      title: "Cheese cake slice",
+      src: "./img/Slices/img (29).jpg",
+      price: "$3.49",
     },
   ],
   regular: [

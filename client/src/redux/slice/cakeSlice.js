@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    currentPage : 1
+    currentPage : 1,
+    searchValue: '',
 }
 
 const cakeSlice = createSlice({
-    name: 'page',
+    name: 'filter',
     initialState,
     reducers: {
         setCurrentPage(state, action){
             state.currentPage = action.payload
-        }
+        },
+        setSearchValue(state, action){
+            state.searchValue = action.payload
+        },
     }
 
 })
 
-export const {setCurrentPage} = cakeSlice.actions
+export const {setCurrentPage,setSearchValue} = cakeSlice.actions
 export default cakeSlice.reducer

@@ -2,16 +2,17 @@ import nodemailer from "nodemailer";
 import logger from "./Logger/Logger.js";
 
 const mailer = async (data) => {
+  console.log("MAILER EMAIL: ", data.email);
   const transporter = nodemailer.createTransport({
     service: "hotmail",
     auth: {
       user: process.env.MAIL,
-      pass: process.env.MAIL_PASS, // Replace with your actual password
+      pass: process.env.MAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: data.email,
+    from: process.env.MAIL,
     to: process.env.MAIL,
     subject: `New Request For ${data.cakeCode}`,
     html: emailHtml(data),

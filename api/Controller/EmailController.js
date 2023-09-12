@@ -11,6 +11,7 @@ class EmailController {
 
   sendRequest = async (req, res) => {
     const { name, phone, email, size, filling, cakeCode } = req.body;
+    console.log("CONTROLLER: ", email);
 
     const mailData = {
       name,

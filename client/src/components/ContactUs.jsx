@@ -12,8 +12,8 @@ function ContactUs() {
           <Link style={{ textDecoration: 'none' }} to={'tel:' +18182406718}>
             <p className="call"> <span><i className="fa fa-phone" aria-hidden="true"></i></span>  (818) 240-6718</p>
           </Link>
-          <Link style={{ textDecoration: 'none' }} to={'mailto:karinas515@gmail.com'}>
-           <p className="mail">Karinas515@gmail.com</p>
+          <Link style={{ textDecoration: 'none' }} to={'mailto:k2406718@gmail.com'}>
+           <p className="mail">k2406718@gmail.com</p>
           </Link>
            <p></p>
         </span>
