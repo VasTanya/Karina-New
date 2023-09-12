@@ -5,6 +5,7 @@ const data = {
     password: "12345678",
   },
   firstPhoto: [
+
     {
       display_number: 1,
       title: "Happy birthday",
@@ -19045,7 +19046,7 @@ const data = {
         {
           display_number: 4,
           src: "./img/21.Thanksgiving Day/first.jpeg",
-          tag: "firstPhoto",
+          tag: "firstPhoto"
         },
       ],
     },

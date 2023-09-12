@@ -3,10 +3,11 @@ import Slices from "../Model/SlicesModel.js";
 class SlicesService {
   constructor() {}
 
-  getAll = async (page, size) => {
-    const skip = (page - 1) * size;
+  getAll = async () => {
+    // const skip = (page - 1) * size;
 
-    const slices = await Slices.find().skip(skip).limit(size);
+    const slices = await Slices.find()
+    // .find().skip(skip).limit(size);
     return slices;
   };
 

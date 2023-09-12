@@ -32,6 +32,7 @@ function AskCoustOfThisCake({ dataImages }) {
                 <p>{albomsId + '.' + filterCakes.id}</p>
                 <input type="text" placeholder='Youre name' />
                 <input type="text" required placeholder='Youre phone*' />
+                <input type="text" required placeholder='Youre email*' />
                 <input type="text" placeholder='Size(inches)' />
                 <input type="text" placeholder='Cake filling' />
                 <Link style={{ textDecoration: 'none' }} to={'mailto:karinas515@gmail.com'}>
