@@ -29,13 +29,13 @@ function AskCoustOfThisCake({ dataImages }) {
             <form className='mail_form' action="">
                 <h6>Send a request to calculate the cost of this cake:</h6>
                 <img src={filterCakes.src} alt="" />
-                <p>{albomsId + '.' + filterCakes.id}</p>
+                <p>{id + '.' + filterCakes.id}</p>
                 <input type="text" placeholder='Youre name' />
                 <input type="text" required placeholder='Youre phone*' />
                 <input type="text" required placeholder='Youre email*' />
                 <input type="text" placeholder='Size(inches)' />
                 <input type="text" placeholder='Cake filling' />
-                <Link style={{ textDecoration: 'none' }} to={'mailto:karinas515@gmail.com'}>
+                <Link style={{ textDecoration: 'none' }} to={'mailto:k2406718@gmail.com'}>
                     <button>Send</button>
                 </Link>
             </form>
