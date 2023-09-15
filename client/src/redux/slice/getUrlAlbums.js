@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchAlbums = createAsyncThunk(
-    'cakes/fetchFirstFotoStatus',
+    'cakes/fetchAllPhotoStatus',
     async (params) => {
-        const { urlAlboms } = params
-        const { data } = await axios.get(urlAlboms)
-        console.log(data);
+        const { urlAlbums } = params
+        const { data } = await axios.get(urlAlbums)
         return  data 
 
     }
@@ -14,8 +13,8 @@ export const fetchAlbums = createAsyncThunk(
 
 const initialState = {
     dataAlbums: [],
-    aloboms: [],
     status: 'loading',
+    pageCount : 1
 }
 
 
@@ -34,7 +33,7 @@ const getUrlAlbums = createSlice({
             .addCase(fetchAlbums.fulfilled, (state, action) => {
                 state.status = 'successful'
                  state.dataAlbums = action.payload
-                 state.aloboms = action.payload.album
+                //  state.aloboms = action.payload.album
              
             })
             .addCase(fetchAlbums.rejected, (state) => {

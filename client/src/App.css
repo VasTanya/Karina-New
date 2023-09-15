@@ -200,16 +200,17 @@ nav ul {
   color: white;
   position: absolute;
   font-size: 3vw;
-  margin: 17vw 15vw;
+  margin: 10vw 15vw;
+  line-height: 4.5vw;
 }
 
 .bg {
-  background: grey;
+  background: black;
   position: absolute;
   border-radius: 7px;
   width: 93vw;
   height: 60vw;
-  opacity: 0.4;
+  opacity: 0.2;
   margin: 2vw;
 }
 
@@ -401,8 +402,9 @@ iframe {
   }
 
   .about_text_and_foto p {
-    font-size: 3.7vw;
-    margin-top: 6vw;
+    font-size: 3.4vw;
+    /* margin-top: 10vw; */
+    margin: 10vw 10vw;
   }
 
   .all_cakes,

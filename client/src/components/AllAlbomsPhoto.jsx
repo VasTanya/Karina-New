@@ -17,7 +17,8 @@ function AllAlbomsPhoto() {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const { dataAlbums,aloboms, status } = useSelector(store => store.getUrlAlbums)
+    const { dataAlbums,status } = useSelector(store => store.getUrlAlbums)
+    // console.log(dataAlbums);
     const {data_Id_Albums, statusId}= useSelector(store => store.getUrl_Id_Albums)
     const { currentPage } = useSelector((store) => store.cakeSlice)
     
@@ -27,8 +28,8 @@ function AllAlbomsPhoto() {
     const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
 
     const getUrlAlbum = async () => {
-        const urlAlboms = `/api/albums?id=${id}`
-        dispatch(fetchAlbums({ urlAlboms })
+        const urlAlbums = `/api/albums?id=${id}&page=${currentPage}`
+        dispatch(fetchAlbums({ urlAlbums })
         )
     }
     // const getUrl_Id_Albums = async () => {
@@ -39,27 +40,8 @@ function AllAlbomsPhoto() {
 
     useEffect(() => {
         getUrlAlbum()
-        // getUrl_Id_Albums()
-        // const newPhotoAlbum = dataAlbumsAll.filter((obj) => obj.album_number === +id)
-        // console.log(newPhotoAlbum);
-    }, [])
+    }, [currentPage])
 
-    // useEffect(() => {
-    //     const newData = dataAlbumsAll.filter((obj) => obj.album_number === +id)
-    //     if (newData) {
-    //         setFilDataMore(...newData.map((el) => {
-    //             if (el.imgArray) {
-    //                 setTitle(el.title)
-    //                 setAlbomId(el.id)
-    //                 return el.imgArray
-    //             } else {
-    //                 navigate('/')
-    //             }
-    //         }))
-    //     } else {
-    //         navigate('/')
-    //     }
-    // }, [])
 
     const onClickPages = (num) => {
         dispatch(setCurrentPage(num))
@@ -74,8 +56,7 @@ function AllAlbomsPhoto() {
         navigate(`/cake?${queryString}`)
     }
 
-  
-
+    
       return (
             <>
               {
@@ -92,12 +73,13 @@ function AllAlbomsPhoto() {
                 </div>
             </div>
         ) : (<div className='photos_in_album'>{status/* && statusId*/ === 'loading' ? isLoading :
-        dataAlbums.map((el) =>
-                <div onClick={() => onClickImg(el.display_number)} key={el.album_number} >
+        // urlAlbums 
+         dataAlbums.map((el) =>
+                <div onClick={() => onClickImg(id)} key={el.album_number} >
                     <div className='one_photo_from_alb'>
-                        <img src={el.album.src} alt="" />
+                        {/* <img src={el.album.src} alt="" /> */}
                         <div className='title_price'>
-                            <p>{el.album_number + '.' + el.album.display_number}</p>
+                            <p>{id + '.'/* + el.album.display_number*/}</p>
                         </div>
                    </div>
                 </div>
@@ -105,7 +87,7 @@ function AllAlbomsPhoto() {
         } </div>)
         }
           <div className='pagination'>{
-            status /* && statusId */=== 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} />
+            status /* && statusId */=== 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} /*setCurrentPage={(num) => dispatch(setCurrentPage(num))}*//>
           }
           </div>
             </>
@@ -115,37 +97,3 @@ function AllAlbomsPhoto() {
 }
 
 export default AllAlbomsPhoto
-
-
-
-
-
-            //     {/* <div className='photos_in_album'>
-            //     {
-            //         filDataMore?.map((el) => 
-            //         <div onClick={() => onClickImg(el.id)} key={el.id} >
-            //             <div className='one_photo_from_alb'>
-            //                 <img src={el.src} alt="" />
-            //                 <div className='title_price'>
-            //                     <p>{albomId + '.' + el.id}</p>
-            //                 </div>
-
-            //             </div>
-            //         </div>
-            //         )
-            //     }
-
-
-            // </div>
-            //   */}
-
-
-            //     {/* <div className='pagination'>
-            //    status === 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} />
-            // </div> */}
-            // <div>{
-
-            //     status === 'successful' && <Pagination pageCount={pageCount} setPageCount={(num) => dispatch(setPageCount(num))} />
-            //   }
-      
-            //   </div>
