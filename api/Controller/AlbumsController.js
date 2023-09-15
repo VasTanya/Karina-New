@@ -19,10 +19,7 @@ class AlbumsController {
 
   getAll = async (req, res) => {
     try {
-      const page = parseInt(req.query.page) || 1;
-      const size = parseInt(req.query.size) || 10;
-
-      const albums = await this.AlbumsService.getAll(page, size);
+      const albums = await this.AlbumsService.getAll();
       response(res, 200, albums);
     } catch (error) {
       logger.error(`Error during getAll: ${error}`);

@@ -5,7 +5,11 @@ class RegularService {
 
   getAll = async () => {
     const regular = await Regular.find();
-    return regular;
+
+    const sortedRegular = regular.sort(
+      (a, b) => a.display_number - b.display_number
+    );
+    return sortedRegular;
   };
 
   getById = async (id) => {

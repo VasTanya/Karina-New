@@ -1,16 +1,34 @@
 import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
-import logger from "../Utils/Logger/Logger.js";
-import mongoose from "mongoose";
 
 class AlbumsService {
   constructor() {}
 
-  getAll = async (page, size) => {
-    const skip = (page - 1) * size;
+  getAll = async () => {
+    const albums = await Albums.find();
 
-    const albums = await Albums.find().skip(skip).limit(size);
-    return albums;
+    const sortedAlbums = albums.sort((a, b) => a.album_number - b.album_number);
+
+    return sortedAlbums;
+  };
+
+  firstPhoto = async () => {
+    const albumData = await AlbumData.find().populate("albumId");
+
+    const firstPhotos = albumData.map((item) => {
+      const data = {
+        album: item.albumId,
+        firstPhoto: item.data.find((el) => el.tag === "firstPhoto"),
+      };
+
+      return data;
+    });
+
+    const sortedFirstPhoto = firstPhotos.sort(
+      (a, b) => a.album.album_number - b.album.album_number
+    );
+
+    return sortedFirstPhoto;
   };
 
   getById = async (id, page, size) => {
@@ -26,8 +44,9 @@ class AlbumsService {
 
     const paginatedAlbumData = {
       ...albumDataById.toObject(),
-      data: paginatedArray,
+      data: paginatedArray.sort((a, b) => a.display_number - b.display_number),
     };
+
     return paginatedAlbumData;
   };
 
@@ -39,30 +58,16 @@ class AlbumsService {
     return albumDataItem;
   };
 
-  firstPhoto = async () => {
-    const albumData = await AlbumData.find();
-
-    const firstPhotos = albumData.map((item) => {
-      return item.data.find((el) => el.tag === "firstPhoto");
-    });
-
-    return firstPhotos;
-  };
-
   search = async (albumNumber, displayNumber) => {
     const albums = await AlbumData.find().populate("albumId");
 
-    if (
-      displayNumber === undefined ||
-      !displayNumber ||
-      displayNumber.trim() === ""
-    ) {
-      const result = albums.filter((query) =>
-        String(query.albumId.album_number).includes(albumNumber)
+    if (!displayNumber) {
+      const result = albums.filter(
+        (query) => String(query.albumId.album_number) === albumNumber
       );
 
       if (result.length === 0) {
-        return `No result for ${albumNumber}`;
+        return `No result for album number ${albumNumber}`;
       }
 
       return result;
@@ -74,11 +79,11 @@ class AlbumsService {
       const result = [];
 
       matchingAlbums.forEach((album) => {
-        const matchingData = album.data.filter((data) =>
-          String(data.display_number).includes(displayNumber)
+        const matchingData = album.data.find(
+          (data) => String(data.display_number) === displayNumber
         );
 
-        if (matchingData.length > 0) {
+        if (matchingData) {
           result.push({
             album_number: album.albumId.album_number,
             matching_data: matchingData,
@@ -87,7 +92,7 @@ class AlbumsService {
       });
 
       if (result.length === 0) {
-        return `No result for ${albumNumber}`;
+        return `No result for album number ${albumNumber} and display number ${displayNumber}`;
       }
 
       return result;

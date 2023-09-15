@@ -4,11 +4,12 @@ class SlicesService {
   constructor() {}
 
   getAll = async () => {
-    // const skip = (page - 1) * size;
+    const slices = await Slices.find();
 
-    const slices = await Slices.find()
-    // .find().skip(skip).limit(size);
-    return slices;
+    const sortedSlices = slices.sort(
+      (a, b) => a.display_number - b.display_number
+    );
+    return sortedSlices;
   };
 
   getById = async (id) => {
