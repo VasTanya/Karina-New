@@ -7,14 +7,15 @@ import IsLoading from '../components/IsLoading';
 function Home() {
   const dispatch = useDispatch()
   const { dataFirstFoto, status } = useSelector(store => store.getUrlFirstFoto)
-  const {searchValue} = useSelector(store=>store.cakeSlice)
+  const { searchValue } = useSelector(store => store.cakeSlice)
   const dataFirstPhoto = dataFirstFoto.data;
-  //  console.log(dataFirstPhoto);
+  // console.log(dataFirstPhoto);
 
   const getUrlFirstFoto = async () => {
     const searchUrl = searchValue ? `search=${searchValue}` : ''
-    const urlFirstFoto = `/api/firstPhoto?&${searchUrl}`
+    const urlFirstFoto = `/api/albums/firstPhoto?&${searchUrl}`
     dispatch(fetchFirstFoto({ urlFirstFoto })
+
     )
   }
   useEffect(() => {
@@ -22,10 +23,6 @@ function Home() {
   }, [])
 
   const isLoading = [...new Array(22)].map((_, idx) => <IsLoading key={idx} />)
-
-  // const sortDataFirstPhoto = status === 'successful' ?   [...dataFirstFoto] : []
-  // sortDataFirstPhoto.sort((a,b)=>a.display_number-b.display_number? 1:-1)
-  // console.log(sortDataFirstPhoto);
 
   return (
     <>
@@ -47,13 +44,13 @@ function Home() {
               <p className='try later'>Please try again later.</p>
             </div>
           </div>
-        ) : (<div className='albums'>{status === 'loading' ? isLoading : 
-        
-          dataFirstPhoto/*.sort((a,b)=>a.display_number-b.display_number)*/.map((el) => <Link key={el.display_number} style={{ textDecoration: 'none' }} to={`${el.display_number}`} >
+        ) : (<div className='albums'>{status === 'loading' ? isLoading :
+
+          dataFirstPhoto.map((el) => <Link key={el.album.album_number} style={{ textDecoration: 'none' }} to={`${el.album.album_number}`} >
             <div className='first_foto'>
-              <img src={el.img} alt="" />
+              <img src={el.firstPhoto.src} alt="" />
               <div className='title_price'>
-                <p>{el.display_number}.{el.title}</p>              
+                <p>{el.album.album_number}.{el.album.title}</p>
               </div>
             </div>
           </Link>)

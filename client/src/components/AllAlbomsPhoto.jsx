@@ -10,25 +10,25 @@ import IsLoading from './IsLoading';
 
 function AllAlbomsPhoto() {
 
-    const [filDataMore, setFilDataMore] = useState([])
-    const [title, setTitle] = useState('')
+    // const [filDataMore, setFilDataMore] = useState([])
+    // const [title, setTitle] = useState('')
     const [albomId, setAlbomId] = useState(0)
     const { id } = useParams()
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
     const { dataAlbums,status } = useSelector(store => store.getUrlAlbums)
-    // console.log(dataAlbums);
     const {data_Id_Albums, statusId}= useSelector(store => store.getUrl_Id_Albums)
     const { currentPage } = useSelector((store) => store.cakeSlice)
+    console.log(dataAlbums);
     
     const data_Id_AlbumsAll = data_Id_Albums.data
     
-
     const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
 
     const getUrlAlbum = async () => {
-        const urlAlbums = `/api/albums?id=${id}&page=${currentPage}`
+        // const filter = dataAlbums.filter((el)=> el.album_number === id)
+        const urlAlbums = `/api/albums?id=${id}&page=${currentPage}&limit=20&filter=${+id}`
         dispatch(fetchAlbums({ urlAlbums })
         )
     }
@@ -40,7 +40,7 @@ function AllAlbomsPhoto() {
 
     useEffect(() => {
         getUrlAlbum()
-    }, [currentPage])
+    }, [currentPage,id])
 
 
     const onClickPages = (num) => {
@@ -50,13 +50,11 @@ function AllAlbomsPhoto() {
     const onClickImg = (id) => {
         const queryString = qs.stringify({
             id,
-            title,
             albomId
         })
         navigate(`/cake?${queryString}`)
     }
 
-    
       return (
             <>
               {
@@ -87,7 +85,7 @@ function AllAlbomsPhoto() {
         } </div>)
         }
           <div className='pagination'>{
-            status /* && statusId */=== 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} /*setCurrentPage={(num) => dispatch(setCurrentPage(num))}*//>
+            status /* && statusId */=== 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} />
           }
           </div>
             </>

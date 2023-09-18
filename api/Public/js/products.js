@@ -3,15 +3,17 @@ const table = document.getElementById("table");
 
 const tableNavArray = Array.from(tableNav);
 // ...
-(async () => {
+(async (album, data) => {
   const response = await fetch(
     "/api/albums/search?album_number=3&display_number=2"
+    // `/api/albums/search?album_number=${album}&display_number=${data}`
   );
   if (response.ok) {
     const data = await response.json();
     console.log(data);
   }
 })();
+
 tableNavArray.forEach((nav) => {
   nav.addEventListener("click", async () => {
     try {
