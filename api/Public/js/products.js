@@ -3,17 +3,15 @@ const table = document.getElementById("table");
 
 const tableNavArray = Array.from(tableNav);
 // ...
-(async (album, data) => {
+(async () => {
   const response = await fetch(
     "/api/albums/search?album_number=3&display_number=2"
-    // `/api/albums/search?album_number=${album}&display_number=${data}`
   );
   if (response.ok) {
     const data = await response.json();
     console.log(data);
   }
 })();
-
 tableNavArray.forEach((nav) => {
   nav.addEventListener("click", async () => {
     try {
@@ -109,7 +107,7 @@ tableNavArray.forEach((nav) => {
               <td>${item._id}</td>
               <td>${item.display_number}</td>
               <td>${item.title}</td>
-              <td>${item.src}</td>
+              <td><img class="img" src="${item.src}" /></td>
               <td><button class="data-edit">EDIT</button></td>
               <td><button class="data-delete">DELETE</button></td>
             `;
