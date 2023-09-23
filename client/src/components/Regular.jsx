@@ -9,7 +9,6 @@ function Regular() {
     const { dataRegular, status } = useSelector(store => store.getUrlRegular)
     const dataRegularCake = dataRegular.data
   
-    
     const getUrlRegular = async () => {
         const urlRegular = '/api/regular'
         dispatch(fetchRegular({ urlRegular })
@@ -22,9 +21,6 @@ function Regular() {
     }, [])
 
     const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
-
-   
-
 
     return (
         <>
@@ -53,9 +49,6 @@ function Regular() {
            )
         } </div>)
       }
-      {/* <div className='photos_in_album'>
-        {isLoading}
-      </div> */}
         </>
     )
 

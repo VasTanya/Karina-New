@@ -46,7 +46,7 @@ function Home() {
           </div>
         ) : (<div className='albums'>{status === 'loading' ? isLoading :
 
-          dataFirstPhoto.map((el) => <Link key={el.album.album_number} style={{ textDecoration: 'none' }} to={`${el.album.album_number}`} >
+          dataFirstPhoto.map((el) => <Link key={el.album.album_number} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
             <div className='first_foto'>
               <img src={el.firstPhoto.src} alt="" />
               <div className='title_price'>

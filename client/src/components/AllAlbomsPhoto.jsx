@@ -1,47 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import qs from 'qs'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../redux/slice/cakeSlice';
 import PaginatioMaterialUi from './PaginatioMaterialUi';
-import { fetchAlbums } from '../redux/slice/getUrlAlbums';
 import { fetch_Id_Albums } from '../redux/slice/getUrl_Id_Albums';
 import IsLoading from './IsLoading';
 
 function AllAlbomsPhoto() {
 
-    // const [filDataMore, setFilDataMore] = useState([])
-    // const [title, setTitle] = useState('')
-    const [albomId, setAlbomId] = useState(0)
     const { id } = useParams()
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
-    const { dataAlbums,status } = useSelector(store => store.getUrlAlbums)
-    const {data_Id_Albums, statusId}= useSelector(store => store.getUrl_Id_Albums)
     const { currentPage } = useSelector((store) => store.cakeSlice)
-    console.log(dataAlbums);
-    
+    const {data_Id_Albums, status}= useSelector(store => store.getUrl_Id_Albums)
     const data_Id_AlbumsAll = data_Id_Albums.data
-    
+    // console.log(data_Id_AlbumsAll);
     const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
 
-    const getUrlAlbum = async () => {
-        // const filter = dataAlbums.filter((el)=> el.album_number === id)
-        const urlAlbums = `/api/albums?id=${id}&page=${currentPage}&limit=20&filter=${+id}`
-        dispatch(fetchAlbums({ urlAlbums })
+    const getUrl_Id_Albums = async () => {
+        const url_Id_Albums = `/api/albums/${id}?page=${currentPage}`
+        dispatch(fetch_Id_Albums({ url_Id_Albums })    
         )
     }
-    // const getUrl_Id_Albums = async () => {
-    //     const url_Id_Albums = '/api/albums/_id'
-    //     dispatch(fetch_Id_Albums({ url_Id_Albums })    
-    //     )
-    // }
 
     useEffect(() => {
-        getUrlAlbum()
+        getUrl_Id_Albums()
     }, [currentPage,id])
-
 
     const onClickPages = (num) => {
         dispatch(setCurrentPage(num))
@@ -50,7 +35,7 @@ function AllAlbomsPhoto() {
     const onClickImg = (id) => {
         const queryString = qs.stringify({
             id,
-            albomId
+            // albomId
         })
         navigate(`/cake?${queryString}`)
     }
@@ -58,7 +43,7 @@ function AllAlbomsPhoto() {
       return (
             <>
               {
-        status/* && statusId*/ === 'error' ? (
+        status === 'error' ? (
             <div className='error_try-later'>
                 <div className='error'>
                     <p>An error has occurred
@@ -70,14 +55,14 @@ function AllAlbomsPhoto() {
                     <p className='Try later'>Please try again later.</p>
                 </div>
             </div>
-        ) : (<div className='photos_in_album'>{status/* && statusId*/ === 'loading' ? isLoading :
-        // urlAlbums 
-         dataAlbums.map((el) =>
-                <div onClick={() => onClickImg(id)} key={el.album_number} >
+        ) : (<div className='photos_in_album'>{status === 'loading' ? isLoading :
+      
+        data_Id_AlbumsAll.data.map((el) =>
+                <div onClick={() => onClickImg(id)} key={el.display_number} >
                     <div className='one_photo_from_alb'>
-                        {/* <img src={el.album.src} alt="" /> */}
+                        <img src={el.src} alt="" /> 
                         <div className='title_price'>
-                            <p>{id + '.'/* + el.album.display_number*/}</p>
+                             <p>{data_Id_AlbumsAll.albumId.album_number + '.' +el.display_number}</p>
                         </div>
                    </div>
                 </div>
@@ -85,7 +70,7 @@ function AllAlbomsPhoto() {
         } </div>)
         }
           <div className='pagination'>{
-            status /* && statusId */=== 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} />
+            status === 'successful' &&  <PaginatioMaterialUi currentPage={currentPage} handleClick={(num) => onClickPages(num)} />
           }
           </div>
             </>
