@@ -14,7 +14,7 @@ export const fetch_Id_Albums = createAsyncThunk(
 
 const initialState = {
     data_Id_Albums: [],
-    statusId: 'loading',
+    status: 'loading',
 }
 
 
@@ -26,17 +26,17 @@ const getUrl_Id_Albums = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetch_Id_Albums.pending, (state) => {
-                state.statusId = 'loading'
+                state.status = 'loading'
                 state.data_Id_Albums = []
             })
 
             .addCase(fetch_Id_Albums.fulfilled, (state, action) => {
-                state.statusId = 'successful'
+                state.status = 'successful'
                  state.data_Id_Albums = action.payload
              
             })
             .addCase(fetch_Id_Albums.rejected, (state) => {
-                state.statusId = 'error'
+                state.status = 'error'
                  state.data_Id_Albums = []
              
             })
