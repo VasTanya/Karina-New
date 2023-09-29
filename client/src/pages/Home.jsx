@@ -7,17 +7,13 @@ import IsLoading from '../components/IsLoading';
 function Home() {
   const dispatch = useDispatch()
   const { dataFirstFoto, status } = useSelector(store => store.getUrlFirstFoto)
-  const { searchValue } = useSelector(store => store.cakeSlice)
-  const dataFirstPhoto = dataFirstFoto.data;
-  // console.log(dataFirstPhoto);
 
   const getUrlFirstFoto = async () => {
-    const searchUrl = searchValue ? `search=${searchValue}` : ''
-    const urlFirstFoto = `/api/albums/firstPhoto?&${searchUrl}`
+    const urlFirstFoto = `/api/albums/firstPhoto`
     dispatch(fetchFirstFoto({ urlFirstFoto })
-
     )
   }
+
   useEffect(() => {
     getUrlFirstFoto()
   }, [])
@@ -46,7 +42,7 @@ function Home() {
           </div>
         ) : (<div className='albums'>{status === 'loading' ? isLoading :
 
-          dataFirstPhoto.map((el) => <Link key={el.album.album_number} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
+        dataFirstFoto.map((el) => <Link key={el.album._id} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
             <div className='first_foto'>
               <img src={el.firstPhoto.src} alt="" />
               <div className='title_price'>

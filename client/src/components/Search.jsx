@@ -4,7 +4,6 @@ import { setSearchValue } from '../redux/slice/cakeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import qs from 'qs'
 import debounce from 'lodash.debounce'
-import Home from '../pages/Home'
 
 function Search() {
   const navigate = useNavigate()
@@ -16,18 +15,16 @@ function Search() {
   const updataSearch = useCallback(
     debounce((text) => {
       dispatch(setSearchValue(text))
-    }, 1000),
+    }, 2000),
     [],
   )
 
   const onClickInput = (e) => {
     setVelInp(e.target.value)
-    // setSearchValue(e.target.value)
     updataSearch(e.target.value)
     const queryString = qs.stringify({
       id,
-      // title,
-      // albomId
+      velInp
     })
     navigate(`/search?${queryString}`)
   }
@@ -37,14 +34,7 @@ function Search() {
     setVelInp('')
     navigate('/')
   }
-  // const test = '21.277'
-  // let text = '.'
-  // const idxSin = test.indexOf(text)
 
-  // const resultPrevSlice = test.slice(0, idxSin)
-  // const resultNextSlice = test.slice(idxSin + 1)
-  // console.log(resultPrevSlice + resultNextSlice);
-  // console.log(resultNextSlice);
   return (
     <div className='div_search'>
 

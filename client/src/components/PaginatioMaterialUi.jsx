@@ -5,8 +5,9 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 
 function PaginatioMaterialUi({ currentPage, handleClick }) {
-  const {dataAlbums} = useSelector(store=> store.getUrlAlbums)
-
+  const {data_Id_Albums}= useSelector(store => store.getUrl_Id_Albums)
+  const data_Id_AlbumsAll = data_Id_Albums.data
+  console.log(data_Id_AlbumsAll.data.length);
   const handlePageClick = (num) => {
     handleClick(num)
   }
@@ -14,7 +15,7 @@ function PaginatioMaterialUi({ currentPage, handleClick }) {
   return (
   
       <Stack spacing={2}>
-        <Pagination count={30} variant="outlined" onChange={(_, page) => handlePageClick(page)} page={currentPage} />
+        <Pagination count={Math.ceil(data_Id_AlbumsAll.data.length)} variant="outlined" onChange={(_, page) => handlePageClick(page)} page={currentPage} />
       </Stack>
 
   )

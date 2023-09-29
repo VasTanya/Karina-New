@@ -20005,7 +20005,7 @@ const data = {
     {
       display_number: 25,
       title: "Birds milk cake",
-      src: "/img/Regular/img (25).jpeg",
+      src: "/img/Regular/img (25).jpg",
       price: "$30",
     },
   ],
