@@ -3,11 +3,14 @@ import axios from "axios";
 
 export const fetchFirstFoto = createAsyncThunk(
     'cakes/fetchFirstFotoStatus',
-    async (params) => {
+    async (params, thunkAPI) => {
         const { urlFirstFoto } = params
         const { data } = await axios.get(urlFirstFoto)
         //  console.log(data);
-        return { data }
+      if (data.length === 0 || typeof data === 'string') {
+        return thunkAPI.rejectWithValue('No data')
+      }
+        return thunkAPI.fulfillWithValue(data)
 
     }
 )

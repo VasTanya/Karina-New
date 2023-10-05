@@ -310,6 +310,7 @@ iframe {
   display: grid;
   justify-items: center;
   align-items: center;
+  gap: 2vw;
 }
 
 .one_cake_div img {
@@ -373,6 +374,18 @@ iframe {
   justify-items: center;
   align-items: center;
   gap: 6vw;
+}
+.please_wait{
+  margin: 10vw 0;
+}
+.one_cake {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 3vw 0;
+}
+.one_cake >.one_cake_div>p{
+  font-size: 2vw;
 }
 
 

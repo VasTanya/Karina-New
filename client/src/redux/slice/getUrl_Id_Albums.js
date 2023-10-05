@@ -6,7 +6,6 @@ export const fetch_Id_Albums = createAsyncThunk(
     async (params) => {
         const { url_Id_Albums } = params
         const { data } = await axios.get(url_Id_Albums)
-        //  console.log(data);
         return { data }
 
     }
@@ -16,8 +15,6 @@ const initialState = {
     data_Id_Albums: [],
     status: 'loading',
 }
-
-
 
 const getUrl_Id_Albums = createSlice({
     name: 'albums_Id',
