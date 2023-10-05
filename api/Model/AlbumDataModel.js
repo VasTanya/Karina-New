@@ -10,6 +10,7 @@ const albumDataSchema = new Schema(
         tag: { type: String },
       },
     ],
+    count: { type: Number },
   },
   { timestamps: true }
 );

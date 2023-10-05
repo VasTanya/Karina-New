@@ -52,6 +52,7 @@ class AlbumsService {
 
   getItemById = async (id, item) => {
     const albumData = await AlbumData.findOne({ albumId: id });
+    console.log(albumData);
 
     const albumDataItem = albumData.data.find((el) => el._id.equals(item));
 

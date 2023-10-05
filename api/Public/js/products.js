@@ -2,16 +2,7 @@ const tableNav = document.getElementsByClassName("tableNav");
 const table = document.getElementById("table");
 
 const tableNavArray = Array.from(tableNav);
-// ...
-(async () => {
-  const response = await fetch(
-    "/api/albums/search?album_number=3&display_number=2"
-  );
-  if (response.ok) {
-    const data = await response.json();
-    console.log(data);
-  }
-})();
+
 tableNavArray.forEach((nav) => {
   nav.addEventListener("click", async () => {
     try {
@@ -119,38 +110,25 @@ tableNavArray.forEach((nav) => {
 
             editButtons.forEach((editButton, index) => {
               editButton.addEventListener("click", () => {
-                const row = data[index];
+                const editModal = document.getElementById("edit-modal");
+                const editModalInputs = document.querySelectorAll(
+                  ".edit-modal-textInput"
+                );
 
-                editButtons.forEach((button) => {
-                  button.style.display = "none";
-                });
+                // Extract data from the corresponding <td> elements in the clicked row
+                const id = newRow.querySelector("td:nth-child(1)");
+                const displayNumber = newRow.querySelector("td:nth-child(2)");
+                // const title = newRow.querySelector("td:nth-child(3)");
+                // const imgSrc = newRow.querySelector("td:nth-child(4) img").src;
 
-                deleteButtons.forEach((button) => {
-                  button.style.display = "none";
-                });
+                // Populate the inputs inside the edit-modal with the extracted data
+                editModalInputs[0].value = id.textContent;
+                editModalInputs[1].value = displayNumber.textContent;
+                // editModalInputs[2].value = title.textContent;
+                // Assuming the image input is the 3rd input element
+                // editModalInputs[3].value = imgSrc;
 
-                const saveButton = document.createElement("button");
-                saveButton.setAttribute("class", "data-save");
-                saveButton.innerText = "SAVE";
-                saveButton.addEventListener("click", async () => {
-                  const updatedValues = Array.from(
-                    newRow.querySelectorAll("td")
-                  ).map((td) => td.innerText);
-
-                  // API REQUEST
-
-                  editButtons.forEach((button) => {
-                    button.style.display = "block";
-                  });
-
-                  deleteButtons.forEach((button) => {
-                    button.style.display = "block";
-                  });
-
-                  newRow.querySelector("td:last-child").removeChild(saveButton);
-                });
-
-                newRow.querySelector("td:last-child").appendChild(saveButton);
+                editModal.style.display = "flex";
               });
             });
 

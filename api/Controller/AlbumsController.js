@@ -49,10 +49,7 @@ class AlbumsController {
     try {
       const { _id, item } = req.params;
 
-      const id = new ObjectId(_id);
-      const itemId = new ObjectId(item);
-
-      const albumDataItem = await this.AlbumsService.getItemById(id, itemId);
+      const albumDataItem = await this.AlbumsService.getItemById(_id, item);
       response(res, 200, albumDataItem);
     } catch (error) {
       logger.error(`Error during getItemById: ${error}`);

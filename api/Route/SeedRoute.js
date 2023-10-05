@@ -1,6 +1,5 @@
 import { Router } from "express";
 import data from "../data.js";
-import FirstPhoto from "../Model/FirstPhoto.js";
 import Albums from "../Model/AlbumsModel.js";
 import Slices from "../Model/SlicesModel.js";
 import Regular from "../Model/RegularModel.js";
@@ -14,7 +13,6 @@ const seedRouter = Router();
 
 seedRouter.get("/", async (req, res) => {
   try {
-    await FirstPhoto.deleteMany({});
     await Albums.deleteMany({});
     await AlbumData.deleteMany({});
     await Slices.deleteMany({});
@@ -27,6 +25,7 @@ seedRouter.get("/", async (req, res) => {
         (createdAlbum) => createdAlbum.title === album.title
       )._id,
       data: album.album,
+      count: album.album.length,
     }));
 
     const createdAlbumData = await AlbumData.insertMany(albumDataToInsert);
@@ -41,12 +40,10 @@ seedRouter.get("/", async (req, res) => {
       }
     });
 
-    const createdFirstPhoto = await FirstPhoto.insertMany(data.firstPhoto);
     const createdSlices = await Slices.insertMany(data.slices);
     const createdRegular = await Regular.insertMany(data.regular);
 
     response(res, 201, {
-      createdFirstPhoto,
       createdAlbums,
       createdAlbumData,
       createdSlices,
