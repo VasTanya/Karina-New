@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFirstFoto } from '../redux/slice/getUrlFirstFoto';
 import IsLoading from '../components/IsLoading';
+import { setCurrentPage } from '../redux/slice/cakeSlice';
 
 function Home() {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function Home() {
 
   useEffect(() => {
     getUrlFirstFoto()
+    return ()=>  dispatch(setCurrentPage(1)) 
   }, [])
 
   const isLoading = [...new Array(22)].map((_, idx) => <IsLoading key={idx} />)

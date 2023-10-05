@@ -19,7 +19,7 @@ function AllAlbomsPhoto() {
     const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />)
 
     const getUrl_Id_Albums = async () => {
-        const url_Id_Albums = `/api/albums/${id}?page=${currentPage}&size=${50}`
+        const url_Id_Albums = `/api/albums/${id}?page=${currentPage}&size=${52}`
         dispatch(fetch_Id_Albums({ url_Id_Albums })
         )
     }
@@ -27,7 +27,6 @@ function AllAlbomsPhoto() {
     useEffect(() => {
         getUrl_Id_Albums()  
         window.scrollTo(0, 0);   
-        return ()=>  dispatch(setCurrentPage(1))  
     }, [currentPage, id])
 
     const onClickPages = (num) => {

@@ -7,6 +7,7 @@ import getUrlAlbums from './slice/getUrlAlbums';
 import getUrl_Id_Albums from "./slice/getUrl_Id_Albums";
 import getUrl_Id_Item from "./slice/getUrl_Id_Item";
 import getUrl_Search from "./slice/getUrl_Search";
+import getUrl_Request from "./slice/getUrl_Request";
 
 export const store = configureStore({
     reducer:{
@@ -18,6 +19,7 @@ export const store = configureStore({
         getUrl_Id_Albums,
         getUrl_Id_Item,
         getUrl_Search,
+        getUrl_Request,
                
     }
 })

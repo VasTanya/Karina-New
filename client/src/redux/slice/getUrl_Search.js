@@ -7,8 +7,7 @@ export const fetchSearch = createAsyncThunk(
     async (params, thunkAPI) => {
         const { urlSearch } = params
         const { data } = await axios.get(urlSearch)
-        console.log(typeof data);
-         
+        // console.log(data);
         if(thunkAPI.length === 0 || typeof data === 'string' ){
             return thunkAPI.rejectWithValue('error')
         }
@@ -32,7 +31,6 @@ const getUrl_Search = createSlice({
                 state.dataSearch = []
             })
             .addCase(fetchSearch.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.status = 'successful'
                 state.dataSearch = action.payload
             

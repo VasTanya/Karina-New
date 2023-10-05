@@ -3,11 +3,14 @@ import axios from "axios";
 
 export const fetch_Id_Albums_Item = createAsyncThunk(
     'fetch_Id_AlbumsStatus_Item',
-    async (params) => {
+    async (params, thunkAPI) => {
         const { url_Id_Albums_Item } = params
         const { data } = await axios.get(url_Id_Albums_Item)
-          console.log(data);
-        return { data }
+        // console.log(data);
+        if(thunkAPI.length === 0 || typeof data === 'string' ){
+            return thunkAPI.rejectWithValue('error')
+        }
+        return thunkAPI.fulfillWithValue(data)
 
     }
 )
