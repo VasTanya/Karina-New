@@ -1,13 +1,15 @@
+// multer.js
 import multer from "multer";
-import { join } from "path";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/img");
+    cb(null, `Public/img/${req.body.src.split("/")[2]}`);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, req.body.src.split("/")[3]);
   },
 });
 
-export const upload = multer({ storage });
+const upload = multer({ storage: storage });
+
+export default upload;

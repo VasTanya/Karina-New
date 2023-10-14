@@ -40,15 +40,15 @@ class SlicesController {
 
   editItem = async (req, res) => {
     try {
+      const { _id } = req.params;
       const { display_number, title, src } = req.body;
 
-      const data = {
-        display_number: display_number,
-        title: title,
-        src: src,
-      };
-
-      const editedItem = this.SlicesService.edit(data);
+      const editedItem = this.SlicesService.edit({
+        _id,
+        display_number,
+        title,
+        src,
+      });
 
       response(res, 200, editedItem);
     } catch (error) {

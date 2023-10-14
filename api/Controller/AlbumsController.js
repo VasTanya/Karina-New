@@ -13,7 +13,9 @@ class AlbumsController {
     this.getItemById = expressAsyncHandler(this.getItemById.bind(this));
     this.firstPhoto = expressAsyncHandler(this.firstPhoto.bind(this));
     this.search = expressAsyncHandler(this.search.bind(this));
+    this.editAlbum = expressAsyncHandler(this.editAlbum.bind(this));
     this.editItem = expressAsyncHandler(this.editItem.bind(this));
+    this.deleteAlbum = expressAsyncHandler(this.deleteAlbum.bind(this));
     this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
   }
 
@@ -33,7 +35,8 @@ class AlbumsController {
     try {
       const { _id } = req.params;
       const page = parseInt(req.query.page) || 1;
-      const size = parseInt(req.query.size) || 10;
+      const size =
+        req.query.size === "all" ? -1 : parseInt(req.query.size) || 10;
 
       const albumById = await this.AlbumsService.getById(_id, page, size);
       response(res, 200, albumById);
@@ -90,21 +93,55 @@ class AlbumsController {
     }
   };
 
+  editAlbum = async (req, res) => {
+    try {
+      const { _id, album_number, title } = req.body;
+
+      const editedAlbum = await this.AlbumsService.editAlbum({
+        _id: _id,
+        album_number: parseInt(album_number),
+        title: title,
+      });
+
+      response(res, 200, editedAlbum);
+    } catch (error) {
+      logger.error(`Error during editing album: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
   editItem = async (req, res) => {
     try {
-      const { display_number, title, src } = req.body;
+      const { albumId, item } = req.params;
+      const { displayNumber, src } = req.body;
 
-      const data = {
-        display_number: display_number,
-        title: title,
-        src: src,
-      };
-
-      const editedItem = await this.AlbumsService.edit(data);
+      const editedItem = this.AlbumsService.editItem({
+        albumId,
+        item,
+        displayNumber,
+        src,
+      });
 
       response(res, 200, editedItem);
     } catch (error) {
-      logger.error(`Error during edit: ${error}`);
+      logger.error(`Error during editing item: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  deleteAlbum = async (req, res) => {
+    try {
+      const { _id } = req.body;
+
+      const deletedItem = await this.AlbumsService.deleteAlbum(_id);
+
+      response(res, 200, deletedItem);
+    } catch (error) {
+      logger.error(`Error during deleting album: ${error}`);
       return response(res, error.statusCode || 500, {
         _message: error.message,
       });
@@ -113,13 +150,13 @@ class AlbumsController {
 
   deleteItem = async (req, res) => {
     try {
-      const { _id } = req.body;
+      const { _id, item } = req.params;
 
-      const deletedItem = await this.AlbumsService.delete(_id);
+      const deletedItem = await this.AlbumsService.deleteItem(_id, item);
 
       response(res, 200, deletedItem);
     } catch (error) {
-      logger.error(`Error during delete: ${error}`);
+      logger.error(`Error during deleting item: ${error}`);
       return response(res, error.statusCode || 500, {
         _message: error.message,
       });

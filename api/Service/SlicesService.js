@@ -18,11 +18,18 @@ class SlicesService {
   };
 
   edit = async (data) => {
-    const item = await Slices.findOneAndUpdate(data);
-    return item;
+    const updatedItem = await Slices.findByIdAndUpdate(data._id, data);
+
+    if (!updatedItem) {
+      throw new Error("Slice not found");
+    }
+
+    return updatedItem;
   };
+
   delete = async (id) => {
-    const item = await Slices.findOneAndDelete(id);
+    const item = await Slices.findByIdAndDelete(id);
+
     return item;
   };
 }

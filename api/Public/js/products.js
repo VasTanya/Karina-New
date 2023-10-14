@@ -31,8 +31,8 @@ tableNavArray.forEach((nav) => {
               <td>ID</td>
               <td>ALBUM NUMBER</td>
               <td>TITLE</td>
+              <td>BUTTONS</td>
               `;
-          // <td>IMAGE</td>
 
           table.appendChild(headerRow);
 
@@ -40,57 +40,340 @@ tableNavArray.forEach((nav) => {
             const newRow = document.createElement("tr");
             newRow.className = "data-row";
             newRow.innerHTML = `
-                <td>${item._id}</td>
-                <td>${item.album_number}</td>
-                <td>${item.title}</td>
+                <td class="edit-album">${item._id}</td>
+                <td class="edit-album">${item.album_number}</td>
+                <td class="edit-album">${item.title}</td>
                 <td><button class="data-edit">EDIT</button></td>
                 <td><button class="data-delete">DELETE</button></td>
+                <td><button class="data-view">VIEW</button></td>
                 `;
-            // <td>${item.src}</td>
 
             table.appendChild(newRow);
 
             const editButtons = newRow.querySelectorAll("button.data-edit");
             const deleteButtons = newRow.querySelectorAll("button.data-delete");
+            const viewButtons = newRow.querySelectorAll("button.data-view");
 
             editButtons.forEach((editButton, index) => {
               editButton.addEventListener("click", () => {
-                const row = data[index];
+                editButton.style.display = "none";
+                deleteButtons[index].style.display = "none";
+                viewButtons[index].style.display = "none";
 
-                editButtons.forEach((button) => {
-                  button.style.display = "none";
+                const idTd = newRow.querySelector("td:nth-child(1)");
+                const albumNumberTd = newRow.querySelector("td:nth-child(2)");
+                const titleTd = newRow.querySelector("td:nth-child(3)");
+
+                const ogAlbumNumber = albumNumberTd.textContent;
+                const ogTitle = titleTd.textContent;
+
+                const albumNumberInput = document.createElement("input");
+                albumNumberInput.value = albumNumberTd.textContent;
+
+                const titleInput = document.createElement("input");
+                titleInput.value = titleTd.textContent;
+
+                albumNumberTd.innerHTML = "";
+                albumNumberTd.appendChild(albumNumberInput);
+
+                titleTd.innerHTML = "";
+                titleTd.appendChild(titleInput);
+
+                const sendEditButton = document.createElement("button");
+                sendEditButton.setAttribute("class", "edit-save");
+                sendEditButton.textContent = "SAVE";
+
+                const cancelEditButton = document.createElement("button");
+                cancelEditButton.setAttribute("class", "edit-cancel");
+                cancelEditButton.textContent = "CANCEL";
+
+                sendEditButton.addEventListener("click", async () => {
+                  try {
+                    const editData = {
+                      _id: idTd.textContent,
+                      album_number: albumNumberInput.value,
+                      title: titleInput.value,
+                    };
+
+                    const fetchEdit = await fetch(
+                      `/api/${nav.value}/${idTd.textContent}/edit`,
+                      {
+                        method: "PUT",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(editData),
+                      }
+                    );
+
+                    location.reload();
+                  } catch (error) {
+                    console.error("Error during editing:", error);
+                  }
                 });
 
-                deleteButtons.forEach((button) => {
-                  button.style.display = "none";
+                cancelEditButton.addEventListener("click", () => {
+                  albumNumberTd.innerHTML = ogAlbumNumber;
+                  titleTd.innerHTML = ogTitle;
+
+                  sendEditButton.remove();
+                  cancelEditButton.remove();
+
+                  editButton.style.display = "block";
+                  deleteButtons[index].style.display = "block";
+                  viewButtons[index].style.display = "block";
                 });
 
-                const saveButton = document.createElement("button");
-                saveButton.innerText = "SAVE";
-                saveButton.setAttribute("class", "data-save");
-                saveButton.addEventListener("click", async () => {
-                  const updatedValues = Array.from(
-                    newRow.querySelectorAll("td")
-                  ).map((td) => td.innerText);
+                newRow.lastElementChild.previousElementSibling.appendChild(
+                  sendEditButton
+                );
+                newRow.lastElementChild.appendChild(cancelEditButton);
+              });
+            });
 
-                  // API REQUEST
+            deleteButtons.forEach((deleteButton, index) => {
+              deleteButton.addEventListener("click", () => {
+                const deleteModal = document.getElementById("delete-modal");
+                const deleteMessage = document.getElementById("delete-message");
+                const cancelDeleteButton =
+                  document.getElementById("delete-cancel");
+                const confirmDeleteButton =
+                  document.getElementById("delete-confirm");
 
-                  editButtons.forEach((button) => {
-                    button.style.display = "block";
+                deleteMessage.innerText = `Are you sure you want to delete ${data[index].title}`;
+
+                deleteModal.style.display = "flex";
+
+                cancelDeleteButton.addEventListener("click", () => {
+                  deleteModal.style.display = "none";
+                });
+
+                confirmDeleteButton.addEventListener("click", async () => {
+                  try {
+                    const response = await fetch(`/api/${nav.value}/delete`, {
+                      method: "DELETE",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        _id: data[index]._id,
+                      }),
+                    });
+
+                    if (response.ok) {
+                      deleteMessage.innerText = `${data[index].title} has been deleted`;
+                    } else if (response.status === 404) {
+                      deleteMessage.innerText = `Resource not found`;
+                    } else {
+                      deleteMessage.innerText = `Failed to delete ${data[index].title}!!! Try again later`;
+                    }
+
+                    deleteModal.style.display = "none";
+                  } catch (error) {
+                    console.error("Error during delete:", error);
+                    deleteMessage.innerText = `An error occurred during deletion`;
+                  }
+                });
+              });
+            });
+
+            viewButtons.forEach((viewButton, index) => {
+              viewButton.addEventListener("click", async () => {
+                const albumId =
+                  newRow.querySelector("td:nth-child(1)").textContent;
+
+                try {
+                  const response = await fetch(
+                    `/api/${nav.value}/${albumId}?page=1&size=all`
+                  );
+
+                  if (!response.ok) {
+                    throw new Error("Error");
+                  }
+
+                  const { data } = await response.json();
+
+                  table.innerHTML = "";
+
+                  const headerRow = document.createElement("tr");
+                  headerRow.className = "header-row";
+                  headerRow.innerHTML = `
+                    <td>ID</td>
+                    <td>DISPLAY NUMBER</td>
+                    <td>IMAGE</td>
+                    <td>BUTTONS</td>
+                  `;
+
+                  table.appendChild(headerRow);
+
+                  data.forEach((item) => {
+                    const newRow = document.createElement("tr");
+                    newRow.className = "data-row";
+                    newRow.innerHTML = `
+                      <td class="edit-album">${item._id}</td>
+                      <td class="edit-album">${item.display_number}</td>
+                      <td><img class="img" src="${item.src}" /></td>
+                      <td><button class="data-edit">EDIT</button></td>
+                      <td><button class="data-delete">DELETE</button></td>
+                    `;
+
+                    console.log("item.src", item.src);
+
+                    table.appendChild(newRow);
+
+                    const editButtons =
+                      newRow.querySelectorAll("button.data-edit");
+                    const deleteButtons =
+                      newRow.querySelectorAll("button.data-delete");
+
+                    editButtons.forEach((editButton, index) => {
+                      editButton.addEventListener("click", () => {
+                        const editModal = document.getElementById("edit-modal");
+                        const editModalInputs = document.querySelectorAll(
+                          ".edit-modal-textInput"
+                        );
+
+                        const id = newRow.querySelector("td:nth-child(1)");
+                        const displayNumber =
+                          newRow.querySelector("td:nth-child(2)");
+                        const imgSrc = newRow.querySelector(
+                          "td:nth-child(3) img"
+                        ).src;
+                        const title = newRow.querySelector("td:nth-child(4)");
+
+                        editModalInputs[0].value = id.textContent;
+                        editModalInputs[1].value = displayNumber.textContent;
+                        editModalInputs[2].style.display = title
+                          ? "none"
+                          : "block";
+                        editModalInputs[3].src = imgSrc;
+
+                        editModalInputs[4].addEventListener("change", (e) => {
+                          const selectedFile = e.target.files[0];
+
+                          if (selectedFile) {
+                            editModalInputs[3].src =
+                              URL.createObjectURL(selectedFile);
+                          } else {
+                            editModalInputs[3].src = item.src;
+                          }
+                        });
+
+                        const editModalForm =
+                          document.getElementById("edit-modal-form");
+                        const cancelEditButton =
+                          document.getElementById("edit-cancel");
+
+                        editModalForm.addEventListener("submit", async (e) => {
+                          e.preventDefault();
+
+                          const formData = new FormData();
+
+                          formData.append(
+                            "displayNumber",
+                            editModalInputs[1].value
+                          );
+                          formData.append("src", item.src);
+                          formData.append("img", editModalInputs[4].files[0]);
+
+                          try {
+                            const fetchEdit = await fetch(
+                              `/api/${nav.value}/${albumId}/${editModalInputs[0].value}/edit`,
+                              {
+                                method: "PUT",
+                                body: formData,
+                              }
+                            );
+
+                            if (response.ok) {
+                              window.location.reload();
+                            } else {
+                              console.error("Edit failed");
+                            }
+                          } catch (error) {
+                            console.error("Error during editing:", error);
+                          }
+                        });
+
+                        cancelEditButton.addEventListener("click", () => {
+                          editModal.style.display = "none";
+                        });
+
+                        editModal.style.display = "flex";
+                      });
+                    });
+
+                    deleteButtons.forEach((deleteButton, index) => {
+                      deleteButton.addEventListener("click", () => {
+                        console.log(data[index]);
+                        const deleteModal =
+                          document.getElementById("delete-modal");
+                        const deleteMessage =
+                          document.getElementById("delete-message");
+                        const cancelDeleteButton =
+                          document.getElementById("delete-cancel");
+                        const confirmDeleteButton =
+                          document.getElementById("delete-confirm");
+
+                        deleteMessage.innerText = `Are you sure you want to delete ${data[index].display_number}`;
+
+                        deleteModal.style.display = "flex";
+
+                        cancelDeleteButton.addEventListener("click", () => {
+                          deleteModal.style.display = "none";
+                        });
+
+                        confirmDeleteButton.addEventListener(
+                          "click",
+                          async () => {
+                            try {
+                              const response = await fetch(
+                                `/api/${nav.value}/${albumId}/${data[index]._id}/delete`,
+                                {
+                                  method: "DELETE",
+                                  headers: {
+                                    "Content-Type": "application/json",
+                                  },
+                                }
+                              );
+
+                              if (response.ok) {
+                                deleteMessage.innerText = `${data[index].display_number} has been deleted`;
+                              } else if (response.status === 404) {
+                                deleteMessage.innerText = `Resource not found`;
+                              } else {
+                                deleteMessage.innerText = `Failed to delete ${data[index].display_number}!!! Try again later`;
+                              }
+
+                              deleteModal.style.display = "none";
+                            } catch (error) {
+                              console.error("Error during delete:", error);
+                              deleteMessage.innerText = `An error occurred during deletion`;
+                            }
+                          }
+                        );
+                      });
+                    });
                   });
-
-                  deleteButtons.forEach((button) => {
-                    button.style.display = "block";
-                  });
-
-                  newRow.querySelector("td:last-child").removeChild(saveButton);
-                });
-
-                newRow.querySelector("td:last-child").appendChild(saveButton);
+                } catch (error) {
+                  console.error("Error during view: ", error.message);
+                }
               });
             });
           });
         } else {
+          const headerRow = document.createElement("tr");
+          headerRow.className = "header-row";
+          headerRow.innerHTML = `
+              <td>ID</td>
+              <td>DISPLAY NUMBER</td>
+              <td>TITLE</td>
+              <td>IMAGE</td>
+              <td>BUTTONS</td>
+              `;
+
+          table.appendChild(headerRow);
+
           data.forEach((item) => {
             const newRow = document.createElement("tr");
             newRow.className = "data-row";
@@ -115,18 +398,66 @@ tableNavArray.forEach((nav) => {
                   ".edit-modal-textInput"
                 );
 
-                // Extract data from the corresponding <td> elements in the clicked row
                 const id = newRow.querySelector("td:nth-child(1)");
                 const displayNumber = newRow.querySelector("td:nth-child(2)");
-                // const title = newRow.querySelector("td:nth-child(3)");
-                // const imgSrc = newRow.querySelector("td:nth-child(4) img").src;
+                const title = newRow.querySelector("td:nth-child(3)");
+                const imgSrc = newRow.querySelector("td:nth-child(4) img").src;
 
-                // Populate the inputs inside the edit-modal with the extracted data
                 editModalInputs[0].value = id.textContent;
                 editModalInputs[1].value = displayNumber.textContent;
-                // editModalInputs[2].value = title.textContent;
-                // Assuming the image input is the 3rd input element
-                // editModalInputs[3].value = imgSrc;
+                editModalInputs[2].value = title.textContent;
+                editModalInputs[3].src = imgSrc;
+
+                const editModalForm =
+                  document.getElementById("edit-modal-form");
+                const cancelEditButton = document.getElementById("edit-cancel");
+
+                editModalInputs[4].addEventListener("change", (e) => {
+                  const selectedFile = e.target.files[0];
+
+                  if (selectedFile) {
+                    editModalInputs[3].src = URL.createObjectURL(selectedFile);
+                  } else {
+                    editModalInputs[3].src = item.src;
+                  }
+                });
+
+                editModalForm.addEventListener("submit", async (e) => {
+                  e.preventDefault();
+
+                  const formData = new FormData();
+
+                  formData.append("display_number", editModalInputs[1].value);
+                  formData.append("title", editModalInputs[2].value);
+                  formData.append("src", item.src);
+                  formData.append("img", editModalInputs[4].files[0]);
+
+                  try {
+                    console.log(
+                      `/api/${nav.value}/${editModalInputs[0].value}/edit`
+                    );
+
+                    const fetchEdit = await fetch(
+                      `/api/${nav.value}/${editModalInputs[0].value}/edit`,
+                      {
+                        method: "PUT",
+                        body: formData,
+                      }
+                    );
+
+                    if (response.ok) {
+                      window.location.reload();
+                    } else {
+                      console.error("Edit failed");
+                    }
+                  } catch (error) {
+                    console.error("Error during editing:", error);
+                  }
+                });
+
+                cancelEditButton.addEventListener("click", () => {
+                  editModal.style.display = "none";
+                });
 
                 editModal.style.display = "flex";
               });
@@ -150,20 +481,30 @@ tableNavArray.forEach((nav) => {
                 });
 
                 confirmDeleteButton.addEventListener("click", async () => {
-                  const response = await fetch("/api/item/deletefunc", {
-                    method: "DELETE",
-                    body: {
-                      _id: data[index]._id,
-                    },
-                  });
+                  try {
+                    const response = await fetch(`/api/${nav.value}/delete`, {
+                      method: "DELETE",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        _id: data[index]._id,
+                      }),
+                    });
 
-                  if (response.ok) {
-                    deleteMessage.innerText = `${data[index].title} has been deleted`;
-                  } else {
-                    deleteMessage.innerText = `Failed to delete ${data[index].title}!!! Try again later`;
+                    if (response.ok) {
+                      deleteMessage.innerText = `${data[index].title} has been deleted`;
+                    } else if (response.status === 404) {
+                      deleteMessage.innerText = `Resource not found`;
+                    } else {
+                      deleteMessage.innerText = `Failed to delete ${data[index].title}!!! Try again later`;
+                    }
+
+                    deleteModal.style.display = "none";
+                  } catch (error) {
+                    console.error("Error during delete:", error);
+                    deleteMessage.innerText = `An error occurred during deletion`;
                   }
-
-                  deleteModal.style.display = "none";
                 });
               });
             });

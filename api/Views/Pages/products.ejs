@@ -24,9 +24,6 @@
       <div class="productsContainer">
         <table id="table">
           <tr>
-            <td>
-              <button class="tableNav" value="firstPhoto">First Photo</button>
-            </td>
             <td><button class="tableNav" value="slices">Slices</button></td>
             <td><button class="tableNav" value="regular">Regular</button></td>
             <td><button class="tableNav" value="albums">Albums</button></td>
@@ -36,32 +33,38 @@
     </div>
 
     <div class="edit-modal" id="edit-modal">
-      <form action="">
+      <form action="" id="edit-modal-form">
         <div class="edit-modal-inputs" id="edit-modal-inputs">
-          <input type="number" class="edit-modal-textInput" />
+          <input type="text" class="edit-modal-textInput" disabled />
           <input type="text" class="edit-modal-textInput" />
-          <img class="edit-modal-img" />
-          <input type="file" />
+          <input type="text" class="edit-modal-textInput" />
+          <img class="edit-modal-textInput edit-modal-img" />
+          <input
+            type="file"
+            name="img"
+            accept="image/*"
+            class="edit-modal-textInput"
+          />
         </div>
         <div class="edit-modal-buttons" id="edit-modal-buttons">
           <button class="edit-button" id="edit-save">SAVE</button>
-          <button class="edit-button" id="edit-cancel">CANCEL</button>
+          <button type="button" class="edit-button" id="edit-cancel">
+            CANCEL
+          </button>
         </div>
       </form>
     </div>
 
     <div class="delete-modal" id="delete-modal">
-      <form action="">
-        <div class="delete-message" id="delete-message"></div>
-        <div class="button-holder">
-          <button class="delete-button cancel" id="delete-cancel">
-            CANCEL
-          </button>
-          <button class="delete-button confirm" id="delete-confirm">
-            DELETE
-          </button>
-        </div>
-      </form>
+      <!-- <form action=""> -->
+      <div class="delete-message" id="delete-message"></div>
+      <div class="button-holder">
+        <button class="delete-button cancel" id="delete-cancel">CANCEL</button>
+        <button class="delete-button confirm" id="delete-confirm">
+          DELETE
+        </button>
+      </div>
+      <!-- </form> -->
     </div>
     <script src="/js/products.js"></script>
   </body>

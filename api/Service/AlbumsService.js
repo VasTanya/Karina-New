@@ -1,5 +1,9 @@
 import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
+import * as fs from "fs";
+import * as path from "path";
+import { v4 as uuidv4 } from "uuid";
+import { fileURLToPath } from "url";
 
 class AlbumsService {
   constructor() {}
@@ -40,7 +44,12 @@ class AlbumsService {
 
     if (!albumDataById) throw { statusCode: 404, message: "Album not found" };
 
-    const paginatedArray = albumDataById.data.slice(skip, skip + size);
+    // let paginatedArray = albumDataById.data;
+
+    const paginatedArray =
+      size === -1
+        ? albumDataById.data
+        : albumDataById.data.slice(skip, skip + size);
 
     const paginatedAlbumData = {
       ...albumDataById.toObject(),
@@ -100,13 +109,57 @@ class AlbumsService {
     }
   };
 
-  edit = async (data) => {
-    const item = await Albums.findOneAndUpdate(data);
+  editAlbum = async (data) => {
+    const updatedAlbum = await Albums.findByIdAndUpdate(data._id, data);
+
+    if (!updatedAlbum) {
+      throw new Error("Album not found");
+    }
+
+    return updatedAlbum;
+  };
+
+  editItem = async (data) => {
+    console.log(data);
+    const album = await AlbumData.findOne({ albumId: data.albumId });
+
+    const item = album.data.find((el) => el._id.equals(data.item));
+
+    if (!item) {
+      throw new Error("Item not found");
+    }
+    item.display_number = parseInt(data.displayNumber);
+
+    await album.save();
+
     return item;
   };
 
-  delete = async (id) => {
-    const item = await Albums.findOneAndDelete(id);
+  deleteAlbum = async (id) => {
+    const album = await Albums.findByIdAndDelete(id);
+    const albumData = await AlbumData.findOneAndDelete({ albumId: id });
+
+    return album;
+  };
+
+  deleteItem = async (id, itemId) => {
+    const album = await AlbumData.findOne({ albumId: id });
+
+    if (!album) {
+      throw new Error("Album not found");
+    }
+
+    const item = album.data.find((el) => el._id.equals(itemId));
+
+    if (!item) {
+      throw new Error("Item not found");
+    }
+
+    album.data.pull(item);
+    album.count = album.data.length;
+
+    await album.save();
+
     return item;
   };
 }

@@ -18,11 +18,19 @@ class RegularService {
   };
 
   edit = async (data) => {
-    const item = await Regular.findOneAndUpdate(data);
-    return item;
+    console.log(data);
+    const updatedItem = await Regular.findByIdAndUpdate(data._id, data);
+
+    if (!updatedItem) {
+      throw new Error("Regular not found");
+    }
+
+    return updatedItem;
   };
+
   delete = async (id) => {
-    const item = await Regular.findOneAndDelete(id);
+    const item = await Regular.findByIdAndDelete(id);
+
     return item;
   };
 }

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import AlbumsController from "../Controller/AlbumsController.js";
+import upload from "../Utils/Multer.js";
 
 const albumsRouter = Router();
 const {
@@ -8,7 +9,9 @@ const {
   getItemById,
   firstPhoto,
   search,
+  editAlbum,
   editItem,
+  deleteAlbum,
   deleteItem,
 } = AlbumsController;
 
@@ -22,8 +25,12 @@ albumsRouter.get("/:_id", getById);
 
 albumsRouter.get("/:_id/:item", getItemById);
 
-albumsRouter.get("/:_id/edit", editItem);
+albumsRouter.put("/:_id/edit", editAlbum);
 
-albumsRouter.get("/delete", deleteItem);
+albumsRouter.put("/:albumId/:item/edit", upload.array("img"), editItem);
+
+albumsRouter.delete("/delete", deleteAlbum);
+
+albumsRouter.delete("/:_id/:item/delete", deleteItem);
 
 export default albumsRouter;

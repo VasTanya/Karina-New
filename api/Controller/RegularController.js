@@ -40,15 +40,15 @@ class RegularController {
 
   editItem = async (req, res) => {
     try {
+      const { _id } = req.params;
       const { display_number, title, src } = req.body;
 
-      const data = {
-        display_number: display_number,
-        title: title,
-        src: src,
-      };
-
-      const editedItem = this.RegularService.edit(data);
+      const editedItem = this.RegularService.edit({
+        _id,
+        display_number,
+        title,
+        src,
+      });
 
       response(res, 200, editedItem);
     } catch (error) {
@@ -63,7 +63,7 @@ class RegularController {
     try {
       const { _id } = req.body;
 
-      const deletedItem = this.RegularService.delete(_id);
+      const deletedItem = await this.RegularService.delete(_id);
 
       response(res, 200, deletedItem);
     } catch (error) {
