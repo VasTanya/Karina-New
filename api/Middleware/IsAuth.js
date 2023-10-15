@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import response from "../Utils/Response.js";
 
 const isAuth = (req, res, next) => {
   const token = req.cookies.access_token;
@@ -17,7 +16,6 @@ const isAuth = (req, res, next) => {
       res.clearCookie("access_token");
       return res.redirect("/admin");
     }
-    response(res, 401, { message: "Invalid token" });
   }
 };
 

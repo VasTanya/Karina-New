@@ -12,7 +12,6 @@ import credentials from "./Config/Credentials.js";
 import corsOptions from "./Config/CorsOptions.js";
 import Connection from "./Utils/Connection.js";
 
-import seedRouter from "./Route/SeedRoute.js";
 import albumsRouter from "./Route/AlbumsRoute.js";
 import slicesRouter from "./Route/SlicesRoute.js";
 import regularRouter from "./Route/RegularRoute.js";
@@ -26,8 +25,8 @@ Connection();
 
 app.use(credentials);
 app.use(cors(corsOptions));
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(apiLogger);
 
@@ -39,7 +38,6 @@ const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "Views", "Pages"));
 app.use(express.static(path.join(__dirname, "Public")));
 
-app.use("/api/seed", seedRouter);
 app.use("/api/albums", albumsRouter);
 app.use("/api/slices", slicesRouter);
 app.use("/api/regular", regularRouter);

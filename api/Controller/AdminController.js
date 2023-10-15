@@ -7,6 +7,8 @@ class AdminController {
   constructor() {
     this.AdminService = new AdminService();
     this.login = expressAsyncHandler(this.login.bind(this));
+    this.seed = expressAsyncHandler(this.seed.bind(this));
+    this.seedAdmin = expressAsyncHandler(this.seedAdmin.bind(this));
     this.logout = expressAsyncHandler(this.logout.bind(this));
   }
 
@@ -16,13 +18,13 @@ class AdminController {
 
       const admin = await this.AdminService.login(email, password);
 
-      res.cookie("access_token", admin, {
+      res.cookie("access_token", admin.token, {
         httpOnly: true,
         sameSite: "strict",
         secure: true,
       });
 
-      response(res, 200, { message: "Login successful" });
+      response(res, 200, admin.message);
     } catch (error) {
       logger.error(`Error during login: ${error}`);
       return response(res, error.statusCode || 500, {
@@ -31,13 +33,43 @@ class AdminController {
     }
   };
 
+  seed = async (req, res) => {
+    try {
+      const seed = this.AdminService.seed();
+
+      response(res, 201, seed);
+    } catch (error) {
+      logger.error("Seed error:", error);
+      response(
+        res,
+        error.statusCode || 500,
+        "Error during seeding: ",
+        error.message
+      );
+    }
+  };
+
+  seedAdmin = async (req, res) => {
+    try {
+      const createdAdmin = this.AdminService.seedAdmin();
+
+      response(res, 201, createdAdmin);
+    } catch (error) {
+      logger.error("Seed error:", error);
+      response(
+        res,
+        error.statusCode || 500,
+        "Error during seeding: ",
+        error.message
+      );
+    }
+  };
+
   logout = async (req, res) => {
     try {
-      await res.clearCookie("access_token");
+      const logout = this.AdminService.logout(req, res);
 
-      await res.redirect("/admin");
-
-      response(res, 200, { message: "Logout successful" });
+      response(res, 200, logout);
     } catch (error) {
       logger.error(`Error during logout: ${error}`);
       return response(res, error.statusCode || 500, {

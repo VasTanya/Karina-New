@@ -66,7 +66,7 @@ const createNewAlbum = async (route, title) => {
 
 const createNewAlbumItem = async (route, newItem) => {
   const formData = new FormData();
-
+  console.log(typeof newItem.tag);
   formData.append("tag", `$${newItem.tag}`);
   formData.append("src", newItem.src);
   formData.append("img", newItem.img.files[0]);
@@ -101,8 +101,6 @@ const displayAlbums = async () => {
     albumsOptGroup.appendChild(option);
   });
 };
-
-displayAlbums();
 
 const createInput = (id, placeholder) => {
   const input = document.createElement("input");
@@ -307,10 +305,10 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
     createNewAlbumItem(definedAlbum, {
       albumId: albumId,
       tag: firstPhotoInput.querySelector("input").checked,
-      img: fileInput,
       src: `/img/${index + 1}.${select.options[select.selectedIndex].text}/${
         fileInput.files[0].name
       }`,
+      img: fileInput,
     })
   );
 };
@@ -318,6 +316,8 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
 const defineAlbum = () => {
   const key = select.options[select.selectedIndex].getAttribute("key");
   const index = select.options[select.selectedIndex].getAttribute("index");
+  displayAlbums();
+
   switch (select.value) {
     case "slices":
       displaySlice("slices");
@@ -329,7 +329,7 @@ const defineAlbum = () => {
       displayAlbum("albums");
       break;
     default:
-      displayAlbumItem(select.value, key, parseInt(index));
+      displayAlbumItem("albums", key, parseInt(index));
       break;
   }
 };

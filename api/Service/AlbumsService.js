@@ -1,6 +1,6 @@
 import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
-import { rmdirSync, unlinkSync } from "fs";
+import { rmdirSync, unlinkSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 
 class AlbumsService {
@@ -20,17 +20,13 @@ class AlbumsService {
     const firstPhotos = albumData.map((item) => {
       const data = {
         album: item.albumId,
-        firstPhoto: item.data.find((el) => el.tag === "firstPhoto"),
+        firstPhotos: item.data.filter((el) => el.tag === "firstPhoto"),
       };
 
       return data;
     });
 
-    const sortedFirstPhoto = firstPhotos.sort(
-      (a, b) => a.album.album_number - b.album.album_number
-    );
-
-    return sortedFirstPhoto;
+    return firstPhotos;
   };
 
   getById = async (id, page, size) => {
@@ -149,6 +145,26 @@ class AlbumsService {
 
     await newAlbum.save();
 
+    const path = join(
+      dirname(
+        new URL(import.meta.url).pathname,
+        "..",
+        "Public",
+        "img",
+        `${albums.length + 1}.${title}`
+      ),
+      "..",
+      "Public",
+      "img",
+      `${albums.length + 1}.${title}`
+    );
+
+    try {
+      mkdirSync(path);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+
     return { message: "Album created succesfully" };
   };
 
@@ -158,14 +174,14 @@ class AlbumsService {
     const newItem = {
       display_number: album.data.length + 1,
       src: data.src,
-      tag: data.tag,
+      tag: data.tag === "$true" ? "firstPhoto" : "",
     };
 
-    album.data.push(newItem); // Use push to add the new item to the array
+    album.data.push(newItem);
 
     album.count = album.data.length;
 
-    await album.save(); // Make sure to await the save operation
+    await album.save();
 
     return { message: "Album item created successfully" };
   };
