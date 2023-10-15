@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/addProducts.css" />
+    <title>Add products</title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../Components/navbar.ejs') %>
+      <div class="newProductHolder">
+        <div class="selectHolder">
+          <div class="newProductForm">
+            <select name="select" id="select">
+              <option value="slices">Slices</option>
+              <option value="regular">Regular</option>
+              <option value="albums">Album</option>
+              <optgroup label="Albums" id="albumsOptGroup"></optgroup>
+            </select>
+            <div class="inputHolder" id="inputHolder"></div>
+            <div id="btnHolder">
+              <!-- <button id="newProductButton">SUBMIT</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/addProducts.js"></script>
+  </body>
+</html>

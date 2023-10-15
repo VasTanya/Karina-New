@@ -39,15 +39,13 @@ const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "Views", "Pages"));
 app.use(express.static(path.join(__dirname, "Public")));
 
-// app.use(Multer())
-
 app.use("/api/seed", seedRouter);
 app.use("/api/albums", albumsRouter);
 app.use("/api/slices", slicesRouter);
 app.use("/api/regular", regularRouter);
 app.use("/api/request", emailRouter);
 app.use("/api/admin", adminRouter);
-app.use("/", viewsRouter);
+app.use("/admin", viewsRouter);
 
 app.use((err, req, res, next) => {
   res.status(404).send({ message: err.message });

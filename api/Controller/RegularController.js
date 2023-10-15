@@ -8,8 +8,9 @@ class RegularController {
     this.RegularService = new RegularService();
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
-    this.editItem = expressAsyncHandler(this.editItem.bind(this));
-    this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
+    this.editRegular = expressAsyncHandler(this.editRegular.bind(this));
+    this.add = expressAsyncHandler(this.add.bind(this));
+    this.deleteRegular = expressAsyncHandler(this.deleteRegular.bind(this));
   }
 
   getAll = async (req, res) => {
@@ -38,15 +39,16 @@ class RegularController {
     }
   };
 
-  editItem = async (req, res) => {
+  editRegular = async (req, res) => {
     try {
       const { _id } = req.params;
-      const { display_number, title, src } = req.body;
+      const { display_number, title, price, src } = req.body;
 
       const editedItem = this.RegularService.edit({
         _id,
         display_number,
         title,
+        price,
         src,
       });
 
@@ -59,13 +61,33 @@ class RegularController {
     }
   };
 
-  deleteItem = async (req, res) => {
+  add = async (req, res) => {
     try {
-      const { _id } = req.body;
+      const { title, price, src } = req.body;
 
-      const deletedItem = await this.RegularService.delete(_id);
+      const addedRegular = await this.RegularService.add({
+        title,
+        price,
+        src,
+      });
 
-      response(res, 200, deletedItem);
+      response(res, 200, addedRegular);
+    } catch (error) {
+      logger.error(`Error during adding: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  deleteRegular = async (req, res) => {
+    try {
+      const { _id } = req.params;
+      const { src } = req.body;
+
+      const deletedRegular = await this.RegularService.delete(_id, src);
+
+      response(res, 200, deletedRegular);
     } catch (error) {
       logger.error(`Error during delete: ${error}`);
       return response(res, error.statusCode || 500, {

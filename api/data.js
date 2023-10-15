@@ -3654,7 +3654,7 @@ const data = {
     },
     {
       album_number: 2,
-      title: "Kids girls",
+      title: "Kids (girls)",
       album: [
         {
           display_number: 1,
@@ -7405,7 +7405,7 @@ const data = {
     },
     {
       album_number: 3,
-      title: "Kids boys",
+      title: "Kids (boys)",
       album: [
         {
           display_number: 1,

@@ -33,9 +33,10 @@
     </div>
 
     <div class="edit-modal" id="edit-modal">
-      <form action="" id="edit-modal-form">
+      <div action="" id="edit-modal-form">
         <div class="edit-modal-inputs" id="edit-modal-inputs">
           <input type="text" class="edit-modal-textInput" disabled />
+          <input type="text" class="edit-modal-textInput" />
           <input type="text" class="edit-modal-textInput" />
           <input type="text" class="edit-modal-textInput" />
           <img class="edit-modal-textInput edit-modal-img" />
@@ -52,19 +53,21 @@
             CANCEL
           </button>
         </div>
-      </form>
+      </div>
     </div>
 
     <div class="delete-modal" id="delete-modal">
-      <!-- <form action=""> -->
-      <div class="delete-message" id="delete-message"></div>
-      <div class="button-holder">
-        <button class="delete-button cancel" id="delete-cancel">CANCEL</button>
-        <button class="delete-button confirm" id="delete-confirm">
-          DELETE
-        </button>
+      <div class="delete-modal-form">
+        <div class="delete-message" id="delete-message"></div>
+        <div class="button-holder" id="button-holder">
+          <button class="delete-button cancel" id="delete-cancel">
+            CANCEL
+          </button>
+          <button class="delete-button confirm" id="delete-confirm">
+            DELETE
+          </button>
+        </div>
       </div>
-      <!-- </form> -->
     </div>
     <script src="/js/products.js"></script>
   </body>

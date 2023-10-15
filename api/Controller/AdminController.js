@@ -35,7 +35,7 @@ class AdminController {
     try {
       await res.clearCookie("access_token");
 
-      await res.redirect("/login");
+      await res.redirect("/admin");
 
       response(res, 200, { message: "Logout successful" });
     } catch (error) {

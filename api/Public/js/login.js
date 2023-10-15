@@ -1,32 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const submit = document.getElementById("submit");
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
+const logOutA = document.getElementById("logOut");
 
-  submit.onclick = async (e) => {
-    e.preventDefault();
+logOutA.addEventListener("click", async () => {
+  try {
+    const response = await fetch("/api/admin/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    const data = {
-      email: email.value,
-      password: password.value,
-    };
-
-    try {
-      const response = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        window.location.href = "/products";
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("An error occurred", error);
+    if (response.ok) {
+      window.location.href = "/admin/login";
+    } else {
+      console.error("Logout failed");
     }
-  };
+  } catch (error) {
+    console.error("An error occurred during logout", error);
+  }
 });

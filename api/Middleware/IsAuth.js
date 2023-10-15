@@ -5,7 +5,7 @@ const isAuth = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) {
-    return res.redirect("/login");
+    return res.redirect("/admin");
   }
 
   try {
@@ -15,7 +15,7 @@ const isAuth = (req, res, next) => {
   } catch (error) {
     if (error.name === "TokenExpiredError") {
       res.clearCookie("access_token");
-      return res.redirect("/login");
+      return res.redirect("/admin");
     }
     response(res, 401, { message: "Invalid token" });
   }

@@ -1,9 +1,7 @@
 import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
-import * as fs from "fs";
-import * as path from "path";
-import { v4 as uuidv4 } from "uuid";
-import { fileURLToPath } from "url";
+import { rmdirSync, unlinkSync } from "fs";
+import { join, dirname } from "path";
 
 class AlbumsService {
   constructor() {}
@@ -128,21 +126,78 @@ class AlbumsService {
     if (!item) {
       throw new Error("Item not found");
     }
-    item.display_number = parseInt(data.displayNumber);
+    item.display_number = parseInt(data.display_number);
 
     await album.save();
 
     return item;
   };
 
+  addAlbum = async (title) => {
+    const albums = await Albums.find();
+
+    const newAlbum = await Albums.create({
+      album_number: albums.length + 1,
+      title: title,
+    });
+
+    const newAlbumData = await AlbumData.create({
+      albumId: newAlbum._id,
+    });
+
+    newAlbum.albumDataId = newAlbumData._id;
+
+    await newAlbum.save();
+
+    return { message: "Album created succesfully" };
+  };
+
+  addItem = async (data) => {
+    const album = await AlbumData.findOne({ albumId: data.albumId });
+
+    const newItem = {
+      display_number: album.data.length + 1,
+      src: data.src,
+      tag: data.tag,
+    };
+
+    album.data.push(newItem); // Use push to add the new item to the array
+
+    album.count = album.data.length;
+
+    await album.save(); // Make sure to await the save operation
+
+    return { message: "Album item created successfully" };
+  };
+
   deleteAlbum = async (id) => {
     const album = await Albums.findByIdAndDelete(id);
     const albumData = await AlbumData.findOneAndDelete({ albumId: id });
 
+    const path = join(
+      dirname(
+        new URL(import.meta.url).pathname,
+        "..",
+        "Public",
+        "img",
+        `${album.album_number}.${album.title}`
+      ),
+      "..",
+      "Public",
+      "img",
+      `${album.album_number}.${album.title}`
+    );
+
+    try {
+      rmdirSync(path);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+
     return album;
   };
 
-  deleteItem = async (id, itemId) => {
+  deleteItem = async (id, itemId, src) => {
     const album = await AlbumData.findOne({ albumId: id });
 
     if (!album) {
@@ -159,6 +214,19 @@ class AlbumsService {
     album.count = album.data.length;
 
     await album.save();
+
+    const path = join(
+      dirname(new URL(import.meta.url).pathname, "..", "Public", src),
+      "..",
+      "Public",
+      src
+    );
+
+    try {
+      unlinkSync(path);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
 
     return item;
   };

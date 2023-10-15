@@ -8,8 +8,9 @@ class SlicesController {
     this.SlicesService = new SlicesService();
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
-    this.editItem = expressAsyncHandler(this.editItem.bind(this));
-    this.deleteItem = expressAsyncHandler(this.deleteItem.bind(this));
+    this.editSlice = expressAsyncHandler(this.editSlice.bind(this));
+    this.add = expressAsyncHandler(this.add.bind(this));
+    this.deleteSlice = expressAsyncHandler(this.deleteSlice.bind(this));
   }
 
   getAll = async (req, res) => {
@@ -38,19 +39,20 @@ class SlicesController {
     }
   };
 
-  editItem = async (req, res) => {
+  editSlice = async (req, res) => {
     try {
       const { _id } = req.params;
-      const { display_number, title, src } = req.body;
+      const { display_number, title, price, src } = req.body;
 
-      const editedItem = this.SlicesService.edit({
+      const editedSlice = this.SlicesService.edit({
         _id,
         display_number,
         title,
+        price,
         src,
       });
 
-      response(res, 200, editedItem);
+      response(res, 200, editedSlice);
     } catch (error) {
       logger.error(`Error during edit: ${error}`);
       return response(res, error.statusCode || 500, {
@@ -59,13 +61,33 @@ class SlicesController {
     }
   };
 
-  deleteItem = async (req, res) => {
+  add = async (req, res) => {
     try {
-      const { _id } = req.body;
+      const { title, price, src } = req.body;
 
-      const deletedItem = this.SlicesService.delete(_id);
+      const addedSlice = await this.SlicesService.add({
+        title,
+        price,
+        src,
+      });
 
-      response(res, 200, deletedItem);
+      response(res, 200, addedSlice);
+    } catch (error) {
+      logger.error(`Error during adding: ${error}`);
+      return response(res, error.statusCode || 500, {
+        _message: error.message,
+      });
+    }
+  };
+
+  deleteSlice = async (req, res) => {
+    try {
+      const { _id } = req.params;
+      const { src } = req.body;
+
+      const deletedSlice = this.SlicesService.delete(_id, src);
+
+      response(res, 200, deletedSlice);
     } catch (error) {
       logger.error(`Error during delete: ${error}`);
       return response(res, error.statusCode || 500, {

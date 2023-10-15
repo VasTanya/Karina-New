@@ -9,19 +9,16 @@
   </head>
   <body>
     <div class="navbar">
-      <div class="nav"><a href="/products">Products</a></div>
-      <div class="nav"><a href="/add_products">Add Product</a></div>
-      <div class="nav"><a href="">aaa</a></div>
-      <div class="nav end">
-        <button id="logOut">
-          <i style="font-size: 24px" class="fa">&#xf08b;</i>
-        </button>
+      <div class="nav"><a href="/admin/products">Products</a></div>
+      <div class="nav"><a href="/admin/addProducts">Add Product</a></div>
+      <div class="nav end" id="logOut">
+        <i style="font-size: 24px" class="fa">&#xf08b;</i>
       </div>
     </div>
     <script>
-      const logOutButton = document.getElementById("logOut");
+      const logOutA = document.getElementById("logOut");
 
-      logOutButton.addEventListener("click", async () => {
+      logOutA.addEventListener("click", async () => {
         try {
           const response = await fetch("/api/admin/logout", {
             method: "POST",
@@ -31,7 +28,7 @@
           });
 
           if (response.ok) {
-            window.location.href = "/login";
+            window.location.href = "/admin";
           } else {
             console.error("Logout failed");
           }

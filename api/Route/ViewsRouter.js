@@ -7,7 +7,7 @@ viewsRouter.get("/", (req, res) => {
   res.render("login");
 });
 
-viewsRouter.get("/login", (req, res) => {
+viewsRouter.get("/login", isAuth, (req, res) => {
   res.render("login");
 });
 
@@ -15,8 +15,8 @@ viewsRouter.get("/products", isAuth, (req, res) => {
   res.render("products");
 });
 
-viewsRouter.get("/add_products", isAuth, (req, res) => {
-  res.render("add_products");
+viewsRouter.get("/addProducts", isAuth, (req, res) => {
+  res.render("addProducts");
 });
 
 export default viewsRouter;
