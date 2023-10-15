@@ -8,6 +8,7 @@ import { setCurrentPage } from '../redux/slice/cakeSlice';
 function Home() {
   const dispatch = useDispatch()
   const { dataFirstFoto, status } = useSelector(store => store.getUrlFirstFoto)
+  console.log(dataFirstFoto);
 
   const getUrlFirstFoto = async () => {
     const urlFirstFoto = `/api/albums/firstPhoto`

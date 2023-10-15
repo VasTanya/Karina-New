@@ -4,9 +4,14 @@ import axios from "axios";
 export const fetch_Request = createAsyncThunk(
     'fetch_request',
     async (params, thunkAPI) => {
-        const { url_request } = params
-        const { data } = await axios.get(url_request)
-        console.log(data);
+        const { url, datainp } = params
+        const { data } = await axios({
+            method: 'post',
+            url: url,
+            data:  datainp
+        })
+
+        // console.log('data',data);
         if(thunkAPI.length === 0 || typeof data === 'string' ){
             return thunkAPI.rejectWithValue('error')
         }
@@ -28,15 +33,6 @@ const initialState = {
     ],
     status1: 'loading',
 }
-// const initialState1 = {
-//     category: 0,
-//     sortType: 
-//         { name: 'популярности (по убыванию)', sortProperty: 'rating' },
-//     pageCount: 1,
-//     searchValue: '',
-// }
-
-
 
 const getUrl_Request = createSlice({
     name: 'albums_Id_Item',

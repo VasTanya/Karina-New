@@ -10,6 +10,7 @@ import IsLoading from './IsLoading';
 function AllAlbomsPhoto() {
 
     const { id } = useParams()
+    // console.log(id);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { currentPage } = useSelector((store) => store.cakeSlice)
@@ -33,13 +34,13 @@ function AllAlbomsPhoto() {
         dispatch(setCurrentPage(num))
     }
 
-    const onClickImg = (idCake,idItem,idItemPhoto) => {
+    const onClickImg = (idCake,idItem, idItemPhoto, album_id, item_id) => {
         const queryString = qs.stringify({
-            
-            id,
-            idCake,
+            // idCake,
             idItem,
-            idItemPhoto
+            // idItemPhoto,
+            album_id,
+            item_id
         })
         navigate(`/cake?${queryString}`)
     }
@@ -62,7 +63,7 @@ function AllAlbomsPhoto() {
                 ) : (<div className='photos_in_album'>{status === 'loading' ? isLoading :
 
                     data_Id_AlbumsAll.data.map((el) => /*<Link key={el.display_number} style={{ textDecoration: 'none' }} to={`/${el.display_number}`}>*/
-                        <div onClick={() => onClickImg(data_Id_AlbumsAll.albumId.album_number,el.display_number,el.src)} key={el.display_number} >
+                        <div onClick={() => onClickImg(data_Id_AlbumsAll.albumId.album_number,el.display_number,el.src, data_Id_AlbumsAll.albumId._id, el._id)} key={el.display_number} >
                             <div className='one_photo_from_alb'>
                                 <img src={el.src} alt="" />
                                 <div className='title_price'>
