@@ -8,7 +8,7 @@ import { setCurrentPage } from '../redux/slice/cakeSlice';
 function Home() {
   const dispatch = useDispatch()
   const { dataFirstFoto, status } = useSelector(store => store.getUrlFirstFoto)
-  console.log(dataFirstFoto);
+    console.log(dataFirstFoto);
 
   const getUrlFirstFoto = async () => {
     const urlFirstFoto = `/api/albums/firstPhoto`
@@ -46,8 +46,9 @@ function Home() {
         ) : (<div className='albums'>{status === 'loading' ? isLoading :
 
         dataFirstFoto.map((el) => <Link key={el.album._id} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
-            <div className='first_foto'>
-              <img src={el.firstPhoto.src} alt="" />
+            <div className='first_foto'>{
+              el.firstPhotos.map((el)=> <img key={el.display_number} src={el.src} alt="" />)
+            }
               <div className='title_price'>
                 <p>{el.album.album_number}.{el.album.title}</p>
               </div>
