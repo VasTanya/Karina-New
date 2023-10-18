@@ -19685,7 +19685,7 @@ const data = {
     {
       display_number: 1,
       title: "Hazelnut slice",
-      src: "/img/Slices/img (1).jpeg",
+      src: "/img/Slices/img (1).jpg",
       price: "$2.99",
     },
     {
@@ -19709,7 +19709,7 @@ const data = {
     {
       display_number: 5,
       title: "Chocolate eclair",
-      src: "/img/Slices/img (5).jpeg",
+      src: "/img/Slices/img (5).jpg",
       price: "$2.99",
     },
     {
@@ -19811,7 +19811,7 @@ const data = {
     {
       display_number: 22,
       title: "Almond slice",
-      src: "/img/Slices/img (22).jpeg",
+      src: "/img/Slices/img (22).jpg",
       price: "$2.99",
     },
     {
@@ -19835,7 +19835,7 @@ const data = {
     {
       display_number: 26,
       title: "Rulette apricot slice",
-      src: "/img/Slices/img (26).jpeg",
+      src: "/img/Slices/img (26).jpg",
       price: "$2.99",
     },
     {

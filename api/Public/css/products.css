@@ -18,19 +18,39 @@
 }
 
 #table {
-  border: 1px solid;
   width: 80%;
   height: auto;
+  margin-top: 2vw;
+}
+
+td{
+ font-size: 1.5vw;
+}
+.data-edit, .data-delete, .data-view, .edit-save, .edit-cancel{
+   width: 5vw;
+   height: 2vw;
+   border-radius: 7px;
+}
+.data-edit:hover, .data-delete:hover, .data-view:hover, .edit-save:hover, .edit-cancel:hover{
+  cursor: pointer;
 }
 
 .tableNav {
-  font-size: 2em;
+  width: 17vw;
+  font-size: 2vw;
   padding: 1vh;
+  margin: 3vw 0;
+  border-radius: 15px;
+  background: rgba(182, 151, 90, 0.82);
+  margin-left: 5vw;
+  border: none;
+}
+.tableNav:hover{
+  cursor: pointer;
 }
 
 .img {
-  width: 50px;
-  height: 50px;
+  width: 5vw;
 }
 
 .delete-modal {
@@ -57,8 +77,8 @@
 }
 
 .delete-message {
-  font-size: 5vh;
-  padding: 5vh 0;
+  font-size: 5vw;
+  padding: 2vw 4vw;
 }
 
 .button-holder {
@@ -70,8 +90,9 @@
 }
 
 .delete-button {
-  font-size: 4vh;
+  font-size: 2.4vw;
   padding: 1vh;
+  border-radius: 10px;
 }
 
 .edit-modal {
@@ -107,16 +128,16 @@
 }
 
 .edit-modal-textInput {
-  width: 50%;
+  width: 60%;
   font-size: 1.5em;
   padding: 1vh;
   text-align: center;
   margin: 1vh 0;
+  border-radius: 10px;
 }
 
 .edit-modal-img {
-  width: 60px;
-  height: 60px;
+  width: 5vw;
   margin: 1vh 0;
 }
 
@@ -129,13 +150,17 @@
 }
 .edit-button {
   padding: 1vh;
-  font-size: 1.2em;
+  font-size: 2.4vw;
   margin: 2vh;
+  border-radius: 10px;
+}
+.edit-button:hover{
+  cursor: pointer;
 }
 
 .edit-message {
-  font-size: 5vh;
-  padding: 5vh 0;
+  font-size: 5vw;
+  padding: 2vw 4vw;
 }
 
 .button-holder {
@@ -146,7 +171,3 @@
   padding: 5vh 0;
 }
 
-.edit-button {
-  font-size: 4vh;
-  padding: 1vh;
-}
