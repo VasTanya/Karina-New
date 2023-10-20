@@ -26,7 +26,6 @@ const createNewRegularSlice = async (route, newItem) => {
   formData.append("src", newItem.src);
   formData.append("img", newItem.img.files[0]);
 
-  console.log(...formData);
   try {
     const response = await fetch(`/api/${route}/add`, {
       method: "POST",
@@ -55,7 +54,7 @@ const createNewAlbum = async (route, title) => {
     });
 
     if (response.ok) {
-      // window.location.reload();
+      window.location.reload();
     } else {
       console.error("Adding album failed");
     }
@@ -71,7 +70,6 @@ const createNewAlbumItem = async (route, newItem) => {
   formData.append("src", newItem.src);
   formData.append("img", newItem.img.files[0]);
 
-  console.log(...formData);
   try {
     const response = await fetch(`/api/${route}/${newItem.albumId}/add`, {
       method: "POST",
@@ -208,11 +206,6 @@ const displayRegular = (definedAlbum) => {
     "formPriceInput",
     `New ${select.options[select.selectedIndex].text} price`
   );
-
-  // const firstPhotoInput = createCheckboxInput(
-  //   "formFirstPhoto",
-  //   `New ${select.options[select.selectedIndex].text} first photo?`
-  // );
 
   const fileInput = createFileInput("formFileInput");
 
