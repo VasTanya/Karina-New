@@ -20,6 +20,9 @@ function Home() {
     getUrlFirstFoto()
     return ()=>  dispatch(setCurrentPage(1)) 
   }, [])
+  
+  const sortData = dataFirstFoto?.map((el)=>el)
+  const alreadySortDataFirstFoto = sortData?.sort((a, b) => a.album.album_number - b.album.album_number)
 
   const isLoading = [...new Array(22)].map((_, idx) => <IsLoading key={idx} />)
 
@@ -45,7 +48,7 @@ function Home() {
           </div>
         ) : (<div className='albums'>{status === 'loading' ? isLoading :
 
-        dataFirstFoto.map((el) => <Link key={el.album._id} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
+        alreadySortDataFirstFoto.map((el) => <Link key={el.album._id} style={{ textDecoration: 'none' }} to={`${el.album._id}`} >
             <div className='first_foto'>{
               el.firstPhotos.map((el)=> <img key={el.display_number} src={el.src} alt="" />)
             }
