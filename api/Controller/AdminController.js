@@ -17,7 +17,7 @@ class AdminController {
       const { email, password } = req.body;
 
       const admin = await this.AdminService.login(email, password);
-
+      console.log("CONT: ", admin);
       res.cookie("access_token", admin.token, {
         httpOnly: true,
         sameSite: "strict",

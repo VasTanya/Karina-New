@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 const isAuth = (req, res, next) => {
   const token = req.cookies.access_token;
-
+  console.log("IS AUTH: ", token);
   if (!token) {
     return res.redirect("/");
   }
