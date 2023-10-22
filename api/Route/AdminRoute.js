@@ -7,9 +7,9 @@ const { login, seed, seedAdmin, logout } = AdminController;
 
 adminRouter.post("/login", login);
 
-adminRouter.get("/seed", isAuth, seed);
+adminRouter.get("/seed", seed);
 
-adminRouter.get("/seed/admin", isAuth, seedAdmin);
+adminRouter.get("/seed/admin", seedAdmin);
 
 adminRouter.post("/logout", logout);
 
