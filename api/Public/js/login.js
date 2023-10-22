@@ -10,7 +10,7 @@ logOutA.addEventListener("click", async () => {
     });
 
     if (response.ok) {
-      window.location.href = "/admin/login";
+      window.location.href = "/";
     } else {
       console.error("Logout failed");
     }

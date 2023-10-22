@@ -43,7 +43,7 @@ app.use("/api/slices", slicesRouter);
 app.use("/api/regular", regularRouter);
 app.use("/api/request", emailRouter);
 app.use("/api/admin", adminRouter);
-app.use("/admin", viewsRouter);
+app.use("/", viewsRouter);
 
 app.use((err, req, res, next) => {
   res.status(404).send({ message: err.message });
