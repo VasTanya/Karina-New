@@ -13,7 +13,6 @@ class AdminService {
 
   login = async (email, password) => {
     const admin = await Admin.findOne({ email: email });
-
     if (admin) {
       if (bcrypt.compareSync(password, admin.password)) {
         const token = generateToken(admin);
@@ -66,7 +65,13 @@ class AdminService {
   seedAdmin = async () => {
     await Admin.deleteMany({});
 
-    const createdAdmin = new Admin(data.admin);
+    const hashedPassword = await bcrypt.hash(data.admin.password, 10);
+
+    const createdAdmin = new Admin({
+      login: data.admin.login,
+      email: data.admin.email,
+      password: hashedPassword,
+    });
 
     await createdAdmin.save();
 
@@ -75,8 +80,6 @@ class AdminService {
 
   logout = async (req, res) => {
     await res.clearCookie("access_token");
-
-    // await res.redirect("/admin");
 
     if (req.cookies.access_token) return { message: "Logout successful" };
   };
