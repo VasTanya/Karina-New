@@ -13,7 +13,7 @@ function Home() {
   console.log(dataFirstFoto);
 
   const getUrlFirstFoto = async () => {
-    const urlFirstFoto = `/api/albums/firstPhoto`;
+    const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
 
