@@ -13,7 +13,7 @@ function Home() {
   console.log(dataFirstFoto);
 
   const getUrlFirstFoto = async () => {
-    const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
+    const urlFirstFoto = `/api/albums/firstPhoto`;
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
 
@@ -21,6 +21,11 @@ function Home() {
     getUrlFirstFoto();
     return () => dispatch(setCurrentPage(1));
   }, []);
+
+  const sortData = dataFirstFoto?.map((el) => el);
+  const alreadySortDataFirstFoto = sortData?.sort(
+    (a, b) => a.album.album_number - b.album.album_number
+  );
 
   const isLoading = [...new Array(22)].map((_, idx) => <IsLoading key={idx} />);
 
@@ -50,7 +55,7 @@ function Home() {
         <div className="albums">
           {status === "loading"
             ? isLoading
-            : dataFirstFoto.map((el) => (
+            : alreadySortDataFirstFoto.map((el) => (
                 <Link
                   key={el.album._id}
                   style={{ textDecoration: "none" }}
