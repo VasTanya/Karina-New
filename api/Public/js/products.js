@@ -3,9 +3,7 @@ const tableNav = document.querySelectorAll(".tableNav");
 const fetchGetFunction = async (nav, query) => {
   try {
     const response = await fetch(
-      !query
-        ? `${process.env.ADMIN_API_URL}/${nav}`
-        : `${process.env.ADMIN_API_URL}/${nav}/${query}`
+      !query ? `/api/${nav}` : `/api/${nav}/${query}`
     );
 
     if (!response.ok) {
@@ -23,9 +21,7 @@ const fetchGetFunction = async (nav, query) => {
 const fetchPutFunction = async (nav, id, formData, albumId) => {
   try {
     const response = await fetch(
-      !albumId
-        ? `${process.env.ADMIN_API_URL}/${nav}/${id}/edit`
-        : `${process.env.ADMIN_API_URL}/${nav}/${albumId}/${id}/edit`,
+      !albumId ? `/api/${nav}/${id}/edit` : `/api/${nav}/${albumId}/${id}/edit`,
       {
         method: "PUT",
         body: formData,
@@ -44,16 +40,13 @@ const fetchPutFunction = async (nav, id, formData, albumId) => {
 
 const fetchPutAlbumFunction = async (nav, id, data) => {
   try {
-    const response = await fetch(
-      `${process.env.ADMIN_API_URL}/${nav}/${id}/edit`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`/api/${nav}/${id}/edit`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       throw new Error("Error during edit", response.status);
@@ -241,8 +234,8 @@ const deleteFunction = async (nav, item, albumId) => {
     try {
       const response = await fetch(
         !albumId
-          ? `${process.env.ADMIN_API_URL}/${nav}/${item._id}/delete`
-          : `${process.env.ADMIN_API_URL}/${nav}/${albumId}/${item._id}/delete`,
+          ? `/api/${nav}/${item._id}/delete`
+          : `/api/${nav}/${albumId}/${item._id}/delete`,
         {
           method: "DELETE",
           headers: {

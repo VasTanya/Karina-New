@@ -5,7 +5,7 @@ const btnHolder = document.getElementById("btnHolder");
 
 const fetchFunction = async (nav) => {
   try {
-    const response = await fetch(`${process.env.ADMIN_API_URL}/${nav}`);
+    const response = await fetch(`/api/${nav}`);
 
     if (!response.ok) {
       throw new Error(response.message);
@@ -27,7 +27,7 @@ const createNewRegularSlice = async (route, newItem) => {
   formData.append("img", newItem.img.files[0]);
 
   try {
-    const response = await fetch(`${process.env.ADMIN_API_URL}/${route}/add`, {
+    const response = await fetch(`/api/${route}/add`, {
       method: "POST",
       body: formData,
     });
@@ -45,7 +45,7 @@ const createNewRegularSlice = async (route, newItem) => {
 const createNewAlbum = async (route, title) => {
   console.log(title);
   try {
-    const response = await fetch(`${process.env.ADMIN_API_URL}/${route}/add`, {
+    const response = await fetch(`/api/${route}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,13 +71,10 @@ const createNewAlbumItem = async (route, newItem) => {
   formData.append("img", newItem.img.files[0]);
 
   try {
-    const response = await fetch(
-      `${process.env.ADMIN_API_URL}/${route}/${newItem.albumId}/add`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`/api/${route}/${newItem.albumId}/add`, {
+      method: "POST",
+      body: formData,
+    });
 
     if (response.ok) {
       window.location.reload();
