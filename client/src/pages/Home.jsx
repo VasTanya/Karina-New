@@ -10,7 +10,6 @@ function Home() {
   const { dataFirstFoto, status } = useSelector(
     (store) => store.getUrlFirstFoto
   );
-  console.log(dataFirstFoto);
 
   const getUrlFirstFoto = async () => {
     const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
@@ -19,7 +18,7 @@ function Home() {
 
   useEffect(() => {
     getUrlFirstFoto();
-    return () => dispatch(setCurrentPage(1));
+    dispatch(setCurrentPage(1));
   }, []);
 
   const sortData = dataFirstFoto?.map((el) => el);
@@ -47,9 +46,6 @@ function Home() {
               </span>
             </p>
           </div>
-          <div>
-            <p className="try later">Please try again later.</p>
-          </div>
         </div>
       ) : (
         <div className="albums">
@@ -62,8 +58,8 @@ function Home() {
                   to={`${el.album._id}`}
                 >
                   <div className="first_foto">
-                    {el.firstPhotos.map((el) => (
-                      <img key={el.display_number} src={el.src} alt="" />
+                    {el.firstPhotos.map((photo) => (
+                      <img key={photo.display_number} src={photo.src} alt="" />
                     ))}
                     <div className="title_price">
                       <p>
@@ -72,7 +68,7 @@ function Home() {
                     </div>
                   </div>
                 </Link>
-              ))}{" "}
+              ))}
         </div>
       )}
     </>
