@@ -18,10 +18,11 @@ class AdminController {
 
       const admin = await this.AdminService.login(email, password);
       console.log("CONT: ", admin);
+
       res.cookie("access_token", admin.token, {
         httpOnly: true,
         sameSite: "strict",
-        secure: true,
+        // secure: true,
       });
 
       response(res, 200, admin.message);

@@ -9,8 +9,8 @@
   </head>
   <body>
     <div class="navbar">
-      <div class="nav"><a href="/admin/products">Products</a></div>
-      <div class="nav"><a href="/admin/addProducts">Add Product</a></div>
+      <div class="nav"><a href="/products">Products</a></div>
+      <div class="nav"><a href="/addProducts">Add Product</a></div>
       <div class="nav end" id="logOut">
         <i style="font-size: 24px" class="fa">&#xf08b;</i>
       </div>
@@ -28,7 +28,7 @@
           });
 
           if (response.ok) {
-            window.location.href = "/admin";
+            window.location.href = "/";
           } else {
             console.error("Logout failed");
           }
