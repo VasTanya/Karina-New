@@ -14276,343 +14276,343 @@ const data = {
     },
     {
       album_number: 6,
-      title: "Chistina",
+      title: "Christina",
       album: [
         {
           display_number: 1,
-          src: "/img/6.Chistina/img (1).jpg",
+          src: "/img/6.Christina/img (1).jpg",
         },
         {
           display_number: 2,
-          src: "/img/6.Chistina/img (2).jpg",
+          src: "/img/6.Christina/img (2).jpg",
         },
         {
           display_number: 3,
-          src: "/img/6.Chistina/img (3).jpg",
+          src: "/img/6.Christina/img (3).jpg",
         },
         {
           display_number: 4,
-          src: "/img/6.Chistina/img (4).jpg",
+          src: "/img/6.Christina/img (4).jpg",
         },
         {
           display_number: 5,
-          src: "/img/6.Chistina/img (5).jpg",
+          src: "/img/6.Christina/img (5).jpg",
         },
         {
           display_number: 6,
-          src: "/img/6.Chistina/img (6).jpg",
+          src: "/img/6.Christina/img (6).jpg",
         },
         {
           display_number: 7,
-          src: "/img/6.Chistina/img (7).jpg",
+          src: "/img/6.Christina/img (7).jpg",
         },
         {
           display_number: 8,
-          src: "/img/6.Chistina/img (8).jpg",
+          src: "/img/6.Christina/img (8).jpg",
         },
         {
           display_number: 9,
-          src: "/img/6.Chistina/img (9).jpg",
+          src: "/img/6.Christina/img (9).jpg",
         },
         {
           display_number: 10,
-          src: "/img/6.Chistina/img (10).jpg",
+          src: "/img/6.Christina/img (10).jpg",
         },
         {
           display_number: 11,
-          src: "/img/6.Chistina/img (11).jpg",
+          src: "/img/6.Christina/img (11).jpg",
         },
         {
           display_number: 12,
-          src: "/img/6.Chistina/img (12).jpg",
+          src: "/img/6.Christina/img (12).jpg",
         },
         {
           display_number: 13,
-          src: "/img/6.Chistina/img (13).jpg",
+          src: "/img/6.Christina/img (13).jpg",
         },
         {
           display_number: 14,
-          src: "/img/6.Chistina/img (14).jpg",
+          src: "/img/6.Christina/img (14).jpg",
         },
         {
           display_number: 15,
-          src: "/img/6.Chistina/img (15).jpg",
+          src: "/img/6.Christina/img (15).jpg",
         },
         {
           display_number: 16,
-          src: "/img/6.Chistina/img (16).jpg",
+          src: "/img/6.Christina/img (16).jpg",
         },
         {
           display_number: 17,
-          src: "/img/6.Chistina/img (17).jpg",
+          src: "/img/6.Christina/img (17).jpg",
         },
         {
           display_number: 18,
-          src: "/img/6.Chistina/img (18).jpg",
+          src: "/img/6.Christina/img (18).jpg",
         },
         {
           display_number: 19,
-          src: "/img/6.Chistina/img (19).jpg",
+          src: "/img/6.Christina/img (19).jpg",
         },
         {
           display_number: 20,
-          src: "/img/6.Chistina/img (20).jpg",
+          src: "/img/6.Christina/img (20).jpg",
         },
         {
           display_number: 21,
-          src: "/img/6.Chistina/img (21).jpg",
+          src: "/img/6.Christina/img (21).jpg",
         },
         {
           display_number: 22,
-          src: "/img/6.Chistina/img (22).jpg",
+          src: "/img/6.Christina/img (22).jpg",
         },
         {
           display_number: 23,
-          src: "/img/6.Chistina/img (23).jpg",
+          src: "/img/6.Christina/img (23).jpg",
         },
         {
           display_number: 24,
-          src: "/img/6.Chistina/img (24).jpg",
+          src: "/img/6.Christina/img (24).jpg",
         },
         {
           display_number: 25,
-          src: "/img/6.Chistina/img (25).jpg",
+          src: "/img/6.Christina/img (25).jpg",
         },
         {
           display_number: 26,
-          src: "/img/6.Chistina/img (26).jpg",
+          src: "/img/6.Christina/img (26).jpg",
         },
         {
           display_number: 27,
-          src: "/img/6.Chistina/img (27).jpg",
+          src: "/img/6.Christina/img (27).jpg",
         },
         {
           display_number: 28,
-          src: "/img/6.Chistina/img (28).jpg",
+          src: "/img/6.Christina/img (28).jpg",
         },
         {
           display_number: 29,
-          src: "/img/6.Chistina/img (29).jpg",
+          src: "/img/6.Christina/img (29).jpg",
         },
         {
           display_number: 30,
-          src: "/img/6.Chistina/img (30).jpg",
+          src: "/img/6.Christina/img (30).jpg",
         },
         {
           display_number: 31,
-          src: "/img/6.Chistina/img (31).jpg",
+          src: "/img/6.Christina/img (31).jpg",
         },
         {
           display_number: 32,
-          src: "/img/6.Chistina/img (32).jpg",
+          src: "/img/6.Christina/img (32).jpg",
         },
         {
           display_number: 33,
-          src: "/img/6.Chistina/img (33).jpg",
+          src: "/img/6.Christina/img (33).jpg",
         },
         {
           display_number: 34,
-          src: "/img/6.Chistina/img (34).jpg",
+          src: "/img/6.Christina/img (34).jpg",
         },
         {
           display_number: 35,
-          src: "/img/6.Chistina/img (35).jpg",
+          src: "/img/6.Christina/img (35).jpg",
         },
         {
           display_number: 36,
-          src: "/img/6.Chistina/img (36).jpg",
+          src: "/img/6.Christina/img (36).jpg",
         },
         {
           display_number: 37,
-          src: "/img/6.Chistina/img (37).jpg",
+          src: "/img/6.Christina/img (37).jpg",
         },
         {
           display_number: 38,
-          src: "/img/6.Chistina/img (38).jpg",
+          src: "/img/6.Christina/img (38).jpg",
         },
         {
           display_number: 39,
-          src: "/img/6.Chistina/img (39).jpg",
+          src: "/img/6.Christina/img (39).jpg",
         },
         {
           display_number: 40,
-          src: "/img/6.Chistina/img (40).jpg",
+          src: "/img/6.Christina/img (40).jpg",
         },
         {
           display_number: 41,
-          src: "/img/6.Chistina/img (41).jpg",
+          src: "/img/6.Christina/img (41).jpg",
         },
         {
           display_number: 42,
-          src: "/img/6.Chistina/img (42).jpg",
+          src: "/img/6.Christina/img (42).jpg",
         },
         {
           display_number: 43,
-          src: "/img/6.Chistina/img (43).jpg",
+          src: "/img/6.Christina/img (43).jpg",
         },
         {
           display_number: 44,
-          src: "/img/6.Chistina/img (44).jpg",
+          src: "/img/6.Christina/img (44).jpg",
         },
         {
           display_number: 45,
-          src: "/img/6.Chistina/img (45).jpg",
+          src: "/img/6.Christina/img (45).jpg",
         },
         {
           display_number: 46,
-          src: "/img/6.Chistina/img (46).jpg",
+          src: "/img/6.Christina/img (46).jpg",
         },
         {
           display_number: 47,
-          src: "/img/6.Chistina/img (47).jpg",
+          src: "/img/6.Christina/img (47).jpg",
         },
         {
           display_number: 48,
-          src: "/img/6.Chistina/img (48).jpg",
+          src: "/img/6.Christina/img (48).jpg",
         },
         {
           display_number: 49,
-          src: "/img/6.Chistina/img (49).jpg",
+          src: "/img/6.Christina/img (49).jpg",
         },
         {
           display_number: 50,
-          src: "/img/6.Chistina/img (50).jpg",
+          src: "/img/6.Christina/img (50).jpg",
         },
         {
           display_number: 51,
-          src: "/img/6.Chistina/img (51).jpg",
+          src: "/img/6.Christina/img (51).jpg",
         },
         {
           display_number: 52,
-          src: "/img/6.Chistina/img (52).jpg",
+          src: "/img/6.Christina/img (52).jpg",
         },
         {
           display_number: 53,
-          src: "/img/6.Chistina/img (53).jpg",
+          src: "/img/6.Christina/img (53).jpg",
         },
         {
           display_number: 54,
-          src: "/img/6.Chistina/img (54).jpg",
+          src: "/img/6.Christina/img (54).jpg",
         },
         {
           display_number: 55,
-          src: "/img/6.Chistina/img (55).jpg",
+          src: "/img/6.Christina/img (55).jpg",
         },
         {
           display_number: 56,
-          src: "/img/6.Chistina/img (56).jpg",
+          src: "/img/6.Christina/img (56).jpg",
         },
         {
           display_number: 57,
-          src: "/img/6.Chistina/img (57).jpg",
+          src: "/img/6.Christina/img (57).jpg",
         },
         {
           display_number: 58,
-          src: "/img/6.Chistina/img (58).jpg",
+          src: "/img/6.Christina/img (58).jpg",
         },
         {
           display_number: 59,
-          src: "/img/6.Chistina/img (59).jpg",
+          src: "/img/6.Christina/img (59).jpg",
         },
         {
           display_number: 60,
-          src: "/img/6.Chistina/img (60).jpg",
+          src: "/img/6.Christina/img (60).jpg",
         },
         {
           display_number: 61,
-          src: "/img/6.Chistina/img (61).jpg",
+          src: "/img/6.Christina/img (61).jpg",
         },
         {
           display_number: 62,
-          src: "/img/6.Chistina/img (62).jpg",
+          src: "/img/6.Christina/img (62).jpg",
         },
         {
           display_number: 63,
-          src: "/img/6.Chistina/img (63).jpg",
+          src: "/img/6.Christina/img (63).jpg",
         },
         {
           display_number: 64,
-          src: "/img/6.Chistina/img (64).jpg",
+          src: "/img/6.Christina/img (64).jpg",
         },
         {
           display_number: 65,
-          src: "/img/6.Chistina/img (65).jpg",
+          src: "/img/6.Christina/img (65).jpg",
         },
         {
           display_number: 66,
-          src: "/img/6.Chistina/img (66).jpg",
+          src: "/img/6.Christina/img (66).jpg",
         },
         {
           display_number: 67,
-          src: "/img/6.Chistina/img (67).jpg",
+          src: "/img/6.Christina/img (67).jpg",
         },
         {
           display_number: 68,
-          src: "/img/6.Chistina/img (68).jpg",
+          src: "/img/6.Christina/img (68).jpg",
         },
         {
           display_number: 69,
-          src: "/img/6.Chistina/img (69).jpg",
+          src: "/img/6.Christina/img (69).jpg",
         },
         {
           display_number: 70,
-          src: "/img/6.Chistina/img (70).jpg",
+          src: "/img/6.Christina/img (70).jpg",
         },
         {
           display_number: 71,
-          src: "/img/6.Chistina/img (71).jpg",
+          src: "/img/6.Christina/img (71).jpg",
         },
         {
           display_number: 72,
-          src: "/img/6.Chistina/img (72).jpg",
+          src: "/img/6.Christina/img (72).jpg",
         },
         {
           display_number: 73,
-          src: "/img/6.Chistina/img (73).jpg",
+          src: "/img/6.Christina/img (73).jpg",
         },
         {
           display_number: 74,
-          src: "/img/6.Chistina/img (74).jpg",
+          src: "/img/6.Christina/img (74).jpg",
         },
         {
           display_number: 75,
-          src: "/img/6.Chistina/img (75).jpg",
+          src: "/img/6.Christina/img (75).jpg",
         },
         {
           display_number: 76,
-          src: "/img/6.Chistina/img (76).jpg",
+          src: "/img/6.Christina/img (76).jpg",
         },
         {
           display_number: 77,
-          src: "/img/6.Chistina/img (77).jpg",
+          src: "/img/6.Christina/img (77).jpg",
         },
         {
           display_number: 78,
-          src: "/img/6.Chistina/img (78).jpg",
+          src: "/img/6.Christina/img (78).jpg",
         },
         {
           display_number: 79,
-          src: "/img/6.Chistina/img (79).jpg",
+          src: "/img/6.Christina/img (79).jpg",
         },
         {
           display_number: 80,
-          src: "/img/6.Chistina/img (80).jpg",
+          src: "/img/6.Christina/img (80).jpg",
         },
         {
           display_number: 81,
-          src: "/img/6.Chistina/img (81).jpg",
+          src: "/img/6.Christina/img (81).jpg",
         },
         {
           display_number: 82,
-          src: "/img/6.Chistina/img (82).jpg",
+          src: "/img/6.Christina/img (82).jpg",
         },
         {
           display_number: 83,
-          src: "/img/6.Chistina/img (83).jpg",
+          src: "/img/6.Christina/img (83).jpg",
         },
         {
           display_number: 84,
-          src: "/img/6.Chistina/first.jpg",
+          src: "/img/6.Christina/first.jpg",
           tag: "firstPhoto",
         },
       ],
