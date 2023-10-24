@@ -18573,119 +18573,119 @@ const data = {
     },
     {
       album_number: 17,
-      title: "Nambers and Letters",
+      title: "Numbers and Letters",
       album: [
         {
           display_number: 1,
-          src: "/img/17.Nambers and Letters/img (1).jpg",
+          src: "/img/17.Numbers and Letters/img (1).jpg",
         },
         {
           display_number: 2,
-          src: "/img/17.Nambers and Letters/img (2).jpg",
+          src: "/img/17.Numbers and Letters/img (2).jpg",
         },
         {
           display_number: 3,
-          src: "/img/17.Nambers and Letters/img (3).jpg",
+          src: "/img/17.Numbers and Letters/img (3).jpg",
         },
         {
           display_number: 4,
-          src: "/img/17.Nambers and Letters/img (4).jpg",
+          src: "/img/17.Numbers and Letters/img (4).jpg",
         },
         {
           display_number: 5,
-          src: "/img/17.Nambers and Letters/img (5).jpg",
+          src: "/img/17.Numbers and Letters/img (5).jpg",
         },
         {
           display_number: 6,
-          src: "/img/17.Nambers and Letters/img (6).jpg",
+          src: "/img/17.Numbers and Letters/img (6).jpg",
         },
         {
           display_number: 7,
-          src: "/img/17.Nambers and Letters/img (7).jpg",
+          src: "/img/17.Numbers and Letters/img (7).jpg",
         },
         {
           display_number: 8,
-          src: "/img/17.Nambers and Letters/img (8).jpg",
+          src: "/img/17.Numbers and Letters/img (8).jpg",
         },
         {
           display_number: 9,
-          src: "/img/17.Nambers and Letters/img (9).jpg",
+          src: "/img/17.Numbers and Letters/img (9).jpg",
         },
         {
           display_number: 10,
-          src: "/img/17.Nambers and Letters/img (10).jpg",
+          src: "/img/17.Numbers and Letters/img (10).jpg",
         },
         {
           display_number: 11,
-          src: "/img/17.Nambers and Letters/img (11).jpg",
+          src: "/img/17.Numbers and Letters/img (11).jpg",
         },
         {
           display_number: 12,
-          src: "/img/17.Nambers and Letters/img (12).jpg",
+          src: "/img/17.Numbers and Letters/img (12).jpg",
         },
         {
           display_number: 13,
-          src: "/img/17.Nambers and Letters/img (13).jpg",
+          src: "/img/17.Numbers and Letters/img (13).jpg",
         },
         {
           display_number: 14,
-          src: "/img/17.Nambers and Letters/img (14).jpg",
+          src: "/img/17.Numbers and Letters/img (14).jpg",
         },
         {
           display_number: 15,
-          src: "/img/17.Nambers and Letters/img (15).jpg",
+          src: "/img/17.Numbers and Letters/img (15).jpg",
         },
         {
           display_number: 16,
-          src: "/img/17.Nambers and Letters/img (16).jpg",
+          src: "/img/17.Numbers and Letters/img (16).jpg",
         },
         {
           display_number: 17,
-          src: "/img/17.Nambers and Letters/img (17).jpg",
+          src: "/img/17.Numbers and Letters/img (17).jpg",
         },
         {
           display_number: 18,
-          src: "/img/17.Nambers and Letters/img (18).jpg",
+          src: "/img/17.Numbers and Letters/img (18).jpg",
         },
         {
           display_number: 19,
-          src: "/img/17.Nambers and Letters/img (19).jpg",
+          src: "/img/17.Numbers and Letters/img (19).jpg",
         },
         {
           display_number: 20,
-          src: "/img/17.Nambers and Letters/img (20).jpg",
+          src: "/img/17.Numbers and Letters/img (20).jpg",
         },
         {
           display_number: 21,
-          src: "/img/17.Nambers and Letters/img (21).jpg",
+          src: "/img/17.Numbers and Letters/img (21).jpg",
         },
         {
           display_number: 22,
-          src: "/img/17.Nambers and Letters/img (22).jpg",
+          src: "/img/17.Numbers and Letters/img (22).jpg",
         },
         {
           display_number: 23,
-          src: "/img/17.Nambers and Letters/img (23).jpg",
+          src: "/img/17.Numbers and Letters/img (23).jpg",
         },
         {
           display_number: 24,
-          src: "/img/17.Nambers and Letters/img (24).jpg",
+          src: "/img/17.Numbers and Letters/img (24).jpg",
         },
         {
           display_number: 25,
-          src: "/img/17.Nambers and Letters/img (25).jpg",
+          src: "/img/17.Numbers and Letters/img (25).jpg",
         },
         {
           display_number: 26,
-          src: "/img/17.Nambers and Letters/img (26).jpg",
+          src: "/img/17.Numbers and Letters/img (26).jpg",
         },
         {
           display_number: 27,
-          src: "/img/17.Nambers and Letters/img (27).jpg",
+          src: "/img/17.Numbers and Letters/img (27).jpg",
         },
         {
           display_number: 28,
-          src: "/img/17.Nambers and Letters/first.jpg",
+          src: "/img/17.Numbers and Letters/first.jpg",
           tag: "firstPhoto",
         },
       ],
