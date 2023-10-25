@@ -40,8 +40,14 @@
           <input type="text" class="edit-modal-textInput" />
           <input type="text" class="edit-modal-textInput" />
           <img class="edit-modal-textInput edit-modal-img" />
-          <input type="file" name="img" class="edit-modal-textInput" />
+          <input
+            type="file"
+            name="img"
+            accept="image/*"
+            class="edit-modal-textInput"
+          />
         </div>
+        <div class="edit-modal-message" id="edit-modal-message"></div>
         <div class="edit-modal-buttons" id="edit-modal-buttons">
           <button class="edit-button" id="edit-save">SAVE</button>
           <button type="button" class="edit-button" id="edit-cancel">
