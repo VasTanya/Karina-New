@@ -50,6 +50,7 @@ li {
 .li_activ {
   color: rgb(233, 217, 164);
   cursor: pointer;
+  white-space: nowrap;
 }
 
 li:hover,
@@ -365,6 +366,18 @@ iframe {
   min-width: 5vw;
   height: 5vw;
 }
+.css-nhb8h9{
+  justify-content: center;
+}
+.css-lrb33l {
+  font-size: 3vw;
+}
+.css-f4jy6p {
+  width: 6vw;
+  height: 6vw;
+  font-size: 2.5vw;
+}
+
 .nosmile {
   width: 5vw;
   margin-top: 2vw;
@@ -387,6 +400,9 @@ iframe {
 .one_cake >.one_cake_div>p{
   font-size: 2vw;
 }
+.p_title_price{
+  white-space: nowrap;
+}
 
 
 
@@ -407,6 +423,7 @@ iframe {
   }
   .nav_li{
     font-size: 2.6vw;
+    white-space: nowrap;
   }
 
   li {
@@ -492,9 +509,15 @@ iframe {
   min-width: 5vw;
   height: 5vw;
 }
+.css-f4jy6p {
+  width: 7vw;
+  height: 7vw;
+  font-size: 3vw;
+}
 }
 
-
-/* .photos_in_album > svg {
-  height: 100px;
-} */
+@media (max-width:460px){
+  nav ul{
+    padding: 0 0vw;
+  }
+}

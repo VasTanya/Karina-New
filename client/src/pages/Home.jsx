@@ -15,7 +15,7 @@ function Home() {
     const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
-
+  
   useEffect(() => {
     getUrlFirstFoto();
     dispatch(setCurrentPage(1));

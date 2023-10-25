@@ -15,7 +15,7 @@ function PaginatioMaterialUi({ currentPage, handleClick }) {
   return (
   
       <Stack spacing={2}>
-        <Pagination count={Math.ceil(data_Id_AlbumsAll.count/52)} variant="outlined" onChange={(_, page) => handlePageClick(page)} page={currentPage} />
+        <Pagination count={Math.ceil(data_Id_AlbumsAll.count/48)} variant="outlined" onChange={(_, page) => handlePageClick(page)} page={currentPage} />
       </Stack>
 
   )

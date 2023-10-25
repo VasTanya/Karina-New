@@ -27,7 +27,7 @@ const navList = [
 
 function Nav() {
 
-    const [navig, setNavig] = useState(0)
+    const [navig, setNavig] = useState()
 
     return (
         <div>
