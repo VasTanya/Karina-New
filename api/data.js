@@ -18103,7 +18103,7 @@ const data = {
     },
     {
       album_number: 15,
-      title: "Fix prise",
+      title: "Fix price",
       album: [
         {
           display_number: 1,
@@ -18573,7 +18573,7 @@ const data = {
     },
     {
       album_number: 17,
-      title: "Nambers and Letters",
+      title: "Numbers and Letters",
       album: [
         {
           display_number: 1,
@@ -18685,6 +18685,34 @@ const data = {
         },
         {
           display_number: 28,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 29,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 30,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 31,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 32,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 33,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 34,
+          src: "/img/17.Nambers and Letters/img (27).jpg",
+        },
+        {
+          display_number: 35,
           src: "/img/17.Nambers and Letters/first.jpg",
           tag: "firstPhoto",
         },
