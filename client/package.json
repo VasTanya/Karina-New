@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build --output /var/ww/karinas/client",
+    "build": "react-scripts build --output /var/www/karinas/client",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
