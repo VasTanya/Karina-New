@@ -2,7 +2,6 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(req.body.src.split("/"));
     cb(null, `Public/img/${req.body.src.split("/")[2]}`);
   },
   filename: (req, file, cb) => {
@@ -11,7 +10,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  cb(null, true); // Accept all files
+  cb(null, true);
 };
 
 const upload = multer({

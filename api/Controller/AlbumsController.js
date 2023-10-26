@@ -2,8 +2,6 @@ import expressAsyncHandler from "express-async-handler";
 import AlbumsService from "../Service/AlbumsService.js";
 import response from "../Utils/Response.js";
 import logger from "../Utils/Logger/Logger.js";
-import { Types } from "mongoose";
-const { ObjectId } = Types;
 
 class AlbumsController {
   constructor() {
