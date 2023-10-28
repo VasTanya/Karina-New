@@ -13,9 +13,10 @@ function Home() {
 
   const getUrlFirstFoto = async () => {
     const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
+    console.log(`AAAAAAA: ${process.env.REACT_APP_API_URL}`);
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
-  
+
   useEffect(() => {
     getUrlFirstFoto();
     dispatch(setCurrentPage(1));
