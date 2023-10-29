@@ -1,4 +1,6 @@
 import express from "express";
+import https from "https";
+import fs from "fs";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -50,6 +52,18 @@ app.use((err, req, res, next) => {
   logger.error({ message: err.message });
 });
 
-const server = app.listen(process.env.PORT, process.env.PORT_EL, () => {
-  logger.info(`SERVER RUNNING AT ${process.env.PORT_EL}:${process.env.PORT}`);
+const privateKey = fs.readFileSync(
+  "/etc/letsencrypt/live/karinas515.com/privkey.pem",
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/karinas515.com/fullchain.pem",
+  "utf8"
+);
+const certCredentials = { key: privateKey, cert: certificate };
+
+const httpsServer = https.createServer(certCredentials, app);
+
+httpsServer.listen(process.env.PORT, () => {
+  logger.info(`HTTPS SERVER RUNNING AT ${process.env.PORT}`);
 });
