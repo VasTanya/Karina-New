@@ -4,7 +4,7 @@ const allowedOrigins = [
   "https://191.101.233.82",
   "https://karinas515.com",
   "https://admin.karinas515.com",
-  "https://api.karinas515.com",
+  "http://api.karinas515.com",
 
   "karinas515.com",
   "admin.karinas515.com",
