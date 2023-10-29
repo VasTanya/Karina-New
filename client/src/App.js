@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import AllAlbomsPhoto from "./components/AllAlbomsPhoto";
 import AskCoustOfThisCake from "./components/AskCoustOfThisCake";
 import OneSearchCake from "./components/OneSearchCake";
+import SentRequest from "./components/SentRequest";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path=":id" element={<AllAlbomsPhoto />} />
           <Route path="/cake" element={<AskCoustOfThisCake />} />
           <Route path="/search" element={<OneSearchCake />} />
+          <Route path="/sentRequest" element={<SentRequest/>} />
         </Route>
       </Routes>
       <ButtonScrollUp />
