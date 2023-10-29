@@ -50,6 +50,6 @@ app.use((err, req, res, next) => {
   logger.error({ message: err.message });
 });
 
-const server = app.listen(process.env.PORT, () => {
-  logger.info(`SERVER RUNNING AT ${process.env.PORT}`);
+const server = app.listen(process.env.PORT, process.env.PORT_EL, () => {
+  logger.info(`SERVER RUNNING AT ${process.env.PORT_EL}:${process.env.PORT}`);
 });
