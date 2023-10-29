@@ -6,10 +6,6 @@ const allowedOrigins = [
   "https://www.karinas515.com",
   "https://admin.karinas515.com",
   "https://api.karinas515.com",
-
-  "karinas515.com",
-  "admin.karinas515.com",
-  "api.karinas515.com",
 ];
 
 export default allowedOrigins;
