@@ -4,7 +4,7 @@ import logger from "./Logger/Logger.js";
 const mailer = async (data) => {
   console.log("MAILER EMAIL: ", data.email);
   const transporter = nodemailer.createTransport({
-    service: "hotmail",
+    service: "gmail",
     auth: {
       user: process.env.MAIL,
       pass: process.env.MAIL_PASS,
