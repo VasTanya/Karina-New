@@ -53,10 +53,15 @@ const emailHtml = (data) => {
           color: #555;
           font-size: 1.2vw;
         }
+        img {
+          width: 100px;
+          height: 100px;
+        }
       </style>
     </head>
     <body>
       <div class="container">
+        <p><img src=${data.img}>
         <h1>New Request For ${data.cakeCode}</h1>
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Phone:</strong> ${data.phone}</p>
