@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Search from './Search'
 
@@ -27,7 +27,15 @@ const navList = [
 
 function Nav() {
 
-    const [navig, setNavig] = useState()
+    const [navig, setNavig] = useState(0)
+
+    useEffect(() => {
+        setNavig(JSON.parse(window.localStorage.getItem('navig')));
+      }, []);
+    
+      useEffect(() => {
+        window.localStorage.setItem('navig', navig);
+      }, [navig]);
 
     return (
         <div>

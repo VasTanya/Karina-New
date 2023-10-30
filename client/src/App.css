@@ -348,6 +348,9 @@ iframe {
   padding: 0 1vw;
   font-size: 1vw;
 }
+.mail_form input:focus{
+  outline: none;
+}
 
 .mail_form button {
   width: 15vw;
@@ -403,7 +406,24 @@ iframe {
 .p_title_price{
   white-space: nowrap;
 }
-
+.sentRequest{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  margin: 10vw 2vw;
+}
+.btn_return{
+  width: 25vw;
+  height: 3vw;
+  border-radius: 20px;
+  padding: 0 1vw;
+  background: rgb(233, 217, 164);
+  border: none;
+  margin: 3vw 0;
+}
+.btn_return:hover{
+  cursor: pointer;
+}
 
 
 
@@ -514,10 +534,16 @@ iframe {
   height: 7vw;
   font-size: 3vw;
 }
+.mail_form input {
+  border: .5px solid;
+}
 }
 
 @media (max-width:460px){
   nav ul{
     padding: 0 0vw;
+  }
+  .mail_form input {
+    border: .5px solid;
   }
 }

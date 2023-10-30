@@ -4,8 +4,10 @@ import qs from "qs";
 import { fetch_Id_Albums_Item } from "../redux/slice/getUrl_Id_Item";
 import { fetch_Request } from "../redux/slice/getUrl_Request";
 import IsLoading from "./IsLoading";
+import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
+  const navigate = useNavigate()
   const [idCakeOne, setIdCakeOne] = useState({});
   const [idItemOne, setIdItemOne] = useState();
   const [idItemPhotoOne, setIdItemPhotoOne] = useState({});
@@ -35,9 +37,6 @@ function AskCoustOfThisCake() {
     setItem_idOne(urlLink.item_id);
   }, []);
 
-  // console.log(idItemPhotoOne);
-  // console.log(idCakeOne);
-
   // const getUrl_Id_AlbumsItem = async () => {
   //     const url_Id_Albums_Item = `${process.env.REACT_APP_API_URL}/albums/${album_idOne}/${item_idOne}`
   //     // const url_Id_Albums_Item = `${process.env.REACT_APP_API_URL}/albums/65245bcf6d75c97a95da6b47/65245bd06d75c97a95da6b5f`
@@ -53,10 +52,14 @@ function AskCoustOfThisCake() {
       email: e.target[2].value,
       size: e.target[3].value,
       filling: e.target[4].value,
+      img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
     };
-    const url_request = "api/request";
+    console.log(newRequest);
+    // const url_request = "api/request";
+    const url_request = `${process.env.REACT_APP_API_URL}/request`;
     dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
+    navigate('/sentRequest')
   };
 
   // useEffect(() => {

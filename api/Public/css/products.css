@@ -30,6 +30,8 @@ td{
    width: 5vw;
    height: 2vw;
    border-radius: 7px;
+   font-size: 1.1vw;
+   border: 1px solid
 }
 .data-edit:hover, .data-delete:hover, .data-view:hover, .edit-save:hover, .edit-cancel:hover{
   cursor: pointer;

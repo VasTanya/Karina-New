@@ -11,7 +11,8 @@ export const fetch_Request = createAsyncThunk(
             data:  datainp
         })
 
-        // console.log('data',data);
+         console.log('url',url);
+         console.log('data',datainp);
         if(thunkAPI.length === 0 || typeof data === 'string' ){
             return thunkAPI.rejectWithValue('error')
         }
@@ -28,6 +29,7 @@ const initialState = {
             email: "",
             size: "",
             filling: "",
+            img:"",
             cakeCode: "",
           },
     ],
@@ -35,7 +37,7 @@ const initialState = {
 }
 
 const getUrl_Request = createSlice({
-    name: 'albums_Id_Item',
+    name: 'requestToMail',
     initialState,
     redusers: {},
     extraReducers: (builder) => {
@@ -48,6 +50,7 @@ const getUrl_Request = createSlice({
             .addCase(fetch_Request.fulfilled, (state, action) => {
                 state.status1 = 'successful'
                  state.data_request = action.payload
+                 console.log(action.payload);
              
             })
             .addCase(fetch_Request.rejected, (state) => {
