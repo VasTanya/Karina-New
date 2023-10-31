@@ -3,8 +3,10 @@ import logger from "./Logger/Logger.js";
 
 const mailer = async (data) => {
   console.log("MAILER EMAIL: ", data.email);
+  console.log(process.env.MAIL);
+  console.log(process.env.MAIL_PASS);
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "hotmail",
     auth: {
       user: process.env.MAIL,
       pass: process.env.MAIL_PASS,
@@ -54,14 +56,14 @@ const emailHtml = (data) => {
           font-size: 1.2vw;
         }
         img {
-          width: 100px;
-          height: 100px;
+          width: 70px;
+          height: 70px;
         }
       </style>
     </head>
     <body>
       <div class="container">
-        <p><img src=${data.img}>
+        <p><center><img src=${data.img}></center></p>
         <h1>New Request For ${data.cakeCode}</h1>
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Phone:</strong> ${data.phone}</p>
