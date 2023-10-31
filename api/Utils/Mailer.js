@@ -3,28 +3,32 @@ import logger from "./Logger/Logger.js";
 
 const mailer = async (data) => {
   console.log("MAILER EMAIL: ", data.email);
-  console.log(process.env.MAIL);
-  console.log(process.env.MAIL_PASS);
+  console.log(process.env.MAIL_USERNAME);
+
   const transporter = nodemailer.createTransport({
-    service: "hotmail",
+    service: process.env.MAIL_SERVICE,
     auth: {
-      user: process.env.MAIL,
-      pass: process.env.MAIL_PASS,
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
+  console.log("transporter: ", transporter);
+
   const mailOptions = {
-    from: process.env.MAIL,
-    to: process.env.MAIL,
+    from: process.env.MAIL_FROM_ADDRESS,
+    to: process.env.MAIL_USERNAME,
     subject: `New Request For ${data.cakeCode}`,
     html: emailHtml(data),
   };
 
+  console.log("mailOptions: ", mailOptions);
+
   try {
     await transporter.sendMail(mailOptions);
-    logger.info("Email has been sent");
+    return { message: "Email has been sent" };
   } catch (error) {
-    logger.error(`MAILER Error sending email: ${error}`);
+    return { message: `MAILER Error sending email: ${error}` };
   }
 };
 
