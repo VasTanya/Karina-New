@@ -10,14 +10,13 @@ const mailer = async (data) => {
       },
     });
 
-    const mailOptions = {
+    await transporter.sendMail({
       from: process.env.MAIL_FROM_ADDRESS,
       to: process.env.MAIL_USERNAME,
       subject: `New Request For ${data.cakeCode}`,
       html: emailHtml(data),
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
     return { message: "Email has been sent" };
   } catch (error) {
     return { message: `MAILER Error sending email: ${error.message}` };
