@@ -1,25 +1,22 @@
-import nodemailer from "nodemailer";
+import util from "util";
+import child_process from "child_process";
 
 const mailer = async (data) => {
+  const emailContent = `
+    Subject: New Request For ${data.cakeCode}
+    To: ${process.env.MAIL_USERNAME}
+    
+    ${emailHtml(data)}
+  `;
+
+  const sendmail = util.promisify(child_process.exec);
   try {
-    const transporter = nodemailer.createTransport({
-      service: process.env.MAIL_SERVICE,
-      auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.MAIL_FROM_ADDRESS,
-      to: process.env.MAIL_USERNAME,
-      subject: `New Request For ${data.cakeCode}`,
-      html: emailHtml(data),
-    });
-
+    await sendmail(
+      `echo "${emailContent}" | sendmail ${process.env.MAIL_USERNAME}`
+    );
     return { message: "Email has been sent" };
   } catch (error) {
-    return { message: `MAILER Error sending email: ${error.message}` };
+    return { message: `Error sending email: ${error.message}` };
   }
 };
 
