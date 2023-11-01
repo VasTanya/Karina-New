@@ -25,10 +25,6 @@ const fetchPutFunction = async (nav, id, formData, albumId) => {
       {
         method: "PUT",
         body: formData,
-        headers: {
-          // Set 'multipart/form-data' as the Content-Type
-          "Content-Type": "multipart/form-data",
-        },
       }
     );
 
