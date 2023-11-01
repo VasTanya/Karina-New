@@ -7,7 +7,7 @@ import IsLoading from "./IsLoading";
 import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [idCakeOne, setIdCakeOne] = useState({});
   const [idItemOne, setIdItemOne] = useState();
   const [idItemPhotoOne, setIdItemPhotoOne] = useState({});
@@ -56,11 +56,10 @@ function AskCoustOfThisCake() {
       cakeCode: idCakeOne + "." + idItemOne,
     };
     console.log(newRequest);
-    // const url_request = "api/request";
+
     const url_request = `${process.env.REACT_APP_API_URL}/request`;
-    console.log("EMAIL API: ", `${process.env.REACT_APP_API_URL}/request`);
     dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
-    navigate("/sentRequest");
+    navigate('/sentRequest')
   };
 
   // useEffect(() => {

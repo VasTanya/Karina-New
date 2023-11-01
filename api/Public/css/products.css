@@ -118,6 +118,7 @@ td{
   height: auto;
   background: white;
   border: 1px solid;
+  font-size: 2vw;
 }
 
 .edit-modal-inputs {
