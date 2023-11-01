@@ -53,25 +53,36 @@ function Home() {
           {status === "loading"
             ? isLoading
             : alreadySortDataFirstFoto.map((el) => (
-                <Link
-                  key={el.album._id}
-                  style={{ textDecoration: "none" }}
-                  to={`${el.album._id}`}
-                >
-                  <div className="first_foto">
-                    {el.firstPhotos.map((photo) => (
-                      <img key={photo.display_number} src={photo.src} alt="" />
-                    ))}
-                    <div className="title_price">
-                      <p>
-                        {el.album.album_number}.{el.album.title}
-                      </p>
-                    </div>
+              <Link
+                key={el.album._id}
+                style={{ textDecoration: "none" }}
+                to={`${el.album._id}`}
+              >
+                <div className="first_foto">
+                  {el.firstPhotos.map((photo) => (
+                    <img key={photo.display_number} src={photo.src} alt="" />
+                  ))}
+                  <div className="title_price">
+                    <p>
+                      {el.album.album_number}.{el.album.title}
+                    </p>
                   </div>
-                </Link>
-              ))}
+                </div>
+              </Link>
+            ))}
+          <Link style={{ textDecoration: "none" }}
+            to={'/myDesign'}>
+            <div className="my_design">
+              <img src="./img/my5.jpg" alt="" />
+              <div className="title_price">
+                <p>My design</p>
+              </div>
+            </div>
+          </Link>
         </div>
       )}
+
+
     </>
   );
 }

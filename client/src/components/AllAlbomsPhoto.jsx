@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import qs from "qs";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../redux/slice/cakeSlice";
@@ -9,7 +9,6 @@ import IsLoading from "./IsLoading";
 
 function AllAlbomsPhoto() {
   const { id } = useParams();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentPage } = useSelector((store) => store.cakeSlice);
@@ -17,7 +16,6 @@ function AllAlbomsPhoto() {
     (store) => store.getUrl_Id_Albums
   );
   const data_Id_AlbumsAll = data_Id_Albums.data;
-  // console.log(data_Id_AlbumsAll);
 
   const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />);
 
@@ -45,9 +43,7 @@ function AllAlbomsPhoto() {
       album_id,
       item_id,
     });
-    // console.log(idCake);
-    // console.log(idItem);
-    // console.log(idItemPhoto);
+   
     navigate(`/cake?${queryString}`);
   };
   return (
@@ -97,7 +93,6 @@ function AllAlbomsPhoto() {
                     </div>
                   </div>
                 )
-                /* </Link> */
               )}{" "}
         </div>
       )}

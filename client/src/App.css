@@ -153,21 +153,24 @@ nav ul {
   padding: 1vw 0;
 }
 
-.first_foto p {
+.first_foto p,
+.my_design p {
   color: black;
 }
 
-.first_foto:hover {
+.first_foto:hover,
+.my_design:hover {
   scale: 1.15;
   cursor: pointer;
 }
 
-.first_foto img {
+.first_foto img,
+.my_design img {
   width: 20vw;
   height: 20vw;
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
 
 }
 
@@ -263,7 +266,7 @@ iframe {
   max-height: 20vw;
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
 }
 
 .photos_in_album {
@@ -318,23 +321,24 @@ iframe {
   max-width: 50vw;
   max-height: 40vw;
   border-radius: 15px;
-  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
 }
 
 .mail_form {
-  width: 25vw;
+  width: 30vw;
   height: 45vw;
   border: 1px solid rgb(233, 217, 164);
   border-radius: 15px;
-  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
   display: grid;
   justify-items: center;
   padding: 2vw 2vw;
 }
 
-.mail_form p {
-  text-align: justify;
-  font-size: 1vw;
+.mail_form h6 {
+  text-align: center;
+  padding: 0 5vw;
+  font-size: 2vw;
 }
 
 .mail_form img {
@@ -342,23 +346,26 @@ iframe {
 }
 
 .mail_form input {
-  width: 15vw;
-  height: 2vw;
+  width: 20vw;
+  height: 3vw;
   border-radius: 15px;
   padding: 0 1vw;
-  font-size: 1vw;
+  font-size: 1.7vw;
 }
 .mail_form input:focus{
   outline: none;
 }
 
 .mail_form button {
-  width: 15vw;
+  width: 20vw;
   height: 3vw;
   border-radius: 15px;
   padding: 0 1vw;
   background: rgb(233, 217, 164);
   border: none;
+}
+.mail_form button:hover{
+  cursor: pointer;
 }
 .css-wjh20t-MuiPagination-ul {
   justify-content: center;
@@ -424,6 +431,79 @@ iframe {
 .btn_return:hover{
   cursor: pointer;
 }
+.my_design{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 1vw;
+  padding: 1vw 0;
+}
+.add_your_photo{
+  width: 100%;
+  height: 70vw;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.design_form {
+  width: 50vw;
+  height: 50vw;
+  border: 1px solid rgb(233, 217, 164);
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+  display: grid;
+  gap: 1vw;
+  justify-items: center;
+  padding: 2vw 2vw;
+}
+
+.design_form h6 {
+  text-align: center;
+  padding: 0 5vw;
+  font-size: 2vw;
+}
+
+.design_form img {
+  width: 10vw;
+}
+
+.design_form input[type="text"], textarea {
+  width: 25vw;
+  height: 3vw;
+  border-radius: 15px;
+  padding: 0 1vw;
+  font-size: 1.7vw;
+  display: grid;
+  align-items: center;
+}
+textarea {
+  width: 25vw;
+  height: 6vw;
+  border-radius: 15px;
+  padding: 0 1vw;
+  font-size: 1.7vw;
+  display: grid;
+  align-items: center;
+}
+.design_form input:focus,
+textarea:focus{
+  outline: none;
+}
+
+.design_form button {
+  width: 25vw;
+  height: 3vw;
+  border-radius: 15px;
+  padding: 0 1vw;
+  background: rgb(233, 217, 164);
+  border: none;
+}
+.design_form button:hover{
+  cursor: pointer;
+}
+input[type="file"]{
+ width: 25vw;
+}
 
 
 
@@ -453,7 +533,6 @@ iframe {
 
   .about_text_and_foto p {
     font-size: 3.4vw;
-    /* margin-top: 10vw; */
     margin: 10vw 10vw;
   }
 
@@ -475,6 +554,10 @@ iframe {
   }
 
   .first_foto img {
+    width: 26vw;
+    height: 26vw;
+  }
+  .my_design img{
     width: 26vw;
     height: 26vw;
   }
@@ -534,16 +617,21 @@ iframe {
   height: 7vw;
   font-size: 3vw;
 }
-.mail_form input {
-  border: .5px solid;
+.design_form input, textarea,.mail_form {
+  font-size: 2vw;
 }
 }
 
 @media (max-width:460px){
   nav ul{
-    padding: 0 0vw;
+    padding: 0 2vw;
   }
-  .mail_form input {
-    border: .5px solid;
+  .design_form input, textarea,.mail_form {
+    font-size: 2vw;
+  }
+  .css-f4jy6p{
+    min-width: 8vw;
+    height: 8vw;
+    font-size: 3.6vw;
   }
 }

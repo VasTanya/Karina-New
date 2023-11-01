@@ -11,8 +11,10 @@ export const fetch_Request = createAsyncThunk(
             data:  datainp
         })
 
-         console.log('url',url);
-         console.log('data',datainp);
+        console.log('url',url);
+        console.log('data',datainp);
+        console.log('dataaa',data);
+        
         if(thunkAPI.length === 0 || typeof data === 'string' ){
             return thunkAPI.rejectWithValue('error')
         }
