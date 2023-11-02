@@ -31,7 +31,6 @@ const fetchPutFunction = async (nav, id, formData, albumId) => {
     if (response.ok) {
       window.location.reload();
     } else {
-      // Handle any other errors or responses as needed
       console.error("Error during edit:", response.status, response.statusText);
     }
   } catch (error) {
