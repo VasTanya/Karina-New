@@ -19,7 +19,6 @@ const fetchGetFunction = async (nav, query) => {
 };
 
 const fetchPutFunction = async (nav, id, formData, albumId) => {
-  const editModalMessage = document.getElementById("edit-modal-message");
   try {
     const response = await fetch(
       !albumId ? `/api/${nav}/${id}/edit` : `/api/${nav}/${albumId}/${id}/edit`,
@@ -32,9 +31,7 @@ const fetchPutFunction = async (nav, id, formData, albumId) => {
     if (response.ok) {
       window.location.reload();
     } else {
-      editModalMessage.textContent =
-        "Image too large!!! Add image smaller than 1MB";
-      throw new Error("Error during edit", response.status);
+      console.error("Error during edit:", response.status, response.statusText);
     }
   } catch (error) {
     console.error("Error during editing:", error);
