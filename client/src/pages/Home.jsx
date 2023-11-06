@@ -75,7 +75,7 @@ function Home() {
             <div className="my_design">
               <img src="./img/my5.jpg" alt="" />
               <div className="title_price">
-                <p>My design</p>
+                <p>Your design</p>
               </div>
             </div>
           </Link>

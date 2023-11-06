@@ -20,13 +20,8 @@ function AskCoustOfThisCake() {
   const [size, setSize] = useState();
   const [filling, setFilling] = useState();
 
-  // const { data_Id_Albums_Item, status } = useSelector(store => store.getUrl_Id_Item)
-  // const { data_request, status1 } = useSelector(store => store.getUrl_Request)
-
-  // console.log('data', data_Id_Albums_Item);
 
   const dispatch = useDispatch();
-  // const isLoading = [...new Array(1)].map((_, idx) => <IsLoading key={idx} />)
 
   useEffect(() => {
     const urlLink = qs.parse(window.location.search.substring(1));
@@ -37,12 +32,6 @@ function AskCoustOfThisCake() {
     setItem_idOne(urlLink.item_id);
   }, []);
 
-  // const getUrl_Id_AlbumsItem = async () => {
-  //     const url_Id_Albums_Item = `${process.env.REACT_APP_API_URL}/albums/${album_idOne}/${item_idOne}`
-  //     // const url_Id_Albums_Item = `${process.env.REACT_APP_API_URL}/albums/65245bcf6d75c97a95da6b47/65245bd06d75c97a95da6b5f`
-  //     dispatch(fetch_Id_Albums_Item({ url_Id_Albums_Item })
-  //     )
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,34 +51,9 @@ function AskCoustOfThisCake() {
     navigate('/sentRequest')
   };
 
-  // useEffect(() => {
-  //     getUrl_Id_AlbumsItem()
-  // }, [])
 
   return (
     <div className="one_cake_div_and_mail">
-      {/* {
-                status === 'error' ? (
-                    <div className='error_try-later'>
-                        <div className='error'>
-                            <p>An error has occurred
-                                <span> <img className='nosmile' src="./img/nosmile.png" alt="" />
-                                </span>
-                            </p>
-                        </div>
-                        <div>
-                            <p className='Try later'>Please try again later.</p>
-                        </div>
-                    </div>
-                ) : (<div className='one_cake_div_and_mail'>{status === 'loading' ? isLoading :
-                    
-                        <div className='one_cake_div'>
-                <img src={data_Id_Albums_Item.src} alt="" />
-                <p>{data_Id_Albums_Item.display_number + '.' + idItemOne}</p>
-            </div>
-                    
-                } </div>)
-            } */}
 
       <div className="one_cake_div">
         <img src={idItemPhotoOne} alt="" />

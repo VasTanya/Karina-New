@@ -304,7 +304,7 @@ iframe {
 
 .one_cake_div_and_mail {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
   padding: 5vw 0;
@@ -319,20 +319,21 @@ iframe {
 
 .one_cake_div img {
   max-width: 50vw;
-  max-height: 40vw;
+  max-height: 55vw;
   border-radius: 15px;
   box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
 }
 
 .mail_form {
-  width: 30vw;
-  height: 45vw;
+  width: 34vw;
+  height: 55vw;
   border: 1px solid rgb(233, 217, 164);
   border-radius: 15px;
   box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
   display: grid;
   justify-items: center;
   padding: 2vw 2vw;
+  margin-top: -3.5vw;
 }
 
 .mail_form h6 {

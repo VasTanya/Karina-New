@@ -27,7 +27,7 @@ function MyDesign() {
     return (
         <div className='add_your_photo'>
             <form onSubmit={handleSubmit} className="design_form" action="">
-                <h6>Send a request to calculate the cost of a cake with my design:</h6>
+                <h6>Send a request to calculate the cost of a cake with your design:</h6>
                 {/* <label for="uploadbtn" class="uploadButton">Загрузить файл<div></div></label>
                 <input style="opacity: 0; z-index: -1;" multiple type="file" name="upload" id="uploadbtn" onchange='document.querySelector(".uploadButton div").innerHTML = Array.from(this.files).map(f => f.name).join("<br />")' /> */} 
 
