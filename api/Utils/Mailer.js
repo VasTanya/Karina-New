@@ -11,7 +11,7 @@ const mailer = async (data) => {
       user: process.env.MAIL_USERNAME,
       pass: process.env.MAIL_PASSWORD,
     },
-    logger: true, // Enable the default console logger
+    logger: true,
   });
 
   // Define email content
@@ -22,25 +22,14 @@ const mailer = async (data) => {
     html: emailHtml(data),
   };
 
-  console.log("====================================");
-  console.log("MAIL_MAILER: ", process.env.MAIL_MAILER);
-  console.log("MAIL_SERVICE: ", process.env.MAIL_SERVICE);
-  console.log("MAIL_HOST: ", process.env.MAIL_HOST);
-  console.log("MAIL_PORT: ", process.env.MAIL_PORT);
-  console.log("MAIL_USERNAME: ", process.env.MAIL_USERNAME);
-  console.log("MAIL_PASSWORD: ", process.env.MAIL_PASSWORD);
-  console.log("MAIL_ENCRYPTION: ", process.env.MAIL_ENCRYPTION);
-  console.log("MAIL_TO: ", process.env.MAIL_TO);
-  console.log("mailOptions: ", mailOptions);
-  console.log("====================================");
-
   try {
     await transporter.sendMail(mailOptions);
-    logger.info("Email has been sent"); // transporter status
-    return { message: "Email has been sent" };
+    return { message: `Request for ${data.cakeCode} has been sent!` };
   } catch (error) {
     logger.error(error);
-    return { message: `Error sending email: ${error.message}` };
+    return {
+      message: `Request for ${data.cakeCode} has failed! Try again later!`,
+    };
   }
 };
 
@@ -54,7 +43,7 @@ const emailHtml = (data) => {
       </head>
       <body>
         <div class="container">
-          <p><center><img src="${data.img}"></center></p>
+          <p><center><img src="https://api.karinas515.com${data.img}"></center></p>
           <h1>New Request For ${data.cakeCode}</h1>
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>
