@@ -37,7 +37,7 @@ const mailer = async (data) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    logger.info(); // transporter status
+    logger.info("Email has been sent"); // transporter status
     return { message: "Email has been sent" };
   } catch (error) {
     logger.error(error);
