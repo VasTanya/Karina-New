@@ -315,6 +315,7 @@ iframe {
   justify-items: center;
   align-items: center;
   gap: 2vw;
+  margin-left: 2vw;
 }
 
 .one_cake_div img {
@@ -343,7 +344,8 @@ iframe {
 }
 
 .mail_form img {
-  width: 10vw;
+  width: 14vw;
+  height: 17vw;
 }
 
 .mail_form input {
