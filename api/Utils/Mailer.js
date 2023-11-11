@@ -71,8 +71,8 @@ const emailHtml = {
             font-size: 1.2vw;
           }
           img {
-            width: 60%;
-            height: 30vh;
+            width: 50%;
+            height: 35vh;
           }
         </style>
       </head>
