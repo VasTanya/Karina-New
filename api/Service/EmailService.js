@@ -5,9 +5,14 @@ class EmailService {
 
   sendRequest = async (data) => {
     console.log("====================================");
-    console.log("SERVICE: ", data);
+    console.log(data);
     console.log("====================================");
-    const message = await mailer(data);
+    const message = await mailer("request", data);
+    return message;
+  };
+
+  sendRequestYourDesign = async (data) => {
+    const message = await mailer("order", data);
     return message;
   };
 }
