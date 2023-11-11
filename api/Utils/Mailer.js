@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import logger from "../Utils/Logger/Logger.js";
+import { getLogger } from "nodemailer/lib/shared";
 
 const mailer = async (data) => {
   const transporter = nodemailer.createTransport({
@@ -10,6 +12,7 @@ const mailer = async (data) => {
       user: process.env.MAIL_USERNAME,
       pass: process.env.MAIL_PASSWORD,
     },
+    logger: true, // Enable the default console logger
   });
 
   // Define email content
@@ -34,8 +37,10 @@ const mailer = async (data) => {
 
   try {
     await transporter.sendMail(mailOptions);
+    logger.info(); // transporter status
     return { message: "Email has been sent" };
   } catch (error) {
+    logger.error(error);
     return { message: `Error sending email: ${error.message}` };
   }
 };
@@ -50,7 +55,7 @@ const emailHtml = (data) => {
       </head>
       <body>
         <div class="container">
-          <p><center><img src=${data.img}></center></p>
+          <p><center><img src="${data.img}"></center></p>
           <h1>New Request For ${data.cakeCode}</h1>
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>
