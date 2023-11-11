@@ -5,17 +5,20 @@ export const fetch_Request = createAsyncThunk(
   "fetch_request",
   async (params, thunkAPI) => {
     const { url, datainp } = params;
+    console.log("before url", url);
+    console.log("before data", datainp);
+
     try {
       const { data } = await axios.post(url, datainp, {
+        withCredentials: true,
         headers: {
-          "Content-Type": "application/json", // Adjust the content type based on your needs
-          // Add any other headers if required
+          "Content-Type": "application/json",
         },
       });
 
-      console.log("url", url);
-      console.log("data", datainp);
-      console.log("dataaa", data);
+      console.log("after url", url);
+      console.log("after data", datainp);
+      console.log("after dataaa", data);
 
       if (thunkAPI.length === 0 || typeof data === "string") {
         return thunkAPI.rejectWithValue("error");
