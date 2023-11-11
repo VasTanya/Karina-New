@@ -7,7 +7,7 @@ import IsLoading from "./IsLoading";
 import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [idCakeOne, setIdCakeOne] = useState({});
   const [idItemOne, setIdItemOne] = useState();
   const [idItemPhotoOne, setIdItemPhotoOne] = useState({});
@@ -20,7 +20,6 @@ function AskCoustOfThisCake() {
   const [size, setSize] = useState();
   const [filling, setFilling] = useState();
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +30,6 @@ function AskCoustOfThisCake() {
     setAlbum_idOne(urlLink.album_id);
     setItem_idOne(urlLink.item_id);
   }, []);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,13 +46,11 @@ function AskCoustOfThisCake() {
 
     const url_request = `${process.env.REACT_APP_API_URL}/request`;
     dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
-    navigate('/sentRequest')
+    navigate("/sentRequest");
   };
-
 
   return (
     <div className="one_cake_div_and_mail">
-
       <div className="one_cake_div">
         <img src={idItemPhotoOne} alt="" />
         <p>{idCakeOne + "." + idItemOne}</p>
@@ -65,9 +61,9 @@ function AskCoustOfThisCake() {
         <img src={idItemPhotoOne} alt="" />
         <p>{idCakeOne + "." + idItemOne}</p>
 
-        <input value={name} type="text" placeholder="Youre name" />
-        <input value={phone} type="text" required placeholder="Youre phone*" />
-        <input value={email} type="text" required placeholder="Youre email*" />
+        <input value={name} type="text" placeholder="Your name" />
+        <input value={phone} type="text" required placeholder="Your phone*" />
+        <input value={email} type="text" required placeholder="Your email*" />
         <input value={size} type="text" placeholder="Size(inches)" />
         <input value={filling} type="text" placeholder="Cake filling" />
         <button>Send</button>

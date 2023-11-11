@@ -38,7 +38,32 @@ const emailHtml = (data) => {
     <html>
       <head>
         <style>
-          // Your CSS styles here
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 3vw;
+            background-color: #f4f4f4;
+          }
+          .container {
+            width: 43vw;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 1.5vw 2vw;
+            border-radius: 5px;
+            box-shadow: 0px 2px 22px 2px rgba(182, 151, 90, 0.82);
+          }
+          h1 {
+            color: #333;
+            font-size: 2.2vw;
+          }
+          p {
+            color: #555;
+            font-size: 1.2vw;
+          }
+          img {
+            width: 70px;
+            height: 70px;
+          }
         </style>
       </head>
       <body>
