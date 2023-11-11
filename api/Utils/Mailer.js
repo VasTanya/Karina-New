@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import logger from "../Utils/Logger/Logger.js";
 
-const mailer = async (data) => {
+const mailer = async (type, data) => {
   const transporter = nodemailer.createTransport({
     service: process.env.MAIL_SERVICE,
     host: process.env.MAIL_HOST,
@@ -14,27 +14,37 @@ const mailer = async (data) => {
     logger: true,
   });
 
-  // Define email content
-  const mailOptions = {
-    from: process.env.MAIL_USERNAME,
-    to: process.env.MAIL_TO,
-    subject: `New Request For ${data.cakeCode}`,
-    html: emailHtml(data),
-  };
-
   try {
-    await transporter.sendMail(mailOptions);
-    return { message: `Request for ${data.cakeCode} has been sent!` };
+    await transporter.sendMail({
+      from: process.env.MAIL_USERNAME,
+      to: process.env.MAIL_TO,
+      subject:
+        type === "request"
+          ? `New Request For ${data.cakeCode}`
+          : `New design order from ${data.email}`,
+      html:
+        type === "request" ? emailHtml.request(data) : emailHtml.order(data),
+    });
+
+    return {
+      message:
+        type === "request"
+          ? `Request for ${data.cakeCode} has been sent!`
+          : "Your order has been sent",
+    };
   } catch (error) {
     logger.error(error);
     return {
-      message: `Request for ${data.cakeCode} has failed! Try again later!`,
+      message: data?.cakeCode
+        ? `Request for ${data.cakeCode} has failed! Try again later!`
+        : `Request failed! Try again later!`,
     };
   }
 };
 
-const emailHtml = (data) => {
-  return `
+const emailHtml = {
+  request: (data) => {
+    return `
     <html>
       <head>
         <style>
@@ -61,14 +71,14 @@ const emailHtml = (data) => {
             font-size: 1.2vw;
           }
           img {
-            width: 70px;
-            height: 70px;
+            width: 60%;
+            height: 30vh;
           }
         </style>
       </head>
       <body>
         <div class="container">
-          <p><center><img src="https://api.karinas515.com${data.img}"></center></p>
+          <p><center><img src="https://www.karinas515.com${data.img}"></center></p>
           <h1>New Request For ${data.cakeCode}</h1>
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>
@@ -79,6 +89,10 @@ const emailHtml = (data) => {
       </body>
     </html>
   `;
+  },
+  order: (data) => {
+    return `aaa`;
+  },
 };
 
 export default mailer;

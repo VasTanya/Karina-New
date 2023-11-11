@@ -10,24 +10,20 @@ class EmailController {
   }
 
   sendRequest = async (req, res) => {
-    const { name, phone, email, size, filling, cakeCode, img } = req.body;
-
-    const mailData = {
-      name,
-      phone,
-      email,
-      size,
-      filling,
-      cakeCode,
-      img,
-    };
-
-    console.log("====================================");
-    console.log("CONTROLLER", mailData);
-    console.log("====================================");
-
     try {
-      const message = await this.EmailService.sendRequest(mailData);
+      const message = await this.EmailService.sendRequest(req.body);
+
+      response(res, 200, message);
+    } catch (error) {
+      logger.error(`CONTROLLER Error sending email: ${error}`);
+      response(res, 500, { error: "Error sending email" });
+    }
+  };
+
+  sendRequestYourDesign = async (req, res) => {
+    try {
+      const message = await this.EmailService.sendRequestYourDesign(req.body);
+
       response(res, 200, message);
     } catch (error) {
       logger.error(`CONTROLLER Error sending email: ${error}`);
