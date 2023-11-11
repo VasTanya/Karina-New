@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 
 const mailer = async (data) => {
-  // Create a transporter using the provided email configuration
   const transporter = nodemailer.createTransport({
     service: process.env.MAIL_SERVICE,
     host: process.env.MAIL_HOST,
@@ -20,6 +19,18 @@ const mailer = async (data) => {
     subject: `New Request For ${data.cakeCode}`,
     html: emailHtml(data),
   };
+
+  console.log("====================================");
+  console.log("MAIL_MAILER: ", process.env.MAIL_MAILER);
+  console.log("MAIL_SERVICE: ", process.env.MAIL_SERVICE);
+  console.log("MAIL_HOST: ", process.env.MAIL_HOST);
+  console.log("MAIL_PORT: ", process.env.MAIL_PORT);
+  console.log("MAIL_USERNAME: ", process.env.MAIL_USERNAME);
+  console.log("MAIL_PASSWORD: ", process.env.MAIL_PASSWORD);
+  console.log("MAIL_ENCRYPTION: ", process.env.MAIL_ENCRYPTION);
+  console.log("MAIL_TO: ", process.env.MAIL_TO);
+  console.log("mailOptions: ", mailOptions);
+  console.log("====================================");
 
   try {
     await transporter.sendMail(mailOptions);

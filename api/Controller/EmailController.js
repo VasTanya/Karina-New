@@ -22,6 +22,10 @@ class EmailController {
       img,
     };
 
+    console.log("====================================");
+    console.log("CONTROLLER", mailData);
+    console.log("====================================");
+
     try {
       const message = await this.EmailService.sendRequest(mailData);
       response(res, 200, message);

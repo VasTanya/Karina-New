@@ -16,7 +16,6 @@ class AdminService {
     if (admin) {
       if (bcrypt.compareSync(password, admin.password)) {
         const token = generateToken(admin);
-        console.log("SERV: ", token);
         return { token: token, message: "Login successful" };
       }
     }

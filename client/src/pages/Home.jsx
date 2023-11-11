@@ -12,7 +12,6 @@ function Home() {
   );
 
   const getUrlFirstFoto = async () => {
-    // console.log(`AAAAAAA: ${process.env.REACT_APP_API_URL}`);
     const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto`;
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
@@ -53,25 +52,24 @@ function Home() {
           {status === "loading"
             ? isLoading
             : alreadySortDataFirstFoto.map((el) => (
-              <Link
-                key={el.album._id}
-                style={{ textDecoration: "none" }}
-                to={`${el.album._id}`}
-              >
-                <div className="first_foto">
-                  {el.firstPhotos.map((photo) => (
-                    <img key={photo.display_number} src={photo.src} alt="" />
-                  ))}
-                  <div className="title_price">
-                    <p>
-                      {el.album.album_number}.{el.album.title}
-                    </p>
+                <Link
+                  key={el.album._id}
+                  style={{ textDecoration: "none" }}
+                  to={`${el.album._id}`}
+                >
+                  <div className="first_foto">
+                    {el.firstPhotos.map((photo) => (
+                      <img key={photo.display_number} src={photo.src} alt="" />
+                    ))}
+                    <div className="title_price">
+                      <p>
+                        {el.album.album_number}.{el.album.title}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          <Link style={{ textDecoration: "none" }}
-            to={'/myDesign'}>
+                </Link>
+              ))}
+          <Link style={{ textDecoration: "none" }} to={"/myDesign"}>
             <div className="my_design">
               <img src="./img/my5.jpg" alt="" />
               <div className="title_price">
@@ -81,8 +79,6 @@ function Home() {
           </Link>
         </div>
       )}
-
-
     </>
   );
 }

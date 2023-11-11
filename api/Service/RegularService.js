@@ -20,7 +20,6 @@ class RegularService {
   };
 
   edit = async (data) => {
-    console.log(data);
     const updatedItem = await Regular.findByIdAndUpdate(data._id, data);
 
     if (!updatedItem) {

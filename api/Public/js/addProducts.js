@@ -18,7 +18,6 @@ const fetchFunction = async (nav) => {
 };
 
 const createNewRegularSlice = async (route, newItem) => {
-  console.log(route);
   const formData = new FormData();
 
   formData.append("title", newItem.title);
@@ -43,7 +42,6 @@ const createNewRegularSlice = async (route, newItem) => {
 };
 
 const createNewAlbum = async (route, title) => {
-  console.log(title);
   try {
     const response = await fetch(`/api/${route}/add`, {
       method: "POST",
@@ -65,7 +63,6 @@ const createNewAlbum = async (route, title) => {
 
 const createNewAlbumItem = async (route, newItem) => {
   const formData = new FormData();
-  console.log(typeof newItem.tag);
   formData.append("tag", `$${newItem.tag}`);
   formData.append("src", newItem.src);
   formData.append("img", newItem.img.files[0]);
