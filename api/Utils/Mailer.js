@@ -71,8 +71,7 @@ const emailHtml = {
               font-size: 1.2vw;
             }
             img {
-              width: 50%;
-              height: 35vh;
+              width: 30vw;         
             }
           </style>
         </head>
@@ -126,8 +125,7 @@ const emailHtml = {
               font-size: 1.2vw;
             }
             img {
-              width: 50%;
-              height: 35vh;
+              width: 30vw;
             }
           </style>
         </head>
@@ -136,7 +134,7 @@ const emailHtml = {
             <p>
               <center><img src="data:image/${mimeType};base64,${base64Image}" /></center>
             </p>
-            <center><h1>New Design Request</h1></center>
+            <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Phone:</strong> ${data.phone}</p>
             <p><strong>Email:</strong> ${data.email}</p>
