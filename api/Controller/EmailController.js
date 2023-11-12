@@ -7,6 +7,9 @@ class EmailController {
   constructor() {
     this.EmailService = new EmailService();
     this.sendRequest = expressAsyncHandler(this.sendRequest.bind(this));
+    this.sendRequestMyDesign = expressAsyncHandler(
+      this.sendRequestMyDesign.bind(this)
+    );
   }
 
   sendRequest = async (req, res) => {
@@ -15,18 +18,18 @@ class EmailController {
 
       response(res, 200, message);
     } catch (error) {
-      logger.error(`CONTROLLER Error sending email: ${error}`);
+      logger.error(`Error sending request: ${error}`);
       response(res, 500, { error: "Error sending email" });
     }
   };
 
-  sendRequestYourDesign = async (req, res) => {
+  sendRequestMyDesign = async (req, res) => {
     try {
-      const message = await this.EmailService.sendRequestYourDesign(req.body);
+      const message = await this.EmailService.sendRequestMyDesign(req.body);
 
       response(res, 200, message);
     } catch (error) {
-      logger.error(`CONTROLLER Error sending email: ${error}`);
+      logger.error(`Error sending order: ${error}`);
       response(res, 500, { error: "Error sending email" });
     }
   };
