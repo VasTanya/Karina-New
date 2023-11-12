@@ -7,6 +7,8 @@ import IsLoading from "./IsLoading";
 import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
+  // const {data_request, status1} = useSelector
+  //   (store) => store.getUrl_Request
   const navigate = useNavigate();
   const [idCakeOne, setIdCakeOne] = useState({});
   const [idItemOne, setIdItemOne] = useState();
