@@ -33,7 +33,6 @@ const getUrlAlbums = createSlice({
             .addCase(fetchAlbums.fulfilled, (state, action) => {
                 state.status = 'successful'
                  state.dataAlbums = action.payload
-                //  state.aloboms = action.payload.album
              
             })
             .addCase(fetchAlbums.rejected, (state) => {
