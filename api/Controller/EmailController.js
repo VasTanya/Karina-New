@@ -25,6 +25,9 @@ class EmailController {
 
   sendRequestMyDesign = async (req, res) => {
     try {
+      console.log("====================================");
+      console.log(req.body);
+      console.log("====================================");
       const message = await this.EmailService.sendRequestMyDesign(req.body);
 
       response(res, 200, message);

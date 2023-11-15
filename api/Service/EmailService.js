@@ -10,7 +10,7 @@ class EmailService {
 
   sendRequestMyDesign = async (data) => {
     console.log("====================================");
-    console.log(data);
+    console.log("SERVICE DATA: ", data);
     console.log("====================================");
     const message = await mailer("order", data);
     return message;

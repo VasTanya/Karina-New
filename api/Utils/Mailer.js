@@ -44,6 +44,9 @@ const mailer = async (type, data) => {
 
 const emailHtml = {
   request: (data) => {
+    console.log("====================================");
+    console.log("MAILER DATA: ", data);
+    console.log("====================================");
     return `
       <html>
         <head>
