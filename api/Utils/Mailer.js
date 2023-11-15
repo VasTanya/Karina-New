@@ -93,6 +93,9 @@ const emailHtml = {
     `;
   },
   order: (data) => {
+    console.log("====================================");
+    console.log("MAILER DATA: ", data);
+    console.log("====================================");
     const base64Image = Buffer.from(data.img, "binary").toString("base64");
     const mimeType = data.img.startsWith("data:image/")
       ? data.img.split(";")[0].slice(5)
