@@ -26,7 +26,9 @@ class EmailController {
   sendRequestMyDesign = async (req, res) => {
     try {
       console.log("====================================");
-      console.log(req.body);
+      console.log("CONTROLLER body: ", req.body);
+      console.log("CONTROLLER file: ", req.file);
+      console.log("CONTROLLER img: ", req.body.img);
       console.log("====================================");
       const message = await this.EmailService.sendRequestMyDesign(req.body);
 

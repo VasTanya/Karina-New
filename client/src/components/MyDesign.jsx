@@ -23,7 +23,7 @@
 //         // const inp_comment = comment.current.value
 //         // setFile(designImage)
 //         // console.log('designImage',designImage);
-        
+
 //         e.preventDefault();
 //         const formData = new FormData(e.currentTarget)
 //         const data = Object.fromEntries(formData)
@@ -36,7 +36,7 @@
 //         // formData.append('filling', inp_filling)
 //         // formData.append('comment', inp_comment)
 //         // for (var pair of formData.entries()) {
-//         //     console.log(pair[0]+ ', ' + pair[1]); 
+//         //     console.log(pair[0]+ ', ' + pair[1]);
 //         // }
 
 //         const url_request_myDesign = `${process.env.REACT_APP_API_URL}/request/mydesign`;
@@ -49,7 +49,7 @@
 //         <div className='add_your_photo'>
 //             <form onSubmit={handleSubmit} encType="multipart/form-data" className="design_form" action="">
 //                 <h6>Send a request to calculate the cost of a cake with your design:</h6>
-               
+
 //                 <input name="img" type="file"  /*ref={image}*/ required accept='image/*'/>
 //                 <input name='name' type="text" /*ref={name}*/ placeholder="Youre name" />
 //                 <input name='phone' type="text" /*ref={phone}*/ required placeholder="Youre phone*" />
@@ -65,9 +65,9 @@
 
 // export default MyDesign
 
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { fetch_myDesign_Order } from '../redux/slice/getUrl_MyDesign';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { fetch_myDesign_Order } from "../redux/slice/getUrl_MyDesign";
 
 function MyDesign() {
   const dispatch = useDispatch();
@@ -77,22 +77,42 @@ function MyDesign() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
 
+    if (!data || !data.img || !data.img.size) {
+      console.error("Invalid data: 'img' key is missing or empty.");
+      // Handle the error, show a message to the user, or return early.
+      return;
+    }
+
     const url_request_myDesign = `${process.env.REACT_APP_API_URL}/request/mydesign`;
-    dispatch(fetch_myDesign_Order({ url: url_request_myDesign, datainp: data }));
+    dispatch(
+      fetch_myDesign_Order({ url: url_request_myDesign, datainp: data })
+    );
   };
 
   return (
-    <div className='add_your_photo'>
-      <form onSubmit={handleSubmit} encType="multipart/form-data" className="design_form" action="">
-        <h6>Send a request to calculate the cost of a cake with your design:</h6>
+    <div className="add_your_photo">
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        className="design_form"
+        action=""
+      >
+        <h6>
+          Send a request to calculate the cost of a cake with your design:
+        </h6>
 
-        <input name="img" type="file" required accept='image/*'/>
-        <input name='name' type="text" placeholder="Your name" />
-        <input name='phone' type="text" required placeholder="Your phone*" />
-        <input name='email' type="text" required placeholder="Your email*" />
-        <input name='size' type="text" placeholder="Size(inches)" />
-        <input name='filling' type="text" placeholder="Cake filling" />
-        <textarea name='comment' placeholder='Add your comment' cols="25" rows="1"></textarea>
+        <input name="img" type="file" required accept="image/*" />
+        <input name="name" type="text" placeholder="Your name" />
+        <input name="phone" type="text" required placeholder="Your phone*" />
+        <input name="email" type="text" required placeholder="Your email*" />
+        <input name="size" type="text" placeholder="Size(inches)" />
+        <input name="filling" type="text" placeholder="Cake filling" />
+        <textarea
+          name="comment"
+          placeholder="Add your comment"
+          cols="25"
+          rows="1"
+        ></textarea>
         <button type="submit">Send</button>
       </form>
     </div>
