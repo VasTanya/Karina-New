@@ -1,47 +1,68 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// export const fetch_myDesign_Order = createAsyncThunk(
+//   "fetch_myDesign_Order",
+//   async (params, thunkAPI) => {
+//     const { url, datainp } = params;
+
+//     console.log('getUrl data',datainp);
+//     try {
+//       const { data } = await axios.post(url, datainp, {
+//         withCredentials: true,
+//         headers: {
+//             "Content-Type": "multipart/form-data",
+//         },
+//         body: datainp,
+//       });
+
+//       if (thunkAPI.length === 0 || typeof data === "string") {
+//         return thunkAPI.rejectWithValue("error");
+//       }
+//        return thunkAPI.fulfillWithValue(data);
+      
+//     } catch (error) {
+//       console.error("Error in fetch_myDesign_Order:", error);
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+// }
+// );
+
 export const fetch_myDesign_Order = createAsyncThunk(
-  "fetch_myDesign_Order",
-  async (params, thunkAPI) => {
-    const { url, datainp } = params;
-    // console.log("before url", url);
-    // console.log("before data", datainp);
-
-    try {
-      const { data } = await axios.post(url, datainp, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-    //   console.log("after url", url);
-    //   console.log("after data", datainp);
-    //   console.log("after dataaa", data);
-
-      if (thunkAPI.length === 0 || typeof data === "string") {
-        return thunkAPI.rejectWithValue("error");
+    "fetchMyDesignOrder",
+    async (params, thunkAPI) => {
+      const { url, datainp } = params;
+  
+      console.log('getUrl data:', datainp);
+      console.log('datainp.img:', datainp.img.name);
+      try {
+        const { data } = await axios.post(url, datainp, {
+          withCredentials: true,
+          // body: datainp,
+        });
+  
+        // if (thunkAPI.length === 0 || typeof data === "string") {
+        //   return thunkAPI.rejectWithValue("error");
+        // }
+        return thunkAPI.fulfillWithValue(data);
+  
+      } catch (error) {
+        console.error("Error in fetchMyDesignOrder:", error);
+        return thunkAPI.rejectWithValue(error.message);
       }
-      return thunkAPI.fulfillWithValue(data);
-    } catch (error) {
-      // Handle error here, e.g., logging or rejecting with a specific value
-      console.error("Error in fetch_myDesign_Order:", error);
-      return thunkAPI.rejectWithValue(error.message);
     }
-  }
-);
+  );
 
 const initialState = {
   data_myDesign_order: [
     {
-      imgage: "",
+      img: "",
       name: "",
       phone: "",
       email: "",
       size: "",
       filling: "",
-      
+      comment: "",
     },
   ],
   status: "loading",
@@ -61,7 +82,6 @@ const getUrl_myDesign = createSlice({
       .addCase(fetch_myDesign_Order.fulfilled, (state, action) => {
         state.status = "successful";
         state.data_myDesign_order = action.payload;
-        // console.log(action.payload);
       })
       .addCase(fetch_myDesign_Order.rejected, (state) => {
         state.status = "error";

@@ -5,9 +5,7 @@ export const fetch_Request = createAsyncThunk(
   "fetch_request",
   async (params, thunkAPI) => {
     const { url, datainp } = params;
-    console.log("before url", url);
-    console.log("before data", datainp);
-
+  
     try {
       const { data } = await axios.post(url, datainp, {
         withCredentials: true,
@@ -15,10 +13,6 @@ export const fetch_Request = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-
-      console.log("after url", url);
-      console.log("after data", datainp);
-      console.log("after dataaa", data);
 
       if (thunkAPI.length === 0 || typeof data === "string") {
         return thunkAPI.rejectWithValue("error");

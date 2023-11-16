@@ -5,7 +5,8 @@ function SentRequest() {
   return (
     <div>
       <div className='sentRequest'>
-        <h4>Your letter has been sent.</h4>
+        <img className='sentReqImg' src="../img/handUp.png" alt="" />
+        <p>Your letter has been sent.</p>
       </div>
 
     </div>
