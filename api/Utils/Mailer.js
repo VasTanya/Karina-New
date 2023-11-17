@@ -130,7 +130,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="${data.img}" /></center>
+              <center><img src="cid:${data.img}" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
