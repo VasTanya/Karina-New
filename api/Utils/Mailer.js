@@ -96,14 +96,6 @@ const emailHtml = {
     `;
   },
   order: (data) => {
-    console.log("====================================");
-    console.log("MAILER DATA: ", data);
-    console.log("====================================");
-    const base64Image = Buffer.from(data.img, "binary").toString("base64");
-    const mimeType = data.img.startsWith("data:image/")
-      ? data.img.split(";")[0].slice(5)
-      : "image/png";
-
     return `
       <html>
         <head>
@@ -138,7 +130,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="data:image/${mimeType};base64,${base64Image}" /></center>
+              <center><img src="${data.img}" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
