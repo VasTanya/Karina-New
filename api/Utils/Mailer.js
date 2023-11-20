@@ -105,7 +105,7 @@ const emailHtml = {
         filename: "client-design.png", // Set the filename for the CID attachment
         content: Buffer.from(data.img, "base64"), // Attach the image content
         encoding: "base64",
-        cid: `client-design@${content}`, // Set a unique Content-ID value
+        cid: `client-design@$cid`, // Set a unique Content-ID value
       },
     ];
     console.log("====================================");
