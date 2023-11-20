@@ -99,10 +99,15 @@ const emailHtml = {
     console.log("====================================");
     console.log("MAILER DATA: ", data);
     console.log("====================================");
-    // const base64Image = Buffer.from(data.img, "base64").toString("base64");
 
-    // const mimeTypeMatch = data.img.match(/^data:image\/([a-zA-Z+]+);base64,/);
-    // const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : "png";
+    const attachments = [
+      {
+        filename: "client-design.png", // Set the filename for the CID attachment
+        content: Buffer.from(data.img, "base64"), // Attach the image content
+        encoding: "base64",
+        cid: "client-design@cid", // Set a unique Content-ID value
+      },
+    ];
 
     return `
       <html>
@@ -138,7 +143,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="${data.img}" alt="Client Design" /></center>
+              <center><img src="cid:client-design@cid" alt="Client Design" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
