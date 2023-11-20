@@ -101,8 +101,8 @@ const emailHtml = {
     console.log("====================================");
     const base64Image = Buffer.from(data.img, "base64").toString("base64");
 
-    const mimeTypeMatch = data.img.match(/^data:image\/([a-zA-Z+]+);base64,/);
-    const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : "png";
+    // const mimeTypeMatch = data.img.match(/^data:image\/([a-zA-Z+]+);base64,/);
+    // const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : "png";
 
     return `
       <html>
@@ -138,7 +138,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="data:image/${mimeType};base64,${base64Image}" alt="Client Design" /></center>
+              <center><img src="${base64Image}" alt="Client Design" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
