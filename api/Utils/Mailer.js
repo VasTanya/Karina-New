@@ -24,6 +24,14 @@ const mailer = async (type, data) => {
           : `New design request from ${data.email}`,
       html:
         type === "request" ? emailHtml.request(data) : emailHtml.order(data),
+      attachments: [
+        {
+          filename: "image.jpg",
+          encoding: "base64",
+          content: "base64-encoded-image-data-here",
+          cid: "uniqueImageId", // Use the same Content-ID as in the HTML template
+        },
+      ],
     });
 
     return {
@@ -48,54 +56,62 @@ const emailHtml = {
     console.log("MAILER DATA: ", data);
     console.log("====================================");
     return `
-      <html>
-        <head>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              margin: 0;
-              padding: 3vw;
-              background-color: #f4f4f4;
-            }
-            .container {
-              width: 43vw;
-              margin: 0 auto;
-              background-color: #fff;
-              padding: 1.5vw 2vw;
-              border-radius: 5px;
-              box-shadow: 0px 2px 22px 2px rgba(182, 151, 90, 0.82);
-            }
-            h1 {
-              color: #333;
-              font-size: 2.2vw;
-            }
-            p {
-              color: #555;
-              font-size: 1.2vw;
-            }
-            img {
-              width: 30vw;         
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <p><center><img src="https://www.karinas515.com${data.img.replace(
-              / /g,
-              "%20"
-            )}"></center></p>
-            <h1>New Request For ${data.cakeCode}</h1>
-            <p><strong>Name:</strong> ${data.name}</p>
-            <p><strong>Phone:</strong> ${data.phone}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>Size:</strong> ${data.size}</p>
-            <p><strong>Filling:</strong> ${data.filling}</p>
-          </div>
-        </body>
+    <html>
+    <head>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 3vw;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 43vw;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 1.5vw 2vw;
+      border-radius: 5px;
+      box-shadow: 0px 2px 22px 2px rgba(182, 151, 90, 0.82);
+    }
+    h1 {
+      color: #333;
+      font-size: 2.2vw;
+    }
+    p {
+      color: #555;
+      font-size: 1.2vw;
+    }
+    img {
+      width: 30vw;         
+    }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+    <p><center><img src="https://www.karinas515.com${data.img.replace(
+      / /g,
+      "%20"
+    )}"></center></p>
+      <h1>New Request For ${data.cakeCode}</h1>
+      <p><strong>Name:</strong> ${data.name}</p>
+      <p><strong>Phone:</strong> ${data.phone}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Size:</strong> ${data.size}</p>
+      <p><strong>Filling:</strong> ${data.filling}</p>
+      </div>
+      </body>
       </html>
-    `;
+      `;
   },
   order: (data) => {
+    console.log("====================================");
+    console.log("MAILER DATA: ", data);
+    console.log("====================================");
+    const base64Image = Buffer.from(data.img, "base64").toString("base64");
+
+    const mimeTypeMatch = data.img.match(/^data:image\/([a-zA-Z+]+);base64,/);
+    const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : "png";
+
     return `
       <html>
         <head>
@@ -130,7 +146,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="${data.img}" /></center>
+              <center><img src="data:image/${mimeType};base64,${base64Image}" alt="Client Design" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
