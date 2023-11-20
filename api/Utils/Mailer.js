@@ -24,14 +24,6 @@ const mailer = async (type, data) => {
           : `New design request from ${data.email}`,
       html:
         type === "request" ? emailHtml.request(data) : emailHtml.order(data),
-      attachments: [
-        {
-          filename: "image.jpg",
-          encoding: "base64",
-          content: "base64-encoded-image-data-here",
-          cid: "uniqueImageId", // Use the same Content-ID as in the HTML template
-        },
-      ],
     });
 
     return {
