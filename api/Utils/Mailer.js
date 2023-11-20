@@ -145,7 +145,7 @@ const emailHtml = {
         <body>
           <div class="container">
             <p>
-              <center><img src="${attachments}" alt="Client Design" /></center>
+              <center><img src="cid:client-design@$cid" alt="Client Design" /></center>
             </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
