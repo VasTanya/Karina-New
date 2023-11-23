@@ -15,6 +15,23 @@ const mailer = async (type, data) => {
   });
 
   try {
+    let emailContent;
+    let attachments;
+
+    if (type === "request") {
+      emailContent = emailHtml.request(data);
+    } else {
+      emailContent = emailHtml.order(data);
+
+      attachments = [
+        {
+          filename: "client-design.png",
+          content: Buffer.from(data.img, "base64"),
+          encoding: "base64",
+        },
+      ];
+    }
+
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
       to: process.env.MAIL_TO,
@@ -22,8 +39,8 @@ const mailer = async (type, data) => {
         type === "request"
           ? `New Request For ${data.cakeCode}`
           : `New design request from ${data.email}`,
-      html:
-        type === "request" ? emailHtml.request(data) : emailHtml.order(data),
+      html: emailContent,
+      attachments: attachments,
     });
 
     return {
@@ -41,6 +58,8 @@ const mailer = async (type, data) => {
     };
   }
 };
+
+// ... (rest of the code remains unchanged)
 
 const emailHtml = {
   request: (data) => {
@@ -100,17 +119,6 @@ const emailHtml = {
     console.log("MAILER DATA: ", data);
     console.log("====================================");
 
-    const attachments = [
-      {
-        filename: "client-design.png", // Set the filename for the CID attachment
-        content: Buffer.from(data.img, "base64"), // Attach the image content
-        encoding: "base64",
-        cid: `client-design@$cid`, // Set a unique Content-ID value
-      },
-    ];
-    console.log("====================================");
-    console.log("ATTACHMENTS: ", attachments);
-    console.log("====================================");
     return `
       <html>
         <head>
@@ -144,9 +152,6 @@ const emailHtml = {
         </head>
         <body>
           <div class="container">
-            <p>
-              <center><img src="cid:client-design@$cid" alt="Client Design" /></center>
-            </p>
             <center><h1>Client Design Request</h1></center>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Phone:</strong> ${data.phone}</p>
