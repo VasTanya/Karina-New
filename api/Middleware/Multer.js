@@ -2,6 +2,10 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log("====================================");
+    console.log("MULTER REQ: ", req);
+    console.log("MULTER FILE: ", file);
+    console.log("====================================");
     cb(null, `Public/img/${req.body.src.split("/")[2]}`);
   },
   filename: (req, file, cb) => {
