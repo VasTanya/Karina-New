@@ -26,8 +26,7 @@ const mailer = async (type, data) => {
       attachments = [
         {
           filename: "client-design.png",
-          content: Buffer.from(data.img, "base64"),
-          encoding: "base64",
+          content: data.img, // Assuming data.img is the correct image
         },
       ];
     }
@@ -58,8 +57,6 @@ const mailer = async (type, data) => {
     };
   }
 };
-
-// ... (rest of the code remains unchanged)
 
 const emailHtml = {
   request: (data) => {
