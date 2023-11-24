@@ -7,6 +7,6 @@ const { sendRequest, sendRequestMyDesign } = EmailController;
 
 emailRouter.post("/", sendRequest);
 
-emailRouter.post("/mydesign", sendRequestMyDesign);
+emailRouter.post("/mydesign", upload.none(), sendRequestMyDesign);
 
 export default emailRouter;
