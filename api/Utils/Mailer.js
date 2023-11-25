@@ -24,6 +24,8 @@ const mailer = async (type, data) => {
       },
     ];
 
+    console.log("Image content length:", attachments[0].content.length);
+
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
       to: process.env.MAIL_TO,
