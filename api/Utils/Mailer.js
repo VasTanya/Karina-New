@@ -15,22 +15,14 @@ const mailer = async (type, data) => {
   });
 
   try {
-    let emailContent;
-    let attachments;
-
-    if (type === "request") {
-      emailContent = emailHtml.request(data);
-    } else {
-      emailContent = emailHtml.order(data);
-
-      attachments = [
-        {
-          filename: "client-design.png",
-          content: Buffer.from(data.img, "base64"),
-          encoding: "base64",
-        },
-      ];
-    }
+    const attachments = [
+      {
+        filename: "client-design.png",
+        content: Buffer.from(data.img, "base64"),
+        encoding: "base64",
+      },
+    ];
+    // }
 
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
@@ -41,7 +33,7 @@ const mailer = async (type, data) => {
           : `New design request from ${data.email}`,
       html:
         type === "request" ? emailHtml.request(data) : emailHtml.order(data),
-      attachments: attachments,
+      attachments: type === "order" ? attachments : "",
     });
 
     return {
