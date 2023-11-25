@@ -17,12 +17,12 @@ const mailer = async (type, data) => {
   try {
     const attachments = [
       {
-        filename: "client-design.png",
+        filename: `client-design.${data.img.split("/")[1].split(";")[0]}`,
         content: Buffer.from(data.img, "base64"),
         encoding: "base64",
+        cid: "client-design", // matching the cid in the HTML
       },
     ];
-    // }
 
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
@@ -150,6 +150,7 @@ const emailHtml = {
             <p><strong>Size:</strong> ${data.size}</p>
             <p><strong>Filling:</strong> ${data.filling}</p>
             <p><strong>Comment:</strong> ${data.comment}</p>
+            <p><center><img src="cid:client-design"></center></p>
           </div>
         </body>
       </html>
