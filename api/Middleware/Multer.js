@@ -2,10 +2,6 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("====================================");
-    console.log("MULTER REQ: ", req);
-    console.log("MULTER FILE: ", file);
-    console.log("====================================");
     cb(null, `Public/img/${req.body.src.split("/")[2]}`);
   },
   filename: (req, file, cb) => {
@@ -20,7 +16,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-  limits: { fileSize: Infinity }, // Set the file size limit to Infinity
+  limits: { fileSize: Infinity },
 });
 
 export default upload;

@@ -26,7 +26,8 @@ const mailer = async (type, data) => {
       attachments = [
         {
           filename: "client-design.png",
-          content: data.img, // Assuming data.img is the correct image
+          content: Buffer.from(data.img, "base64"),
+          encoding: "base64",
         },
       ];
     }

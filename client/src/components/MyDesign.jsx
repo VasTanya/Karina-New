@@ -66,11 +66,14 @@
 // export default MyDesign
 
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetch_myDesign_Order } from "../redux/slice/getUrl_MyDesign";
+import { useNavigate } from "react-router-dom";
 
 function MyDesign() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { status } = useSelector((store) => store.getUrl_MyDesign);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +82,6 @@ function MyDesign() {
 
     if (!data || !data.img || !data.img.size) {
       console.error("Invalid data: 'img' key is missing or empty.");
-      // Handle the error, show a message to the user, or return early.
       return;
     }
 
@@ -87,6 +89,8 @@ function MyDesign() {
     dispatch(
       fetch_myDesign_Order({ url: url_request_myDesign, datainp: data })
     );
+    // status === "error"? navigate("/error"):
+    // navigate("/sentRequest")
   };
 
   return (
