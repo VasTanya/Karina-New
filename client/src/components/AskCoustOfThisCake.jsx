@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
   const {data_request, status1} = useSelector((store)=> store.getUrl_Request) 
+  
   const navigate = useNavigate();
   const [idCakeOne, setIdCakeOne] = useState({});
   const [idItemOne, setIdItemOne] = useState();
@@ -46,20 +47,10 @@ function AskCoustOfThisCake() {
 
     const url_request = `${process.env.REACT_APP_API_URL}/request`;
     dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
+    // console.log('status1', status1);
+    status1 === "error"? navigate("/error"):
+    navigate("/sentRequest")
   
-    status1 === "error" ? (
-      <div className="error_try-later">
-        <div className="error">
-          <p>
-            An error has occurred
-            <span>
-              {/* {" "} */}
-              <img className="nosmile" src="./img/nosmile.png" alt="" />
-            </span>
-          </p>
-        </div>
-      </div>
-    ) :(navigate("/sentRequest"))  
   };
 
   return (

@@ -15,6 +15,7 @@ import AskCoustOfThisCake from "./components/AskCoustOfThisCake";
 import OneSearchCake from "./components/OneSearchCake";
 import SentRequest from "./components/SentRequest";
 import MyDesign from "./components/MyDesign";
+import Error from "./components/Error";
 import "./App.css";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/search" element={<OneSearchCake />} />
           <Route path="/sentRequest" element={<SentRequest/>} />
           <Route path="/myDesign" element={<MyDesign/>} />
+          <Route path="/error" element={<Error/>} />
         </Route>
       </Routes>
       <ButtonScrollUp />

@@ -402,6 +402,9 @@ iframe {
   align-items: center;
   gap: 6vw;
 }
+.error{
+  margin: 10vw 0;
+}
 .please_wait{
   margin: 10vw 0;
 }
@@ -517,6 +520,7 @@ textarea:focus{
 input[type="file"]{
  width: 25vw;
 }
+
 
 
 

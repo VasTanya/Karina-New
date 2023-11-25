@@ -69,14 +69,14 @@ function Home() {
                   </div>
                 </Link>
               ))}
-          <Link style={{ textDecoration: "none" }} to={"/myDesign"}>
+          {/* <Link style={{ textDecoration: "none" }} to={"/myDesign"}>
             <div className="my_design">
               <img src="./img/my5.jpg" alt="" />
               <div className="title_price">
                 <p>Your design</p>
               </div>
             </div>
-          </Link>
+          </Link> */}
         </div>
       )}
     </>

@@ -55,7 +55,6 @@ const getUrl_Request = createSlice({
       .addCase(fetch_Request.fulfilled, (state, action) => {
         state.status1 = "successful";
         state.data_request = action.payload;
-        console.log(action.payload);
       })
       .addCase(fetch_Request.rejected, (state) => {
         state.status1 = "error";
