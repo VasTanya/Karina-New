@@ -20,7 +20,7 @@ const mailer = async (type, data) => {
         filename: `client-design.${data.img.split("/")[1].split(";")[0]}`,
         content: Buffer.from(data.img, "base64"),
         encoding: "base64",
-        cid: "client-design", // matching the cid in the HTML
+        cid: "image",
       },
     ];
 
@@ -144,13 +144,13 @@ const emailHtml = {
         <body>
           <div class="container">
             <center><h1>Client Design Request</h1></center>
+            <p><center><img src="cid:image"></center></p>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Phone:</strong> ${data.phone}</p>
             <p><strong>Email:</strong> ${data.email}</p>
             <p><strong>Size:</strong> ${data.size}</p>
             <p><strong>Filling:</strong> ${data.filling}</p>
             <p><strong>Comment:</strong> ${data.comment}</p>
-            <p><center><img src="cid:client-design"></center></p>
           </div>
         </body>
       </html>
