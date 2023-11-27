@@ -27,7 +27,7 @@ const mailer = async (type, data, template) => {
         type === "request"
           ? `New Request For ${data.cakeCode}`
           : `New design request from ${data.email}`,
-      html: type === "request" ? "" : template,
+      html: template,
     });
 
     return {
