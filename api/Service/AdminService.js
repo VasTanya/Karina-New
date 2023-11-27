@@ -79,9 +79,12 @@ class AdminService {
   };
 
   logout = async (req, res) => {
-    await res.clearCookie("access_token");
-
-    if (req.cookies.access_token) return { message: "Logout successful" };
+    if (req.cookies.access_token) {
+      await res.clearCookie("access_token");
+      return { message: "Logout successful" };
+    } else {
+      return { message: "Already logged out" };
+    }
   };
 }
 

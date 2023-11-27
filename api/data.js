@@ -1,7 +1,7 @@
 const data = {
   admin: {
-    login: "test",
-    email: "test@email.com",
+    login: "admin",
+    email: "k2406718@gmail.com",
     password: "12345678",
   },
 

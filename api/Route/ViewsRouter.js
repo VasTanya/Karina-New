@@ -3,7 +3,7 @@ import isAuth from "../Middleware/IsAuth.js";
 
 const viewsRouter = Router();
 
-viewsRouter.get("/", (req, res) => res.render("login"));
+viewsRouter.get("/", isAuth, (req, res) => res.render("login"));
 
 viewsRouter.get("/products", isAuth, (req, res) => res.render("products"));
 

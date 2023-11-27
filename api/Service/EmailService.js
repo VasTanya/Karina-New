@@ -4,9 +4,6 @@ class EmailService {
   constructor() {}
 
   sendRequest = async (data) => {
-    console.log("====================================");
-    console.log("SERVICE DATA: ", data);
-    console.log("====================================");
     const template = `
       <html>
         <head>
@@ -59,10 +56,6 @@ class EmailService {
   };
 
   sendRequestMyDesign = async (data) => {
-    console.log("====================================");
-    console.log("SERVICE DATA: ", data);
-    console.log("====================================");
-
     const template = `
       <html>
         <head>

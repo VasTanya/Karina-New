@@ -25,10 +25,6 @@ class EmailController {
 
   sendRequestMyDesign = async (req, res) => {
     try {
-      console.log("====================================");
-      console.log("CONT: ", req.body);
-      console.log("CONT FILE: ", req.files);
-      console.log("====================================");
       const message = await this.EmailService.sendRequestMyDesign({
         file: req.files[0].originalname,
         ...req.body,

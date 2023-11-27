@@ -7,11 +7,11 @@ const Cron = () => {
   const deleteFiles = () => {
     const directoryPath = "Public/img/mydesign";
 
-    logger.log(`Deleting files in directory: ${directoryPath}`);
+    logger.log(`CRON : Deleting files in directory: ${directoryPath}`);
 
     fs.readdir(directoryPath, (err, files) => {
       if (err) {
-        logger.error(`Error reading directory: ${err}`);
+        logger.error(`CRON : Error reading directory: ${err}`);
         return;
       }
 
@@ -26,7 +26,9 @@ const Cron = () => {
 
         fs.stat(filePath, (error, stats) => {
           if (error) {
-            logger.error(`Error getting file stats ${filePath}: ${error}`);
+            logger.error(
+              `CRON : Error getting file stats ${filePath}: ${error}`
+            );
             return;
           }
 
@@ -35,9 +37,11 @@ const Cron = () => {
           if (fileAgeInMillis >= oneWeekInMillis) {
             fs.unlink(filePath, (deleteError) => {
               if (deleteError) {
-                logger.error(`Error deleting file ${filePath}: ${deleteError}`);
+                logger.error(
+                  `CRON : Error deleting file ${filePath}: ${deleteError}`
+                );
               } else {
-                logger.log(`Deleted file: ${filePath}`);
+                logger.log(`CRON : Deleted file: ${filePath}`);
               }
             });
           }

@@ -57,20 +57,17 @@ export const fetch_myDesign_Order = createAsyncThunk(
   async (params, thunkAPI) => {
     const { url, datainp } = params;
 
-    // Validate if 'img' key is present and not empty in datainp
-    if (!datainp || !datainp.img || !datainp.img.size) {
-      return thunkAPI.rejectWithValue(
-        "Invalid data: 'img' key is missing or empty."
-      );
-    }
-
+    console.log("====================================");
     console.log("getUrl data:", datainp);
+    console.log("====================================");
 
     try {
       const { data } = await axios.post(url, datainp, {
         withCredentials: true,
       });
-
+      console.log("====================================");
+      console.log(":DATA: ", data);
+      console.log("====================================");
       // if (thunkAPI.length === 0 || typeof data === "string") {
       //   return thunkAPI.rejectWithValue("error");
       // }
