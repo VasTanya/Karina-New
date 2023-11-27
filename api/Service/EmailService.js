@@ -94,7 +94,7 @@ class EmailService {
         <body>
         <div class="container">
           <center><h1>Client Design Request</h1></center>
-          <p><center><img src="https://www.karinas515.com/Public/img/${data.file.orginialname.replace(
+          <p><center><img src="https://www.karinas515.com/Public/img/mydesign/${data.file.orginialname.replace(
             / /g,
             "%20"
           )}"></center></p>
