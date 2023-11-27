@@ -5,7 +5,7 @@ import logger from "./Logger/Logger.js";
 
 const Cron = () => {
   const deleteFiles = () => {
-    const directoryPath = "/img/mydesign";
+    const directoryPath = "../Public/img/mydesign";
     const currentDir = new URL(".", import.meta.url).pathname;
 
     console.log("Current directory:", currentDir);
