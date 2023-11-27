@@ -7,6 +7,11 @@ const { sendRequest, sendRequestMyDesign } = EmailController;
 
 emailRouter.post("/", sendRequest);
 
-emailRouter.post("/mydesign", upload.array("img"), sendRequestMyDesign);
+emailRouter.post("/mydesign", (req, res) => {
+  console.log("====================================");
+  console.log("ROUTE: ", req.file);
+  console.log("====================================");
+  upload.array("img"), sendRequestMyDesign;
+});
 
 export default emailRouter;
