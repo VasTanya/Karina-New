@@ -6,6 +6,7 @@ import logger from "./Logger/Logger.js";
 const Cron = () => {
   const deleteFiles = () => {
     const directoryPath = "/img/mydesign";
+    logger.log("Current directory:", __dirname);
 
     logger.log(`Deleting files in directory: ${directoryPath}`);
 
