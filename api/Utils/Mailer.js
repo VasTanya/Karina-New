@@ -2,6 +2,11 @@ import nodemailer from "nodemailer";
 import logger from "../Utils/Logger/Logger.js";
 
 const mailer = async (type, data, template) => {
+  console.log("====================================");
+  console.log("TYPE: ", type);
+  console.log("DATA: ", data);
+  console.log("TEMPLATE: ", template);
+  console.log("====================================");
   const transporter = nodemailer.createTransport({
     service: process.env.MAIL_SERVICE,
     host: process.env.MAIL_HOST,
