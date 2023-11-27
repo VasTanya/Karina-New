@@ -101,7 +101,6 @@ class EmailService {
             / /g,
             "%20"
           )}"></center></p>
-          <p><center><img src="cid:image"></center></p>
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>
           <p><strong>Email:</strong> ${data.email}</p>
@@ -110,8 +109,8 @@ class EmailService {
           <p><strong>Comment:</strong> ${data.comment}</p>
         </div>
       </body>
-      </html>
-    `;
+    </html>
+  `;
 
     const message = await mailer("order", data, template);
     return message;
