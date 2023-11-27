@@ -9,7 +9,7 @@ emailRouter.post("/", sendRequest);
 
 emailRouter.post("/mydesign", (req, res) => {
   console.log("====================================");
-  console.log("ROUTE: ", req);
+  console.log("ROUTE: ", req.files);
   console.log("====================================");
   upload.array("img"), sendRequestMyDesign;
 });
