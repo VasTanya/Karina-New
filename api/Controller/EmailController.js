@@ -28,7 +28,10 @@ class EmailController {
       console.log("====================================");
       console.log("CONT: ", req.body);
       console.log("====================================");
-      const message = await this.EmailService.sendRequestMyDesign(req.body);
+      const message = await this.EmailService.sendRequestMyDesign({
+        file: req.file,
+        ...req.body,
+      });
 
       response(res, 200, message);
     } catch (error) {
