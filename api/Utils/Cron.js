@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import cron from "cron";
-import logger from "./Logger/Logger";
+import logger from "./Logger/Logger.js";
 
 const Cron = () => {
   const deleteFiles = () => {
