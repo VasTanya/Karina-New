@@ -48,7 +48,7 @@ const Cron = () => {
 
   const CronJob = cron.CronJob;
 
-  const job = new CronJob("* * * * *", deleteFiles, null, true, "UTC");
+  const job = new CronJob("0 0 * * *", deleteFiles, null, true, "UTC");
 
   job.start();
 };
