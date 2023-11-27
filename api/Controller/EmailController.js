@@ -30,7 +30,7 @@ class EmailController {
       console.log("CONT FILE: ", req.file);
       console.log("====================================");
       const message = await this.EmailService.sendRequestMyDesign({
-        file: `/Public/img/mydesign/${req.file[0].originalname}`,
+        file: `/Public/img/mydesign/${req.files[0].originalname}`,
         ...req.body,
       });
 
