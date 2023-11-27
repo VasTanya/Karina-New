@@ -20,10 +20,12 @@ import regularRouter from "./Route/RegularRoute.js";
 import emailRouter from "./Route/EmailRoute.js";
 import viewsRouter from "./Route/ViewsRouter.js";
 import adminRouter from "./Route/AdminRoute.js";
+import Cron from "./Utils/Cron.js";
 
 const app = express();
 dotenv.config();
 Connection();
+Cron();
 
 app.use(credentials);
 app.use(cors(corsOptions));
