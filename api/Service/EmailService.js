@@ -4,6 +4,9 @@ class EmailService {
   constructor() {}
 
   sendRequest = async (data) => {
+    console.log("====================================");
+    console.log("SERVICE DATA: ", data);
+    console.log("====================================");
     const template = `
       <html>
         <head>
@@ -94,7 +97,7 @@ class EmailService {
         <body>
         <div class="container">
           <center><h1>Client Design Request</h1></center>
-          <p><center><img src="https://www.karinas515.com/Public/img/mydesign/${data.file.replace(
+          <p><center><img src="https://www.karinas515.com/img/mydesign/${data.file.replace(
             / /g,
             "%20"
           )}"></center></p>
