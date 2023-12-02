@@ -30,11 +30,11 @@ function Nav() {
     const [navig, setNavig] = useState(0)
 
     useEffect(() => {
-        setNavig(JSON.parse(window.localStorage.getItem('navig')));
+        setNavig(JSON.parse(window.sessionStorage.getItem('navig')));
       }, []);
     
       useEffect(() => {
-        window.localStorage.setItem('navig', navig);
+        window.sessionStorage.setItem('navig', navig);
       }, [navig]);
 
     return (

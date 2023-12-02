@@ -483,7 +483,8 @@ iframe {
   width: 10vw;
 }
 
-.design_form input[type="text"], textarea {
+.design_form input,
+textarea {
   width: 25vw;
   height: 3vw;
   border-radius: 15px;
@@ -634,8 +635,39 @@ input[type="file"]{
   height: 7vw;
   font-size: 3vw;
 }
-.design_form input, textarea,.mail_form {
-  font-size: 2vw;
+.design_form input, textarea {
+  font-size: 2.8vw;
+  width: 35vw;
+  height: 5vw;
+}
+.design_form button{
+  width: 35vw;
+  height: 5vw;
+  font-size: 3vw;
+}
+.design_form{
+  width: 70vw;
+  height: 70vw;
+}
+.add_your_photo{
+  height: 90vw;
+}
+.one_cake_div_and_mail{
+  height: 70vw;
+}
+.mail_form{
+  width: 40vw;
+  height: 63vw;
+}
+  .mail_form input, 
+  .mail_form button {
+    width: 28vw;
+    height: 4vw;
+    font-size: 2.5vw;
+}
+.mail_form img {
+  width: 16vw;
+  height: 18vw;
 }
 }
 
@@ -651,4 +683,15 @@ input[type="file"]{
     height: 8vw;
     font-size: 3.6vw;
   }
+  .design_form input, textarea {
+    font-size: 2.8vw;
+    width: 35vw;
+    height: 5vw;
+  }
+  .design_form button{
+    width: 35vw;
+    height: 5vw;
+    font-size: 3vw;
+  }
+
 }

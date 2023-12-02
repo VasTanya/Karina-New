@@ -10,9 +10,9 @@ function AskCoustOfThisCake() {
   const {data_request, status1} = useSelector((store)=> store.getUrl_Request) 
   
   const navigate = useNavigate();
-  const [idCakeOne, setIdCakeOne] = useState({});
+  const [idCakeOne, setIdCakeOne] = useState();
   const [idItemOne, setIdItemOne] = useState();
-  const [idItemPhotoOne, setIdItemPhotoOne] = useState({});
+  const [idItemPhotoOne, setIdItemPhotoOne] = useState();
   const [album_idOne, setAlbum_idOne] = useState();
   const [item_idOne, setItem_idOne] = useState();
 
@@ -33,7 +33,7 @@ function AskCoustOfThisCake() {
     setItem_idOne(urlLink.item_id);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const newRequest = {
       name: e.target[0].value,
@@ -46,10 +46,23 @@ function AskCoustOfThisCake() {
     };
 
     const url_request = `${process.env.REACT_APP_API_URL}/request`;
-    dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
-    // console.log('status1', status1);
-    status1 === "error"? navigate("/error"):
-    navigate("/sentRequest")
+    // dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
+    // // console.log('status1', status1);
+    // status1 === "error"? navigate("/error"):
+    // navigate("/sentRequest")
+    try {
+      dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
+     
+     if (status1 === "successful" || status1 === 'loading' ) {
+       navigate("/sentRequest");
+      
+     } else  {
+       navigate("/error");
+     } 
+   } catch (error) {
+     console.error('Error:', error);
+   }
+   console.log(status1);
   
   };
 
@@ -66,8 +79,8 @@ function AskCoustOfThisCake() {
         <p>{idCakeOne + "." + idItemOne}</p>
 
         <input value={name} type="text" placeholder="Your name" />
-        <input value={phone} type="text" required placeholder="Your phone*" />
-        <input value={email} type="text" required placeholder="Your email*" />
+        <input value={phone} type="number" required placeholder="Your phone*" />
+        <input value={email} type="email" required placeholder="Your email*" />
         <input value={size} type="text" placeholder="Size(inches)" />
         <input value={filling} type="text" placeholder="Cake filling" />
         <button>Send</button>
