@@ -26,6 +26,7 @@ const mailer = async (type, data, template) => {
     });
 
     return {
+      status1: "successful",
       message:
         type === "request"
           ? `Request for ${data.cakeCode} has been sent!`
@@ -34,6 +35,7 @@ const mailer = async (type, data, template) => {
   } catch (error) {
     logger.error(error);
     return {
+      status1: "error",
       message: data?.cakeCode
         ? `Request for ${data.cakeCode} has failed! Try again later!`
         : `Request failed! Try again later!`,
