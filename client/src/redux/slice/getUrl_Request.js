@@ -36,6 +36,8 @@ const initialState = {
       email: "",
       size: "",
       filling: "",
+      pick_up_date: "",
+      comment: "",
       img: "",
       cakeCode: "",
     },

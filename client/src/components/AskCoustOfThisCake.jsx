@@ -48,6 +48,7 @@ function AskCoustOfThisCake() {
       img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
     };
+    console.log(newRequest);
 
     const url_request = `${process.env.REACT_APP_API_URL}/request`;
     // dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
