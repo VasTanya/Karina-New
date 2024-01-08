@@ -328,7 +328,7 @@ iframe {
 
 .mail_form {
   width: 34vw;
-  height: 55vw;
+  height: 60vw;
   border: 1px solid rgb(233, 217, 164);
   border-radius: 15px;
   box-shadow: 7px 10px 12px 4px rgba(182,151,90,.82);
@@ -337,6 +337,10 @@ iframe {
   padding: 2vw 2vw;
   margin-top: -3.5vw;
 }
+.mail_form textarea{
+width: 20vw;
+}
+
 
 .mail_form h6 {
   text-align: center;
@@ -653,17 +657,22 @@ input[type="file"]{
   height: 90vw;
 }
 .one_cake_div_and_mail{
-  height: 70vw;
+  height: 78vw;
 }
 .mail_form{
   width: 40vw;
-  height: 63vw;
+  height: 74vw;
 }
-  .mail_form input, 
-  .mail_form button {
+.mail_form input, 
+.mail_form button {
     width: 28vw;
     height: 4vw;
     font-size: 2.5vw;
+}
+.mail_form textarea {
+    width: 28vw;
+    height: 8vw;
+  
 }
 .mail_form img {
   width: 16vw;
@@ -687,6 +696,9 @@ input[type="file"]{
     font-size: 2.8vw;
     width: 35vw;
     height: 5vw;
+  }
+  .mail_form textarea{
+    width: 29vw;
   }
   .design_form button{
     width: 35vw;

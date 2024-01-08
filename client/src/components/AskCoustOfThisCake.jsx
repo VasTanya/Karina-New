@@ -21,6 +21,8 @@ function AskCoustOfThisCake() {
   const [email, setEmail] = useState();
   const [size, setSize] = useState();
   const [filling, setFilling] = useState();
+  const [pick_up_date, setPick_up_date] = useState();
+  const [comment, setComment] = useState();
 
   const dispatch = useDispatch();
 
@@ -41,6 +43,8 @@ function AskCoustOfThisCake() {
       email: e.target[2].value,
       size: e.target[3].value,
       filling: e.target[4].value,
+      pick_up_date: e.target[5].value,
+      comment: e.target[6].value,
       img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
     };
@@ -83,6 +87,13 @@ function AskCoustOfThisCake() {
         <input value={email} type="email" required placeholder="Your email*" />
         <input value={size} type="text" placeholder="Size(inches)" />
         <input value={filling} type="text" placeholder="Cake filling" />
+        <input value={pick_up_date} type="text" required placeholder="Pick up date*" />
+        <textarea
+          name="comment"
+          placeholder="Add your comment"
+          cols="25"
+          rows="1"
+        ></textarea>
         <button>Send</button>
       </form>
     </div>
