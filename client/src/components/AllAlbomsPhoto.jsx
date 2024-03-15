@@ -43,7 +43,7 @@ function AllAlbomsPhoto() {
       album_id,
       item_id,
     });
-   
+
     navigate(`/cake?${queryString}`);
   };
   return (
@@ -67,33 +67,31 @@ function AllAlbomsPhoto() {
         <div className="photos_in_album">
           {status === "loading"
             ? isLoading
-            : data_Id_AlbumsAll.data.map(
-                (el) => (
-                  <div
-                    onClick={() =>
-                      onClickImg(
-                        data_Id_AlbumsAll.albumId.album_number,
-                        el.display_number,
-                        el.src,
-                        data_Id_AlbumsAll.albumId._id,
-                        el._id
-                      )
-                    }
-                    key={el.display_number}
-                  >
-                    <div className="one_photo_from_alb">
-                      <img src={el.src} alt="" />
-                      <div className="title_price">
-                        <p>
-                          {data_Id_AlbumsAll.albumId.album_number +
-                            "." +
-                            el.display_number}
-                        </p>
-                      </div>
+            : data_Id_AlbumsAll.data.map((el) => (
+                <div
+                  onClick={() =>
+                    onClickImg(
+                      data_Id_AlbumsAll.albumId.album_number,
+                      el.display_number,
+                      el.src,
+                      data_Id_AlbumsAll.albumId._id,
+                      el._id
+                    )
+                  }
+                  key={el.display_number}
+                >
+                  <div className="one_photo_from_alb">
+                    <img src={el.src} alt="" />
+                    <div className="title_price">
+                      <p>
+                        {data_Id_AlbumsAll.albumId.album_number +
+                          "." +
+                          el.display_number}
+                      </p>
                     </div>
                   </div>
-                )
-              )}{" "}
+                </div>
+              ))}{" "}
         </div>
       )}
       <div className="pagination">
