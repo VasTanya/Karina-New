@@ -48,6 +48,7 @@ class EmailService {
             <p><strong>Size:</strong> ${data.size}</p>
             <p><strong>Filling:</strong> ${data.filling}</p>
             <p><strong>Pick_up_date:</strong> ${data.pick_up_date}</p>
+            <p><strong>Pick_up_location:</strong> ${data.pick_up_location}</p>
             <p><strong>Comment:</strong> ${data.comment}</p>
           </div>
         </body>
@@ -101,6 +102,8 @@ class EmailService {
           <p><strong>Email:</strong> ${data.email}</p>
           <p><strong>Size:</strong> ${data.size}</p>
           <p><strong>Filling:</strong> ${data.filling}</p>
+          <p><strong>Pick_up_date:</strong> ${data.pick_up_date}</p>
+          <p><strong>Pick_up_location:</strong> ${data.pick_up_location}</p>
           <p><strong>Comment:</strong> ${data.comment}</p>
         </div>
       </body>
