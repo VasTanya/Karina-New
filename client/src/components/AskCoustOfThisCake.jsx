@@ -22,6 +22,7 @@ function AskCoustOfThisCake() {
   const [size, setSize] = useState();
   const [filling, setFilling] = useState();
   const [pick_up_date, setPick_up_date] = useState();
+  const [pick_up_location, setPick_up_location] = useState();
   const [comment, setComment] = useState();
 
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function AskCoustOfThisCake() {
       size: e.target[3].value,
       filling: e.target[4].value,
       pick_up_date: e.target[5].value,
+      pick_up_location: e.target[6].value,
       comment: e.target[6].value,
       img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
@@ -89,6 +91,7 @@ function AskCoustOfThisCake() {
         <input value={size} type="text" placeholder="Size(inches)" />
         <input value={filling} type="text" placeholder="Cake filling" />
         <input value={pick_up_date} type="text" required placeholder="Pick up date*" />
+        <input value={pick_up_location} type="text" required placeholder="Pick up location*" />
         <textarea
           name="comment"
           placeholder="Add your comment"

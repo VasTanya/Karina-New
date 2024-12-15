@@ -20,7 +20,12 @@ function Home() {
     getUrlFirstFoto();
     dispatch(setCurrentPage(1));
   }, []);
-
+//ssh root@191.101.233.82
+//.(123Karinas123).
+//systemctl restart nginx
+//systemctl restart mongod
+// pm2 restart api
+//exit
   const sortData = dataFirstFoto?.map((el) => el);
   const alreadySortDataFirstFoto = sortData?.sort(
     (a, b) => a.album.album_number - b.album.album_number

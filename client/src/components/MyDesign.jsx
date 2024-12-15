@@ -45,6 +45,8 @@ function MyDesign() {
         <input name="email" type="email" required placeholder="Your email*" />
         <input name="size" type="text" placeholder="Size(inches)" />
         <input name="filling" type="text" placeholder="Cake filling" />
+        <input name="pick_up_date" type="text" required placeholder="Pick up date*" />
+        <input name="pick_up_location" type="text" required placeholder="Pick up location*" />
         <textarea
           name="comment"
           placeholder="Add your comment"
