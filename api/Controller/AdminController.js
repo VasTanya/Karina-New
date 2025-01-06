@@ -35,7 +35,7 @@ class AdminController {
 
   seed = async (req, res) => {
     try {
-      const seed = this.AdminService.seed();
+      const seed = await this.AdminService.seed();
 
       response(res, 201, seed);
     } catch (error) {

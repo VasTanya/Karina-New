@@ -19,7 +19,9 @@ class AlbumsController {
 
   getAll = async (req, res) => {
     try {
-      const albums = await this.AlbumsService.getAll();
+      const page = parseInt(req.query.page);
+      const size = parseInt(req.query.size);
+      const albums = await this.AlbumsService.getAll(page, size);
       response(res, 200, albums);
     } catch (error) {
       logger.error(`Error during getAll: ${error}`);
@@ -78,8 +80,8 @@ class AlbumsController {
       const { album_number, display_number } = req.query;
 
       const search = await this.AlbumsService.search(
-        album_number,
-        display_number
+        parseInt(album_number),
+        parseInt(display_number)
       );
 
       response(res, 200, search);
@@ -96,8 +98,7 @@ class AlbumsController {
       const { _id } = req.params;
       const { album_number, title } = req.body;
 
-      const editedAlbum = await this.AlbumsService.editAlbum({
-        _id: _id,
+      const editedAlbum = await this.AlbumsService.editAlbum(_id, {
         album_number: parseInt(album_number),
         title: title,
       });

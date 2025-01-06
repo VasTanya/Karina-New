@@ -1,18 +1,22 @@
-import { Router } from "express";
 import RegularController from "../Controller/RegularController.js";
 import upload from "../Middleware/Multer.js";
+import { BaseRouter } from "./BaseRouter.js";
 
-const regularRouter = Router();
-const { getAll, getById, editRegular, add, deleteRegular } = RegularController;
+class RegularRoute extends BaseRouter {
+  constructor() {
+    super();
+    this.controller = RegularController;
+    this.initRoutes();
+  }
 
-regularRouter.get("/", getAll);
+  initRoutes() {
+    this.router.get("/", this.controller.getAll);
+    this.router.get("/:_id", this.controller.getById);
+    this.router.put("/:_id/edit", upload.array("img"), this.controller.editOne);
+    this.router.post("/add", upload.array("img"), this.controller.add);
+    this.router.delete("/:_id/delete", this.controller.deleteOne);
+  }
+}
 
-regularRouter.get("/:_id", getById);
-
-regularRouter.put("/:_id/edit", upload.array("img"), editRegular);
-
-regularRouter.post("/add", upload.array("img"), add);
-
-regularRouter.delete("/:_id/delete", deleteRegular);
-
-export default regularRouter;
+const slicesRouterInstance = new RegularRoute();
+export default slicesRouterInstance.getRouter();

@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 
+/**
+ * @deprecated
+ */
+
 const albumDataSchema = new Schema(
   {
     albumId: { type: Schema.Types.ObjectId, ref: "Albums" },

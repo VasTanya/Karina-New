@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 
+/**
+ * @deprecated
+ */
+
 const slicesSchema = new Schema(
   {
     display_number: { type: Number, required: true },

@@ -2,51 +2,41 @@ import Albums from "../Model/AlbumsModel.js";
 import AlbumData from "../Model/AlbumDataModel.js";
 import { rmdirSync, unlinkSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
+import DbService from "./DbService.js";
 
-class AlbumsService {
-  constructor() {}
+class AlbumsService extends DbService {
+  constructor() {
+    super("albums");
+    this.albumData = new DbService("albumData");
+  }
 
-  getAll = async () => {
-    const albums = await Albums.find();
-
-    const sortedAlbums = albums.sort((a, b) => a.album_number - b.album_number);
-
-    return sortedAlbums;
+  getAll = async (page, size) => {
+    return this.find(page, size);
   };
 
   firstPhoto = async () => {
-    const albumData = await AlbumData.find().populate("albumId");
+    const albumData = await this.findAllAndPopulate();
 
-    const firstPhotos = albumData.map((item) => {
-      const data = {
-        album: item.albumId,
-        firstPhotos: item.data.filter((el) => el.tag === "firstPhoto"),
-      };
-
-      return data;
-    });
-
-    return firstPhotos;
+    return albumData.map((item) => ({
+      album: item.albumId,
+      firstPhotos: item.data.filter((el) => el.tag === "firstPhoto"),
+    }));
   };
 
   getById = async (id, page, size) => {
     const skip = (page - 1) * size;
 
-    const albumDataById = await AlbumData.findOne({ albumId: id }).populate(
-      "albumId"
-    );
+    const mappedAlbumData = await this.findOneAndPopulate(id);
 
-    if (!albumDataById) throw { statusCode: 404, message: "Album not found" };
-
-    // let paginatedArray = albumDataById.data;
+    if (!mappedAlbumData) throw { statusCode: 404, message: "Album not found" };
 
     const paginatedArray =
       size === -1
-        ? albumDataById.data
-        : albumDataById.data.slice(skip, skip + size);
+        ? mappedAlbumData.data
+        : mappedAlbumData.data.slice(skip, skip + size);
 
     const paginatedAlbumData = {
-      ...albumDataById.toObject(),
+      ...mappedAlbumData,
       data: paginatedArray.sort((a, b) => a.display_number - b.display_number),
     };
 
@@ -54,36 +44,36 @@ class AlbumsService {
   };
 
   getItemById = async (id, item) => {
-    const albumData = await AlbumData.findOne({ albumId: id });
+    const albumData = await this.albumData.findOne({ albumId: id });
 
-    const albumDataItem = albumData.data.find((el) => el._id.equals(item));
+    const albumDataItem = albumData.data.find((el) => el._id === item);
 
     return albumDataItem;
   };
 
   search = async (albumNumber, displayNumber) => {
-    const albums = await AlbumData.find().populate("albumId");
+    const albums = await this.findAllAndPopulate();
 
     if (!displayNumber) {
       const result = albums.filter(
-        (query) => String(query.albumId.album_number) === albumNumber
+        (query) => query.albumId.album_number === albumNumber
       );
 
       if (result.length === 0) {
-        return `No result for album number ${albumNumber}`;
+        return { message: `No result for album number ${albumNumber}` };
       }
 
       return result;
     } else {
       const matchingAlbums = albums.filter(
-        (query) => String(query.albumId.album_number) === albumNumber
+        (query) => query.albumId.album_number === albumNumber
       );
 
       const result = [];
 
       matchingAlbums.forEach((album) => {
         const matchingData = album.data.find(
-          (data) => String(data.display_number) === displayNumber
+          (data) => data.display_number === displayNumber
         );
 
         if (matchingData) {
@@ -95,15 +85,17 @@ class AlbumsService {
       });
 
       if (result.length === 0) {
-        return `No result for album number ${albumNumber} and display number ${displayNumber}`;
+        return {
+          message: `No result for album number ${albumNumber} and display number ${displayNumber}`,
+        };
       }
 
       return result;
     }
   };
 
-  editAlbum = async (data) => {
-    const updatedAlbum = await Albums.findByIdAndUpdate(data._id, data);
+  editAlbum = async (id, data) => {
+    const updatedAlbum = await this.findByIdAndUpdate(id, data);
 
     if (!updatedAlbum) {
       throw new Error("Album not found");
@@ -113,7 +105,7 @@ class AlbumsService {
   };
 
   editItem = async (data) => {
-    const album = await AlbumData.findOne({ albumId: data.albumId });
+    const album = await this.albumData.findOne({ albumId: data.albumId });
 
     const item = album.data.find((el) => el._id.equals(data.item));
 
@@ -243,6 +235,30 @@ class AlbumsService {
     }
 
     return item;
+  };
+
+  findOneAndPopulate = async (id) => {
+    const [{ albumId, ...albumDataById }, album] = await Promise.all([
+      this.albumData.findOne({ albumId: id }),
+      this.findById(id),
+    ]);
+
+    return { albumId: album, ...albumDataById };
+  };
+
+  findAllAndPopulate = async (id) => {
+    const [albumDataById, album] = await Promise.all([
+      this.albumData.findAll(),
+      this.findAll(),
+    ]);
+
+    return albumDataById.map(({ albumId, ...el }) => {
+      const albumToSet = album.find((album) => album._id === albumId);
+      return {
+        albumId: albumToSet,
+        ...el,
+      };
+    });
   };
 }
 

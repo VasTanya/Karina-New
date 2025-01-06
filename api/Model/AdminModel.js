@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 
+/**
+ * @deprecated
+ */
+
 const adminSchema = new Schema(
   {
     login: { type: String, required: true },

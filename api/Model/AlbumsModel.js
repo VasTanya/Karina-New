@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 
+/**
+ * @deprecated
+ */
+
 const albumsSchema = new Schema(
   {
     album_number: { type: Number, required: true },

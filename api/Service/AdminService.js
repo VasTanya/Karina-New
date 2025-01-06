@@ -1,18 +1,22 @@
 import bcrypt from "bcryptjs";
-import generateToken from "../Utils/Token.js";
-import Albums from "../Model/AlbumsModel.js";
-import AlbumData from "../Model/AlbumDataModel.js";
-import Slices from "../Model/SlicesModel.js";
-import Regular from "../Model/RegularModel.js";
-import Admin from "../Model/AdminModel.js";
-import data from "../data.js";
+import { v4 as uuid4 } from "uuid";
+import DbService from "./DbService.js";
 import logger from "../Utils/Logger/Logger.js";
+import generateToken from "../Utils/Token.js";
+import data from "../data.js";
 
 class AdminService {
-  constructor() {}
+  constructor() {
+    this.Albums = new DbService("albums");
+    this.AlbumData = new DbService("albumData");
+    this.Slices = new DbService("slices");
+    this.Regular = new DbService("regular");
+    this.Admin = new DbService("admin");
+  }
 
   login = async (email, password) => {
-    const admin = await Admin.findOne({ email: email });
+    const admin = await this.Admin.findOne({ email: email });
+
     if (admin) {
       if (bcrypt.compareSync(password, admin.password)) {
         const token = generateToken(admin);
@@ -24,58 +28,84 @@ class AdminService {
   };
 
   seed = async () => {
-    await Albums.deleteMany({});
-    await AlbumData.deleteMany({});
-    await Slices.deleteMany({});
-    await Regular.deleteMany({});
+    try {
+      await Promise.all([
+        this.Albums.deleteCollection(),
+        this.AlbumData.deleteCollection(),
+        this.Slices.deleteCollection(),
+        this.Regular.deleteCollection(),
+      ]);
+      logger.info("COLLECTIONS DELETED");
+    } catch (error) {
+      logger.error("COLLECTION DELETION ERROR", error);
+    }
 
-    const createdAlbums = await Albums.insertMany(data.albums);
+    try {
+      await Promise.all([
+        this.Slices.createCollection(data.slices),
+        this.Regular.createCollection(data.regular),
+        this.Albums.createCollection(data.albums),
+      ]);
+      logger.info("COLLECTIONS CREATED");
+    } catch (error) {
+      logger.error("COLLECTION CREATION ERROR", error);
+    }
 
-    const albumDataToInsert = data.albums.map((album) => ({
-      albumId: createdAlbums.find(
-        (createdAlbum) => createdAlbum.title === album.title
-      )._id,
-      data: album.album,
-      count: album.album.length,
-    }));
+    const createdAlbums = await this.Albums.findAlbums();
 
-    const createdAlbumData = await AlbumData.insertMany(albumDataToInsert);
-
-    createdAlbums.forEach(async (album) => {
-      const correspondingAlbumData = createdAlbumData.find((albumData) =>
-        albumData.albumId.equals(album._id)
+    const albumDataToInsert = data.albums.map((album) => {
+      const correspondingAlbum = createdAlbums.find(
+        (createdAlbum) => createdAlbum.album_number === album.album_number
       );
-      if (correspondingAlbumData) {
-        album.albumDataId = correspondingAlbumData._id;
-        await album.save();
+      if (!correspondingAlbum) {
+        logger.error(`No matching album found for title: ${album.title}`);
+        return;
       }
+
+      return {
+        albumId: correspondingAlbum._id,
+        data: album.album.map((item) => ({
+          _id: uuid4(),
+          ...item,
+        })),
+        count: album.album.length,
+      };
     });
 
-    const createdSlices = await Slices.insertMany(data.slices);
-    const createdRegular = await Regular.insertMany(data.regular);
+    try {
+      await this.AlbumData.createCollection(albumDataToInsert);
+      logger.info("ALBUM ITEMS CREATED");
+    } catch (error) {
+      logger.error("ALBUM ITEM CREATION ERROR", error);
+    }
 
-    return {
-      createdAlbums,
-      createdAlbumData,
-      createdSlices,
-      createdRegular,
-    };
+    // createdAlbums.forEach(async (album) => {
+    //   const correspondingAlbumData = createdAlbumData.find((albumData) =>
+    //     albumData.albumId.equals(album._id)
+    //   );
+    //   if (correspondingAlbumData) {
+    //     album.albumDataId = correspondingAlbumData._id;
+    //     await album.save();
+    //   }
+    // });
+
+    return { message: "Seed successful" };
   };
 
   seedAdmin = async () => {
-    await Admin.deleteMany({});
+    await this.Admin.deleteCollection();
 
     const hashedPassword = await bcrypt.hash(data.admin.password, 10);
 
-    const createdAdmin = new Admin({
-      login: data.admin.login,
-      email: data.admin.email,
-      password: hashedPassword,
-    });
+    await this.Admin.createCollection([
+      {
+        login: data.admin.login,
+        email: data.admin.email,
+        password: hashedPassword,
+      },
+    ]);
 
-    await createdAdmin.save();
-
-    return createdAdmin;
+    return { message: "Admin seeded successfully" };
   };
 
   logout = async (req, res) => {

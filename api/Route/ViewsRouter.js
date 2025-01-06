@@ -1,14 +1,20 @@
-import { Router } from "express";
 import isAuth from "../Middleware/IsAuth.js";
+import { BaseRouter } from "./BaseRouter.js";
 
-const viewsRouter = Router();
+class ViewsRouter extends BaseRouter {
+  constructor() {
+    super();
+    this.initRoutes();
+  }
 
-viewsRouter.get("/", isAuth, (req, res) => res.render("login"));
+  initRoutes() {
+    this.router.get("/", isAuth, (req, res) => res.render("login"));
+    this.router.get("/products", isAuth, (req, res) => res.render("products"));
+    this.router.get("/addProducts", isAuth, (req, res) =>
+      res.render("addProducts")
+    );
+  }
+}
 
-viewsRouter.get("/products", isAuth, (req, res) => res.render("products"));
-
-viewsRouter.get("/addProducts", isAuth, (req, res) =>
-  res.render("addProducts")
-);
-
-export default viewsRouter;
+const viewsRouterInstance = new ViewsRouter();
+export default viewsRouterInstance.getRouter();

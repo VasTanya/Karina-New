@@ -1,12 +1,23 @@
-import { Router } from "express";
+import { BaseRouter } from "./BaseRouter.js";
 import EmailController from "../Controller/EmailController.js";
 import upload from "../Middleware/Multer.js";
 
-const emailRouter = Router();
-const { sendRequest, sendRequestMyDesign } = EmailController;
+class EmailRoute extends BaseRouter {
+  constructor() {
+    super();
+    this.controller = EmailController;
+    this.initRoutes();
+  }
 
-emailRouter.post("/", sendRequest);
+  initRoutes() {
+    this.router.post("/", this.controller.sendRequest);
+    this.router.post(
+      "/mydesign",
+      upload.array("img"),
+      this.controller.sendRequestMyDesign
+    );
+  }
+}
 
-emailRouter.post("/mydesign", upload.array("img"), sendRequestMyDesign);
-
-export default emailRouter;
+const emailRouterInstance = new EmailRoute();
+export default emailRouterInstance.getRouter();
