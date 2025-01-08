@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  border: 1px solid  rgba(182, 151, 90, 0.82);
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+}
+
+.nav {
+  width: 16vw;
+  height: 5vw;
+  border: 1px solid;
+  font-size: 2vw;
+  padding: 2vh;
+  margin: 2vh;
+  cursor: pointer;
+  border: 1px solid  rgba(182, 151, 90, 0.82);
+  border-radius: 15px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.end {
+  width: 4vw;
+  height: 5vw;
+  justify-self: end;
+  border: 1px solid  rgba(182, 151, 90, 0.82);
+  border-radius: 15px;
+}
+.end i{
+  font-size: 2vw;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/products.css" />
+    <title>Products</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../Components/navbar.ejs') %>
+      <div class="productsContainer">
+        <table id="table">
+          <tr>
+            <td><button class="tableNav" value="slices">Slices</button></td>
+            <td><button class="tableNav" value="regular">Regular</button></td>
+            <td><button class="tableNav" value="albums">Albums</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="edit-modal" id="edit-modal">
+      <div action="" id="edit-modal-form">
+        <div class="edit-modal-inputs" id="edit-modal-inputs">
+          <input type="text" class="edit-modal-textInput" disabled />
+          <input type="text" class="edit-modal-textInput" />
+          <input type="text" class="edit-modal-textInput" />
+          <input type="text" class="edit-modal-textInput" />
+          <img class="edit-modal-textInput edit-modal-img" />
+          <input
+            type="file"
+            name="img"
+            accept="image/*"
+            class="edit-modal-textInput"
+          />
+        </div>
+        <div class="edit-modal-message" id="edit-modal-message"></div>
+        <div class="edit-modal-buttons" id="edit-modal-buttons">
+          <button class="edit-button" id="edit-save">SAVE</button>
+          <button type="button" class="edit-button" id="edit-cancel">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="delete-modal" id="delete-modal">
+      <div class="delete-modal-form">
+        <div class="delete-message" id="delete-message"></div>
+        <div class="button-holder" id="button-holder">
+          <button class="delete-button cancel" id="delete-cancel">
+            CANCEL
+          </button>
+          <button class="delete-button confirm" id="delete-confirm">
+            DELETE
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/products.js"></script>
+  </body>
+</html>

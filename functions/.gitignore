@@ -1,0 +1,6 @@
+.env
+.prettierrc
+Public/img/*
+**/.DS_Store
+node_modules/
+*.local
