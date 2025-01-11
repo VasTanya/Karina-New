@@ -4,6 +4,7 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint . --fix",
+    "environment": "node Utils/EnvironmentManager.js",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "nodemon index.js",

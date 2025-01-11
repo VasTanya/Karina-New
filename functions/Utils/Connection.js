@@ -7,10 +7,10 @@ const Connection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    logger.info("CONNECTED TO DB");
+    logger.info("[MONGO]: CONNECTED TO DB");
     return true;
   } catch (error) {
-    logger.error(`FAILED TO CONNECT: ${error.message}`);
+    logger.error(`[MONGO]: FAILED TO CONNECT: ${error.message}`);
     return false;
   }
 };

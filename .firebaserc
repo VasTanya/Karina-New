@@ -1,5 +1,18 @@
 {
   "projects": {
-    "default": "karinas-6d917"
-  }
+    "default": "karinas-64571"
+  },
+  "targets": {
+    "karinas-64571": {
+      "hosting": {
+        "main": [
+          "karinas515.com"
+        ],
+        "admin": [
+          "admin.karinas515.com"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

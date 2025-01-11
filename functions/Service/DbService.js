@@ -117,7 +117,7 @@ class DbService {
 
     await batch.commit();
     logger.info(
-        `${this.collectionName} created successfully: Document count ${count}`,
+        `[DB-SRV]: ${this.collectionName} created successfully: Document count ${count}`,
     );
   };
 
@@ -127,7 +127,7 @@ class DbService {
 
     if (!docsLength) {
       logger.info(
-          `No documents found in ${this.collectionName} collection to delete`,
+          `[DB-SRV]: No documents found in ${this.collectionName} collection to delete`,
       );
       return;
     }
@@ -138,7 +138,7 @@ class DbService {
 
     await batch.commit();
     logger.info(
-        `${this.collectionName} deleted successfully: Document count ${docsLength}`,
+        `[DB-SRV]: ${this.collectionName} deleted successfully: Document count ${docsLength}`,
     );
   };
 

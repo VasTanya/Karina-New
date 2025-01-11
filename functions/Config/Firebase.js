@@ -4,14 +4,14 @@ import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase/storage";
 import { serviceAccount } from "./FirebaseCredentials.js";
 import logger from "../Utils/Logger/Logger.js";
-console.log(serviceAccount);
+
 try {
   initializeApp({
     credential: cert(serviceAccount),
   });
-  logger.info("DB INITIALIZED");
+  logger.info("[FRB-SDK]: DB INITIALIZED");
 } catch (error) {
-  logger.error("SDK FAILED TO INITIALIZE", error.message);
+  logger.error("[FRB-SDK]: SDK FAILED TO INITIALIZE", error.message);
   process.exit(1);
 }
 
@@ -22,9 +22,9 @@ const db = getFirestore();
 export const connection = async () => {
   try {
     await db.collection("test").limit(1).get();
-    logger.info("CONNECTED TO DB");
+    logger.info("[FRB-SDK]: CONNECTED TO DB");
   } catch (error) {
-    logger.error("ERROR CONNECTING TO DB", error.message);
+    logger.error("[FRB-SDK]: ERROR CONNECTING TO DB", error.message);
     process.exit(1);
   }
 };

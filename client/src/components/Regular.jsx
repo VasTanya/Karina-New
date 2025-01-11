@@ -9,7 +9,7 @@ function Regular() {
   const dataRegularCake = dataRegular.data;
 
   const getUrlRegular = async () => {
-    const urlRegular = `${process.env.REACT_APP_API_URL}/regular`;
+    const urlRegular = `${process.env.REACT_APP_API_URL}/basics/regular`;
     dispatch(fetchRegular({ urlRegular }));
   };
 

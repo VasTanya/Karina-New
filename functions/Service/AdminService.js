@@ -35,9 +35,9 @@ class AdminService {
         this.Slices.deleteCollection(),
         this.Regular.deleteCollection(),
       ]);
-      logger.info("COLLECTIONS DELETED");
+      logger.info("[ADM-SRV]: COLLECTIONS DELETED");
     } catch (error) {
-      logger.error("COLLECTION DELETION ERROR", error);
+      logger.error("[ADM-SRV]: COLLECTION DELETION ERROR", error);
     }
 
     try {
@@ -46,9 +46,9 @@ class AdminService {
         this.Regular.createCollection(data.regular),
         this.Albums.createCollection(data.albums),
       ]);
-      logger.info("COLLECTIONS CREATED");
+      logger.info("[ADM-SRV]: COLLECTIONS CREATED");
     } catch (error) {
-      logger.error("COLLECTION CREATION ERROR", error);
+      logger.error("[ADM-SRV]: COLLECTION CREATION ERROR", error);
     }
 
     const createdAlbums = await this.Albums.findAlbums();
@@ -58,7 +58,9 @@ class AdminService {
           (createdAlbum) => createdAlbum.album_number === album.album_number,
       );
       if (!correspondingAlbum) {
-        logger.error(`No matching album found for title: ${album.title}`);
+        logger.error(
+            `[ADM-SRV]: No matching album found for title: ${album.title}`,
+        );
         return;
       }
 
@@ -74,9 +76,9 @@ class AdminService {
 
     try {
       await this.AlbumData.createCollection(albumDataToInsert);
-      logger.info("ALBUM ITEMS CREATED");
+      logger.info("[ADM-SRV]: ALBUM ITEMS CREATED");
     } catch (error) {
-      logger.error("ALBUM ITEM CREATION ERROR", error);
+      logger.error("[ADM-SRV]: ALBUM ITEM CREATION ERROR", error);
     }
 
     // createdAlbums.forEach(async (album) => {

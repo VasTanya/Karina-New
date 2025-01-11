@@ -5,7 +5,7 @@ Welcome to Karina's Bakery project!
 This project consists of two main parts:
 
 - **client** - Frontend - which runs on React.js
-- **functions** - Backend - which is Firebase Cloud Functions-based Node.js Express
+- **functions** - Backend - which is Firebase Cloud Functions-based Node.js Express app
 
 ## Getting Started
 
@@ -70,3 +70,5 @@ npm start
 ```
 
 This will start the Firebase Cloud Functions backend locally. You can use the Firebase Emulator or deploy it to Firebase depending on your setup.
+
+TODO: write deployment instructions

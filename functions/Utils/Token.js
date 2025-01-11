@@ -7,7 +7,7 @@ const generateToken = (admin) => {
   };
 
   try {
-    const token = jwt.sign(tokenPayload, process.env.SECRET, {
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 

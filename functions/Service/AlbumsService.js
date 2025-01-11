@@ -45,6 +45,8 @@ class AlbumsService extends DbService {
 
   getItemById = async (id, item) => {
     const albumData = await this.albumData.findOne({ albumId: id });
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    if (!albumData) return {};
 
     const albumDataItem = albumData.data.find((el) => el._id === item);
 

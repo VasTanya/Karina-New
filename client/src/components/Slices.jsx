@@ -9,7 +9,7 @@ function Slices() {
   const dataSlice = dataSlices.data;
 
   const getUrlSlices = async () => {
-    const urlSlices = `${process.env.REACT_APP_API_URL}/slices`;
+    const urlSlices = `${process.env.REACT_APP_API_URL}/basics/slices`;
     dispatch(fetchSlice({ urlSlices }));
   };
   useEffect(() => {
@@ -43,7 +43,9 @@ function Slices() {
                 <div key={el.display_number} className="one_photo_from_alb">
                   <img src={el.src} alt="" />
                   <div className="title_price">
-                    <p className="p_title_price">{el.title + "(№" + el.display_number + ")"}</p>
+                    <p className="p_title_price">
+                      {el.title + "(№" + el.display_number + ")"}
+                    </p>
                     <p>{el.price}</p>
                   </div>
                 </div>

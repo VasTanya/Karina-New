@@ -8,8 +8,8 @@ const mailer = async (type, data, template) => {
     port: parseInt(process.env.MAIL_PORT),
     secure: process.env.MAIL_ENCRYPTION === "tls",
     auth: {
-      user: process.env.MAIL_USERNAME,
-      pass: process.env.MAIL_PASSWORD,
+      user: process.env.SUPPORT_MAIL_USERNAME,
+      pass: process.env.SUPPORT_MAIL_PASSWORD,
     },
     logger: true,
   });
@@ -17,7 +17,7 @@ const mailer = async (type, data, template) => {
   try {
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
-      to: process.env.MAIL_TO,
+      to: process.env.SUPPORT_MAIL_USERNAME,
       subject:
         type === "request" ?
           `New Request For ${data.cakeCode}` :

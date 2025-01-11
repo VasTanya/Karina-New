@@ -1,4 +1,11 @@
 {
+  "projects": {
+    "default": "karinas-64571"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "functions": [
     {
       "source": "functions",
@@ -10,21 +17,81 @@
         "firebase-debug.*.log",
         "*.local"
       ],
-      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"]
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run environment"
+      ]
     }
   ],
-  "hosting": {
-    "public": "build",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "/api/**",
-        "destination": "/api"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+  "hosting": [
+    {
+      "site": "karinas-64571",
+      "public": "client/build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "**/node_modules/**"
+      ],
+      "predeploy": [
+        "npm --prefix ./client install",
+        "npm --prefix ./client run build"
+      ],
+      "rewrites": [
+        {
+          "source": "/albums/**",
+          "function": "albums"
+        },
+        {
+          "source": "/basics/**",
+          "function": "basics"
+        },
+        {
+          "source": "/request/**",
+          "function": "email"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "admin-karinas-64571",
+      "public": "admin/build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "**/node_modules/**"
+      ],
+      "predeploy": [
+        "npm --prefix ./admin install",
+        "npm --prefix ./admin run build"
+      ],
+      "rewrites": [
+        {
+          "source": "/albums/**",
+          "function": "albums"
+        },
+        {
+          "source": "/basics/**",
+          "function": "basics"
+        },
+        {
+          "source": "/admin/**",
+          "function": "admin"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
   }
 }

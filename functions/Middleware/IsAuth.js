@@ -8,7 +8,7 @@ const isAuth = (req, res, next) => {
     return res.render("login");
   } else {
     try {
-      const decodedToken = jwt.verify(token, process.env.SECRET);
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decodedToken;
 
       if (req.path === "/" && decodedToken) {
