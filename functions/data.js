@@ -1,9 +1,18 @@
 const data = {
-  admin: {
-    login: "admin",
-    email: "admin@karinas515.com",
-    password: "...515karinas515...",
-  },
+  admins: [
+    {
+      login: "admin",
+      email: "admin@karinas515.com",
+      password: "...515karinas515...",
+      permissions: ["**"],
+    },
+    {
+      login: "support",
+      email: "support@karinas515.com",
+      password: "...515karinas515...",
+      permissions: ["editor"],
+    },
+  ],
 
   albums: [
     {

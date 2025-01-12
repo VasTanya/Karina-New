@@ -2,9 +2,7 @@ const tableNav = document.querySelectorAll(".tableNav");
 
 const fetchGetFunction = async (nav, query) => {
   try {
-    const response = await fetch(
-      !query ? `/api/${nav}` : `/api/${nav}/${query}`,
-    );
+    const response = await fetch(!query ? `/${nav}` : `/${nav}/${query}`);
 
     if (!response.ok) {
       throw new Error("Error during get", response.status);
@@ -21,11 +19,11 @@ const fetchGetFunction = async (nav, query) => {
 const fetchPutFunction = async (nav, id, formData, albumId) => {
   try {
     const response = await fetch(
-      !albumId ? `/api/${nav}/${id}/edit` : `/api/${nav}/${albumId}/${id}/edit`,
+      !albumId ? `/${nav}/${id}/edit` : `/${nav}/${albumId}/${id}/edit`,
       {
         method: "PUT",
         body: formData,
-      },
+      }
     );
 
     if (response.ok) {
@@ -40,7 +38,7 @@ const fetchPutFunction = async (nav, id, formData, albumId) => {
 
 const fetchPutAlbumFunction = async (nav, id, data) => {
   try {
-    const response = await fetch(`/api/${nav}/${id}/edit`, {
+    const response = await fetch(`/${nav}/${id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -104,12 +102,12 @@ const editSlicesRegular = (nav, newRow, item) => {
 };
 
 const editAlbums = async (
-    nav,
-    newRow,
-    editButton,
-    deleteButtons,
-    viewButtons,
-    index,
+  nav,
+  newRow,
+  editButton,
+  deleteButtons,
+  viewButtons,
+  index
 ) => {
   editButton.style.display = "none";
   deleteButtons[index].style.display = "none";
@@ -174,13 +172,13 @@ const editAlbumItem = (nav, newRow, item, albumId) => {
   editModalInputs[1].value =
     newRow.querySelector("td:nth-child(2)").textContent;
   editModalInputs[2].style.display = newRow.querySelector("td:nth-child(4)")
-      .textContent ?
-    "none" :
-    "block";
+    .textContent
+    ? "none"
+    : "block";
   editModalInputs[3].style.display = newRow.querySelector("td:nth-child(5)")
-      .textContent ?
-    "none" :
-    "block";
+    .textContent
+    ? "none"
+    : "block";
   editModalInputs[4].src = newRow.querySelector("td:nth-child(3) img").src;
 
   editModalInputs[5].addEventListener("change", (e) => {
@@ -233,16 +231,16 @@ const deleteFunction = async (nav, item, albumId) => {
 
     try {
       const response = await fetch(
-        !albumId ?
-          `/api/${nav}/${item._id}/delete` :
-          `/api/${nav}/${albumId}/${item._id}/delete`,
+        !albumId
+          ? `/${nav}/${item._id}/delete`
+          : `/${nav}/${albumId}/${item._id}/delete`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ src: item.src }),
-        },
+        }
       );
 
       if (response.ok) {
@@ -317,14 +315,14 @@ const displaySlices = async (nav) => {
 
     editButtons.forEach((button) =>
       button.addEventListener("click", () =>
-        editSlicesRegular(nav, newRow, item),
-      ),
+        editSlicesRegular(nav, newRow, item)
+      )
     );
 
     const deleteButtons = newRow.querySelectorAll("button.data-delete");
 
     deleteButtons.forEach((button) =>
-      button.addEventListener("click", () => deleteFunction(nav, item)),
+      button.addEventListener("click", () => deleteFunction(nav, item))
     );
   });
 };
@@ -374,22 +372,22 @@ const displayRegular = async (nav) => {
 
     editButtons.forEach((button) =>
       button.addEventListener("click", () =>
-        editSlicesRegular(nav, newRow, item),
-      ),
+        editSlicesRegular(nav, newRow, item)
+      )
     );
 
     const deleteButtons = newRow.querySelectorAll("button.data-delete");
 
     deleteButtons.forEach((button) =>
-      button.addEventListener("click", () => deleteFunction(nav, item)),
+      button.addEventListener("click", () => deleteFunction(nav, item))
     );
   });
 };
 
 const displayAlbumData = async (nav, album) => {
   const { albumId, data } = await fetchGetFunction(
-      nav,
-      `${album._id}?page=1&size=all`,
+    nav,
+    `${album._id}?page=1&size=all`
   );
 
   table.innerHTML = "";
@@ -422,7 +420,7 @@ const displayAlbumData = async (nav, album) => {
 
     editButtons.forEach((button) => {
       button.addEventListener("click", () =>
-        editAlbumItem(nav, newRow, item, albumId._id),
+        editAlbumItem(nav, newRow, item, albumId._id)
       );
     });
 
@@ -430,7 +428,7 @@ const displayAlbumData = async (nav, album) => {
 
     deleteButtons.forEach((button) => {
       button.addEventListener("click", () =>
-        deleteFunction(nav, item, albumId._id),
+        deleteFunction(nav, item, albumId._id)
       );
     });
   });
@@ -480,16 +478,16 @@ const displayAlbums = async (nav) => {
 
     editButtons.forEach((button, index) =>
       button.addEventListener("click", () =>
-        editAlbums(nav, newRow, button, deleteButtons, viewButtons, index),
-      ),
+        editAlbums(nav, newRow, button, deleteButtons, viewButtons, index)
+      )
     );
 
     deleteButtons.forEach((button) =>
-      button.addEventListener("click", () => deleteFunction(nav, item)),
+      button.addEventListener("click", () => deleteFunction(nav, item))
     );
 
     viewButtons.forEach((button) =>
-      button.addEventListener("click", () => displayAlbumData(nav, item)),
+      button.addEventListener("click", () => displayAlbumData(nav, item))
     );
   });
 };

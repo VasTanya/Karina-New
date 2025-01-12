@@ -2,9 +2,10 @@
 
 Welcome to Karina's Bakery project!
 
-This project consists of two main parts:
+This project consists of two three parts:
 
 - **client** - Frontend - which runs on React.js
+- **admin** - Admin frontend - which runs on React.js
 - **functions** - Backend - which is Firebase Cloud Functions-based Node.js Express app
 
 ## Getting Started
@@ -24,7 +25,13 @@ git clone https://github.com/your-username/karinas-bakery.git
 First, navigate to the client folder and install the frontend dependencies:
 
 ```bash
-cd client/ && npm install
+cd client && npm install
+```
+
+Then, navigate to the admin folder and install the backend dependencies:
+
+```bash
+cd admin && npm install
 ```
 
 Then, navigate to the functions folder and install the backend dependencies:
@@ -55,7 +62,23 @@ npm start
 
 This will start the React frontend locally, usually accessible at http://localhost:3000.
 
-#### 2. Run the Backend (Functions)
+#### 2. Run the Frontend (Client)
+
+In the second terminal, navigate to the admin folder:
+
+```bash
+cd admin
+```
+
+Run the admin project:
+
+```bash
+npm start
+```
+
+This will start the React admin locally, usually accessible at http://localhost:3000.
+
+#### 3. Run the Backend (Functions)
 
 In the second terminal, navigate to the functions folder:
 

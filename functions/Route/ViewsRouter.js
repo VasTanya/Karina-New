@@ -11,7 +11,7 @@ class ViewsRouter extends BaseRouter {
     this.router.get("/", isAuth, (req, res) => res.render("login"));
     this.router.get("/products", isAuth, (req, res) => res.render("products"));
     this.router.get("/addProducts", isAuth, (req, res) =>
-      res.render("addProducts")
+      res.render("addProducts"),
     );
   }
 }

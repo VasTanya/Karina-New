@@ -4,7 +4,6 @@ const isAuth = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) {
-    console.log("bbb");
     return res.render("login");
   } else {
     try {

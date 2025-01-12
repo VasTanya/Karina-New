@@ -14,40 +14,46 @@ import RegularRoute from "../Route/RegularRoute.js";
 import SlicesRoute from "../Route/SlicesRoute.js";
 import EmailRoute from "../Route/EmailRoute.js";
 import AdminRoute from "../Route/AdminRoute.js";
+import ViewsRoute from "../Route/ViewsRouter.js";
 import Cron from "../Utils/Cron.js";
 import { connection } from "../Config/Firebase.js";
 import logger from "../Utils/Logger/Logger.js";
 
-const devApp = express();
+const developmentApp = express();
 dotenv.config();
 connection();
 
 Cron();
 
-devApp.use(credentials);
-devApp.use(cors(corsOptions));
-devApp.use(express.json({ limit: "50mb" }));
-devApp.use(express.urlencoded({ extended: true, limit: "50mb" }));
-devApp.use(cookieParser());
-devApp.use(apiLogger);
+developmentApp.use(credentials);
+developmentApp.use(cors(corsOptions));
+developmentApp.use(express.json({ limit: "50mb" }));
+developmentApp.use(express.urlencoded({ extended: true, limit: "50mb" }));
+developmentApp.use(cookieParser());
+developmentApp.use(apiLogger);
 
-devApp.set("view engine", "ejs");
+developmentApp.set("view engine", "ejs");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-devApp.set("views", path.join(__dirname, "Views", "Pages"));
-devApp.use(express.static(path.join(__dirname, "Public")));
+developmentApp.set("views", path.join(__dirname, "..", "Views", "Pages"));
+developmentApp.use(express.static(path.join(__dirname, "..", "Public")));
 
-devApp.use("/albums", AlbumsRoute);
-devApp.use("/slices", SlicesRoute);
-devApp.use("/regular", RegularRoute);
-devApp.use("/request", EmailRoute);
-devApp.use("/admin", AdminRoute);
+developmentApp.use("/albums", AlbumsRoute);
+developmentApp.use("/slices", SlicesRoute);
+developmentApp.use("/regular", RegularRoute);
+developmentApp.use("/request", EmailRoute);
+developmentApp.use("/admin", AdminRoute);
+developmentApp.use("/", ViewsRoute);
 
-devApp.use((err, req, res, next) => {
+developmentApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[DEV-APP]: ${err.message}` });
   logger.error({ message: `[DEV-APP]: ${err.message}` });
 });
 
-export default devApp;
+developmentApp.listen(process.env.OUT_PORT, () => {
+  logger.info(
+      `SERVER LIVE ON ${process.env.ENVIRONMENT} PORT ${process.env.OUT_PORT}`,
+  );
+});

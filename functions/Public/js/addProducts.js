@@ -5,7 +5,7 @@ const btnHolder = document.getElementById("btnHolder");
 
 const fetchFunction = async (nav) => {
   try {
-    const response = await fetch(`/api/${nav}`);
+    const response = await fetch(`/${nav}`);
 
     if (!response.ok) {
       throw new Error(response.message);
@@ -26,7 +26,7 @@ const createNewRegularSlice = async (route, newItem) => {
   formData.append("img", newItem.img.files[0]);
 
   try {
-    const response = await fetch(`/api/${route}/add`, {
+    const response = await fetch(`/${route}/add`, {
       method: "POST",
       body: formData,
     });
@@ -43,7 +43,7 @@ const createNewRegularSlice = async (route, newItem) => {
 
 const createNewAlbum = async (route, title) => {
   try {
-    const response = await fetch(`/api/${route}/add`, {
+    const response = await fetch(`/${route}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const createNewAlbumItem = async (route, newItem) => {
   formData.append("img", newItem.img.files[0]);
 
   try {
-    const response = await fetch(`/api/${route}/${newItem.albumId}/add`, {
+    const response = await fetch(`/${route}/${newItem.albumId}/add`, {
       method: "POST",
       body: formData,
     });
@@ -124,8 +124,8 @@ const createCheckboxInput = (id, textContent) => {
 
 const createFileInput = (id) => {
   const fileInput = createInput(
-      id,
-      `New ${select.options[select.selectedIndex].text} file`,
+    id,
+    `New ${select.options[select.selectedIndex].text} file`
   );
   fileInput.type = "file";
   return fileInput;
@@ -149,13 +149,13 @@ const displaySlice = (definedAlbum) => {
   btnHolder.innerHTML = "";
 
   const titleInput = createInput(
-      "formTitleInput",
-      `New ${select.options[select.selectedIndex].text} title`,
+    "formTitleInput",
+    `New ${select.options[select.selectedIndex].text} title`
   );
 
   const priceInput = createInput(
-      "formPriceInput",
-      `New ${select.options[select.selectedIndex].text} price`,
+    "formPriceInput",
+    `New ${select.options[select.selectedIndex].text} price`
   );
 
   const fileInput = createFileInput("formFileInput");
@@ -186,7 +186,7 @@ const displaySlice = (definedAlbum) => {
       src: `/img/${select.options[select.selectedIndex].text}/${
         fileInput.files[0].name
       }`,
-    }),
+    })
   );
 };
 
@@ -195,13 +195,13 @@ const displayRegular = (definedAlbum) => {
   btnHolder.innerHTML = "";
 
   const titleInput = createInput(
-      "formTitleInput",
-      `New ${select.options[select.selectedIndex].text} title`,
+    "formTitleInput",
+    `New ${select.options[select.selectedIndex].text} title`
   );
 
   const priceInput = createInput(
-      "formPriceInput",
-      `New ${select.options[select.selectedIndex].text} price`,
+    "formPriceInput",
+    `New ${select.options[select.selectedIndex].text} price`
   );
 
   const fileInput = createFileInput("formFileInput");
@@ -232,7 +232,7 @@ const displayRegular = (definedAlbum) => {
       src: `/img/${select.options[select.selectedIndex].text}/${
         fileInput.files[0].name
       }`,
-    }),
+    })
   );
 };
 
@@ -241,8 +241,8 @@ const displayAlbum = async (definedAlbum) => {
   btnHolder.innerHTML = "";
 
   const titleInput = createInput(
-      "formTitleInput",
-      `New ${select.options[select.selectedIndex].text} title`,
+    "formTitleInput",
+    `New ${select.options[select.selectedIndex].text} title`
   );
 
   const button = createButton("newProductButton");
@@ -251,7 +251,7 @@ const displayAlbum = async (definedAlbum) => {
   btnHolder.appendChild(button);
 
   button.addEventListener("click", () =>
-    createNewAlbum(definedAlbum, { title: titleInput.value }),
+    createNewAlbum(definedAlbum, { title: titleInput.value })
   );
 };
 
@@ -267,8 +267,8 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
   } item`;
 
   const firstPhotoInput = createCheckboxInput(
-      "formFirstPhoto",
-      `New ${select.options[select.selectedIndex].text} first photo?`,
+    "formFirstPhoto",
+    `New ${select.options[select.selectedIndex].text} first photo?`
   );
 
   const fileInput = createFileInput("formFileInput");
@@ -299,7 +299,7 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
         fileInput.files[0].name
       }`,
       img: fileInput,
-    }),
+    })
   );
 };
 

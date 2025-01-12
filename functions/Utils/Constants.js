@@ -1,5 +1,4 @@
 export const ENV_VARS_LIST = {
-  ENVIRONMENT: "globals.environment",
   PORT: "globals.port",
   MONGODB_URI: "globals.mongodb_uri",
   JWT_SECRET: "globals.jwt_secret",
@@ -22,4 +21,10 @@ export const ENV_VARS_LIST = {
   AUTH_PROVIDER_X509_CERT_URL: "config.auth_provider_x509_cert_url",
   CLIENT__X509_CERT_URL: "config.client_x509_cert_url",
   UNIVERSE_DOMAIN: "config.universe_domain",
+  API_KEY: "config.api_key",
+  AUTH_DOMAIN: "config.auth_domain",
+  STORAGE_BUCKET: "config.storage_bucket",
+  MESSAGING_SENDER_ID: "config.messaging_sender_id",
+  APP_ID: "config.app_id",
+  MEASUREMENT_ID: "config.measurement_id",
 };

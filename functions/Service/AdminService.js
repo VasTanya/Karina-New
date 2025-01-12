@@ -16,6 +16,7 @@ class AdminService {
 
   login = async (email, password) => {
     const admin = await this.Admin.findOne({ email: email });
+    console.log("ADMIN SERVICE", admin);
 
     if (admin) {
       if (bcrypt.compareSync(password, admin.password)) {
@@ -55,11 +56,11 @@ class AdminService {
 
     const albumDataToInsert = data.albums.map((album) => {
       const correspondingAlbum = createdAlbums.find(
-          (createdAlbum) => createdAlbum.album_number === album.album_number,
+        (createdAlbum) => createdAlbum.album_number === album.album_number
       );
       if (!correspondingAlbum) {
         logger.error(
-            `[ADM-SRV]: No matching album found for title: ${album.title}`,
+          `[ADM-SRV]: No matching album found for title: ${album.title}`
         );
         return;
       }
@@ -97,15 +98,20 @@ class AdminService {
   seedAdmin = async () => {
     await this.Admin.deleteCollection();
 
-    const hashedPassword = await bcrypt.hash(data.admin.password, 10);
+    const adminsToCreate = await Promise.all(
+      data.admins.map(async (admin) => {
+        const hashedPassword = await bcrypt.hash(admin.password, 10);
 
-    await this.Admin.createCollection([
-      {
-        login: data.admin.login,
-        email: data.admin.email,
-        password: hashedPassword,
-      },
-    ]);
+        return {
+          login: admin.login,
+          email: admin.email,
+          password: hashedPassword,
+          permissions: admin.permissions,
+        };
+      })
+    );
+    console.log(adminsToCreate);
+    await this.Admin.createCollection(adminsToCreate);
 
     return { message: "Admin seeded successfully" };
   };

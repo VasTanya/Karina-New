@@ -7,7 +7,7 @@
     "environment": "node Utils/EnvironmentManager.js",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "nodemon index.js",
+    "start": "nodemon App/DevelopmentApp.js",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },

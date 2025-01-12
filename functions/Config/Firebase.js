@@ -1,14 +1,12 @@
 import { initializeApp, cert } from "firebase-admin/app";
-// import { storage } from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
-import { getStorage } from "firebase/storage";
 import { serviceAccount } from "./FirebaseCredentials.js";
+import StorageManager from "./StorageManager.js";
 import logger from "../Utils/Logger/Logger.js";
 
 try {
-  initializeApp({
-    credential: cert(serviceAccount),
-  });
+  const app = initializeApp({ credential: cert(serviceAccount) });
+  const storage = new StorageManager(app);
   logger.info("[FRB-SDK]: DB INITIALIZED");
 } catch (error) {
   logger.error("[FRB-SDK]: SDK FAILED TO INITIALIZE", error.message);
@@ -16,8 +14,6 @@ try {
 }
 
 const db = getFirestore();
-// const storage = getStorage();
-// const bucket = storage().bucket();
 
 export const connection = async () => {
   try {
