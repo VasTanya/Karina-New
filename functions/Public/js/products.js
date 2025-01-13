@@ -73,12 +73,14 @@ const editSlicesRegular = (nav, newRow, item) => {
   const editModalSave = document.getElementById("edit-save");
   const cancelEditButton = document.getElementById("edit-cancel");
 
+  let newFileUrl;
   editModalInputs[5].addEventListener("change", (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       editModalInputs[4].src = URL.createObjectURL(selectedFile);
+      newFileUrl = `${nav.includes("slices") ? "Slices" : "Regulars"}/unset/${selectedFile.name}`;
     } else {
-      editModalInputs[4].src = item.src;
+      editModalInputs[4].src = item.src.sm;
     }
   });
 
@@ -88,8 +90,10 @@ const editSlicesRegular = (nav, newRow, item) => {
     formData.append("display_number", editModalInputs[1].value);
     formData.append("title", editModalInputs[2].value);
     formData.append("price", editModalInputs[3].value);
-    formData.append("src", item.src);
-    formData.append("img", editModalInputs[5].files[0]);
+    if (newFileUrl) {
+      formData.append("src", newFileUrl);
+      formData.append("img", editModalInputs[5].files[0]);
+    }
 
     await fetchPutFunction(nav, editModalInputs[0].value, formData);
   });
@@ -163,7 +167,7 @@ const editAlbums = async (
   newRow.lastElementChild.appendChild(cancelEditButton);
 };
 
-const editAlbumItem = (nav, newRow, item, albumId) => {
+const editAlbumItem = (nav, newRow, item, albumId, albumTitle) => {
   const editModal = document.getElementById("edit-modal");
   const editModalInputs = document.querySelectorAll(".edit-modal-textInput");
 
@@ -181,12 +185,14 @@ const editAlbumItem = (nav, newRow, item, albumId) => {
     : "block";
   editModalInputs[4].src = newRow.querySelector("td:nth-child(3) img").src;
 
+  let newFileUrl;
   editModalInputs[5].addEventListener("change", (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       editModalInputs[4].src = URL.createObjectURL(selectedFile);
+      newFileUrl = `${albumTitle}/unset/${selectedFile.name}`;
     } else {
-      editModalInputs[4].src = item.src;
+      editModalInputs[4].src = item.src.sm;
     }
   });
 
@@ -197,8 +203,10 @@ const editAlbumItem = (nav, newRow, item, albumId) => {
     const formData = new FormData();
 
     formData.append("display_number", editModalInputs[1].value);
-    formData.append("src", item.src);
-    formData.append("img", editModalInputs[5].files[0]);
+    if (newFileUrl) {
+      formData.append("src", newFileUrl);
+      formData.append("img", editModalInputs[5].files[0]);
+    }
 
     await fetchPutFunction(nav, editModalInputs[0].value, formData, albumId);
   });
@@ -304,7 +312,7 @@ const displaySlices = async (nav) => {
         <td>${item.display_number}</td>
         <td>${item.title}</td>
         <td>${item.price}</td>
-        <td><img class="img" src="${item.src}" /></td>
+        <td><img class="img" src="${item.src.sm}" /></td>
         <td><button class="data-edit">EDIT</button></td>
         <td><button class="data-delete">DELETE</button></td>
     `;
@@ -361,7 +369,7 @@ const displayRegular = async (nav) => {
         <td>${item.display_number}</td>
         <td>${item.title}</td>
         <td>${item.price}</td>
-        <td><img class="img" src="${item.src}" /></td>
+        <td><img class="img" src="${item.src.sm}" /></td>
         <td><button class="data-edit">EDIT</button></td>
         <td><button class="data-delete">DELETE</button></td>
     `;
@@ -409,7 +417,7 @@ const displayAlbumData = async (nav, album) => {
     newRow.innerHTML = `
         <td class="edit-album">${item._id}</td>
         <td class="edit-album">${item.display_number}</td>
-        <td><img class="img" src="${item.src}" /></td>
+        <td><img class="img" src="${item.src.sm}" /></td>
         <td><button class="data-edit">EDIT</button></td>
         <td><button class="data-delete">DELETE</button></td>
       `;
@@ -420,7 +428,7 @@ const displayAlbumData = async (nav, album) => {
 
     editButtons.forEach((button) => {
       button.addEventListener("click", () =>
-        editAlbumItem(nav, newRow, item, albumId._id)
+        editAlbumItem(nav, newRow, item, albumId._id, album.title)
       );
     });
 
@@ -495,10 +503,10 @@ const displayAlbums = async (nav) => {
 const renderDataTable = (nav) => {
   switch (nav) {
     case "slices":
-      displaySlices(nav);
+      displaySlices(`basics/${nav}`);
       break;
     case "regular":
-      displayRegular(nav);
+      displayRegular(`basics/${nav}`);
       break;
     case "albums":
       displayAlbums(nav);

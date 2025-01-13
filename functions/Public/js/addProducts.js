@@ -183,9 +183,11 @@ const displaySlice = (definedAlbum) => {
       title: titleInput.value,
       price: priceInput.value,
       img: fileInput,
-      src: `/img/${select.options[select.selectedIndex].text}/${
-        fileInput.files[0].name
-      }`,
+      src: fileInput.files[0]
+        ? `${select.options[select.selectedIndex].text}/unset/${
+            fileInput.files[0].name
+          }`
+        : "",
     })
   );
 };
@@ -229,9 +231,11 @@ const displayRegular = (definedAlbum) => {
       title: titleInput.value,
       price: priceInput.value,
       img: fileInput,
-      src: `/img/${select.options[select.selectedIndex].text}/${
-        fileInput.files[0].name
-      }`,
+      src: fileInput.files[0]
+        ? `${select.options[select.selectedIndex].text}/unset/${
+            fileInput.files[0].name
+          }`
+        : "",
     })
   );
 };
@@ -295,9 +299,11 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
     createNewAlbumItem(definedAlbum, {
       albumId: albumId,
       tag: firstPhotoInput.querySelector("input").checked,
-      src: `/img/${index + 1}.${select.options[select.selectedIndex].text}/${
-        fileInput.files[0].name
-      }`,
+      src: fileInput.files[0]
+        ? `${index + 1}.${select.options[select.selectedIndex].text}/unset/${
+            fileInput.files[0].name
+          }`
+        : "",
       img: fileInput,
     })
   );
@@ -310,10 +316,10 @@ const defineAlbum = () => {
 
   switch (select.value) {
     case "slices":
-      displaySlice("slices");
+      displaySlice("basics/slices");
       break;
     case "regular":
-      displayRegular("regular");
+      displayRegular("basics/regular");
       break;
     case "albums":
       displayAlbum("albums");

@@ -73,7 +73,7 @@ function AllAlbomsPhoto() {
                     onClickImg(
                       data_Id_AlbumsAll.albumId.album_number,
                       el.display_number,
-                      el.src,
+                      el.src.lg,
                       data_Id_AlbumsAll.albumId._id,
                       el._id
                     )
@@ -81,7 +81,7 @@ function AllAlbomsPhoto() {
                   key={el.display_number}
                 >
                   <div className="one_photo_from_alb">
-                    <img src={el.src} alt="" />
+                    <img src={el.src.lg} alt="" />
                     <div className="title_price">
                       <p>
                         {data_Id_AlbumsAll.albumId.album_number +

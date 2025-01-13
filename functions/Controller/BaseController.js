@@ -49,6 +49,7 @@ export class BaseController {
         title,
         price,
         src,
+        ...(req.file && { file: req.file }),
       });
 
       response(res, 200, editedObject);
@@ -68,6 +69,7 @@ export class BaseController {
         title,
         price,
         src,
+        ...(req.file && { file: req.file }),
       });
 
       response(res, 200, addedObject);
@@ -84,7 +86,7 @@ export class BaseController {
       const { _id } = req.params;
       const { src } = req.body;
 
-      const deletedObject = this.service.delete(_id, src);
+      const deletedObject = await this.service.delete(_id, src);
 
       response(res, 200, deletedObject);
     } catch (error) {

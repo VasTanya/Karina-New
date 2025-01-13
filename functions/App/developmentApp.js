@@ -41,8 +41,8 @@ developmentApp.set("views", path.join(__dirname, "..", "Views", "Pages"));
 developmentApp.use(express.static(path.join(__dirname, "..", "Public")));
 
 developmentApp.use("/albums", AlbumsRoute);
-developmentApp.use("/slices", SlicesRoute);
-developmentApp.use("/regular", RegularRoute);
+developmentApp.use("/basics/slices", SlicesRoute);
+developmentApp.use("/basics/regular", RegularRoute);
 developmentApp.use("/request", EmailRoute);
 developmentApp.use("/admin", AdminRoute);
 developmentApp.use("/", ViewsRoute);
@@ -54,6 +54,6 @@ developmentApp.use((err, req, res, next) => {
 
 developmentApp.listen(process.env.OUT_PORT, () => {
   logger.info(
-      `SERVER LIVE ON ${process.env.ENVIRONMENT} PORT ${process.env.OUT_PORT}`,
+    `SERVER LIVE ON ${process.env.ENVIRONMENT} PORT ${process.env.OUT_PORT}`,
   );
 });

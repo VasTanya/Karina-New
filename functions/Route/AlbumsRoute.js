@@ -17,15 +17,15 @@ class AlbumsRoute extends BaseRouter {
     this.router.get("/:_id/:item", this.controller.getItemById);
     this.router.put("/:_id/edit", this.controller.editAlbum);
     this.router.put(
-        "/:albumId/:item/edit",
-        upload.array("img"),
-        this.controller.editItem,
+      "/:albumId/:item/edit",
+      upload.single("img"),
+      this.controller.editItem,
     );
     this.router.post("/add", this.controller.addAlbum);
     this.router.post(
-        "/:albumId/add",
-        upload.array("img"),
-        this.controller.addItem,
+      "/:albumId/add",
+      upload.single("img"),
+      this.controller.addItem,
     );
     this.router.delete("/:_id/delete", this.controller.deleteAlbum);
     this.router.delete("/:_id/:item/delete", this.controller.deleteItem);

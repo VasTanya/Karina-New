@@ -12,8 +12,12 @@ class SlicesRoute extends BaseRouter {
   initRoutes() {
     this.router.get("/", this.controller.getAll);
     this.router.get("/:_id", this.controller.getById);
-    this.router.put("/:_id/edit", upload.array("img"), this.controller.editOne);
-    this.router.post("/add", upload.array("img"), this.controller.add);
+    this.router.put(
+      "/:_id/edit",
+      upload.single("img"),
+      this.controller.editOne,
+    );
+    this.router.post("/add", upload.single("img"), this.controller.add);
     this.router.delete("/:_id/delete", this.controller.deleteOne);
   }
 }

@@ -41,7 +41,7 @@ function Slices() {
             ? isLoading
             : dataSlice.map((el) => (
                 <div key={el.display_number} className="one_photo_from_alb">
-                  <img src={el.src} alt="" />
+                  <img src={el.src.md} alt="" />
                   <div className="title_price">
                     <p className="p_title_price">
                       {el.title + "(№" + el.display_number + ")"}

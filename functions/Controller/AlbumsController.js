@@ -80,8 +80,8 @@ class AlbumsController {
       const { album_number, display_number } = req.query;
 
       const search = await this.AlbumsService.search(
-          parseInt(album_number),
-          parseInt(display_number),
+        parseInt(album_number),
+        parseInt(display_number)
       );
 
       response(res, 200, search);
@@ -117,11 +117,12 @@ class AlbumsController {
       const { albumId, item } = req.params;
       const { display_number, src } = req.body;
 
-      const editedItem = this.AlbumsService.editItem({
+      const editedItem = await this.AlbumsService.editItem({
         albumId,
         item,
         display_number,
         src,
+        ...(req.file && { file: req.file }),
       });
 
       response(res, 200, editedItem);
@@ -137,7 +138,7 @@ class AlbumsController {
     try {
       const { title } = req.body;
 
-      const addedAlbum = this.AlbumsService.addAlbum(title);
+      const addedAlbum = await this.AlbumsService.addAlbum(title);
 
       response(res, 200, addedAlbum);
     } catch (error) {
@@ -153,10 +154,11 @@ class AlbumsController {
       const { albumId } = req.params;
       const { tag, src } = req.body;
 
-      const createdItem = this.AlbumsService.addItem({
+      const createdItem = await this.AlbumsService.addItem({
         albumId,
         tag,
         src,
+        ...(req.file && { file: req.file }),
       });
 
       response(res, 200, createdItem);
@@ -186,9 +188,8 @@ class AlbumsController {
   deleteItem = async (req, res) => {
     try {
       const { _id, item } = req.params;
-      const { src } = req.body;
 
-      const deletedItem = await this.AlbumsService.deleteItem(_id, item, src);
+      const deletedItem = await this.AlbumsService.deleteItem(_id, item);
 
       response(res, 200, deletedItem);
     } catch (error) {

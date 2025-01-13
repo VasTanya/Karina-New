@@ -42,7 +42,7 @@ function Regular() {
             ? isLoading
             : dataRegularCake.map((el) => (
                 <div key={el.display_number} className="one_photo_from_alb">
-                  <img src={el.src} alt="" />
+                  <img src={el.src.md} alt="" />
                   <div className="title_price">
                     <p>{el.title + "(№" + el.display_number + ")"}</p>
                     <p>{el.price}</p>

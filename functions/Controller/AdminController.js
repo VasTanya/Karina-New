@@ -41,10 +41,10 @@ class AdminController {
     } catch (error) {
       logger.error("Seed error:", error);
       response(
-          res,
-          error.statusCode || 500,
-          "Error during seeding: ",
-          error.message,
+        res,
+        error.statusCode || 500,
+        "Error during seeding: ",
+        error.message
       );
     }
   };
@@ -57,10 +57,10 @@ class AdminController {
     } catch (error) {
       logger.error("Seed error:", error);
       response(
-          res,
-          error.statusCode || 500,
-          "Error during seeding: ",
-          error.message,
+        res,
+        error.statusCode || 500,
+        "Error during seeding: ",
+        error.message
       );
     }
   };

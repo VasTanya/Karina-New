@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
 import dotenv from "dotenv";
-import { ENV_VARS_LIST } from "./Constants.js";
-import logger from "./Logger/Logger.js";
+import { ENV_VARS_LIST } from "../Utils/Constants.js";
+import logger from "../Utils/Logger/Logger.js";
 
 dotenv.config();
 

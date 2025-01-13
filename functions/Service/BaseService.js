@@ -27,6 +27,17 @@ export class BaseService extends DbService {
   add = async (data) => {
     const dataLength = await this.count();
 
+    if (data.file) {
+      const uploadedFilePaths = await this.uploadImage(data.file, data.src);
+      data.src = uploadedFilePaths;
+    } else {
+      data.src = {
+        sm: "noPhoto (sm).jpeg",
+        md: "noPhoto (md).jpeg",
+        lg: "noPhoto (lg).jpeg",
+      };
+    }
+
     await this.create({
       display_number: dataLength + 1,
       title: data.title,
@@ -37,7 +48,7 @@ export class BaseService extends DbService {
     return { message: `${this.dataTitle} created` };
   };
 
-  delete = async (id, src) => {
+  delete = async (id) => {
     const item = await this.findByIdAndDelete(id);
 
     if (!item) {
@@ -47,28 +58,15 @@ export class BaseService extends DbService {
       };
     }
 
-    // const path = join(
-    //   dirname(new URL(import.meta.url).pathname, "..", "Public", src),
-    //   "..",
-    //   "Public",
-    //   src
-    // );
-
-    // try {
-    //   unlinkSync(path);
-    // } catch (error) {
-    //   console.error("Error deleting image:", error);
-    // }
-
     return item;
   };
 
   setDataTitle = (collectionName) => {
     if (!collectionName) return "";
 
-    const singularName = collectionName.endsWith("s") ?
-      collectionName.slice(0, -1) :
-      collectionName;
+    const singularName = collectionName.endsWith("s")
+      ? collectionName.slice(0, -1)
+      : collectionName;
 
     return (
       singularName.charAt(0).toUpperCase() + singularName.slice(1).toLowerCase()

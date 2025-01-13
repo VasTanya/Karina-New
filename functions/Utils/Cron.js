@@ -24,7 +24,7 @@ const Cron = () => {
         fs.stat(filePath, (error, stats) => {
           if (error) {
             logger.error(
-                `CRON : Error getting file stats ${filePath}: ${error}`,
+              `CRON : Error getting file stats ${filePath}: ${error}`,
             );
             return;
           }
@@ -35,7 +35,7 @@ const Cron = () => {
             fs.unlink(filePath, (deleteError) => {
               if (deleteError) {
                 logger.error(
-                    `CRON : Error deleting file ${filePath}: ${deleteError}`,
+                  `CRON : Error deleting file ${filePath}: ${deleteError}`,
                 );
               } else {
                 logger.log(`CRON : Deleted file: ${filePath}`);

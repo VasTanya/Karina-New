@@ -28,3 +28,9 @@ export const ENV_VARS_LIST = {
   APP_ID: "config.app_id",
   MEASUREMENT_ID: "config.measurement_id",
 };
+
+export const IMAGE_SIZES = {
+  sm: { width: 96, height: 96 },
+  md: { width: 268, height: 326 },
+  lg: { width: 384, height: 384 },
+};
