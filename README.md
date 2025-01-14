@@ -98,7 +98,7 @@ Visit this URL on this device to log in:
 Log into your organization account, follow the steps and verify your authentication in terminal
 
 ```bash
-✔  Success! Logged in as **admin@karinas515.com**
+✔  Success! Logged in as **your@email.com**
 ```
 
 Now your are ready to use Firebase CLI functionality
@@ -157,4 +157,4 @@ npm start
 
 This will start the Firebase Cloud Functions backend locally. You can use the Firebase Emulator or deploy it to Firebase depending on your setup.
 
-TODO: write deployment instructions
+### 5. TODO: write deployment instructions
