@@ -8,6 +8,7 @@ try {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: serviceAccount.storageBucket,
+    databaseURL: serviceAccount.databaseURL,
   });
   logger.info("[FRB-SDK]: DB INITIALIZED");
 } catch (error) {
@@ -15,7 +16,7 @@ try {
   process.exit(1);
 }
 
-const db = getFirestore();
+const db = getFirestore(serviceAccount.databaseURL);
 const storage = new StorageManager(admin.storage());
 
 export const connection = async () => {

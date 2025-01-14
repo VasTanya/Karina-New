@@ -8,11 +8,9 @@ class ViewsRouter extends BaseRouter {
   }
 
   initRoutes() {
-    this.router.get("/", isAuth, (req, res) => res.render("login"));
-    this.router.get("/products", isAuth, (req, res) => res.render("products"));
-    this.router.get("/addProducts", isAuth, (req, res) =>
-      res.render("addProducts"),
-    );
+    this.router.get("/", (req, res) => res.render("login"));
+    this.router.get("/products", (req, res) => res.render("products"));
+    this.router.get("/addProducts", (req, res) => res.render("addProducts"));
   }
 }
 

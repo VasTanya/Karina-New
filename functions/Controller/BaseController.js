@@ -3,8 +3,9 @@ import response from "../Utils/Response.js";
 import logger from "../Utils/Logger/Logger.js";
 
 export class BaseController {
-  constructor(service) {
+  constructor(service, type) {
     this.service = service;
+    this.type = type;
     this.getAll = expressAsyncHandler(this.getAll.bind(this));
     this.getById = expressAsyncHandler(this.getById.bind(this));
     this.editOne = expressAsyncHandler(this.editOne.bind(this));
@@ -17,9 +18,9 @@ export class BaseController {
       const data = await this.service.getAll();
       response(res, 200, data);
     } catch (error) {
-      logger.error(`Error during getAll: ${error}`);
+      logger.error(`[${this.type}-CTRL]: Error during getAll: `, error);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -31,9 +32,9 @@ export class BaseController {
       const objectById = await this.service.getById(paramsId);
       response(res, 200, objectById);
     } catch (error) {
-      logger.error(`Error during getById: ${error}`);
+      logger.error(`[${this.type}-CTRL]: Error during getById: `, error);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -54,9 +55,9 @@ export class BaseController {
 
       response(res, 200, editedObject);
     } catch (error) {
-      logger.error(`Error during edit: ${error}`);
+      logger.error(`[${this.type}-CTRL]: Error during editOne: `, error);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -74,9 +75,9 @@ export class BaseController {
 
       response(res, 200, addedObject);
     } catch (error) {
-      logger.error(`Error during adding: ${error}`);
+      logger.error(`[${this.type}-CTRL]: Error during add: `, error);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -90,9 +91,9 @@ export class BaseController {
 
       response(res, 200, deletedObject);
     } catch (error) {
-      logger.error(`Error during delete: ${error}`);
+      logger.error(`[${this.type}-CTRL]: Error during deleteOne: `, error);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };

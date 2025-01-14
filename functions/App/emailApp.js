@@ -5,7 +5,7 @@ import common from "../Middleware/Common.js";
 
 const emailApp = express();
 common(emailApp);
-emailApp.use("/", EmailRoute);
+emailApp.use("/email", EmailRoute);
 
 emailApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[EMAIL-APP]: ${err.message}` });

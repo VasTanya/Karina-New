@@ -20,7 +20,7 @@ import { connection } from "../Config/Firebase.js";
 import logger from "../Utils/Logger/Logger.js";
 
 const developmentApp = express();
-dotenv.config();
+dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 connection();
 
 Cron();
@@ -43,7 +43,7 @@ developmentApp.use(express.static(path.join(__dirname, "..", "Public")));
 developmentApp.use("/albums", AlbumsRoute);
 developmentApp.use("/basics/slices", SlicesRoute);
 developmentApp.use("/basics/regular", RegularRoute);
-developmentApp.use("/request", EmailRoute);
+developmentApp.use("/email", EmailRoute);
 developmentApp.use("/admin", AdminRoute);
 developmentApp.use("/", ViewsRoute);
 
@@ -54,6 +54,6 @@ developmentApp.use((err, req, res, next) => {
 
 developmentApp.listen(process.env.OUT_PORT, () => {
   logger.info(
-    `SERVER LIVE ON ${process.env.ENVIRONMENT} PORT ${process.env.OUT_PORT}`,
+    `SERVER LIVE ON ${process.env.NODE_ENV.toLocaleUpperCase()} PORT ${process.env.OUT_PORT}`
   );
 });

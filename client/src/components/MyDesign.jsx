@@ -6,25 +6,26 @@ import { useNavigate } from "react-router-dom";
 function MyDesign() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {status} = useSelector((store)=>store.getUrl_MyDesign)
+  const { status } = useSelector((store) => store.getUrl_MyDesign);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    const url_request_myDesign = `${process.env.REACT_APP_API_URL}/request/mydesign`;
-    try{
-      dispatch(fetch_myDesign_Order({ url: url_request_myDesign, datainp: formData }));
-     if (status === "successful" || status === 'loading' ) {
-       navigate("/sentRequest");
-      
-     } else  {
-       navigate("/error");
-     } 
-   }catch (error) {
-     console.error('Error:', error);
-   }
-   console.log(status);
+    const url_request_myDesign = `${process.env.REACT_APP_API_URL}/email/mydesign`;
+    try {
+      dispatch(
+        fetch_myDesign_Order({ url: url_request_myDesign, datainp: formData })
+      );
+      if (status === "successful" || status === "loading") {
+        navigate("/sentRequest");
+      } else {
+        navigate("/error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    console.log(status);
   };
 
   return (
@@ -45,8 +46,18 @@ function MyDesign() {
         <input name="email" type="email" required placeholder="Your email*" />
         <input name="size" type="text" placeholder="Size(inches)" />
         <input name="filling" type="text" placeholder="Cake filling" />
-        <input name="pick_up_date" type="text" required placeholder="Pick up date*" />
-        <input name="pick_up_location" type="text" required placeholder="Pick up location*" />
+        <input
+          name="pick_up_date"
+          type="text"
+          required
+          placeholder="Pick up date*"
+        />
+        <input
+          name="pick_up_location"
+          type="text"
+          required
+          placeholder="Pick up location*"
+        />
         <textarea
           name="comment"
           placeholder="Add your comment"

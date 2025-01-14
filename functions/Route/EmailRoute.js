@@ -10,11 +10,11 @@ class EmailRoute extends BaseRouter {
   }
 
   initRoutes() {
-    this.router.post("/", this.controller.sendRequest);
+    this.router.post("/request", this.controller.request);
     this.router.post(
       "/mydesign",
       upload.single("img"),
-      this.controller.sendRequestMyDesign,
+      this.controller.requestMyDesign
     );
   }
 }

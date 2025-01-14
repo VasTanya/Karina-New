@@ -24,9 +24,9 @@ class AlbumsController {
       const albums = await this.AlbumsService.getAll(page, size);
       response(res, 200, albums);
     } catch (error) {
-      logger.error(`Error during getAll: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during getAll: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -41,9 +41,9 @@ class AlbumsController {
       const albumById = await this.AlbumsService.getById(_id, page, size);
       response(res, 200, albumById);
     } catch (error) {
-      logger.error(`Error during getById: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during getById: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -55,9 +55,9 @@ class AlbumsController {
       const albumDataItem = await this.AlbumsService.getItemById(_id, item);
       response(res, 200, albumDataItem);
     } catch (error) {
-      logger.error(`Error during getItemById: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during getItemById: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -68,9 +68,9 @@ class AlbumsController {
 
       response(res, 200, firstPhoto);
     } catch (error) {
-      logger.error(`Error during firstPhoto: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during firstPhoto: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -86,9 +86,9 @@ class AlbumsController {
 
       response(res, 200, search);
     } catch (error) {
-      logger.error(`Error during search: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during search: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -105,9 +105,9 @@ class AlbumsController {
 
       response(res, 200, editedAlbum);
     } catch (error) {
-      logger.error(`Error during editing album: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during editAlbum: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -127,9 +127,9 @@ class AlbumsController {
 
       response(res, 200, editedItem);
     } catch (error) {
-      logger.error(`Error during editing item: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during editItem: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -142,9 +142,9 @@ class AlbumsController {
 
       response(res, 200, addedAlbum);
     } catch (error) {
-      logger.error(`Error during editing item: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during addAlbum: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -163,9 +163,9 @@ class AlbumsController {
 
       response(res, 200, createdItem);
     } catch (error) {
-      logger.error(`Error during editing item: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during addItem: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -178,9 +178,9 @@ class AlbumsController {
 
       response(res, 200, deletedAlbum);
     } catch (error) {
-      logger.error(`Error during deleting album: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during deleteAlbum: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -193,9 +193,9 @@ class AlbumsController {
 
       response(res, 200, deletedItem);
     } catch (error) {
-      logger.error(`Error during deleting item: ${error}`);
+      logger.error(`[ALB-CTRL]: Error during deleteItem: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };

@@ -3,7 +3,7 @@ import { BaseController } from "./BaseController.js";
 
 class SlicesController extends BaseController {
   constructor() {
-    super(new SlicesService());
+    super(new SlicesService(), "SLC");
   }
 }
 

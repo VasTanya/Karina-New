@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 
 export const serviceAccount = {
   type: process.env.TYPE,
@@ -20,4 +20,5 @@ export const serviceAccount = {
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
   measurementId: process.env.MEASUREMENT_ID,
+  databaseURL: process.env.DATABASE_URL,
 };

@@ -26,9 +26,9 @@ class AdminController {
 
       response(res, 200, admin.message);
     } catch (error) {
-      logger.error(`Error during login: ${error}`);
+      logger.error(`[ADMIN-CTRL]: Error during login: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };
@@ -39,13 +39,10 @@ class AdminController {
 
       response(res, 201, seed);
     } catch (error) {
-      logger.error("Seed error:", error);
-      response(
-        res,
-        error.statusCode || 500,
-        "Error during seeding: ",
-        error.message
-      );
+      logger.error("[ADMIN-CTRL]: Error during seed:", error);
+      response(res, error.statusCode || 500, {
+        message: `Error during seeding: ${error.message}`,
+      });
     }
   };
 
@@ -55,13 +52,10 @@ class AdminController {
 
       response(res, 201, createdAdmin);
     } catch (error) {
-      logger.error("Seed error:", error);
-      response(
-        res,
-        error.statusCode || 500,
-        "Error during seeding: ",
-        error.message
-      );
+      logger.error("[ADMIN-CTRL]: Error during seedAdmin:", error);
+      response(res, error.statusCode || 500, {
+        message: `Error during seeding: ${error.message}`,
+      });
     }
   };
 
@@ -71,9 +65,9 @@ class AdminController {
 
       response(res, 200, logout);
     } catch (error) {
-      logger.error(`Error during logout: ${error}`);
+      logger.error(`[ADMIN-CTRL]: Error during logout: ${error}`);
       return response(res, error.statusCode || 500, {
-        _message: error.message,
+        message: error.message,
       });
     }
   };

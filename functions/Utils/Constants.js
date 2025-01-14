@@ -1,5 +1,4 @@
 export const ENV_VARS_LIST = {
-  PORT: "globals.port",
   MONGODB_URI: "globals.mongodb_uri",
   JWT_SECRET: "globals.jwt_secret",
   OG_MAIL: "mail.og_mail",
@@ -27,6 +26,7 @@ export const ENV_VARS_LIST = {
   MESSAGING_SENDER_ID: "config.messaging_sender_id",
   APP_ID: "config.app_id",
   MEASUREMENT_ID: "config.measurement_id",
+  DATABASE_URL: "config.database_url",
 };
 
 export const IMAGE_SIZES = {

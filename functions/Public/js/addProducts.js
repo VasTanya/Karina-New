@@ -185,8 +185,8 @@ const displaySlice = (definedAlbum) => {
       img: fileInput,
       src: fileInput.files[0]
         ? `${select.options[select.selectedIndex].text}/unset/${
-            fileInput.files[0].name
-          }`
+          fileInput.files[0].name
+        }`
         : "",
     })
   );
@@ -233,8 +233,8 @@ const displayRegular = (definedAlbum) => {
       img: fileInput,
       src: fileInput.files[0]
         ? `${select.options[select.selectedIndex].text}/unset/${
-            fileInput.files[0].name
-          }`
+          fileInput.files[0].name
+        }`
         : "",
     })
   );
@@ -301,8 +301,8 @@ const displayAlbumItem = (definedAlbum, albumId, index) => {
       tag: firstPhotoInput.querySelector("input").checked,
       src: fileInput.files[0]
         ? `${index + 1}.${select.options[select.selectedIndex].text}/unset/${
-            fileInput.files[0].name
-          }`
+          fileInput.files[0].name
+        }`
         : "",
       img: fileInput,
     })

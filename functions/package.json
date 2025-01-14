@@ -4,10 +4,10 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint . --fix",
-    "environment": "node Manager/EnvironmentManager.js",
+    "environment": "NODE_ENV=production node Manager/EnvironmentManager.js",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "nodemon App/DevelopmentApp.js",
+    "start": "NODE_ENV=development nodemon App/DevelopmentApp.js",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },

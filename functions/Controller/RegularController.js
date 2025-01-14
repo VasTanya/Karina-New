@@ -3,7 +3,7 @@ import { BaseController } from "./BaseController.js";
 
 class RegularController extends BaseController {
   constructor() {
-    super(new RegularService());
+    super(new RegularService(), "RGL");
   }
 }
 

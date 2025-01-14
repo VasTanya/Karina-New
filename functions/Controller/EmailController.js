@@ -1,20 +1,18 @@
 import expressAsyncHandler from "express-async-handler";
-import EmailService from "../Service/EmailService.js";
 import logger from "../Utils/Logger/Logger.js";
 import response from "../Utils/Response.js";
+import EmailManager from "../Manager/EmailManager.js";
 
-class EmailController {
+class EmailController extends EmailManager {
   constructor() {
-    this.EmailService = new EmailService();
-    this.sendRequest = expressAsyncHandler(this.sendRequest.bind(this));
-    this.sendRequestMyDesign = expressAsyncHandler(
-        this.sendRequestMyDesign.bind(this),
-    );
+    super();
+    this.request = expressAsyncHandler(this.request.bind(this));
+    this.requestMyDesign = expressAsyncHandler(this.requestMyDesign.bind(this));
   }
 
-  sendRequest = async (req, res) => {
+  request = async (req, res) => {
     try {
-      const message = await this.EmailService.sendRequest(req.body);
+      const message = await this.sendRequest(req.body);
 
       response(res, 200, message);
     } catch (error) {
@@ -23,9 +21,9 @@ class EmailController {
     }
   };
 
-  sendRequestMyDesign = async (req, res) => {
+  requestMyDesign = async (req, res) => {
     try {
-      const message = await this.EmailService.sendRequestMyDesign({
+      const message = await this.sendRequestMyDesign({
         file: req.files[0].originalname,
         ...req.body,
       });

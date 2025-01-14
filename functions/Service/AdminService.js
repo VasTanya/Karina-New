@@ -15,17 +15,20 @@ class AdminService {
   }
 
   login = async (email, password) => {
-    const admin = await this.Admin.findOne({ email: email });
-    console.log("ADMIN SERVICE", admin);
+    try {
+      const admin = await this.Admin.findOne({ email: email });
 
-    if (admin) {
-      if (bcrypt.compareSync(password, admin.password)) {
-        const token = generateToken(admin);
-        return { token: token, message: "Login successful" };
+      if (admin) {
+        if (bcrypt.compareSync(password, admin.password)) {
+          const token = generateToken(admin);
+          return { token: token, message: "Login successful" };
+        }
       }
-    }
 
-    return { message: "Wrong email or password" };
+      return { message: "Wrong email or password" };
+    } catch (error) {
+      logger.error("[ADM-SRV]: Error during login: ", error);
+    }
   };
 
   seed = async () => {
@@ -82,38 +85,33 @@ class AdminService {
       logger.error("[ADM-SRV]: ALBUM ITEM CREATION ERROR", error);
     }
 
-    // createdAlbums.forEach(async (album) => {
-    //   const correspondingAlbumData = createdAlbumData.find((albumData) =>
-    //     albumData.albumId.equals(album._id)
-    //   );
-    //   if (correspondingAlbumData) {
-    //     album.albumDataId = correspondingAlbumData._id;
-    //     await album.save();
-    //   }
-    // });
-
     return { message: "Seed successful" };
   };
 
   seedAdmin = async () => {
-    await this.Admin.deleteCollection();
+    try {
+      await this.Admin.deleteCollection();
 
-    const adminsToCreate = await Promise.all(
-      data.admins.map(async (admin) => {
-        const hashedPassword = await bcrypt.hash(admin.password, 10);
+      const adminsToCreate = await Promise.all(
+        data.admins.map(async (admin) => {
+          const hashedPassword = await bcrypt.hash(admin.password, 10);
 
-        return {
-          login: admin.login,
-          email: admin.email,
-          password: hashedPassword,
-          permissions: admin.permissions,
-        };
-      })
-    );
-    console.log(adminsToCreate);
-    await this.Admin.createCollection(adminsToCreate);
+          return {
+            login: admin.login,
+            email: admin.email,
+            password: hashedPassword,
+            permissions: admin.permissions,
+          };
+        })
+      );
 
-    return { message: "Admin seeded successfully" };
+      await this.Admin.createCollection(adminsToCreate);
+
+      return { message: "Admin seeded successfully" };
+    } catch (error) {
+      logger.error("[ADM-SRV]: Error seedAdmin: ", error);
+      return { message: "Error seeding admin" };
+    }
   };
 
   logout = async (req, res) => {

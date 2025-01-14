@@ -244,7 +244,7 @@ class DbService {
   };
 
   uploadImage = async (file, src) => {
-    const resizedImages = await this.storage.sharp.resizeAndConvert(file);
+    const resizedImages = await this.storage.resizeAndConvert(file);
 
     const filePaths = {};
     for (const file of resizedImages) {

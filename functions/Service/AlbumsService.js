@@ -12,7 +12,7 @@ class AlbumsService extends DbService {
     try {
       return this.find(page, size);
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during getAll", error);
+      logger.error("[ALB-SRV]: Error during getAll", error);
       return [];
     }
   };
@@ -26,7 +26,7 @@ class AlbumsService extends DbService {
         firstPhotos: item.data.filter((el) => el.tag === "firstPhoto"),
       }));
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during firstPhoto", error);
+      logger.error("[ALB-SRV]: Error during firstPhoto", error);
       return [];
     }
   };
@@ -53,7 +53,7 @@ class AlbumsService extends DbService {
 
       return paginatedAlbumData;
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during getById", error);
+      logger.error("[ALB-SRV]: Error during getById", error);
       return {};
     }
   };
@@ -68,7 +68,7 @@ class AlbumsService extends DbService {
 
       return albumDataItem;
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during getItemById", error);
+      logger.error("[ALB-SRV]: Error during getItemById", error);
       return {};
     }
   };
@@ -116,7 +116,7 @@ class AlbumsService extends DbService {
         return result;
       }
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during search", error);
+      logger.error("[ALB-SRV]: Error during search", error);
       return [];
     }
   };
@@ -127,7 +127,7 @@ class AlbumsService extends DbService {
 
       return { message: "Album updated successfully" };
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during editAlbum", error);
+      logger.error("[ALB-SRV]: Error during editAlbum", error);
       return { message: "Failed to edit album. Please try again later." };
     }
   };
@@ -172,7 +172,7 @@ class AlbumsService extends DbService {
       await albumDataRef.update({ data: albumData.data });
       return { message: "Item updated successfully" };
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during editItem", error);
+      logger.error("[ALB-SRV]: Error during editItem", error);
       return { message: "Failed to edit item. Please try again later." };
     }
   };
@@ -193,12 +193,12 @@ class AlbumsService extends DbService {
           count: 0,
         });
       } catch (error) {
-        logger.error("[ALB-SVC]: Error creating album", error);
+        logger.error("[ALB-SRV]: Error creating album", error);
       }
 
       return { message: "Album created succesfully" };
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during addAlbum", error);
+      logger.error("[ALB-SRV]: Error during addAlbum", error);
       return { message: "Failed to create album. Please try again later." };
     }
   };
@@ -240,7 +240,7 @@ class AlbumsService extends DbService {
       });
       return { message: "Album item created successfully" };
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during addItem", error);
+      logger.error("[ALB-SRV]: Error during addItem", error);
       return {
         message: "Failed to create album item. Please try again later.",
       };
@@ -290,33 +290,43 @@ class AlbumsService extends DbService {
       });
       return { message: "Item deleted successfully" };
     } catch (error) {
-      logger.error("[ALB-SVC]: Error during deleteItem", error);
+      logger.error("[ALB-SRV]: Error during deleteItem", error);
       return { message: "Failed to delete item. Please try again later." };
     }
   };
 
   findOneAndPopulate = async (id) => {
-    const [{ albumId, ...albumDataById }, album] = await Promise.all([
-      this.albumData.findOne({ albumId: id }),
-      this.findById(id),
-    ]);
+    try {
+      const [{ albumId, ...albumDataById }, album] = await Promise.all([
+        this.albumData.findOne({ albumId: id }),
+        this.findById(id),
+      ]);
 
-    return { albumId: album, ...albumDataById };
+      return { albumId: album, ...albumDataById };
+    } catch (error) {
+      logger.error("[ALB-SRV]: Error during findOneAndPopulate", error);
+      return null;
+    }
   };
 
   findAllAndPopulate = async (id) => {
-    const [albumDataById, album] = await Promise.all([
-      this.albumData.findAll(),
-      this.findAll(),
-    ]);
+    try {
+      const [albumDataById, album] = await Promise.all([
+        this.albumData.findAll(),
+        this.findAll(),
+      ]);
 
-    return albumDataById.map(({ albumId, ...el }) => {
-      const albumToSet = album.find((album) => album._id === albumId);
-      return {
-        albumId: albumToSet,
-        ...el,
-      };
-    });
+      return albumDataById.map(({ albumId, ...el }) => {
+        const albumToSet = album.find((album) => album._id === albumId);
+        return {
+          albumId: albumToSet,
+          ...el,
+        };
+      });
+    } catch (error) {
+      logger.error("[ALB-SRV]: Error during findAllAndPopulate", error);
+      return [];
+    }
   };
 }
 

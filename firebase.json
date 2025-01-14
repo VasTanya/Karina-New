@@ -48,7 +48,7 @@
           "function": "basics"
         },
         {
-          "source": "/request/**",
+          "source": "/email/**",
           "function": "email"
         },
         {
