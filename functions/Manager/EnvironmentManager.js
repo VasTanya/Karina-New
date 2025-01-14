@@ -7,7 +7,9 @@ dotenv.config();
 
 class EnvironmentManager {
   constructor() {
-    this.env = dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
+    this.env = dotenv.config({
+      path: `./.env.${process.env.NODE_ENV || "production"}`,
+    }).parsed;
   }
 
   loadFirebaseConfig() {
