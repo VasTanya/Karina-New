@@ -18,6 +18,7 @@ import ViewsRoute from "../Route/ViewsRouter.js";
 import Cron from "../Utils/Cron.js";
 import { connection } from "../Config/Firebase.js";
 import logger from "../Utils/Logger/Logger.js";
+import requestLogger from "../Utils/Logger/RequestLogger.js";
 
 const developmentApp = express();
 dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
@@ -31,6 +32,7 @@ developmentApp.use(express.json({ limit: "50mb" }));
 developmentApp.use(express.urlencoded({ extended: true, limit: "50mb" }));
 developmentApp.use(cookieParser());
 developmentApp.use(apiLogger);
+developmentApp.use(requestLogger);
 
 developmentApp.set("view engine", "ejs");
 

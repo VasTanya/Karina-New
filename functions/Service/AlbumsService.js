@@ -19,12 +19,43 @@ class AlbumsService extends DbService {
 
   firstPhoto = async () => {
     try {
-      const albumData = await this.findAllAndPopulate();
+      const albumData = await this.albumData.collection.get();
 
-      return albumData.map((item) => ({
-        album: item.albumId,
-        firstPhotos: item.data.filter((el) => el.tag === "firstPhoto"),
-      }));
+      const firstPhotos = albumData.docs
+        .map((doc) => {
+          const { albumId, data } = doc.data();
+          const firstPhoto = Array.isArray(data)
+            ? data.filter((el) => el.tag === "firstPhoto")
+            : [];
+          return firstPhoto.length > 0 ? { albumId, firstPhoto } : null;
+        })
+        .filter(Boolean);
+
+      const albumIds = firstPhotos.map((el) => el.albumId);
+      const albumPromises = albumIds.map((id) => this.findById(id));
+      const albums = await Promise.all(albumPromises);
+
+      const albumMap = albums.reduce((acc, album) => {
+        acc[album._id] = album;
+        return acc;
+      }, {});
+
+      const firstPhotoWithAlbum = await Promise.all(
+        firstPhotos.map(async (el) => {
+          const album = albumMap[el.albumId];
+          const firstPhoto = await Promise.all(
+            el.firstPhoto.map(async ({ src, ...rest }) => ({
+              ...rest,
+              src: await this.mapUrls(src),
+            }))
+          );
+          return { album, firstPhotos: firstPhoto };
+        })
+      );
+
+      return firstPhotoWithAlbum.sort(
+        (a, b) => a.album.album_number - b.album.album_number
+      );
     } catch (error) {
       logger.error("[ALB-SRV]: Error during firstPhoto", error);
       return [];

@@ -50,7 +50,6 @@ class EnvironmentManager {
   }
 
   setEnvironment() {
-    console.log(this.env);
     try {
       const localEnvVars = {};
       const newEnvVars = {};

@@ -8,7 +8,7 @@ class DbService {
     this.storage = storage;
   }
 
-  find = async (page = 1, size = 20) => {
+  find = async (page, size) => {
     const orderingField =
       this.collectionName === "albums" ? "album_number" : "display_number";
 
@@ -29,7 +29,7 @@ class DbService {
       snapshot.docs.map(async (doc) => await this.mapDoc(doc))
     );
 
-    return docs;
+    return docs.sort((a, b) => a[orderingField] - b[orderingField]);
   };
 
   findAll = async () => {

@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import corsOptions from "../Config/CorsOptions.js";
 import credentials from "../Config/Credentials.js";
 import apiLogger from "../Utils/Logger/ApiLogger.js";
+import requestLogger from "../Utils/Logger/RequestLogger.js";
 
 const common = (app) => {
   app.use(credentials);
@@ -13,6 +14,7 @@ const common = (app) => {
   app.use(express.urlencoded({ extended: true, limit: "50mb" }));
   app.use(cookieParser());
   app.use(apiLogger);
+  app.use(requestLogger);
 };
 
 export default common;
