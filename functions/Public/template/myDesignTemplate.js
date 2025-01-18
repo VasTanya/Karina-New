@@ -33,10 +33,7 @@ export const myDesignTemplate = (data) => {
       <body>
         <div class="container">
             <center><h1>Client Design Request</h1></center>
-            <p><center><img src="https://www.karinas515.com/img/mydesign/${data.file.replace(
-    / /g,
-    "%20"
-  )}"></center></p>
+            <p><center><img src="${data.img}"></center></p>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Phone:</strong> ${data.phone}</p>
             <p><strong>Email:</strong> ${data.email}</p>

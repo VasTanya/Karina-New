@@ -20,9 +20,8 @@ function AllAlbomsPhoto() {
   const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />);
 
   const getUrl_Id_Albums = async () => {
-    const url_Id_Albums = `${
-      process.env.REACT_APP_API_URL
-    }/albums/${id}?page=${currentPage}&size=${48}`;
+    const queryString = `page=${currentPage}&size=${48}&url=true&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
+    const url_Id_Albums = `${process.env.REACT_APP_API_URL}/albums/${id}?${queryString}`;
     dispatch(fetch_Id_Albums({ url_Id_Albums }));
   };
 

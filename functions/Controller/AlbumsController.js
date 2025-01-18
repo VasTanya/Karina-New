@@ -2,6 +2,7 @@ import expressAsyncHandler from "express-async-handler";
 import AlbumsService from "../Service/AlbumsService.js";
 import response from "../Utils/Response.js";
 import logger from "../Utils/Logger/Logger.js";
+import queryParser from "../Utils/QueryParser.js";
 
 class AlbumsController {
   constructor() {
@@ -19,9 +20,8 @@ class AlbumsController {
 
   getAll = async (req, res) => {
     try {
-      const page = parseInt(req.query.page);
-      const size = parseInt(req.query.size);
-      const albums = await this.AlbumsService.getAll(page, size);
+      const query = queryParser(req.query);
+      const albums = await this.AlbumsService.getAll(query);
       response(res, 200, albums);
     } catch (error) {
       logger.error(`[ALB-CTRL]: Error during getAll: ${error}`);
@@ -34,11 +34,8 @@ class AlbumsController {
   getById = async (req, res) => {
     try {
       const { _id } = req.params;
-      const page = parseInt(req.query.page) || 1;
-      const size =
-        req.query.size === "all" ? -1 : parseInt(req.query.size) || 10;
-
-      const albumById = await this.AlbumsService.getById(_id, page, size);
+      const query = queryParser(req.query);
+      const albumById = await this.AlbumsService.getById(_id, query);
       response(res, 200, albumById);
     } catch (error) {
       logger.error(`[ALB-CTRL]: Error during getById: ${error}`);
@@ -64,7 +61,8 @@ class AlbumsController {
 
   firstPhoto = async (req, res) => {
     try {
-      const firstPhoto = await this.AlbumsService.firstPhoto();
+      const query = queryParser(req.query);
+      const firstPhoto = await this.AlbumsService.firstPhoto(query);
 
       response(res, 200, firstPhoto);
     } catch (error) {
@@ -77,12 +75,9 @@ class AlbumsController {
 
   search = async (req, res) => {
     try {
-      const { album_number, display_number } = req.query;
+      const query = queryParser(req.query);
 
-      const search = await this.AlbumsService.search(
-        parseInt(album_number),
-        parseInt(display_number)
-      );
+      const search = await this.AlbumsService.search(query);
 
       response(res, 200, search);
     } catch (error) {

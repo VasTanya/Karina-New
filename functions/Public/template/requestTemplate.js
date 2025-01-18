@@ -32,10 +32,7 @@ export const requestTemplate = (data) => {
       </head>
       <body>
         <div class="container">
-          <p><center><img src="https://www.karinas515.com${data.img.replace(
-    / /g,
-    "%20"
-  )}"></center></p>
+          <p><center><img src="${data.img}"></center></p>
           <h1>New Request For ${data.cakeCode}</h1>
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>

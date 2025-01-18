@@ -49,15 +49,41 @@ class EnvironmentManager {
     }
   }
 
+  removeFirebaseEnv(vars) {
+    try {
+      for (const key of vars) {
+        const cmd = `firebase functions:config:unset ${key}`;
+        try {
+          execSync(cmd, { stdio: "inherit" });
+          logger.info(`[ENV-MNGR]: SUCCESSFULLY REMOVED ${key}`);
+        } catch (error) {
+          logger.error(`[ENV-MNGR]: FAILED TO REMOVE ${key}:`, error);
+        }
+      }
+    } catch (error) {
+      logger.error("[ENV-MNGR]: ERROR SETTING FIREBASE ENVIRONMENT:", error);
+    }
+  }
+
   setEnvironment() {
     try {
       const localEnvVars = {};
       const newEnvVars = {};
       const currentEnvVars = this.getCurrentFirebaseEnv();
+      const envsToRemove = [];
 
       for (const [key, value] of Object.entries(this.env)) {
         if (ENV_VARS_LIST[key] && value) {
           localEnvVars[ENV_VARS_LIST[key]] = value;
+        }
+      }
+
+      for (const [key, value] of Object.entries(currentEnvVars)) {
+        const allowedKeys = Object.values(ENV_VARS_LIST);
+        for (const keyToCheck of Object.keys(value)) {
+          if (!allowedKeys.includes(`${key}.${keyToCheck}`)) {
+            envsToRemove.push(`${key}.${keyToCheck}`);
+          }
         }
       }
 
@@ -73,8 +99,10 @@ class EnvironmentManager {
         }
       }
 
-      if (Object.keys(newEnvVars).length) {
-        this.setFirebaseEnv(newEnvVars);
+      if (envsToRemove.length) this.removeFirebaseEnv(envsToRemove);
+      if (Object.keys(newEnvVars).length) this.setFirebaseEnv(newEnvVars);
+
+      if (envsToRemove.length || Object.keys(newEnvVars).length) {
         logger.info("[ENV-MNGR]: FINISHED UPDATING FIREBASE ENVIRONMENT");
       } else {
         logger.info("[ENV-MNGR]: NO NEW VARIABLES DETECTED");

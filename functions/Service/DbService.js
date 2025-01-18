@@ -8,7 +8,7 @@ class DbService {
     this.storage = storage;
   }
 
-  find = async (page, size) => {
+  find = async ({ page, size, select }) => {
     const orderingField =
       this.collectionName === "albums" ? "album_number" : "display_number";
 
@@ -26,23 +26,23 @@ class DbService {
     const snapshot = await query.get();
 
     const docs = await Promise.all(
-      snapshot.docs.map(async (doc) => await this.mapDoc(doc))
+      snapshot.docs.map(async (doc) => await this.mapDoc(doc, true, select))
     );
 
     return docs.sort((a, b) => a[orderingField] - b[orderingField]);
   };
 
-  findAll = async () => {
+  findAll = async ({ url, select }) => {
     const snapshot = await this.collection.get();
 
     const docs = await Promise.all(
-      snapshot.docs.map(async (doc) => await this.mapDoc(doc))
+      snapshot.docs.map(async (doc) => await this.mapDoc(doc, url, select))
     );
 
     return docs;
   };
 
-  findOne = async (query, getUrl = true) => {
+  findOne = async (query, { url = true, select }) => {
     try {
       const [key, value] = Object.entries(query)[0];
 
@@ -52,7 +52,7 @@ class DbService {
         .get();
 
       const docs = await Promise.all(
-        snapshot.docs.map(async (doc) => await this.mapDoc(doc, getUrl))
+        snapshot.docs.map(async (doc) => await this.mapDoc(doc, url, select))
       );
 
       return docs[0];
@@ -73,13 +73,13 @@ class DbService {
     return docs;
   };
 
-  findAlbums = async (page) => {
+  findAlbums = async () => {
     const snapshot = await this.collection.get();
 
     return Promise.all(snapshot.docs.map((doc) => this.mapDoc(doc, false)));
   };
 
-  findById = async (id) => {
+  findById = async (id, { url, select }) => {
     const docRef = await this.collection.doc(id).get();
 
     if (!docRef.exists) {
@@ -87,7 +87,7 @@ class DbService {
       return {};
     }
 
-    return this.mapDoc(docRef);
+    return this.mapDoc(docRef, url, select);
   };
 
   findByIdAndUpdate = async (id, data) => {
@@ -175,6 +175,7 @@ class DbService {
       const hasAlbum = Object.keys(doc).includes("album");
 
       if (hasAlbum) {
+        // eslint-disable-next-line no-unused-vars
         const { album, ...rest } = doc;
         doc = rest;
       }
@@ -211,18 +212,18 @@ class DbService {
     );
   };
 
-  mapDoc = async (doc, getUrl = true) => {
+  mapDoc = async (doc, getUrl = true, select) => {
     const _id = doc.id;
     const data = doc.data();
 
     if (getUrl) {
       if (data.src && Object.keys(data.src).length) {
-        const mappedUrls = await this.mapUrls(data.src);
+        const mappedUrls = await this.mapUrls(data.src, select);
         data.src = mappedUrls;
       } else if (data.data) {
         for (const item of data.data) {
           if (item.src) {
-            const mappedUrls = await this.mapUrls(item.src);
+            const mappedUrls = await this.mapUrls(item.src, select);
             item.src = mappedUrls;
           }
         }
@@ -232,19 +233,20 @@ class DbService {
     return { _id, ...data };
   };
 
-  mapUrls = async (urls) => {
+  mapUrls = async (urls, select = ["*"]) => {
     const mappedUrls = {};
-
     for (const [key, value] of Object.entries(urls)) {
-      const path = await this.storage.getUrl(value);
-      mappedUrls[key] = path;
+      if (select[0] === "*" || select.includes(key)) {
+        const path = await this.storage.getUrl(value);
+        mappedUrls[key] = path;
+      }
     }
 
     return mappedUrls;
   };
 
   uploadImage = async (file, src) => {
-    const resizedImages = await this.storage.resizeAndConvert(file);
+    const resizedImages = await this.storage.resizeManyAndConvert(file);
 
     const filePaths = {};
     for (const file of resizedImages) {

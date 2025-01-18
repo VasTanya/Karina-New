@@ -1,10 +1,10 @@
 export const ENV_VARS_LIST = {
   MONGODB_URI: "globals.mongodb_uri",
   JWT_SECRET: "globals.jwt_secret",
-  OG_MAIL: "mail.og_mail",
-  OG_MAIL_PASS: "mail.og_mail_pass",
+  ADMIN_MAIL_USERNAME: "mail.admin_mail",
+  ADMIN_MAIL_PASSWORD: "mail.admin_mail_password",
   SUPPORT_MAIL: "mail.support_mail",
-  SUPPORT_MAIL_PASS: "mail.support_mail_pass",
+  SUPPORT_MAIL_PASSWORD: "mail.support_mail_password",
   MAIL_SERVICE: "mail.mail_service",
   MAIL_HOST: "mail.mail_host",
   MAIL_PORT: "mail.mail_port",
@@ -34,3 +34,11 @@ export const IMAGE_SIZES = {
   md: { width: 268, height: 326 },
   lg: { width: 384, height: 384 },
 };
+
+export const DEFAULT_IMAGE = "noPhoto.jpeg";
+
+export const NO_PHOTO_URLS = Object.keys(IMAGE_SIZES).reduce((acc, size) => {
+  acc[size] = DEFAULT_IMAGE;
+
+  return acc;
+}, {});

@@ -56,18 +56,10 @@ export const fetch_myDesign_Order = createAsyncThunk(
   "fetchMyDesignOrder",
   async (params, thunkAPI) => {
     const { url, datainp } = params;
-
-    console.log("====================================");
-    console.log("getUrl data:", datainp);
-    console.log("====================================");
-
     try {
       const { data } = await axios.post(url, datainp, {
         withCredentials: true,
       });
-      console.log("====================================");
-      console.log(":DATA: ", data);
-      console.log("====================================");
       // if (thunkAPI.length === 0 || typeof data === "string") {
       //   return thunkAPI.rejectWithValue("error");
       // }

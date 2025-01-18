@@ -2,7 +2,7 @@ const tableNav = document.querySelectorAll(".tableNav");
 
 const fetchGetFunction = async (nav, query) => {
   try {
-    const response = await fetch(!query ? `/${nav}` : `/${nav}/${query}`);
+    const response = await fetch(query ? `/${nav}?${query}` : `/${nav}`);
 
     if (!response.ok) {
       throw new Error("Error during get", response.status);
@@ -279,7 +279,10 @@ const deleteFunction = async (nav, item, albumId) => {
 };
 
 const displaySlices = async (nav) => {
-  const data = await fetchGetFunction(nav);
+  const data = await fetchGetFunction(
+    nav,
+    `url=true&select=${encodeURIComponent(JSON.stringify(["sm"]))}`
+  );
 
   const existingDataRows = document.querySelectorAll("#table tr.data-row");
   existingDataRows.forEach((row) => {
@@ -336,7 +339,10 @@ const displaySlices = async (nav) => {
 };
 
 const displayRegular = async (nav) => {
-  const data = await fetchGetFunction(nav);
+  const data = await fetchGetFunction(
+    nav,
+    `url=true&select=${encodeURIComponent(JSON.stringify(["sm"]))}`
+  );
 
   const existingDataRows = document.querySelectorAll("#table tr.data-row");
   existingDataRows.forEach((row) => {
@@ -394,8 +400,10 @@ const displayRegular = async (nav) => {
 
 const displayAlbumData = async (nav, album) => {
   const { albumId, data } = await fetchGetFunction(
-    nav,
-    `${album._id}?page=1&size=all`
+    `${nav}/${album._id}`,
+    `page=1&size=*&url=true&select=${encodeURIComponent(
+      JSON.stringify(["sm"])
+    )}`
   );
 
   table.innerHTML = "";

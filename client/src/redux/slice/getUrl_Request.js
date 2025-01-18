@@ -13,9 +13,7 @@ export const fetch_Request = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      console.log("====================================");
-      console.log(":DATA: ", data);
-      console.log("====================================");
+
       if (thunkAPI.length === 0 || typeof data === "string") {
         return thunkAPI.rejectWithValue("error");
       }

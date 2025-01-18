@@ -1,3 +1,4 @@
+import { NO_PHOTO_URLS } from "../Utils/Constants.js";
 import logger from "../Utils/Logger/Logger.js";
 import DbService from "./DbService.js";
 
@@ -8,9 +9,9 @@ export class BaseService extends DbService {
     this.dataTitle = this.setDataTitle(serviceName);
   }
 
-  getAll = async () => {
+  getAll = async (query) => {
     try {
-      return this.find();
+      return this.find(query);
     } catch (error) {
       logger.error(`[${this.logType}-SRV]: Error during getAll: `, error);
       return [];
@@ -49,11 +50,7 @@ export class BaseService extends DbService {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
       } else {
-        data.src = {
-          sm: "noPhoto (sm).jpeg",
-          md: "noPhoto (md).jpeg",
-          lg: "noPhoto (lg).jpeg",
-        };
+        data.src = NO_PHOTO_URLS;
       }
 
       await this.create({

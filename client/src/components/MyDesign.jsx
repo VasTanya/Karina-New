@@ -25,7 +25,6 @@ function MyDesign() {
     } catch (error) {
       console.error("Error:", error);
     }
-    console.log(status);
   };
 
   return (

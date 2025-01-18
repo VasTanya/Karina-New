@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import response from "../Utils/Response.js";
+import queryParser from "../Utils/QueryParser.js";
 import logger from "../Utils/Logger/Logger.js";
 
 export class BaseController {
@@ -15,7 +16,8 @@ export class BaseController {
 
   getAll = async (req, res) => {
     try {
-      const data = await this.service.getAll();
+      const query = queryParser(req.query);
+      const data = await this.service.getAll(query);
       response(res, 200, data);
     } catch (error) {
       logger.error(`[${this.type}-CTRL]: Error during getAll: `, error);

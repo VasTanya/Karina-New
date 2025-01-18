@@ -1,6 +1,7 @@
 import { v4 as uuid4 } from "uuid";
 import DbService from "./DbService.js";
 import logger from "../Utils/Logger/Logger.js";
+import { NO_PHOTO_URLS } from "../Utils/Constants.js";
 
 class AlbumsService extends DbService {
   constructor() {
@@ -8,16 +9,16 @@ class AlbumsService extends DbService {
     this.albumData = new DbService("albumData");
   }
 
-  getAll = async (page, size) => {
+  getAll = async (query) => {
     try {
-      return this.find(page, size);
+      return this.find(query);
     } catch (error) {
       logger.error("[ALB-SRV]: Error during getAll", error);
       return [];
     }
   };
 
-  firstPhoto = async () => {
+  firstPhoto = async ({ url, select }) => {
     try {
       const albumData = await this.albumData.collection.get();
 
@@ -32,7 +33,9 @@ class AlbumsService extends DbService {
         .filter(Boolean);
 
       const albumIds = firstPhotos.map((el) => el.albumId);
-      const albumPromises = albumIds.map((id) => this.findById(id));
+      const albumPromises = albumIds.map((id) =>
+        this.findById(id, { url, select })
+      );
       const albums = await Promise.all(albumPromises);
 
       const albumMap = albums.reduce((acc, album) => {
@@ -46,7 +49,7 @@ class AlbumsService extends DbService {
           const firstPhoto = await Promise.all(
             el.firstPhoto.map(async ({ src, ...rest }) => ({
               ...rest,
-              src: await this.mapUrls(src),
+              src: await this.mapUrls(src, select),
             }))
           );
           return { album, firstPhotos: firstPhoto };
@@ -62,27 +65,32 @@ class AlbumsService extends DbService {
     }
   };
 
-  getById = async (id, page, size) => {
+  getById = async (id, { page = 1, size = 10, url, select }) => {
     try {
       const skip = (page - 1) * size;
 
-      const mappedAlbumData = await this.findOneAndPopulate(id);
+      // eslint-disable-next-line no-unused-vars
+      const [{ albumId, ...albumDataById }, album] = await Promise.all([
+        this.albumData.findOne({ albumId: id }, { url: false }),
+        this.findById(id, { url: false }),
+      ]);
 
-      if (!mappedAlbumData) return {};
+      if (!albumDataById) return {};
 
       const paginatedArray =
         size === -1
-          ? mappedAlbumData.data
-          : mappedAlbumData.data.slice(skip, skip + size);
+          ? albumDataById.data
+          : albumDataById.data.slice(skip, skip + size);
 
-      const paginatedAlbumData = {
-        ...mappedAlbumData,
-        data: paginatedArray.sort(
-          (a, b) => a.display_number - b.display_number
-        ),
-      };
+      const paginatedAlbumData = await Promise.all(
+        paginatedArray.map(async ({ src, ...rest }) => {
+          const mappedSrc = await this.mapUrls(src, select);
 
-      return paginatedAlbumData;
+          return { ...rest, src: mappedSrc };
+        })
+      );
+
+      return { albumId: album, ...albumDataById, data: paginatedAlbumData };
     } catch (error) {
       logger.error("[ALB-SRV]: Error during getById", error);
       return {};
@@ -104,14 +112,21 @@ class AlbumsService extends DbService {
     }
   };
 
-  search = async (albumNumber, displayNumber) => {
+  search = async (query) => {
+    const { album_number, display_number, ...rest } = query;
+    const albumNumber = album_number;
+    const displayNumber = display_number;
+
     try {
-      const albums = await this.findAllAndPopulate();
+      let result = [];
 
       if (!displayNumber) {
-        const result = albums.filter(
-          (query) => query.albumId.album_number === albumNumber
-        );
+        const albums = await this.findAll({ url: false });
+        result = albums
+          .filter((album) =>
+            album.album_number.toString().includes(albumNumber.toString())
+          )
+          .sort((a, b) => a.album_number - b.album_number);
 
         if (result.length === 0) {
           return { message: `No result for album number ${albumNumber}` };
@@ -119,24 +134,29 @@ class AlbumsService extends DbService {
 
         return result;
       } else {
-        const matchingAlbums = albums.filter(
-          (query) => query.albumId.album_number === albumNumber
+        const { _id, ...album } = await this.findOne(
+          { album_number: albumNumber },
+          { url: false }
         );
 
-        const result = [];
+        const albumData = await this.albumData.findOne(
+          { albumId: _id },
+          { url: false }
+        );
 
-        matchingAlbums.forEach((album) => {
-          const matchingData = album.data.find(
-            (data) => data.display_number === displayNumber
-          );
+        const matchingData = albumData.data.find((data) =>
+          data.display_number.toString().includes(displayNumber.toString())
+        );
 
-          if (matchingData) {
-            result.push({
-              album_number: album.albumId.album_number,
-              matching_data: matchingData,
-            });
-          }
-        });
+        const mappedUrls = await this.mapUrls(matchingData.src, rest.select);
+        matchingData.src = mappedUrls;
+
+        if (matchingData) {
+          result.push({
+            album_number: album.album_number,
+            matching_data: matchingData,
+          });
+        }
 
         if (result.length === 0) {
           return {
@@ -249,11 +269,7 @@ class AlbumsService extends DbService {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
       } else {
-        data.src = {
-          sm: "noPhoto (sm).jpeg",
-          md: "noPhoto (md).jpeg",
-          lg: "noPhoto (lg).jpeg",
-        };
+        data.src = NO_PHOTO_URLS;
       }
 
       const newItem = {
@@ -326,11 +342,11 @@ class AlbumsService extends DbService {
     }
   };
 
-  findOneAndPopulate = async (id) => {
+  findOneAndPopulate = async (id, query) => {
     try {
       const [{ albumId, ...albumDataById }, album] = await Promise.all([
-        this.albumData.findOne({ albumId: id }),
-        this.findById(id),
+        this.albumData.findOne({ albumId: id }, query),
+        this.findById(id, query),
       ]);
 
       return { albumId: album, ...albumDataById };
@@ -340,11 +356,11 @@ class AlbumsService extends DbService {
     }
   };
 
-  findAllAndPopulate = async (id) => {
+  findAllAndPopulate = async (query) => {
     try {
       const [albumDataById, album] = await Promise.all([
-        this.albumData.findAll(),
-        this.findAll(),
+        this.albumData.findAll(query),
+        this.findAll(query),
       ]);
 
       return albumDataById.map(({ albumId, ...el }) => {

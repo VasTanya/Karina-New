@@ -16,7 +16,7 @@ class AdminService {
 
   login = async (email, password) => {
     try {
-      const admin = await this.Admin.findOne({ email: email });
+      const admin = await this.Admin.findOne({ email: email }, { url: false });
 
       if (admin) {
         if (bcrypt.compareSync(password, admin.password)) {

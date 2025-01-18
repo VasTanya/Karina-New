@@ -9,7 +9,8 @@ function Slices() {
   const dataSlice = dataSlices.data;
 
   const getUrlSlices = async () => {
-    const urlSlices = `${process.env.REACT_APP_API_URL}/basics/slices`;
+    const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
+    const urlSlices = `${process.env.REACT_APP_API_URL}/basics/slices?${queryString}`;
     dispatch(fetchSlice({ urlSlices }));
   };
   useEffect(() => {

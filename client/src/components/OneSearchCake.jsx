@@ -17,11 +17,8 @@ function OneSearchCake() {
   const resultPrevDot = searchValue.slice(0, idxSin);
   const resultNextDot = searchValue.slice(idxSin + 1);
 
-  // console.log(dataSearch);
-  // console.log(searchValue);
-
   const getUrlSearch = async () => {
-    const urlSearch = `${process.env.REACT_APP_API_URL}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}`;
+    const urlSearch = `${process.env.REACT_APP_API_URL}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
     dispatch(fetchSearch({ urlSearch }));
   };
 
@@ -45,7 +42,7 @@ function OneSearchCake() {
             ? isLoading
             : dataSearch?.map((el) => (
                 <div key={el.album_number} className="one_cake_div">
-                  <img src={el.matching_data.src} alt="" />
+                  <img src={el.matching_data.src.lg} alt="" />
                   <p>
                     {el.album_number + dot + el.matching_data.display_number}
                   </p>

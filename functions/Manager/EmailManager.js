@@ -18,7 +18,7 @@ class EmailManager {
         user: process.env.ADMIN_MAIL_USERNAME,
         pass: process.env.ADMIN_MAIL_PASSWORD,
       },
-      logger: true,
+      logger,
     });
     this.sendRequest = expressAsyncHandler(this.sendRequest.bind(this));
     this.sendRequestMyDesign = expressAsyncHandler(

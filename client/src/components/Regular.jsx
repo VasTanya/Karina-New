@@ -9,7 +9,8 @@ function Regular() {
   const dataRegularCake = dataRegular.data;
 
   const getUrlRegular = async () => {
-    const urlRegular = `${process.env.REACT_APP_API_URL}/basics/regular`;
+    const queryString = `page=1&size=10&select=${encodeURIComponent(JSON.stringify(["md"]))}`;
+    const urlRegular = `${process.env.REACT_APP_API_URL}/basics/regular?${queryString}`;
     dispatch(fetchRegular({ urlRegular }));
   };
 
