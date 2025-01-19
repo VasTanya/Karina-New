@@ -1,68 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// export const fetch_myDesign_Order = createAsyncThunk(
-//   "fetch_myDesign_Order",
-//   async (params, thunkAPI) => {
-//     const { url, datainp } = params;
-
-//     console.log('getUrl data',datainp);
-//     try {
-//       const { data } = await axios.post(url, datainp, {
-//         withCredentials: true,
-//         headers: {
-//             "Content-Type": "multipart/form-data",
-//         },
-//         body: datainp,
-//       });
-
-//       if (thunkAPI.length === 0 || typeof data === "string") {
-//         return thunkAPI.rejectWithValue("error");
-//       }
-//        return thunkAPI.fulfillWithValue(data);
-
-//     } catch (error) {
-//       console.error("Error in fetch_myDesign_Order:", error);
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-// }
-// );
-
-// export const fetch_myDesign_Order = createAsyncThunk(
-//   "fetchMyDesignOrder",
-//   async (params, thunkAPI) => {
-//     const { url, datainp } = params;
-
-//     console.log("getUrl data:", datainp);
-
-//     try {
-//       const { data } = await axios.post(url, datainp, {
-//         withCredentials: true,
-//         // body: datainp,
-//       });
-
-//       // if (thunkAPI.length === 0 || typeof data === "string") {
-//       //   return thunkAPI.rejectWithValue("error");
-//       // }
-//       return thunkAPI.fulfillWithValue(data);
-//     } catch (error) {
-//       console.error("Error in fetchMyDesignOrder:", error);
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const fetch_myDesign_Order = createAsyncThunk(
   "fetchMyDesignOrder",
   async (params, thunkAPI) => {
-    const { url, datainp } = params;
+    const { url, content } = params;
     try {
-      const { data } = await axios.post(url, datainp, {
+      const { data } = await axios.post(url, content, {
         withCredentials: true,
       });
-      // if (thunkAPI.length === 0 || typeof data === "string") {
-      //   return thunkAPI.rejectWithValue("error");
-      // }
+
+      if (data.status === "error") {
+        return thunkAPI.rejectWithValue(data);
+      }
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.error("Error in fetchMyDesignOrder:", error);
@@ -83,30 +33,39 @@ const initialState = {
       comment: "",
     },
   ],
-  status: "loading",
+  status: "",
 };
 
 const getUrl_myDesign = createSlice({
   name: "requestToMail_myDesign",
   initialState,
-  redusers: {},
+  reducers: {
+    resetState: (state) => {
+      state.status = "";
+      state.data_myDesign_order = [];
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetch_myDesign_Order.pending, (state) => {
         state.status = "loading";
         state.data_myDesign_order = [];
       })
-
       .addCase(fetch_myDesign_Order.fulfilled, (state, action) => {
-        state.status = "successful";
+        state.status = action.payload.status || "successful";
         state.data_myDesign_order = action.payload;
+        state.message = action.payload.message || "Your letter has been sent";
       })
-      .addCase(fetch_myDesign_Order.rejected, (state) => {
-        state.status = "error";
-        state.data_myDesign_order = [];
+      .addCase(fetch_myDesign_Order.rejected, (state, action) => {
+        state.status = action.payload.status || "error";
+        state.data_myDesign_order = action.payload;
+        state.message =
+          action.payload.message ||
+          "Something went wrong. Please try again later";
       });
   },
 });
 
-// export const {} = getUrl.actions;
+export const { resetState } = getUrl_myDesign.actions;
 export default getUrl_myDesign.reducer;

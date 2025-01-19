@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch_myDesign_Order } from "../redux/slice/getUrl_MyDesign";
 import { useNavigate } from "react-router-dom";
+import { uploadImage } from "../firebase/functions/uploadImage";
 
 function MyDesign() {
   const navigate = useNavigate();
@@ -11,21 +12,25 @@ function MyDesign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const content = await uploadImage("MyDesign", formData);
 
     const url_request_myDesign = `${process.env.REACT_APP_API_URL}/email/mydesign`;
     try {
-      dispatch(
-        fetch_myDesign_Order({ url: url_request_myDesign, datainp: formData })
-      );
-      if (status === "successful" || status === "loading") {
-        navigate("/sentRequest");
-      } else {
-        navigate("/error");
-      }
+      dispatch(fetch_myDesign_Order({ url: url_request_myDesign, content }));
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  useEffect(() => {
+    if (status === "loading") {
+      navigate("/requestPending");
+    } else if (status === "successful") {
+      navigate("/sentRequest");
+    } else if (status === "error") {
+      navigate("/error");
+    }
+  }, [status, navigate]);
 
   return (
     <div className="add_your_photo">

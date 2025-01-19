@@ -25,6 +25,8 @@ class EmailController extends EmailManager {
   };
 
   requestMyDesign = async (req, res) => {
+    const { img, ...rest } = req.body;
+
     try {
       let fileStoragePath;
       if (req.file) {
@@ -32,17 +34,16 @@ class EmailController extends EmailManager {
         const filePath = `MyDesign/${uuid()}`;
         const uploadedImage = await storage.upload(resizedFile, filePath);
         fileStoragePath = uploadedImage;
+      } else if (img) {
+        fileStoragePath = img;
       } else {
         response(res, 500, {
           message: "Image failed to upload. Try again later",
         });
       }
 
-      const img = await storage.getUrl(fileStoragePath);
-      const message = await this.sendRequestMyDesign({
-        img,
-        ...req.body,
-      });
+      const imgUrl = await storage.getUrl(fileStoragePath);
+      const message = await this.sendRequestMyDesign({ img: imgUrl, ...rest });
 
       response(res, 200, message);
     } catch (error) {

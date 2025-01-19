@@ -7,9 +7,7 @@ import IsLoading from "./IsLoading";
 import { Link, useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
-  const { data_request, status1 } = useSelector(
-    (store) => store.getUrl_Request
-  );
+  const { data_request, status } = useSelector((store) => store.getUrl_Request);
 
   const navigate = useNavigate();
   const [idCakeOne, setIdCakeOne] = useState();
@@ -55,23 +53,23 @@ function AskCoustOfThisCake() {
     console.log(newRequest);
 
     const url_request = `${process.env.REACT_APP_API_URL}/email/request`;
-    // dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
-    // // console.log('status1', status1);
-    // status1 === "error"? navigate("/error"):
-    // navigate("/sentRequest")
+
     try {
       dispatch(fetch_Request({ url: url_request, datainp: newRequest }));
-
-      if (status1 === "successful" || status1 === "loading") {
-        navigate("/sentRequest");
-      } else {
-        navigate("/error");
-      }
     } catch (error) {
       console.error("Error:", error);
     }
-    console.log(status1);
   };
+
+  useEffect(() => {
+    if (status === "loading") {
+      navigate("/requestPending");
+    } else if (status === "successful") {
+      navigate("/sentRequest");
+    } else if (status === "error") {
+      navigate("/error");
+    }
+  }, [status, navigate]);
 
   return (
     <div className="one_cake_div_and_mail">

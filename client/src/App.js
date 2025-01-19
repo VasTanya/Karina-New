@@ -15,6 +15,8 @@ import AskCoustOfThisCake from "./components/AskCoustOfThisCake";
 import OneSearchCake from "./components/OneSearchCake";
 import SentRequest from "./components/SentRequest";
 import MyDesign from "./components/MyDesign";
+import RequestPending from "./components/RequestPending";
+import IsLoading from "./components/IsLoading";
 import Error from "./components/Error";
 import "./App.css";
 
@@ -34,9 +36,11 @@ function App() {
           <Route path=":id" element={<AllAlbomsPhoto />} />
           <Route path="/cake" element={<AskCoustOfThisCake />} />
           <Route path="/search" element={<OneSearchCake />} />
-          <Route path="/sentRequest" element={<SentRequest/>} />
-          <Route path="/myDesign" element={<MyDesign/>} />
-          <Route path="/error" element={<Error/>} />
+          <Route path="/sentRequest" element={<SentRequest />} />
+          <Route path="/myDesign" element={<MyDesign />} />
+          <Route path="/requestPending" element={<RequestPending />} />
+          <Route path="/isLoading" element={<IsLoading />} />
+          <Route path="/error" element={<Error />} />
         </Route>
       </Routes>
       <ButtonScrollUp />

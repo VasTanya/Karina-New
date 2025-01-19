@@ -21,7 +21,7 @@ const initialState = {
 const getUrlFirstFoto = createSlice({
   name: "firstFoto",
   initialState,
-  redusers: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFirstFoto.pending, (state) => {

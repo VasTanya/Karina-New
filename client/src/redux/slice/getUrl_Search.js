@@ -21,7 +21,7 @@ const initialState = {
 const getUrl_Search = createSlice({
   name: "search",
   initialState,
-  redusers: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSearch.pending, (state) => {

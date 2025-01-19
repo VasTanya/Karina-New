@@ -13,17 +13,6 @@ export const fetch_Id_Albums_Item = createAsyncThunk(
   }
 );
 
-// export const fetch_Id_Albums_Item = createAsyncThunk(
-//     'fetch_Id_AlbumsStatus_Item',
-//     async (params) => {
-//         const { url_Id_Albums_Item } = params;
-//         const { data } = await axios.get(url_Id_Albums_Item)
-//         //  console.log(data);
-//         return data
-
-//     }
-// )
-
 const initialState = {
   data_Id_Albums_Item: [],
   status: "loading",
@@ -32,7 +21,7 @@ const initialState = {
 const getUrl_Id_Item = createSlice({
   name: "albums_Id_Item",
   initialState,
-  redusers: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetch_Id_Albums_Item.pending, (state) => {

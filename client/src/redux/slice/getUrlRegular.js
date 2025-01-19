@@ -18,7 +18,7 @@ const initialState = {
 const getUrlRegular = createSlice({
   name: "regular",
   initialState,
-  redusers: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchRegular.pending, (state) => {

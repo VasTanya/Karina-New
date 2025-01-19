@@ -18,7 +18,7 @@ const initialState = {
 const getUrlSlice = createSlice({
   name: "slices",
   initialState,
-  redusers: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSlice.pending, (state) => {

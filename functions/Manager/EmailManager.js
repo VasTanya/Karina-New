@@ -34,7 +34,7 @@ class EmailManager {
     } catch (error) {
       logger.error("[EMAIL-MNGR]: Error sending request", error);
       return {
-        status1: "error",
+        status: "error",
         message: errorMessage,
       };
     }
@@ -48,7 +48,7 @@ class EmailManager {
     } catch (error) {
       logger.error("[EMAIL-MNGR]: Error sending myDesign", error);
       return {
-        status1: "error",
+        status: "error",
         message: errorMessage,
       };
     }
@@ -67,7 +67,7 @@ class EmailManager {
       });
 
       return {
-        status1: "successful",
+        status: "successful",
         message:
           type === "request"
             ? `Request for ${data.cakeCode} has been sent!`
@@ -76,7 +76,7 @@ class EmailManager {
     } catch (error) {
       logger.error(error);
       return {
-        status1: "error",
+        status: "error",
         message: data?.cakeCode
           ? `Request for ${data.cakeCode} has failed! Try again later!`
           : `Request failed! Try again later!`,

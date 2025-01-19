@@ -14,12 +14,11 @@ export const fetch_Request = createAsyncThunk(
         },
       });
 
-      if (thunkAPI.length === 0 || typeof data === "string") {
-        return thunkAPI.rejectWithValue("error");
+      if (data.status === "error") {
+        return thunkAPI.rejectWithValue(data);
       }
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      // Handle error here, e.g., logging or rejecting with a specific value
       console.error("Error in fetch_Request:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -40,30 +39,40 @@ const initialState = {
       cakeCode: "",
     },
   ],
-  status1: "loading",
+  status: "",
 };
 
 const getUrl_Request = createSlice({
   name: "requestToMail",
   initialState,
-  redusers: {},
+  reducers: {
+    resetState: (state) => {
+      state.status = "";
+      state.data_request = [];
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetch_Request.pending, (state) => {
-        state.status1 = "loading";
+        state.status = "loading";
         state.data_request = [];
       })
 
       .addCase(fetch_Request.fulfilled, (state, action) => {
-        state.status1 = "successful";
+        state.status = action.payload.status || "successful";
         state.data_request = action.payload;
+        state.message = action.payload.message || "Your letter has been sent";
       })
-      .addCase(fetch_Request.rejected, (state) => {
-        state.status1 = "error";
+      .addCase(fetch_Request.rejected, (state, action) => {
+        state.status = action.payload.status || "error";
         state.data_request = [];
+        state.message =
+          action.payload.message ||
+          "Something went wrong. Please try again later";
       });
   },
 });
 
-// export const {} = getUrl.actions;
+export const { resetState } = getUrl_Request.actions;
 export default getUrl_Request.reducer;
