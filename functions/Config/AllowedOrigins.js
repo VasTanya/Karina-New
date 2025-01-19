@@ -11,5 +11,5 @@ const allowedOrigins = [
   "https://www.karinas515.com",
   "https://admin.karinas515.com",
 ];
-console.log(allowedOrigins);
+
 export default allowedOrigins;

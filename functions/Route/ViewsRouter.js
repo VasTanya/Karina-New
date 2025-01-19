@@ -1,4 +1,3 @@
-import isAuth from "../Middleware/IsAuth.js";
 import { BaseRouter } from "./BaseRouter.js";
 
 class ViewsRouter extends BaseRouter {

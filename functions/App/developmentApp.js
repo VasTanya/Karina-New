@@ -15,7 +15,7 @@ import SlicesRoute from "../Route/SlicesRoute.js";
 import EmailRoute from "../Route/EmailRoute.js";
 import AdminRoute from "../Route/AdminRoute.js";
 import ViewsRoute from "../Route/ViewsRouter.js";
-import Cron from "../Utils/Cron.js";
+
 import { connection } from "../Config/Firebase.js";
 import logger from "../Utils/Logger/Logger.js";
 import requestLogger from "../Utils/Logger/RequestLogger.js";
@@ -23,8 +23,6 @@ import requestLogger from "../Utils/Logger/RequestLogger.js";
 const developmentApp = express();
 dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 connection();
-
-Cron();
 
 developmentApp.use(credentials);
 developmentApp.use(cors(corsOptions));

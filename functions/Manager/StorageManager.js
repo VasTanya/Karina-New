@@ -98,6 +98,15 @@ class StorageManager {
     }
   };
 
+  getFiles = async () => {
+    try {
+      const [files] = await this.storage.getFiles();
+      return files;
+    } catch (error) {
+      logger.error("[STR-MNGR]: Error getting files:", error);
+    }
+  };
+
   resizeOneAndConvert = async (
     file,
     size = this.defaultSize,
