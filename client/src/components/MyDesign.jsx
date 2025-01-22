@@ -12,11 +12,10 @@ function MyDesign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const content = await uploadImage("MyDesign", formData);
-
     const url_request_myDesign = `${process.env.REACT_APP_API_URL}/email/mydesign`;
+
     try {
-      dispatch(fetch_myDesign_Order({ url: url_request_myDesign, content }));
+      dispatch(fetch_myDesign_Order({ url: url_request_myDesign, formData }));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -44,7 +43,12 @@ function MyDesign() {
           Send a request to calculate the cost of a cake with your design:
         </h6>
 
-        <input name="img" type="file" required accept="image/*" />
+        <input
+          name="img"
+          type="file"
+          required
+          accept="image/*,.heic,.heif,.webp,.bmp,.tiff,.ico"
+        />
         <input name="name" type="text" placeholder="Your name" />
         <input name="phone" type="number" required placeholder="Your phone*" />
         <input name="email" type="email" required placeholder="Your email*" />

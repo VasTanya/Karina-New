@@ -1,6 +1,7 @@
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
 import { v4 as uuid } from "uuid";
+import { resizeImage } from "./resizeImage";
 
 export const uploadImage = async (location, formData) => {
   const content = {};
@@ -8,10 +9,11 @@ export const uploadImage = async (location, formData) => {
 
   const form = formData;
   const image = form.get("img");
+  const resizedImage = await resizeImage(image);
 
-  if (image) {
-    const imageRef = ref(storage, `${location}/${uuid()}`);
-    const snapshot = await uploadBytes(imageRef, image);
+  if (resizedImage) {
+    const imageRef = ref(storage, `${location}/${uuid()}.jpeg`);
+    const snapshot = await uploadBytes(imageRef, resizedImage);
     uploadPath = snapshot.ref.fullPath;
   }
 

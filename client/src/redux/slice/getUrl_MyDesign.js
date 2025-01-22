@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { uploadImage } from "../../firebase/functions/uploadImage";
 
 export const fetch_myDesign_Order = createAsyncThunk(
   "fetchMyDesignOrder",
   async (params, thunkAPI) => {
-    const { url, content } = params;
+    const { url, formData } = params;
+    const content = await uploadImage("MyDesign", formData);
+
     try {
       const { data } = await axios.post(url, content, {
         withCredentials: true,
