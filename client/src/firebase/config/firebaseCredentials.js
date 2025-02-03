@@ -2,7 +2,7 @@ export const serviceAccount = {
   type: process.env.REACT_APP_TYPE,
   project_id: process.env.REACT_APP_PROJECT_ID,
   private_key_id: process.env.REACT_APP_PRIVATE_KEY_ID,
-  private_key: process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  private_key: process.env.REACT_APP_PRIVATE_KEY,
   client_email: process.env.REACT_APP_CLIENT_EMAIL,
   client_id: process.env.REACT_APP_CLIENT_ID,
   auth_uri: process.env.REACT_APP_AUTH_URI,
