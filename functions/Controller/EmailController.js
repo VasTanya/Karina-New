@@ -42,7 +42,7 @@ class EmailController extends EmailManager {
         });
       }
 
-      const imgUrl = await storage.getUrl(fileStoragePath);
+      const imgUrl = await storage.getUrl(fileStoragePath, true);
       const message = await this.sendRequestMyDesign({ img: imgUrl, ...rest });
 
       response(res, 200, message);
