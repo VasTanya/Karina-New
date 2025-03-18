@@ -115,7 +115,7 @@ class StorageManager {
   ) => {
     try {
       const buffer = await this.sharp(file.buffer)
-        .resize(width, height)
+        .resize({width, height, fit: "cover"})
         .toFormat("jpeg")
         .toBuffer();
       return {
