@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Basics from "./pages/Basics";
+import Albums from "./pages/Albums";
+import AlbumItems from "./pages/AlbumItems";
+import AddProduct from "./pages/AddProduct";
+
+import { defineUserStatus } from "./helpers/defineUserStatus";
+import { checkAuth } from "./redux/userSlice";
+
+import "./css/App.css";
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+  const status = defineUserStatus(user.status);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route exact path="/" element={status ? <Home /> : <Login />}>
+          <Route path="/basics/:type" element={<Basics />} />
+          <Route path="/albums" element={<Albums />} />
+          <Route path="/albums/:id" element={<AlbumItems />} />
+          <Route path="/add" element={<AddProduct />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

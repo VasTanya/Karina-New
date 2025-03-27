@@ -1,0 +1,26 @@
+.td {
+  font-size: 1.5vw;
+}
+
+.data-edit,
+.data-delete,
+.data-view,
+.edit-save,
+.edit-cancel {
+  width: 5vw;
+  height: 2vw;
+  border-radius: 7px;
+  font-size: 1.1vw;
+  border: 1px solid;
+}
+.data-edit:hover,
+.data-delete:hover,
+.data-view:hover,
+.edit-save:hover,
+.edit-cancel:hover {
+  cursor: pointer;
+}
+
+.img {
+  width: 5vw;
+}

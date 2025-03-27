@@ -1,0 +1,63 @@
+.productsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.status {
+  text-align: center;
+}
+
+.table {
+  width: 80%;
+  height: auto;
+  margin-top: 2vw;
+}
+
+.data-edit,
+.data-delete,
+.data-view,
+.edit-save,
+.edit-cancel {
+  width: 5vw;
+  height: 2vw;
+  border-radius: 7px;
+  font-size: 1.1vw;
+  border: 1px solid;
+}
+.data-edit:hover,
+.data-delete:hover,
+.data-view:hover,
+.edit-save:hover,
+.edit-cancel:hover {
+  cursor: pointer;
+}
+
+.tableNav {
+  width: 17vw;
+  font-size: 2vw;
+  padding: 1vh;
+  margin: 3vw 0;
+  border-radius: 15px;
+  background: rgba(182, 151, 90, 0.82);
+  margin-left: 5vw;
+  border: none;
+}
+.tableNav:hover {
+  cursor: pointer;
+}
+
+.img {
+  width: 5vw;
+}
+
+.button-holder {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  padding: 5vh 0;
+}

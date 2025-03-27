@@ -18,13 +18,7 @@ class AdminController {
 
       const admin = await this.AdminService.login(email, password);
 
-      res.cookie("access_token", admin.token, {
-        httpOnly: true,
-        sameSite: "strict",
-        // secure: true,
-      });
-
-      response(res, 200, admin.message);
+      response(res, admin.status, admin);
     } catch (error) {
       logger.error(`[ADMIN-CTRL]: Error during login: ${error}`);
       return response(res, error.statusCode || 500, {

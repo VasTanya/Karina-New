@@ -70,13 +70,13 @@ class AlbumsService extends DbService {
       const skip = (page - 1) * size;
 
       // eslint-disable-next-line no-unused-vars
-      const [{ albumId, ...albumDataById }, album] = await Promise.all([
+      const [albumData, album] = await Promise.all([
         this.albumData.findOne({ albumId: id }, { url: false }),
         this.findById(id, { url: false }),
       ]);
 
-      if (!albumDataById) return {};
-
+      if (!albumData) return { data: [] };
+      const { albumId, ...albumDataById } = albumData;
       const paginatedArray =
         size === -1
           ? albumDataById.data

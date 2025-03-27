@@ -16,16 +16,16 @@ class AdminService {
 
   login = async (email, password) => {
     try {
-      const admin = await this.Admin.findOne({ email: email }, { url: false });
+      const admin = await this.Admin.findOne({ email }, { url: false });
 
       if (admin) {
         if (bcrypt.compareSync(password, admin.password)) {
           const token = generateToken(admin);
-          return { token: token, message: "Login successful" };
+          return { token: token, message: "Login successful", status: 200 };
         }
       }
 
-      return { message: "Wrong email or password" };
+      return { message: "Wrong email or password", status: 400 };
     } catch (error) {
       logger.error("[ADM-SRV]: Error during login: ", error);
     }
