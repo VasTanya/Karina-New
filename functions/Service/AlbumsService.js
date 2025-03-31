@@ -301,10 +301,13 @@ class AlbumsService extends DbService {
         this.albumData.findOneAndDelete({ albumId: id }),
       ]);
 
-      return { message: "Album deleted succesfully" };
+      return { message: "Album deleted succesfully", status: 200 };
     } catch (error) {
       logger.error("[ALB-SRV]: Error during deleteAlbum", error);
-      return { message: "Failed to delete album. Please again try later" };
+      return {
+        message: "Failed to delete album. Please again try later",
+        status: 400,
+      };
     }
   };
 

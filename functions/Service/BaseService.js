@@ -78,10 +78,13 @@ export class BaseService extends DbService {
         };
       }
 
-      return item;
+      return { status: 200, message: `${this.dataTitle} deleted` };
     } catch (error) {
       logger.error(`[${this.logType}-SRV]: Error during delete: `, error);
-      return {};
+      return {
+        status: 500,
+        message: error.message || "Failed to delete",
+      };
     }
   };
 

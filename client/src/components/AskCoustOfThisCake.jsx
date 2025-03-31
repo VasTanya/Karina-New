@@ -50,7 +50,6 @@ function AskCoustOfThisCake() {
       img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
     };
-    console.log(newRequest);
 
     const url_request = `${process.env.REACT_APP_API_URL}/email/request`;
 

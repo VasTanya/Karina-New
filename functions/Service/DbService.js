@@ -122,15 +122,23 @@ class DbService {
   };
 
   findByIdAndDelete = async (id) => {
+    const tasks = [];
     const docRef = this.collection.doc(id);
     const docData = (await docRef.get()).data();
-    const tasks = [docRef.delete()];
 
-    if (docData.src) {
-      tasks.push(this.deleteImage(docData.src));
+    if (docData) {
+      tasks.push(docRef.delete());
+
+      if (docData.src) {
+        tasks.push(this.deleteImage(docData.src));
+      }
+
+      await Promise.all(tasks);
+
+      return true;
+    } else {
+      return null;
     }
-
-    await Promise.all(tasks);
   };
 
   findOneAndDelete = async (query) => {
@@ -140,7 +148,7 @@ class DbService {
       .limit(1)
       .get();
 
-    if (snapshot.empty) return { message: "Not found" };
+    if (snapshot.empty) return { message: "Not found", status: 404 };
 
     const doc = snapshot.docs[0];
     const docData = doc.data();
@@ -161,6 +169,8 @@ class DbService {
 
     const docRef = doc.ref;
     await docRef.delete();
+
+    return { message: "Deleted successfully", status: 200 };
   };
 
   listCollections = async () => {
