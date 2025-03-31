@@ -14,8 +14,9 @@ function Albums() {
   const dispatch = useDispatch();
   const { data, status } = useSelector((store) => store.albums);
 
+  const fetchData = async () => dispatch(fetchSlice());
   useEffect(() => {
-    dispatch(fetchSlice());
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -45,6 +46,7 @@ function Albums() {
                   item={item}
                   openEditModal={openEditModal}
                   openDeleteModal={openDeleteModal}
+                  refresh={fetchData}
                 />
               );
             })}

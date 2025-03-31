@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../css/Item.css";
 
-function Item({ item, openEditModal, openDeleteModal }) {
+function Item({ item, openEditModal, openDeleteModal, refresh }) {
   const navigate = useNavigate();
 
   const fetchItems = (id) => {
@@ -22,12 +22,18 @@ function Item({ item, openEditModal, openDeleteModal }) {
         </td>
       )}
       <td className="td">
-        <button className="data-edit" onClick={() => openEditModal(item)}>
+        <button
+          className="data-edit"
+          onClick={() => openEditModal(item, refresh)}
+        >
           EDIT
         </button>
       </td>
       <td className="td">
-        <button className="data-delete" onClick={() => openDeleteModal(item)}>
+        <button
+          className="data-delete"
+          onClick={() => openDeleteModal(item, refresh)}
+        >
           DELETE
         </button>
       </td>

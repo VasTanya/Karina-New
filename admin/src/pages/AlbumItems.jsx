@@ -24,8 +24,11 @@ function AlbumItem() {
     setPage(page);
   };
 
-  useEffect(() => {
+  const fetchData = async () =>
     dispatch(fetchSlice({ param: id, page, size: 48 }));
+
+  useEffect(() => {
+    fetchData();
   }, [dispatch, id, page]);
 
   return status === "error" ? (
@@ -56,6 +59,7 @@ function AlbumItem() {
                 item={item}
                 openEditModal={openEditModal}
                 openDeleteModal={openDeleteModal}
+                refresh={fetchData}
               />
             );
           })}

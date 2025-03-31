@@ -15,8 +15,10 @@ function Basics() {
   const dispatch = useDispatch();
   const { data, status } = useSelector((store) => store.basics);
 
+  const fetchData = async () => dispatch(fetchSlice({ param: type }));
+
   useEffect(() => {
-    dispatch(fetchSlice({ param: type }));
+    fetchData();
   }, [dispatch, type]);
 
   return (
@@ -48,6 +50,7 @@ function Basics() {
                   item={item}
                   openEditModal={openEditModal}
                   openDeleteModal={openDeleteModal}
+                  refresh={fetchData}
                 />
               );
             })}

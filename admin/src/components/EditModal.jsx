@@ -1,34 +1,39 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+import { fetchSlice } from "../redux/updateSlice";
+
+import { mapModalData } from "../helpers/mapModalData";
 import "../css/EditModal.css";
 
-function EditModal({ item, closeModal }) {
-  const [message, setMessage] = useState("");
-  const [formData, setFormData] = useState({
-    ...(item._id && { _id: "" }),
-    ...(item.display_number && { display_number: "" }),
-    ...(item.album_number && { album_number: "" }),
-    ...(item.title && { title: "" }),
-    ...(item.price && { price: "" }),
-    ...(item.src && { src: "" }),
-  });
+function EditModal({ item, closeModal, refresh }) {
+  const dispatch = useDispatch();
 
-  const handleSave = () => {
-    closeModal();
+  const path = useLocation().pathname;
+  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState(() => mapModalData(item));
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    const { _id, src, ...rest } = formData;
+    const { message } = await dispatch(
+      fetchSlice({ path, param: _id, data: rest })
+    ).unwrap();
+
+    setMessage(message);
+    setTimeout(() => {
+      closeModal();
+      refresh();
+    }, 1500);
   };
 
   useEffect(() => {
     if (item) {
-      setFormData({
-        ...(item._id && { _id: item._id }),
-        ...(item.display_number && { display_number: item.display_number }),
-        ...(item.album_number && { album_number: item.album_number }),
-        ...(item.title && { title: item.title }),
-        ...(item.price && { price: item.price }),
-        ...(item.src && { src: item.src }),
-      });
+      setFormData((prevData) => mapModalData(item, prevData));
     }
-  }, [item]);
+  }, [item, dispatch]);
 
   return (
     <div className="edit-modal" id="edit-modal">
@@ -37,18 +42,23 @@ function EditModal({ item, closeModal }) {
           <input
             type="text"
             className="edit-modal-textInput"
-            value={formData._id}
+            value={formData._id || ""}
             disabled
           />
           <input
             type="text"
             className="edit-modal-textInput"
-            value={formData.display_number || formData.album_number}
+            value={
+              (formData.display_number
+                ? formData.display_number
+                : formData.album_number) || ""
+            }
             onChange={(e) =>
               setFormData({
                 ...formData,
-                [formData.display_number ? "display_number" : "album_number"]:
-                  e.target.value,
+                [formData.display_number !== undefined
+                  ? "display_number"
+                  : "album_number"]: e.target.value,
               })
             }
           />
@@ -56,7 +66,7 @@ function EditModal({ item, closeModal }) {
             <input
               type="text"
               className="edit-modal-textInput"
-              value={formData.title}
+              value={formData.title || ""}
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
@@ -66,7 +76,7 @@ function EditModal({ item, closeModal }) {
             <input
               type="text"
               className="edit-modal-textInput"
-              value={formData.price}
+              value={formData.price || ""}
               onChange={(e) =>
                 setFormData({ ...formData, price: e.target.value })
               }
@@ -92,14 +102,20 @@ function EditModal({ item, closeModal }) {
           {message}
         </div>
         <div className="edit-modal-buttons" id="edit-modal-buttons">
-          <button className="edit-button" id="edit-save" onClick={handleSave}>
-            SAVE
+          <button
+            className="edit-button"
+            id="edit-save"
+            onClick={handleSave}
+            disabled={isSaving}
+          >
+            {isSaving ? "SAVING..." : "SAVE"}
           </button>
           <button
             type="button"
             className="edit-button"
             id="edit-cancel"
             onClick={closeModal}
+            disabled={isSaving}
           >
             CANCEL
           </button>
