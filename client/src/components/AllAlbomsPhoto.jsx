@@ -21,7 +21,7 @@ function AllAlbomsPhoto() {
 
   const getUrl_Id_Albums = async () => {
     const queryString = `page=${currentPage}&size=${48}&url=true&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
-    const url_Id_Albums = `${process.env.REACT_APP_API_URL}/albums/${id}?${queryString}`;
+    const url_Id_Albums = `${process.env.REACT_APP_API_URL || ""}/albums/${id}?${queryString}`;
     dispatch(fetch_Id_Albums({ url_Id_Albums }));
   };
 

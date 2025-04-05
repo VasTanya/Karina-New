@@ -22,7 +22,7 @@ export const fetchUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/admin/profile`,
+        `${process.env.REACT_APP_API_URL || ""}/admin/profile`,
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
 
@@ -38,7 +38,7 @@ export const fetchSlice = createAsyncThunk(
   async (userCredentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/admin/login`,
+        `${process.env.REACT_APP_API_URL || ""}/admin/login`,
         userCredentials
       );
       if (data.token)
@@ -55,7 +55,7 @@ export const fetchReset = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const reset = await axios.get(
-        `${process.env.REACT_APP_API_URL}/admin/seed`,
+        `${process.env.REACT_APP_API_URL || ""}/admin/seed`,
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
 

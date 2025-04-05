@@ -16,7 +16,7 @@ function OneSearchCake() {
   const resultNextDot = searchValue.slice(idxSin + 1);
 
   const getUrlSearch = async () => {
-    const urlSearch = `${process.env.REACT_APP_API_URL}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
+    const urlSearch = `${process.env.REACT_APP_API_URL || ""}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
     dispatch(fetchSearch({ urlSearch }));
   };
 

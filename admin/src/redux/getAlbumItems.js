@@ -6,7 +6,7 @@ export const fetchSlice = createAsyncThunk(
   async (params) => {
     const { param, page, size } = params;
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/albums/${param}?page=${page}&size=${size}&url=true&select=${encodeURIComponent(
+      `${process.env.REACT_APP_API_URL || ""}/albums/${param}?page=${page}&size=${size}&url=true&select=${encodeURIComponent(
         JSON.stringify(["sm"])
       )}`
     );

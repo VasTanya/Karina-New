@@ -5,7 +5,7 @@ export const fetchSlice = createAsyncThunk(
   "basics/fetchAlbums",
   async (params) => {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/albums/`
+      `${process.env.REACT_APP_API_URL || ""}/albums/`
     );
     return { data };
   }

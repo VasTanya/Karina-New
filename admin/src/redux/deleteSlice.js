@@ -9,7 +9,7 @@ export const fetchSlice = createAsyncThunk(
       const { path, param } = params;
 
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_API_URL}${path}/${param}/delete`,
+        `${process.env.REACT_APP_API_URL || ""}${path}/${param}/delete`,
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
 

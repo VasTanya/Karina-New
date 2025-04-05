@@ -50,7 +50,7 @@ function AskCoustOfThisCake() {
       cakeCode: idCakeOne + "." + idItemOne,
     };
 
-    const url_request = `${process.env.REACT_APP_API_URL}/email/request`;
+    const url_request = `${process.env.REACT_APP_API_URL || ""}/email/request`;
 
     try {
       dispatch(fetch_Request({ url: url_request, datainp: newRequest }));

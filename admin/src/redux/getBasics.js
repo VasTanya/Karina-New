@@ -6,7 +6,7 @@ export const fetchSlice = createAsyncThunk(
   async (params) => {
     const { param } = params;
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/basics/${param}`
+      `${process.env.REACT_APP_API_URL || ""}/basics/${param}`
     );
     return { data };
   }

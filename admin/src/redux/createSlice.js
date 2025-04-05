@@ -8,7 +8,7 @@ export const fetchSlice = createAsyncThunk(
     try {
       const { path, data } = params;
       const result = await axios.post(
-        `${process.env.REACT_APP_API_URL}/${path}/add`,
+        `${process.env.REACT_APP_API_URL || ""}/${path}/add`,
         data,
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );

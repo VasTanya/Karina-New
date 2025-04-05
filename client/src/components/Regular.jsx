@@ -10,7 +10,7 @@ function Regular() {
 
   const getUrlRegular = async () => {
     const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
-    const urlRegular = `${process.env.REACT_APP_API_URL}/basics/regular?${queryString}`;
+    const urlRegular = `${process.env.REACT_APP_API_URL || ""}/basics/regular?${queryString}`;
     dispatch(fetchRegular({ urlRegular }));
   };
 
