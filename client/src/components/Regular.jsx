@@ -16,6 +16,7 @@ function Regular() {
 
   useEffect(() => {
     getUrlRegular();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />);

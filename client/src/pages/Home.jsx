@@ -20,6 +20,7 @@ function Home() {
   useEffect(() => {
     getUrlFirstFoto();
     dispatch(setCurrentPage(1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sortData = dataFirstFoto?.map((el) => el);

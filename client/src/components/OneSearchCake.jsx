@@ -2,8 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import qs from "qs";
-import { setSearchValue } from "../redux/slice/cakeSlice";
 import { fetchSearch } from "../redux/slice/getUrl_Search";
 import IsLoading from "./IsLoading";
 
@@ -24,6 +22,7 @@ function OneSearchCake() {
 
   useEffect(() => {
     getUrlSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   const isLoading = [...new Array(1)].map((_, idx) => <IsLoading key={idx} />);
