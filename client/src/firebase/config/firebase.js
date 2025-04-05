@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { serviceAccount } from "./firebaseCredentials";
+import { serviceAccount } from "./firebase.config";
 
 let app, storage;
 try {
