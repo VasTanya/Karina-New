@@ -14,6 +14,9 @@ function Home() {
   const getUrlFirstFoto = async () => {
     const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
     const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto?${queryString}`;
+    console.log(
+      `${process.env.REACT_APP_API_URL}/albums/firstPhoto?${queryString}`
+    );
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
 
