@@ -44,8 +44,14 @@ jobs:
       #   run: |
       #     npm --prefix ./functions run lint
       #     npm --prefix ./functions run environment
-
       - name: Deploy to Firebase
-        run: firebase deploy
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KARINAS_64571 }}
+          channelId: live
+          projectId: karinas-64571
+
+        # run: firebase deploy
+        # env:
+        #   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
