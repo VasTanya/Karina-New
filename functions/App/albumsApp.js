@@ -10,6 +10,7 @@ common(albumsApp);
 
 albumsApp.use("/albums", AlbumsRoute);
 
+// eslint-disable-next-line no-unused-vars
 albumsApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[ALBUMS-APP]: ${err.message}` });
   logger.error({ message: `[ALBUMS-APP]: ${err.message}` });

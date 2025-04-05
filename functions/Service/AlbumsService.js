@@ -65,6 +65,7 @@ class AlbumsService extends DbService {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   getById = async (id, { page = 1, size = 10, url, select }) => {
     try {
       const skip = (page - 1) * size;
@@ -76,6 +77,7 @@ class AlbumsService extends DbService {
       ]);
 
       if (!albumData) return { data: [] };
+      // eslint-disable-next-line no-unused-vars
       const { albumId, ...albumDataById } = albumData;
       const paginatedArray =
         size === -1
@@ -160,6 +162,7 @@ class AlbumsService extends DbService {
 
         if (result.length === 0) {
           return {
+            // eslint-disable-next-line max-len
             message: `No result for album number ${albumNumber} and display number ${displayNumber}`,
           };
         }
@@ -347,6 +350,7 @@ class AlbumsService extends DbService {
 
   findOneAndPopulate = async (id, query) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const [{ albumId, ...albumDataById }, album] = await Promise.all([
         this.albumData.findOne({ albumId: id }, query),
         this.findById(id, query),

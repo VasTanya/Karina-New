@@ -7,6 +7,7 @@ const emailApp = express();
 common(emailApp);
 emailApp.use("/email", EmailRoute);
 
+// eslint-disable-next-line no-unused-vars
 emailApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[EMAIL-APP]: ${err.message}` });
   logger.error({ message: `[EMAIL-APP]: ${err.message}` });
