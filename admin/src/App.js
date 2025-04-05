@@ -13,8 +13,10 @@ import { defineUserStatus } from "./helpers/defineUserStatus";
 import { checkAuth } from "./redux/userSlice";
 
 import "./css/App.css";
+import { serviceAccount } from "./firebase/config/firebase.config";
 
 function App() {
+  console.log(serviceAccount);
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const status = defineUserStatus(user.status);
