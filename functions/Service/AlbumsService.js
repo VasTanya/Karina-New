@@ -268,7 +268,7 @@ class AlbumsService extends DbService {
       if (data.file) {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
-      } else {
+      } else if (!data.src) {
         data.src = NO_PHOTO_URLS;
       }
 
@@ -276,7 +276,7 @@ class AlbumsService extends DbService {
         _id: uuid4(),
         display_number: albumData.data.length + 1,
         src: data.src,
-        ...(data.tag === "$true" ? { tag: "firstPhoto" } : {}),
+        ...(data.tag && { tag: data.tag }),
       };
 
       albumData.data.push(newItem);

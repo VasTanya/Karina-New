@@ -1,29 +1,20 @@
 import jwt from "jsonwebtoken";
 
 const isAuth = (req, res, next) => {
-  const token = req.cookies.access_token;
+  const token = req.headers.authorization?.split(" ")[1];
 
-  if (!token) {
-    return res.render("login");
-  } else {
-    try {
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decodedToken;
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-      if (req.path === "/" && decodedToken) {
-        return res.redirect("/products");
-      }
-
-      next();
-    } catch (error) {
-      if (error.name === "TokenExpiredError") {
-        res.clearCookie("access_token");
-        return res.redirect("/");
-      } else {
-        res.clearCookie("access_token");
-        return res.redirect("/");
-      }
+    if (!decodedToken) {
+      return res.status(401).json({ message: "Unauthorized" });
     }
+
+    req.user = decodedToken;
+
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: error.message || "Unauthorized" });
   }
 };
 

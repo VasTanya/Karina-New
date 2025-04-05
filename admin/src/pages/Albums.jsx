@@ -17,6 +17,7 @@ function Albums() {
   const fetchData = async () => dispatch(fetchSlice());
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   return (
@@ -28,6 +29,8 @@ function Albums() {
         <div className="status">Failed to load</div>
       ) : status === "loading" ? (
         <div className="status">Loading...</div>
+      ) : !data.length ? (
+        <div className="status">No data to display</div>
       ) : (
         <table className="table">
           <thead>

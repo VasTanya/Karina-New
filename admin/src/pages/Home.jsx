@@ -6,10 +6,12 @@ import EditModal from "../components/EditModal";
 import DeleteModal from "../components/DeleteModal";
 
 import "../css/Home.css";
+import ResetModal from "../components/ResetModal";
 
 function Home() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [refresh, setRefresh] = useState([]);
 
@@ -25,15 +27,20 @@ function Home() {
     setRefresh(() => refresh);
   };
 
+  const openResetModal = () => {
+    setIsResetModalOpen(true);
+  };
+
   const closeModal = () => {
     setIsEditModalOpen(false);
     setIsDeleteModalOpen(false);
+    setIsResetModalOpen(false);
     setSelectedItem(null);
   };
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar openResetModal={openResetModal}></Navbar>
       <div className="container">
         <Outlet context={{ openEditModal, openDeleteModal }} />
       </div>
@@ -50,6 +57,9 @@ function Home() {
           closeModal={() => closeModal(setIsDeleteModalOpen)}
           refresh={refresh}
         />
+      )}
+      {isResetModalOpen && (
+        <ResetModal closeModal={() => closeModal(setIsResetModalOpen)} />
       )}
     </>
   );

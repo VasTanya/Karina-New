@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const getToken = () =>
+export const getToken = () =>
   document.cookie
     .split("; ")
     .find((x) => x.includes("token"))
@@ -17,8 +17,24 @@ export const checkAuth = createAsyncThunk(
   }
 );
 
-export const fetchSlice = createAsyncThunk(
+export const fetchUser = createAsyncThunk(
   "user/fetchUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/profile`,
+        { headers: { Authorization: `Bearer ${getToken()}` } }
+      );
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data || "Login failed");
+    }
+  }
+);
+
+export const fetchSlice = createAsyncThunk(
+  "user/fetchAuth",
   async (userCredentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
@@ -34,8 +50,25 @@ export const fetchSlice = createAsyncThunk(
   }
 );
 
+export const fetchReset = createAsyncThunk(
+  "user/fetchReset",
+  async (_, { rejectWithValue }) => {
+    try {
+      const reset = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/seed`,
+        { headers: { Authorization: `Bearer ${getToken()}` } }
+      );
+
+      return { message: "Database reset successfully" || reset.data.message };
+    } catch (error) {
+      return rejectWithValue(error.response.data || "Login failed");
+    }
+  }
+);
+
 const initialState = {
   data: null,
+  user: null,
   status: "idle",
 };
 
@@ -69,6 +102,14 @@ export const userSlice = createSlice({
       .addCase(checkAuth.rejected, (state, action) => {
         state.status = "idle";
         state.data = null;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.status = "successful";
+        state.user = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.status = "error";
+        state.user = action.payload;
       });
   },
 });

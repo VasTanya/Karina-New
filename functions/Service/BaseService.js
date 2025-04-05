@@ -45,11 +45,10 @@ export class BaseService extends DbService {
   add = async (data) => {
     try {
       const dataLength = await this.count();
-
       if (data.file) {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
-      } else {
+      } else if (!data.src) {
         data.src = NO_PHOTO_URLS;
       }
 

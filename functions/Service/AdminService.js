@@ -49,6 +49,7 @@ class AdminService {
         this.Slices.createCollection(data.slices),
         this.Regular.createCollection(data.regular),
         this.Albums.createCollection(data.albums),
+        this.seedAdmin(),
       ]);
       logger.info("[ADM-SRV]: COLLECTIONS CREATED");
     } catch (error) {

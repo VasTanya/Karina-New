@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-
-import "../css/DeleteModal.css";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchSlice } from "../redux/deleteSlice";
+
+import "../css/DeleteModal.css";
 
 function DeleteModal({ item, closeModal, refresh }) {
   const dispatch = useDispatch();

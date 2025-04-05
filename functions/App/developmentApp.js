@@ -45,6 +45,7 @@ developmentApp.use("/basics/slices", SlicesRoute);
 developmentApp.use("/basics/regular", RegularRoute);
 developmentApp.use("/email", EmailRoute);
 developmentApp.use("/admin", AdminRoute);
+// legacy
 developmentApp.use("/", ViewsRoute);
 
 developmentApp.use((err, req, res, next) => {

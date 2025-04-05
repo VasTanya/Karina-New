@@ -29,6 +29,7 @@ function AlbumItem() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id, page]);
 
   return status === "error" ? (

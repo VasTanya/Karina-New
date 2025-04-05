@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch_myDesign_Order } from "../redux/slice/getUrl_MyDesign";
 import { useNavigate } from "react-router-dom";
-import { uploadImage } from "../firebase/functions/uploadImage";
 
 function MyDesign() {
   const navigate = useNavigate();

@@ -89,7 +89,7 @@ class StorageManager {
 
       const [signedUrl] = await target.getSignedUrl({
         action: "read",
-        expires: isTemporal ? sevenDays : hour,
+        expires: sevenDays,
       });
 
       return signedUrl;

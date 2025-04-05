@@ -87,3 +87,7 @@
 .newProductButton:hover {
   cursor: pointer;
 }
+
+.validation {
+  color: red;
+}

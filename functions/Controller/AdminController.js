@@ -27,6 +27,19 @@ class AdminController {
     }
   };
 
+  profile = async (req, res) => {
+    try {
+      if (req.user) {
+        response(res, 200, req.user);
+      } else throw new Error("User not found");
+    } catch (error) {
+      logger.error(`[ADMIN-CTRL]: Error during profile: ${error}`);
+      return response(res, error.statusCode || 500, {
+        message: error.message,
+      });
+    }
+  };
+
   seed = async (req, res) => {
     try {
       const seed = await this.AdminService.seed();

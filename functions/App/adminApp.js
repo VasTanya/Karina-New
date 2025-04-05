@@ -7,7 +7,7 @@ import AdminRoute from "../Route/AdminRoute.js";
 
 const adminApp = express();
 common(adminApp);
-adminApp.use("/", AdminRoute);
+adminApp.use("/admin", AdminRoute);
 
 adminApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[ADMIN-APP]: ${err.message}` });

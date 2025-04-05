@@ -2,7 +2,7 @@ import imageCompression from "browser-image-compression";
 import heic2any from "heic2any";
 
 export const resizeImage = async (file) => {
-  if (file.type !== "image/heic" || file.type !== "image/heif") {
+  if (file.type === "image/heic" || file.type === "image/heif") {
     return await handleIphoneFormat(file);
   }
   return await handleBasicFormat(file);

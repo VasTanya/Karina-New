@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getToken } from "./userSlice";
 
 export const fetchSlice = createAsyncThunk(
   "update/updateSlices",
@@ -9,7 +10,8 @@ export const fetchSlice = createAsyncThunk(
 
       const result = await axios.put(
         `${process.env.REACT_APP_API_URL}${path}/${param}/edit`,
-        data
+        data,
+        { headers: { Authorization: `Bearer ${getToken()}` } }
       );
 
       return {

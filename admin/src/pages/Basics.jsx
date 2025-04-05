@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useOutletContext, useParams } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
 import { fetchSlice } from "../redux/getBasics";
 
 import Item from "../components/Item";
-
 import "../css/Products.css";
 
 function Basics() {
@@ -19,6 +18,7 @@ function Basics() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, type]);
 
   return (
@@ -30,6 +30,8 @@ function Basics() {
         <div className="status">Failed to load</div>
       ) : status === "loading" ? (
         <div className="status">Loading...</div>
+      ) : !data.length ? (
+        <div className="status">No data to display</div>
       ) : (
         <table className="table">
           <thead>

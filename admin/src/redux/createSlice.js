@@ -3,19 +3,22 @@ import axios from "axios";
 import { getToken } from "./userSlice";
 
 export const fetchSlice = createAsyncThunk(
-  "delete/deleteSlices",
+  "create/createSlices",
   async (params, { rejectWithValue }) => {
     try {
-      const { path, param } = params;
-
-      const { data } = await axios.delete(
-        `${process.env.REACT_APP_API_URL}${path}/${param}/delete`,
+      const { path, data } = params;
+      const result = await axios.post(
+        `${process.env.REACT_APP_API_URL}/${path}/add`,
+        data,
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
-
-      return { message: data.message };
+      return (
+        result.data || {
+          message: `${result.data.title || data.title || data.display_number} added successfully`,
+        }
+      );
     } catch (error) {
-      rejectWithValue(error.response.data || "Failed to delete");
+      return rejectWithValue(error.response?.data || "Failed to add product");
     }
   }
 );
@@ -25,8 +28,8 @@ const initialState = {
   status: "loading",
 };
 
-const deleteSlice = createSlice({
-  name: "delete",
+const addProductSlice = createSlice({
+  name: "create",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -46,4 +49,4 @@ const deleteSlice = createSlice({
   },
 });
 
-export default deleteSlice.reducer;
+export default addProductSlice.reducer;
