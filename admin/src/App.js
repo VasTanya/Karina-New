@@ -20,7 +20,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const status = defineUserStatus(user.status);
-
+  console.log(serviceAccount);
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
