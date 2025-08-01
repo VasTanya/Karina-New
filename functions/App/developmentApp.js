@@ -45,8 +45,10 @@ developmentApp.use("/basics/slices", SlicesRoute);
 developmentApp.use("/basics/regular", RegularRoute);
 developmentApp.use("/email", EmailRoute);
 developmentApp.use("/admin", AdminRoute);
+// legacy
 developmentApp.use("/", ViewsRoute);
 
+// eslint-disable-next-line no-unused-vars
 developmentApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[DEV-APP]: ${err.message}` });
   logger.error({ message: `[DEV-APP]: ${err.message}` });

@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* .container {
+  width: 100%;
+  height: auto;
+} */
+.newProductForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: auto;
+  border: 1px solid;
+  margin: 3vh 0vh;
+  padding: 3vh 0;
+  border: 1px solid rgba(182, 151, 90, 0.82);
+  border-radius: 15px;
+  box-shadow: 11px 13px 9px -1px rgba(182, 151, 90, 0.82);
+}
+
+.newProductFormHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+.select,
+.formTitleInput,
+.formPriceInput,
+.formFileInput {
+  width: 29vw;
+  font-size: 1.5vw;
+  padding: 1vh;
+  margin: 2vh;
+  border: 2px solid rgba(182, 151, 90, 0.82);
+  border-radius: 15px;
+  outline: none;
+  background: white;
+}
+
+.formFirstPhotoInput {
+}
+.selectHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 3vh 0;
+}
+
+.inputHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 3vh 0;
+}
+
+.displayNewImg {
+  width: 10vw;
+  height: 10vw;
+}
+
+.newProductForm input[type="button"] {
+  width: 35%;
+}
+.newProductButton {
+  width: 20vw;
+  font-size: 1.5vw;
+  padding: 1vh;
+  margin: 2vh;
+  border-radius: 15px;
+  outline: none;
+  background: rgba(182, 151, 90, 0.82);
+  border: none;
+}
+.newProductButton:hover {
+  cursor: pointer;
+}
+
+.validation {
+  color: red;
+}

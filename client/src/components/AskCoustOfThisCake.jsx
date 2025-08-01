@@ -1,13 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
-import { fetch_Id_Albums_Item } from "../redux/slice/getUrl_Id_Item";
 import { fetch_Request } from "../redux/slice/getUrl_Request";
-import IsLoading from "./IsLoading";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AskCoustOfThisCake() {
-  const { data_request, status } = useSelector((store) => store.getUrl_Request);
+  const { status } = useSelector((store) => store.getUrl_Request);
 
   const navigate = useNavigate();
   const [idCakeOne, setIdCakeOne] = useState();
@@ -50,9 +49,8 @@ function AskCoustOfThisCake() {
       img: idItemPhotoOne,
       cakeCode: idCakeOne + "." + idItemOne,
     };
-    console.log(newRequest);
 
-    const url_request = `${process.env.REACT_APP_API_URL}/email/request`;
+    const url_request = `${process.env.REACT_APP_API_URL || ""}/email/request`;
 
     try {
       dispatch(fetch_Request({ url: url_request, datainp: newRequest }));

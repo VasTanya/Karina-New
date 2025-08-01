@@ -169,9 +169,9 @@ class AlbumsController {
     try {
       const { _id } = req.params;
 
-      const deletedAlbum = await this.AlbumsService.deleteAlbum(_id);
+      const { status, message } = await this.AlbumsService.deleteAlbum(_id);
 
-      response(res, 200, deletedAlbum);
+      response(res, status, { message });
     } catch (error) {
       logger.error(`[ALB-CTRL]: Error during deleteAlbum: ${error}`);
       return response(res, error.statusCode || 500, {

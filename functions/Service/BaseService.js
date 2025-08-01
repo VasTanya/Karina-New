@@ -45,11 +45,10 @@ export class BaseService extends DbService {
   add = async (data) => {
     try {
       const dataLength = await this.count();
-
       if (data.file) {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
-      } else {
+      } else if (!data.src) {
         data.src = NO_PHOTO_URLS;
       }
 
@@ -78,10 +77,13 @@ export class BaseService extends DbService {
         };
       }
 
-      return item;
+      return { status: 200, message: `${this.dataTitle} deleted` };
     } catch (error) {
       logger.error(`[${this.logType}-SRV]: Error during delete: `, error);
-      return {};
+      return {
+        status: 500,
+        message: error.message || "Failed to delete",
+      };
     }
   };
 

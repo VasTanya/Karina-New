@@ -2,8 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import qs from "qs";
-import { setSearchValue } from "../redux/slice/cakeSlice";
 import { fetchSearch } from "../redux/slice/getUrl_Search";
 import IsLoading from "./IsLoading";
 
@@ -18,12 +16,13 @@ function OneSearchCake() {
   const resultNextDot = searchValue.slice(idxSin + 1);
 
   const getUrlSearch = async () => {
-    const urlSearch = `${process.env.REACT_APP_API_URL}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
+    const urlSearch = `${process.env.REACT_APP_API_URL || ""}/albums/search?album_number=${resultPrevDot}&display_number=${resultNextDot}&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
     dispatch(fetchSearch({ urlSearch }));
   };
 
   useEffect(() => {
     getUrlSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   const isLoading = [...new Array(1)].map((_, idx) => <IsLoading key={idx} />);

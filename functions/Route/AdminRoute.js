@@ -1,5 +1,7 @@
 import { BaseRouter } from "./BaseRouter.js";
 import AdminController from "../Controller/AdminController.js";
+import isAuth from "../Middleware/IsAuth.js";
+import isAdmin from "../Middleware/IsAdmin.js";
 
 class AdminRoute extends BaseRouter {
   constructor() {
@@ -10,9 +12,10 @@ class AdminRoute extends BaseRouter {
 
   initRoutes() {
     this.router.post("/login", this.controller.login);
-    this.router.get("/seed", this.controller.seed);
-    this.router.get("/seed/admin", this.controller.seedAdmin);
-    this.router.post("/logout", this.controller.logout);
+    this.router.get("/profile", isAuth, this.controller.profile);
+    this.router.get("/seed", isAuth, isAdmin, this.controller.seed);
+    this.router.get("/seed/admin", isAuth, isAdmin, this.controller.seedAdmin);
+    this.router.post("/logout", isAuth, this.controller.logout);
   }
 }
 

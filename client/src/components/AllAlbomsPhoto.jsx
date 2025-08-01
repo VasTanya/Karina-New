@@ -21,13 +21,14 @@ function AllAlbomsPhoto() {
 
   const getUrl_Id_Albums = async () => {
     const queryString = `page=${currentPage}&size=${48}&url=true&select=${encodeURIComponent(JSON.stringify(["lg"]))}`;
-    const url_Id_Albums = `${process.env.REACT_APP_API_URL}/albums/${id}?${queryString}`;
+    const url_Id_Albums = `${process.env.REACT_APP_API_URL || ""}/albums/${id}?${queryString}`;
     dispatch(fetch_Id_Albums({ url_Id_Albums }));
   };
 
   useEffect(() => {
     getUrl_Id_Albums();
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, id]);
 
   const onClickPages = (num) => {

@@ -10,12 +10,13 @@ function Regular() {
 
   const getUrlRegular = async () => {
     const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
-    const urlRegular = `${process.env.REACT_APP_API_URL}/basics/regular?${queryString}`;
+    const urlRegular = `${process.env.REACT_APP_API_URL || ""}/basics/regular?${queryString}`;
     dispatch(fetchRegular({ urlRegular }));
   };
 
   useEffect(() => {
     getUrlRegular();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />);

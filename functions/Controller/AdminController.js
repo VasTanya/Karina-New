@@ -18,15 +18,22 @@ class AdminController {
 
       const admin = await this.AdminService.login(email, password);
 
-      res.cookie("access_token", admin.token, {
-        httpOnly: true,
-        sameSite: "strict",
-        // secure: true,
-      });
-
-      response(res, 200, admin.message);
+      response(res, admin.status, admin);
     } catch (error) {
       logger.error(`[ADMIN-CTRL]: Error during login: ${error}`);
+      return response(res, error.statusCode || 500, {
+        message: error.message,
+      });
+    }
+  };
+
+  profile = async (req, res) => {
+    try {
+      if (req.user) {
+        response(res, 200, req.user);
+      } else throw new Error("User not found");
+    } catch (error) {
+      logger.error(`[ADMIN-CTRL]: Error during profile: ${error}`);
       return response(res, error.statusCode || 500, {
         message: error.message,
       });

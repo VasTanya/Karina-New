@@ -13,6 +13,7 @@ function SentRequest() {
   useEffect(() => {
     dispatch(resetRequestState());
     dispatch(resetMyDesignState());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch_myDesign_Order } from "../redux/slice/getUrl_MyDesign";
 import { useNavigate } from "react-router-dom";
-import { uploadImage } from "../firebase/functions/uploadImage";
 
 function MyDesign() {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ function MyDesign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const url_request_myDesign = `${process.env.REACT_APP_API_URL}/email/mydesign`;
+    const url_request_myDesign = `${process.env.REACT_APP_API_URL || ""}/email/mydesign`;
 
     try {
       dispatch(fetch_myDesign_Order({ url: url_request_myDesign, formData }));

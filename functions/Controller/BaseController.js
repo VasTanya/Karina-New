@@ -89,9 +89,9 @@ export class BaseController {
       const { _id } = req.params;
       const { src } = req.body;
 
-      const deletedObject = await this.service.delete(_id, src);
+      const { status, message } = await this.service.delete(_id, src);
 
-      response(res, 200, deletedObject);
+      response(res, status, { message });
     } catch (error) {
       logger.error(`[${this.type}-CTRL]: Error during deleteOne: `, error);
       return response(res, error.statusCode || 500, {

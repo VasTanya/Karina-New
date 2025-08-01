@@ -65,18 +65,20 @@ class AlbumsService extends DbService {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   getById = async (id, { page = 1, size = 10, url, select }) => {
     try {
       const skip = (page - 1) * size;
 
       // eslint-disable-next-line no-unused-vars
-      const [{ albumId, ...albumDataById }, album] = await Promise.all([
+      const [albumData, album] = await Promise.all([
         this.albumData.findOne({ albumId: id }, { url: false }),
         this.findById(id, { url: false }),
       ]);
 
-      if (!albumDataById) return {};
-
+      if (!albumData) return { data: [] };
+      // eslint-disable-next-line no-unused-vars
+      const { albumId, ...albumDataById } = albumData;
       const paginatedArray =
         size === -1
           ? albumDataById.data
@@ -160,6 +162,7 @@ class AlbumsService extends DbService {
 
         if (result.length === 0) {
           return {
+            // eslint-disable-next-line max-len
             message: `No result for album number ${albumNumber} and display number ${displayNumber}`,
           };
         }
@@ -268,7 +271,7 @@ class AlbumsService extends DbService {
       if (data.file) {
         const uploadedFilePaths = await this.uploadImage(data.file, data.src);
         data.src = uploadedFilePaths;
-      } else {
+      } else if (!data.src) {
         data.src = NO_PHOTO_URLS;
       }
 
@@ -276,7 +279,7 @@ class AlbumsService extends DbService {
         _id: uuid4(),
         display_number: albumData.data.length + 1,
         src: data.src,
-        ...(data.tag === "$true" ? { tag: "firstPhoto" } : {}),
+        ...(data.tag && { tag: data.tag }),
       };
 
       albumData.data.push(newItem);
@@ -301,10 +304,13 @@ class AlbumsService extends DbService {
         this.albumData.findOneAndDelete({ albumId: id }),
       ]);
 
-      return { message: "Album deleted succesfully" };
+      return { message: "Album deleted succesfully", status: 200 };
     } catch (error) {
       logger.error("[ALB-SRV]: Error during deleteAlbum", error);
-      return { message: "Failed to delete album. Please again try later" };
+      return {
+        message: "Failed to delete album. Please again try later",
+        status: 400,
+      };
     }
   };
 
@@ -344,6 +350,7 @@ class AlbumsService extends DbService {
 
   findOneAndPopulate = async (id, query) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const [{ albumId, ...albumDataById }, album] = await Promise.all([
         this.albumData.findOne({ albumId: id }, query),
         this.findById(id, query),

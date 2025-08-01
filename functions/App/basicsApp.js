@@ -11,6 +11,7 @@ common(basicsApp);
 basicsApp.use("/basics/slices", SlicesRoute);
 basicsApp.use("/basics/regular", RegularRoute);
 
+// eslint-disable-next-line no-unused-vars
 basicsApp.use((err, req, res, next) => {
   res.status(404).send({ message: `[BASICS-APP]: ${err.message}` });
   logger.error({ message: `[BASICS-APP]: ${err.message}` });

@@ -1,0 +1,91 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          cd functions
+          npm install
+
+      - name: Create admin env file
+        run: |
+          echo "REACT_APP_TYPE=${{ secrets.REACT_APP_TYPE }}" >> ./admin/.env
+          echo "REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }}" >> ./admin/.env
+          echo "REACT_APP_PRIVATE_KEY_ID=${{ secrets.REACT_APP_PRIVATE_KEY_ID }}" >> ./admin/.env
+          echo "REACT_APP_PRIVATE_KEY=${{ secrets.REACT_APP_PRIVATE_KEY }}" >> ./admin/.env
+          echo "REACT_APP_CLIENT_EMAIL=${{ secrets.REACT_APP_CLIENT_EMAIL }}" >> ./admin/.env
+          echo "REACT_APP_CLIENT_ID=${{ secrets.REACT_APP_CLIENT_ID }}" >> ./admin/.env
+          echo "REACT_APP_AUTH_URI=${{ secrets.REACT_APP_AUTH_URI }}" >> ./admin/.env
+          echo "REACT_APP_TOKEN_URI=${{ secrets.REACT_APP_TOKEN_URI }}" >> ./admin/.env
+          echo "REACT_APP_AUTH_PROVIDER_X509_CERT_URL=${{ secrets.REACT_APP_AUTH_PROVIDER_X509_CERT_URL }}" >> ./admin/.env
+          echo "REACT_APP_CLIENT__X509_CERT_URL=${{ secrets.REACT_APP_CLIENT__X509_CERT_URL }}" >> ./admin/.env
+          echo "REACT_APP_UNIVERSE_DOMAIN=${{ secrets.REACT_APP_UNIVERSE_DOMAIN }}" >> ./admin/.env
+          echo "REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> ./admin/.env
+          echo "REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }}" >> ./admin/.env
+          echo "REACT_APP_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}" >> ./admin/.env
+          echo "REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }}" >> ./admin/.env
+          echo "REACT_APP_MEASUREMENT_ID=${{ secrets.REACT_APP_MEASUREMENT_ID }}" >> ./admin/.env
+          echo "REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }}" >> ./admin/.env
+          echo "REACT_APP_DATABASE_URL=${{ secrets.REACT_APP_DATABASE_URL }}" >> ./admin/.env
+
+      - name: Create client env file
+        run: |
+          echo "REACT_APP_TYPE=${{ secrets.REACT_APP_TYPE }}" >> ./client/.env
+          echo "REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }}" >> ./client/.env
+          echo "REACT_APP_PRIVATE_KEY_ID=${{ secrets.REACT_APP_PRIVATE_KEY_ID }}" >> ./client/.env
+          echo "REACT_APP_PRIVATE_KEY=${{ secrets.REACT_APP_PRIVATE_KEY }}" >> ./client/.env
+          echo "REACT_APP_CLIENT_EMAIL=${{ secrets.REACT_APP_CLIENT_EMAIL }}" >> ./client/.env
+          echo "REACT_APP_CLIENT_ID=${{ secrets.REACT_APP_CLIENT_ID }}" >> ./client/.env
+          echo "REACT_APP_AUTH_URI=${{ secrets.REACT_APP_AUTH_URI }}" >> ./client/.env
+          echo "REACT_APP_TOKEN_URI=${{ secrets.REACT_APP_TOKEN_URI }}" >> ./client/.env
+          echo "REACT_APP_AUTH_PROVIDER_X509_CERT_URL=${{ secrets.REACT_APP_AUTH_PROVIDER_X509_CERT_URL }}" >> ./client/.env
+          echo "REACT_APP_CLIENT__X509_CERT_URL=${{ secrets.REACT_APP_CLIENT__X509_CERT_URL }}" >> ./client/.env
+          echo "REACT_APP_UNIVERSE_DOMAIN=${{ secrets.REACT_APP_UNIVERSE_DOMAIN }}" >> ./client/.env
+          echo "REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> ./client/.env
+          echo "REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }}" >> ./client/.env
+          echo "REACT_APP_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}" >> ./client/.env
+          echo "REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }}" >> ./client/.env
+          echo "REACT_APP_MEASUREMENT_ID=${{ secrets.REACT_APP_MEASUREMENT_ID }}" >> ./client/.env
+          echo "REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }}" >> ./client/.env
+          echo "REACT_APP_DATABASE_URL=${{ secrets.REACT_APP_DATABASE_URL }}" >> ./client/.env
+
+      - name: Build client and admin apps
+        run: |
+          npm --prefix ./client install
+          npm --prefix ./client run build
+          npm --prefix ./admin install
+          npm --prefix ./admin run build
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Install functions dependencies
+        run: npm --prefix ./functions ci
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KARINAS_64571 }}
+          channelId: live
+          projectId: karinas-64571

@@ -1,5 +1,6 @@
 import { BaseRouter } from "./BaseRouter.js";
 import SlicesController from "../Controller/SlicesController.js";
+import isAuth from "../Middleware/IsAuth.js";
 import upload from "../Middleware/Multer.js";
 
 class SlicesRoute extends BaseRouter {
@@ -14,11 +15,12 @@ class SlicesRoute extends BaseRouter {
     this.router.get("/:_id", this.controller.getById);
     this.router.put(
       "/:_id/edit",
+      isAuth,
       upload.single("img"),
-      this.controller.editOne,
+      this.controller.editOne
     );
-    this.router.post("/add", upload.single("img"), this.controller.add);
-    this.router.delete("/:_id/delete", this.controller.deleteOne);
+    this.router.post("/add", isAuth, upload.single("img"), this.controller.add);
+    this.router.delete("/:_id/delete", isAuth, this.controller.deleteOne);
   }
 }
 

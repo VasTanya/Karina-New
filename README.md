@@ -1,6 +1,8 @@
 # Karina's Bakery
 
-Welcome to Karina's Bakery project!
+Welcome to the Karina's Bakery project!
+Before getting started, please read through this README carefully.
+If you have any questions or need clarification, contact AdminKarinas.
 
 This project consists of two three parts:
 
@@ -17,7 +19,7 @@ To get started with this project, follow the steps below:
 Start by cloning the project into your local machine:
 
 ```bash
-git clone https://github.com/your-username/karinas-bakery.git
+git clone <repo-url>
 ```
 
 ### 2. Install The Dependencies
@@ -40,7 +42,9 @@ Then, navigate to the functions folder and install the backend dependencies:
 cd functions && npm install
 ```
 
-### 3. Set up local Firebase CLI
+### 3. Set up local Firebase CLI. **Optional.**
+
+> **Important:** Firebase is needed locally only if you are the sole maintainer.
 
 #### 1. Install the Firebase CLI on your local machine.
 
@@ -157,4 +161,14 @@ npm start
 
 This will start the Firebase Cloud Functions backend locally. You can use the Firebase Emulator or deploy it to Firebase depending on your setup.
 
-### 5. TODO: write deployment instructions
+### 5. Deployment
+
+#### 1. Automated deployment
+
+Deployment is automated via Github Actions (Firebase pipeline).
+Once pushed to master, Github will automatically build and deploy latest changes to servers.
+
+#### 2. Manual deployment
+
+If by any reason automated deployment fails.
+Ask AdminKarinas to deploy manually

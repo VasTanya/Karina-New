@@ -10,11 +10,12 @@ function Slices() {
 
   const getUrlSlices = async () => {
     const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
-    const urlSlices = `${process.env.REACT_APP_API_URL}/basics/slices?${queryString}`;
+    const urlSlices = `${process.env.REACT_APP_API_URL || ""}/basics/slices?${queryString}`;
     dispatch(fetchSlice({ urlSlices }));
   };
   useEffect(() => {
     getUrlSlices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isLoading = [...new Array(12)].map((_, idx) => <IsLoading key={idx} />);

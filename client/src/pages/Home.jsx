@@ -13,13 +13,14 @@ function Home() {
 
   const getUrlFirstFoto = async () => {
     const queryString = `select=${encodeURIComponent(JSON.stringify(["md"]))}`;
-    const urlFirstFoto = `${process.env.REACT_APP_API_URL}/albums/firstPhoto?${queryString}`;
+    const urlFirstFoto = `${process.env.REACT_APP_API_URL || ""}/albums/firstPhoto?${queryString}`;
     dispatch(fetchFirstFoto({ urlFirstFoto }));
   };
 
   useEffect(() => {
     getUrlFirstFoto();
     dispatch(setCurrentPage(1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sortData = dataFirstFoto?.map((el) => el);

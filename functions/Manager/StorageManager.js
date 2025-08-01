@@ -79,6 +79,7 @@ class StorageManager {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   getUrl = async (url, isTemporal = false) => {
     const hour = Date.now() + 60 * 60 * 1000;
     const sevenDays = hour + 7 * 24 * 60 * 60 * 1000;
@@ -89,7 +90,7 @@ class StorageManager {
 
       const [signedUrl] = await target.getSignedUrl({
         action: "read",
-        expires: isTemporal ? sevenDays : hour,
+        expires: sevenDays,
       });
 
       return signedUrl;
@@ -115,7 +116,7 @@ class StorageManager {
   ) => {
     try {
       const buffer = await this.sharp(file.buffer)
-        .resize({width, height, fit: "cover"})
+        .resize({ width, height, fit: "cover" })
         .toFormat("jpeg")
         .toBuffer();
       return {
