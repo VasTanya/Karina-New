@@ -20,7 +20,7 @@ function ContactUs() {
           </Link>
           <Link
             style={{ textDecoration: "none" }}
-            to={"mailto:support@karinas515.com"}
+            to={"mailto:k2406718@gmail.com"}
           >
             <p className="mail">k2406718@gmail.com</p>
           </Link>
