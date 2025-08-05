@@ -8,9 +8,15 @@ const data = {
     },
     {
       login: "support",
+      email: "support@karinas515.com",
+      password: "...515karinas515...",
+      permissions: ["editor"],
+    },
+    {
+      login: "k2406718",
       email: "k2406718@gmail.com",
       password: "Karinas515",
-      permissions: ["editor"],
+      permissions: ["**"],
     },
   ],
 
